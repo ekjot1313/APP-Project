@@ -14,7 +14,7 @@ public class MapEditor {
 		// double backquote is to avoid compiler interpret words
 		// like \test as \t (ie. as a escape sequence)
 		
-		String a;
+		String ab;
 
 	}
 
