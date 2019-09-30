@@ -67,7 +67,7 @@ public class MapReader {
 		
 		for(Continent c :listOfContinent)
 		System.out.println(c.getName() +" :"+c.getContinentValue());
-		System.out.println("countries\\\\");
+		System.out.println("countries");
 		for(Country c :listOfCountries)
 			System.out.println(c.getName() +" :"+c.getContinentName().getName());
 			
