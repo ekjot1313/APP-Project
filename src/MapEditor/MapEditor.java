@@ -13,6 +13,8 @@ public class MapEditor {
 		// We need to provide file path as the parameter:
 		// double backquote is to avoid compiler interpret words
 		// like \test as \t (ie. as a escape sequence)
+		
+		String a;
 
 	}
 
