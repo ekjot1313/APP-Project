@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Continent {
 	private String name;
-	private int continent_value;
+	private int continentValue;
 	private List<Country> countries;
 	
 	
@@ -30,15 +30,15 @@ public class Continent {
 	 * This method returns the continent value of the continent
 	 * @return continentValue
 	 */
-	public int getContinent_Value() {
-		return continent_value;
+	public int getContinentValue() {
+		return continentValue;
 	}
 	/**
 	 * This method sets the continent value of the continent
 	 * @param continentValue
 	 */
-	public void setContinent_Value(int continent_value) {
-		this.continent_value = continent_value;
+	public void setContinentValue(int continentValue) {
+		this.continentValue = continentValue;
 	}
 	/**
 	 * This method gets the countries of the continent

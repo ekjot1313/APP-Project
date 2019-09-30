@@ -7,8 +7,8 @@ import java.util.*;
 public class Country {
 	public String name;
 	public Player owner;
-	public Continent continent_name;
-	public int no_of_armies;
+	public Continent continentName;
+	public int noOfArmies;
 	public List<Country> neighbours;
 	public String getName() {
 		return name;
@@ -38,29 +38,29 @@ public class Country {
 	 * This method returns the continent of the country.
 	 * @return
 	 */
-	public Continent getContinent_name() {
-		return continent_name;
+	public Continent getContinentName() {
+		return continentName;
 	}
 	/**
 	 * This method sets the continent of the country.
-	 * @param continent_name
+	 * @param continentName
 	 */
-	public void setContinent_name(Continent continent_name) {
-		this.continent_name = continent_name;
+	public void setContinentName(Continent continentName) {
+		this.continentName = continentName;
 	}
 	/**
 	 *  This method returns the no of armies present in the country.
 	 * @return
 	 */
-	public int getNo_of_armies() {
-		return no_of_armies;
+	public int getNoOfArmies() {
+		return noOfArmies;
 	}
 	/**
 	 * This method sets the no of armies of the country.
-	 * @param no_of_armies
+	 * @param noOfArmies
 	 */
-	public void setNo_of_armies(int no_of_armies) {
-		this.no_of_armies = no_of_armies;
+	public void setNoOfArmies(int noOfArmies) {
+		this.noOfArmies = noOfArmies;
 	}
 	/**
 	 * This method returns the list of the neighbours of the country.
