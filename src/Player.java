@@ -6,7 +6,7 @@ import java.util.*;
  */
 public class Player {
 	String name;
-	int no_of_armies;
+	int noOfArmies;
 	List<Country> assigned_countries;
 	/**
 	 *  This method returns the name of the player.
@@ -26,15 +26,15 @@ public class Player {
 	 *  This method returns the no of armies for a player.
 	 * @return
 	 */
-	public int getNo_of_armies() {
-		return no_of_armies;
+	public int getNoOfArmies() {
+		return noOfArmies;
 	}
 	/**
 	 * This method sets the no of armies for a player.
-	 * @param no_of_armies
+	 * @param noOfArmies
 	 */
-	public void setNo_of_armies(int no_of_armies) {
-		this.no_of_armies = no_of_armies;
+	public void setNoOfArmies(int noOfArmies) {
+		this.noOfArmies = noOfArmies;
 	}
 	/**
 	 * This method returns the list of countries belonging to a player.
