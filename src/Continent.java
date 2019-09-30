@@ -9,7 +9,7 @@ import java.util.List;
 public class Continent {
 	private String name;
 	private int continentValue;
-	List<Country> countries;
+	private List<Country> countries;
 	
 	
 	/**
