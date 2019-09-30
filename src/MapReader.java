@@ -33,7 +33,6 @@ public class MapReader {
 	public static void main(String args[])
 	{
 		MapReader m=new MapReader();
-		//String s="C:\\Program Files\\Domination\\maps\\ameroki.map\";
 		m.parseMapFile("C:\\Program Files\\Domination\\maps\\ameroki.map");
 	}
 	
