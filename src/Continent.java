@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * This class is created to represent the Continent details
  * 
@@ -7,7 +9,8 @@
 public class Continent {
 	private String name;
 	private int continentValue;
-	//List<Country> countries;
+	List<Country> countries;
+	
 	
 	/**
 	 * This method returns the name of the continent
@@ -36,6 +39,20 @@ public class Continent {
 	 */
 	public void setContinentValue(int continentValue) {
 		this.continentValue = continentValue;
+	}
+	/**
+	 * This method gets the countries of the continent
+	 * @return
+	 */
+	public List<Country> getCountries() {
+		return countries;
+	}
+	/**
+	 * This method sets the countries of the continent
+	 * @param countries
+	 */
+	public void setCountries(List<Country> countries) {
+		this.countries = countries;
 	}
 	
 }
