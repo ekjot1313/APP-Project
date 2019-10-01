@@ -121,22 +121,23 @@ public class MapReader {
 		int notConnected=validateMap(mapOfWorld,listOfContinent,listOfCountries);
 		System.out.println();
 		if(notConnected == 0)
+		{
 		System.out.println("Valid Map");
+		//display
+				for(Continent c :listOfContinent) {
+					System.out.println("Continent :"+c.getName());
+					for(Country c1 :c.getCountries()) {
+						System.out.print("Country :"+c1.getName()+":Neighbours->");
+						for(Country c2 :c1.getNeighbours()) {
+							System.out.print(c2.getName()+"||");
+						}
+						System.out.println();
+					}
+					System.out.println();
+				}
+		}
 		else
 			System.out.println("Invalid map");
-		/*
-		//display
-		/*for(Continent c :listOfContinent) {
-			System.out.println("Continent :"+c.getName());
-			for(Country c1 :c.getCountries()) {
-				System.out.print("Country :"+c1.getName()+":Neighbours->");
-				for(Country c2 :c1.getNeighbours()) {
-					System.out.print(c2.getName()+"||");
-				}
-				System.out.println();
-			}
-			System.out.println();
-		}*/
 			
 	}
 	
