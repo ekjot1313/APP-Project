@@ -97,6 +97,7 @@ public class MapReader {
 					for(int j=0;j<listOfCountries.get(i).getNeighbours().size();j++)
 						templist.add(listOfCountries.indexOf(listOfCountries.get(i).neighbours.get(j)));
 						mapOfWorld.put(i,templist);
+					
 				
 				
 			}
@@ -117,7 +118,12 @@ public class MapReader {
 		System.out.println("---------------");
 		*/
 		//validate map call
-		validateMap(mapOfWorld);
+		int notConnected=validateMap(mapOfWorld,listOfContinent,listOfCountries);
+		System.out.println();
+		if(notConnected == 0)
+		System.out.println("Valid Map");
+		else
+			System.out.println("Invalid map");
 		/*
 		//display
 		/*for(Continent c :listOfContinent) {
@@ -134,10 +140,12 @@ public class MapReader {
 			
 	}
 	
-	public static void validateMap(HashMap<Integer,List<Integer>> mapOfWorld) {
+	public static int validateMap(HashMap<Integer,List<Integer>> mapOfWorld,List<Continent> listOfContinent,List<Country> listOfCountries) {
 		//traversing
-		Boolean[] visited =new Boolean[mapOfWorld.keySet().size()];
-		
+		int notConnected =0;
+		if(checkDuplicates(listOfContinent,listOfCountries)==0)
+		{	
+			Boolean[] visited =new Boolean[mapOfWorld.keySet().size()];		
 		for(int i =0;i<visited.length;i++) {
 			visited[i] =false;
 		}
@@ -146,6 +154,7 @@ public class MapReader {
 		queue.add(0);
 		visited[0] = true;
 		//System.out.println(queue.poll().name);
+		
 		while(queue.size()>0)
 		{
 			Integer c1=queue.poll();	
@@ -160,22 +169,48 @@ public class MapReader {
 			}
 			
 		}
-		int notConnected =0;
+		
 		for(int i=0;i<visited.length;i++) {
 			System.out.print(i+"="+visited[i]+" ||");
 			if(!visited[i]) {
 				notConnected =1;
+				System.out.println();
+				System.out.println("Not a connected graph");
 				break;
 			}
 		}
-		System.out.println(notConnected);
 		
+		}
+		else
+			notConnected=1;
+		
+		return notConnected;
 	}
-	
+	public static int checkDuplicates(List<Continent> listOfContinent,List<Country> listOfCountries)
+	{	int duplicate=0;
+		for(int i=0;i<(listOfContinent.size()-1);i++)
+			for(int j=i+1;j<listOfContinent.size();j++)
+				if((listOfContinent.get(i).getName()).equalsIgnoreCase(listOfContinent.get(j).getName()))
+				{
+					duplicate=1;
+					System.out.println("Duplicate Continent :"+listOfContinent.get(i).getName());
+					break;
+				}
+		if(duplicate==0)
+			for(int i=0;i<(listOfCountries.size()-1);i++)
+				for(int j=i+1;j<listOfCountries.size();j++)
+					if((listOfCountries.get(i).getName()).equalsIgnoreCase(listOfCountries.get(j).getName()))
+					{
+						duplicate=1;
+						System.out.println("Duplicate Country :"+listOfCountries.get(i).getName());
+						break;
+					}
+		return duplicate;
+	}
 	public static void main(String args[])
 	{
 		MapReader m=new MapReader();
-		m.parseMapFile("C:\\Program Files\\Domination\\maps\\testmap.map");
+		m.parseMapFile("C:\\Program Files\\Domination\\maps\\test.map");
 	}
 	
 }
