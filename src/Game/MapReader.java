@@ -39,7 +39,10 @@ public class MapReader {
 						
 					}
 				}
-				
+				for(int i=0;i<listOfContinent.size();i++)
+				{
+					listOfContinent.get(i).setCountries(new ArrayList<Country>());
+				}
 				if(currentLine.contains("[countries]"))
 				{
 					while((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("["))
@@ -55,6 +58,7 @@ public class MapReader {
 						country.setName(countryDetails[1]);
 						country.setContinentName(listOfContinent.get((Integer.parseInt(countryDetails[2]))-1));
 						listOfCountries.add(country);
+						listOfContinent.get((Integer.parseInt(countryDetails[2]))-1).getCountries().add(country);
 					}
 				}
 				for(int i=0;i<listOfCountries.size();i++)
@@ -83,6 +87,18 @@ public class MapReader {
 		catch(Exception e)
 		{
 			System.out.println(e);
+		}
+		
+		for(Continent c :listOfContinent) {
+			System.out.println("Continent :"+c.getName());
+			for(Country c1 :c.getCountries()) {
+				System.out.print("Country :"+c1.getName()+":Neighbours->");
+				for(Country c2 :c1.getNeighbours()) {
+					System.out.print(c2.getName()+"||");
+				}
+				System.out.println();
+			}
+			System.out.println();
 		}
 			
 	}
