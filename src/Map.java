@@ -7,7 +7,7 @@ import java.util.List;
  *
  */
 
-// pending pic, map, card, prv
+// pending pic, map, card, prv 
 
 public class Map {
 	public String message;
