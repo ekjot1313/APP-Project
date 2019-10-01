@@ -1,4 +1,9 @@
 package MapEditor;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 /**
  * Temporary class for user driven commands to edit map.
  * This will be called when user will enter 'editmap' command
@@ -7,7 +12,7 @@ package MapEditor;
  *
  */
 
-import java.io.*;
+// pending: editContinent(), editCountry(), editNeighbour(), showMap(), saveMap()
 
 public class MapEditor {
 
@@ -17,13 +22,10 @@ public class MapEditor {
 
 		String command[];
 
-		int len;
-
 		command = brConsole.readLine().split(" ");
-		len = command.length;
 
 		while (!command[0].equals("savemap")) {
-			
+
 			switch (command[0]) {
 			case "editcontinent": {
 				editContinent(command);
@@ -56,26 +58,35 @@ public class MapEditor {
 
 	}
 
-	private static Object readCommand() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	/**
+	 * This method will display the map
+	 */
 	private static void showMap() {
 		// TODO Auto-generated method stub
 
 	}
-
+/**
+ * This method will edit neighbour
+ * @param command
+ */
 	private static void editNeighbour(String[] command) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * This method will edit country
+	 * @param command
+	 */
 	private static void editCountry(String[] command) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * This method will edit continent
+	 * @param command
+	 */
 	private static void editContinent(String[] command) {
 		// TODO Auto-generated method stub
 
