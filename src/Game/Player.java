@@ -1,3 +1,4 @@
+package Game;
 import java.util.*;
 /**
  * This class is created to represent the Player details

@@ -1,3 +1,4 @@
+package Game;
 import java.util.*;
 /**
  * Country class to set and get data members of this class .
