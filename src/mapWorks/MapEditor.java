@@ -393,7 +393,7 @@ public class MapEditor {
 					cont.setName(s.get(1));
 					cont.setContinentValue(Integer.parseInt(s.get(2)));
 					map.listOfContinent.add(cont);
-					//(new MapReader()).display(map);
+					(new MapReader()).display(map);
 
 				} else if (s.get(0).equals("remove")) {
 

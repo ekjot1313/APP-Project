@@ -107,17 +107,7 @@ public class MapReader {
 		if (notConnected == 0) {
 			System.out.println("Valid Map");
 			// display
-			for (Continent c : map.listOfContinent) {
-				System.out.println("Continent :" + c.getName());
-				for (Country c1 : c.getCountries()) {
-					System.out.print("Country :" + c1.getName() + ":Neighbours->");
-					for (Country c2 : c1.getNeighbours()) {
-						System.out.print(c2.getName() + "||");
-					}
-					System.out.println();
-				}
-				System.out.println();
-			}
+			display(map);
 		} else
 			System.out.println("Invalid map");
 		
@@ -127,6 +117,27 @@ public class MapReader {
 			 System.out.println("Invalid filename");
 		}
 
+	}
+
+	/**
+	 * This method display/print the map
+	 * @param map2
+	 */
+	public void display(Map map2) {
+		// TODO Auto-generated method stub
+		
+		for (Continent c : map2.listOfContinent) {
+			System.out.println("Continent :" + c.getName());
+			for (Country c1 : c.getCountries()) {
+				System.out.print("Country :" + c1.getName() + ":Neighbours->");
+				for (Country c2 : c1.getNeighbours()) {
+					System.out.print(c2.getName() + "||");
+				}
+				System.out.println();
+			}
+			System.out.println();
+		}
+		
 	}
 
 	public static int validateMap(HashMap<Integer, List<Integer>> mapOfWorld, List<Continent> listOfContinent,
