@@ -9,8 +9,6 @@ import java.util.*;
 
 public class MapReader {
 	public Map map;
-	// public List<Continent> listOfContinent;
-	// public List<Country> listOfCountries;
 	private File fileObject;
 	private BufferedReader bufferReaderForFile;
 	private String currentLine;
