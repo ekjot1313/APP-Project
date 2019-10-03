@@ -459,12 +459,11 @@ public class MapEditor {
 editcountry -add def abc -add ghi abc
 editneighbor -add def ghi*/
 					
-					//if same continent create a link only
-					if(count.getContinentName().equals(neig.getContinentName())) {
+					//if different continents, create a bridge also
+					if(!count.getContinentName().equals(neig.getContinentName())) {
 						int ind=findContInd(count.getContinentName().getName(),map.listOfContinent);
 						
 					}
-					
 					
 					
 					

@@ -17,12 +17,12 @@ public class Map {
 	public String mapName;
 	public List<Continent> listOfContinent;
 	public List<Country> listOfCountries;
-	public List<Bridge> bridges;
+	
 
 	public Map() {
 		this.listOfContinent = new ArrayList<Continent>();
 		this.listOfCountries = new ArrayList<Country>();
-		this.bridges = new ArrayList<Bridge>();
+		
 	}
 
 	/**

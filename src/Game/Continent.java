@@ -12,10 +12,11 @@ public class Continent {
 	private String name;
 	private int continentValue;
 	public List<Country> countries;
+	public List<Bridge> bridges;
 	
 public Continent(){
 	this.countries=new ArrayList<Country>();
-	
+	this.bridges = new ArrayList<Bridge>();
 }
 	
 	/**
