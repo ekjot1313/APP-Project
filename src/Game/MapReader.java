@@ -1,16 +1,14 @@
-
 package Game;
 
 import Game.Map;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class MapReader {
 	public Map map;
-	// public List<Continent> listOfContinent;
-	// public List<Country> listOfCountries;
 	private File fileObject;
 	private BufferedReader bufferReaderForFile;
 	private String currentLine;
@@ -28,56 +26,15 @@ public class MapReader {
 			while ((currentLine = bufferReaderForFile.readLine()) != null) {
 
 				if (currentLine.contains("[continents]")) {
-					while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
-
-						// System.out.println(currentLine);
-						if (currentLine.length() == 0) {
-							continue;
-						}
-						String[] continentDetails = currentLine.split(" ");
-
-						Continent continent = new Continent();
-						continent.setName(continentDetails[0]);
-						continent.setContinentValue(Integer.parseInt(continentDetails[1]));
-						map.listOfContinent.add(continent);
-
-					}
+					loadContinents();
 				}
-				for (int i = 0; i < map.listOfContinent.size(); i++) {
-					map.listOfContinent.get(i).setCountries(new ArrayList<Country>());
-				}
+				
 				if (currentLine.contains("[countries]")) {
-					while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
-
-						// System.out.println(currentLine);
-						if (currentLine.length() == 0) {
-							continue;
-						}
-						String[] countryDetails = currentLine.split(" ");
-
-						Country country = new Country();
-						country.setName(countryDetails[1]);
-						country.setContinentName(map.listOfContinent.get((Integer.parseInt(countryDetails[2])) - 1));
-						map.listOfCountries.add(country);
-						map.listOfContinent.get((Integer.parseInt(countryDetails[2])) - 1).getCountries().add(country);
-					}
+					loadCountries();
 				}
-				for (int i = 0; i < map.listOfCountries.size(); i++) {
-					map.listOfCountries.get(i).neighbours = new ArrayList<Country>();
-				}
+				
 				if (currentLine.contains("[borders]")) {
-					while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
-						// System.out.println(currentLine);
-						if (currentLine.length() == 0) {
-							continue;
-						}
-						String[] neighbourDetails = currentLine.split(" ");
-						for (int i = 0; i < neighbourDetails.length - 1; i++) {
-							map.listOfCountries.get(Integer.parseInt(neighbourDetails[0]) - 1).neighbours
-									.add(map.listOfCountries.get(Integer.parseInt(neighbourDetails[i + 1]) - 1));
-
-						}
-					}
+					loadBorders();
 				}
 
 			}
@@ -99,6 +56,65 @@ public class MapReader {
 				System.out.println("Invalid filename");
 		}
 
+	}
+
+	private void loadBorders() throws NumberFormatException, IOException {
+		// TODO Auto-generated method stub
+
+		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
+			// System.out.println(currentLine);
+			if (currentLine.length() == 0) {
+				continue;
+			}
+			String[] neighbourDetails = currentLine.split(" ");
+			for (int i = 0; i < neighbourDetails.length - 1; i++) {
+				map.listOfCountries.get(Integer.parseInt(neighbourDetails[0]) - 1).neighbours
+						.add(map.listOfCountries.get(Integer.parseInt(neighbourDetails[i + 1]) - 1));
+
+			}
+		}
+	
+	}
+
+	private void loadCountries() throws NumberFormatException, IOException {
+		// TODO Auto-generated method stub
+
+		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
+
+			// System.out.println(currentLine);
+			if (currentLine.length() == 0) {
+				continue;
+			}
+			String[] countryDetails = currentLine.split(" ");
+
+			Country country = new Country();
+			country.setName(countryDetails[1]);
+			country.setContinentName(map.listOfContinent.get((Integer.parseInt(countryDetails[2])) - 1));
+			map.listOfCountries.add(country);
+			map.listOfContinent.get((Integer.parseInt(countryDetails[2])) - 1).getCountries().add(country);
+		}
+	
+		
+	}
+
+	private void loadContinents() throws NumberFormatException, IOException {
+		// TODO Auto-generated method stub
+
+		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
+
+			// System.out.println(currentLine);
+			if (currentLine.length() == 0) {
+				continue;
+			}
+			String[] continentDetails = currentLine.split(" ");
+
+			Continent continent = new Continent();
+			continent.setName(continentDetails[0]);
+			continent.setContinentValue(Integer.parseInt(continentDetails[1]));
+			map.listOfContinent.add(continent);
+
+		}
+	
 	}
 
 	/**
