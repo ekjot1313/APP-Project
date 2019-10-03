@@ -11,6 +11,11 @@ public class Country {
 	public Continent continentName;
 	public int noOfArmies;
 	public List<Country> neighbours;
+	
+	public Country() {
+		this.neighbours=new ArrayList<Country>();
+	}
+	
 	public String getName() {
 		return name;
 	}

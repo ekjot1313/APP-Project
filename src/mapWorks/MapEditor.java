@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import Game.MapReader;
 
@@ -26,7 +27,9 @@ public class MapEditor {
 	public static Map map;
 
 	public static void main(String args[]) throws IOException {
+		
 
+		
 		BufferedReader brConsole = new BufferedReader(new InputStreamReader(System.in));
 
 		map = new Map();
@@ -137,7 +140,7 @@ public class MapEditor {
 		}
 
 		if (good) {
-			executeStack("editcontinent", stack);
+			executeStack("editneighbor", stack);
 		}
 	}
 
@@ -235,7 +238,7 @@ public class MapEditor {
 
 		}
 		if (good) {
-			executeStack("editcontinent", stack);
+			executeStack("editcountry", stack);
 		}
 
 	}
@@ -393,7 +396,7 @@ public class MapEditor {
 					cont.setName(s.get(1));
 					cont.setContinentValue(Integer.parseInt(s.get(2)));
 					map.listOfContinent.add(cont);
-					(new MapReader()).display(map);
+					// (new MapReader()).display(map);
 
 				} else if (s.get(0).equals("remove")) {
 
@@ -404,11 +407,26 @@ public class MapEditor {
 		case "editcountry": {
 			for (int i = 0; i < stack.size(); i++) {
 				ArrayList<String> s = stack.get(i);
+
 				if (s.get(0).equals("add")) {
 					Country count = new Country();
 					count.setName(s.get(1));
-					count.setContinentName(map.listOfContinent.get(map.listOfContinent.indexOf(s.get(2))));
-					
+
+					int contInd = findContInd(s.get(2), map.listOfContinent);
+
+					if (contInd == -1) {
+						System.out.println("Continent Not Found.");
+						return;
+					}
+
+					count.setContinentName(map.listOfContinent.get(contInd));
+
+					map.listOfContinent.get(contInd).getCountries().add(count);
+
+					map.listOfCountries.add(count);
+
+					// (new MapReader()).display(map);
+
 				} else if (s.get(0).equals("remove")) {
 
 				}
@@ -418,10 +436,35 @@ public class MapEditor {
 		case "editneighbor": {
 			for (int i = 0; i < stack.size(); i++) {
 				ArrayList<String> s = stack.get(i);
-				for (int j = 0; j < stack.get(i).size(); j++) {
-					System.out.print(s.get(j) + " ");
+				if (s.get(0).equals("add")) {
+
+					
+					int countInd = findCountInd(s.get(1), map.listOfCountries);
+					if (countInd == -1) {
+						System.out.println("Country Not Found.");
+						return;
+					}
+					int neigInd = findCountInd(s.get(2), map.listOfCountries);
+					if (neigInd == -1) {
+						System.out.println("Neighbor Country Not Found.");
+						return;
+					}
+					
+					Country count = map.listOfCountries.get(countInd);
+					Country neig = map.listOfCountries.get(neigInd);
+					
+					map.listOfCountries.get(countInd).getNeighbours().add(neig);
+					map.listOfCountries.get(neigInd).getNeighbours().add(count);
+/*editcontinent -add abc 12 -add xyz 15 
+editcountry -add def abc -add ghi xyz
+editneighbor -add def ghi*/
+					
+					
+					
+					
+				} else if (s.get(0).equals("remove")) {
 				}
-				System.out.println();
+
 			}
 			break;
 		}
@@ -429,7 +472,36 @@ public class MapEditor {
 			System.out.println("Error!!!");
 		}
 		}
+		
+		(new MapReader()).display(map);
 
+	}
+
+	private static int findCountInd(String countName, List<Country> listOfCountries) {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < listOfCountries.size(); i++) {
+			if (listOfCountries.get(i).getName().equals(countName)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	/**
+	 * This method find continent from listofcontinent with its name
+	 * 
+	 * @param contName
+	 * @param listOfContinent
+	 * @return
+	 */
+	private static int findContInd(String contName, List<Continent> listOfContinent) {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < listOfContinent.size(); i++) {
+			if (listOfContinent.get(i).getName().equals(contName)) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 }

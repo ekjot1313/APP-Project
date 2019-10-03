@@ -15,6 +15,8 @@ public class MapReader {
 	private BufferedReader bufferReaderForFile;
 	private String currentLine;
 	public HashMap<Integer, List<Integer>> mapOfWorld = new HashMap<Integer, List<Integer>>();
+	
+	
 
 	public void parseMapFile(String filePath) {
 		map = new Map();
@@ -80,56 +82,56 @@ public class MapReader {
 
 			}
 
+			// graph creation
 
-		// graph creation
+			for (int i = 0; i < map.listOfCountries.size(); i++) {
+				List<Integer> templist = new ArrayList<Integer>();
+				for (int j = 0; j < map.listOfCountries.get(i).getNeighbours().size(); j++)
+					templist.add(map.listOfCountries.indexOf(map.listOfCountries.get(i).neighbours.get(j)));
+				mapOfWorld.put(i, templist);
 
-		for (int i = 0; i < map.listOfCountries.size(); i++) {
-			List<Integer> templist = new ArrayList<Integer>();
-			for (int j = 0; j < map.listOfCountries.get(i).getNeighbours().size(); j++)
-				templist.add(map.listOfCountries.indexOf(map.listOfCountries.get(i).neighbours.get(j)));
-			mapOfWorld.put(i, templist);
+			}
 
-		}
+			System.out.println(mapOfWorld.toString());
 
-		System.out.println(mapOfWorld.toString());
-
-		/*
-		 * //display map for(Country c:mapOfWorld.keySet()) {
-		 * System.out.println(c.getName()); //System.out.println(mapOfWorld.get(c));
-		 * for(Country c1: mapOfWorld.get(c)) { System.out.print(c1.getName()+"||"); }
-		 * System.out.println(); }
-		 * 
-		 * System.out.println("---------------");
-		 */
-		// validate map call
-		int notConnected = validateMap(mapOfWorld, map.listOfContinent, map.listOfCountries);
-		System.out.println();
-		if (notConnected == 0) {
-			System.out.println("Valid Map");
-			// display
-			display(map);
-		} else
-			System.out.println("Invalid map");
-		
+			/*
+			 * //display map for(Country c:mapOfWorld.keySet()) {
+			 * System.out.println(c.getName()); //System.out.println(mapOfWorld.get(c));
+			 * for(Country c1: mapOfWorld.get(c)) { System.out.print(c1.getName()+"||"); }
+			 * System.out.println(); }
+			 * 
+			 * System.out.println("---------------");
+			 */
+			// validate map call
+			int notConnected = validateMap(mapOfWorld, map.listOfContinent, map.listOfCountries);
+			System.out.println();
+			if (notConnected == 0) {
+				System.out.println("Valid Map");
+				// display
+				display(map);
+			} else
+				System.out.println("Invalid map");
 
 		} catch (Exception e) {
-			if(e.toString().contains("FileNotFoundException"))
-			 System.out.println("Invalid filename");
+			if (e.toString().contains("FileNotFoundException"))
+				System.out.println("Invalid filename");
 		}
 
 	}
 
 	/**
 	 * This method display/print the map
+	 * 
 	 * @param map2
 	 */
 	public void display(Map map2) {
 		// TODO Auto-generated method stub
-		
+
 		for (Continent c : map2.listOfContinent) {
 			System.out.println("Continent :" + c.getName());
 			for (Country c1 : c.getCountries()) {
-				System.out.print("Country :" + c1.getName() + ":Neighbours->");
+				System.out.print("Country :" + c1.getName() + ": Neighbours->");
+
 				for (Country c2 : c1.getNeighbours()) {
 					System.out.print(c2.getName() + "||");
 				}
@@ -137,7 +139,7 @@ public class MapReader {
 			}
 			System.out.println();
 		}
-		
+
 	}
 
 	public static int validateMap(HashMap<Integer, List<Integer>> mapOfWorld, List<Continent> listOfContinent,
@@ -210,9 +212,17 @@ public class MapReader {
 		String filename = "ameroki.map";
 		System.out.println(System.getProperty("user.dir"));
 		String currentPath = System.getProperty("user.dir");
-		currentPath += "\\src\\Maps\\"+filename ;
+		currentPath += "\\src\\Maps\\" + filename;
 		m.parseMapFile(currentPath);
 	}
 
-}
+	/**
+	 * This method returns the currently loaded map
+	 * 
+	 * @return
+	 */
+	public Map getMap() {
+		return this.map;
+	}
 
+}

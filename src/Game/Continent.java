@@ -1,4 +1,5 @@
 package Game;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,9 +11,12 @@ import java.util.List;
 public class Continent {
 	private String name;
 	private int continentValue;
-	private List<Country> countries;
+	public List<Country> countries;
 	
-
+public Continent(){
+	this.countries=new ArrayList<Country>();
+	
+}
 	
 	/**
 	 * This method returns the name of the continent
@@ -56,5 +60,7 @@ public class Continent {
 	public void setCountries(List<Country> countries) {
 		this.countries = countries;
 	}
+	
+	
 	
 }
