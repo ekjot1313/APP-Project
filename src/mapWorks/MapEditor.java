@@ -1,5 +1,6 @@
 package mapWorks;
 
+import Game.Bridge;
 import Game.Continent;
 import Game.Country;
 import Game.Map;
@@ -27,9 +28,7 @@ public class MapEditor {
 	public static Map map;
 
 	public static void main(String args[]) throws IOException {
-		
 
-		
 		BufferedReader brConsole = new BufferedReader(new InputStreamReader(System.in));
 
 		map = new Map();
@@ -436,41 +435,39 @@ public class MapEditor {
 		case "editneighbor": {
 			for (int i = 0; i < stack.size(); i++) {
 				ArrayList<String> s = stack.get(i);
+				int countInd = findCountInd(s.get(1), map.listOfCountries);
+				if (countInd == -1) {
+					System.out.println("Country Not Found.");
+					return;
+				}
+				int neigInd = findCountInd(s.get(2), map.listOfCountries);
+				if (neigInd == -1) {
+					System.out.println("Neighbor Country Not Found.");
+					return;
+				}
+
+				Country count = map.listOfCountries.get(countInd);
+				Country neig = map.listOfCountries.get(neigInd);
+
+				int contInd1 = map.listOfContinent.indexOf(count.getContinentName());
+				int contInd2 = map.listOfContinent.indexOf(neig.getContinentName());
+
 				if (s.get(0).equals("add")) {
 
-					
-					int countInd = findCountInd(s.get(1), map.listOfCountries);
-					if (countInd == -1) {
-						System.out.println("Country Not Found.");
-						return;
-					}
-					int neigInd = findCountInd(s.get(2), map.listOfCountries);
-					if (neigInd == -1) {
-						System.out.println("Neighbor Country Not Found.");
-						return;
-					}
-					
-					Country count = map.listOfCountries.get(countInd);
-					Country neig = map.listOfCountries.get(neigInd);
-					
 					map.listOfCountries.get(countInd).getNeighbours().add(neig);
 					map.listOfCountries.get(neigInd).getNeighbours().add(count);
-/*editcontinent -add abc 12
-editcountry -add def abc -add ghi abc
-editneighbor -add def ghi*/
-					
-					//if different continents, create a bridge also
-					if(!count.getContinentName().equals(neig.getContinentName())) {
-						int ind=findContInd(count.getContinentName().getName(),map.listOfContinent);
-						
+
+					// if different continents, create a bridge also
+					if (!count.getContinentName().equals(neig.getContinentName())) {
+
+						createBridge(contInd1, contInd2, count, neig);
+
 					}
-					
-					
-					
-					
+
 				} else if (s.get(0).equals("remove")) {
 					
 					
+
 				}
 
 			}
@@ -480,16 +477,32 @@ editneighbor -add def ghi*/
 			System.out.println("Error!!!");
 		}
 		}
-		
-		
 
 	}
-/**
- *  This method find country index from listofcountry with its name
- * @param countName
- * @param listOfCountries
- * @return
- */
+
+	/**
+	 * This method creates a bridge
+	 * 
+	 * @param contInd1
+	 * @param contInd2
+	 * @param count
+	 * @param neig
+	 */
+	private static void createBridge(int contInd1, int contInd2, Country count, Country neig) {
+		// TODO Auto-generated method stub
+		Bridge bridgeA2B = new Bridge(map.listOfContinent.get(contInd2), count, neig);
+		Bridge bridgeB2A = new Bridge(map.listOfContinent.get(contInd1), neig, count);
+		map.listOfContinent.get(contInd1).bridges.add(bridgeA2B);
+		map.listOfContinent.get(contInd2).bridges.add(bridgeB2A);
+	}
+
+	/**
+	 * This method find country index from listofcountry with its name
+	 * 
+	 * @param countName
+	 * @param listOfCountries
+	 * @return
+	 */
 	private static int findCountInd(String countName, List<Country> listOfCountries) {
 		// TODO Auto-generated method stub
 		for (int i = 0; i < listOfCountries.size(); i++) {
