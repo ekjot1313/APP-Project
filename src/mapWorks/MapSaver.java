@@ -12,7 +12,7 @@ import Game.Map;
  * @author ekjot
  *
  */
-public class MapSaver {
+public class MapSaver {        //UNDER CONSTRUCTION
 	public Map map;
 	public String fileName;
 

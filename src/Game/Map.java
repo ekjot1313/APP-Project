@@ -13,35 +13,35 @@ import java.util.List;
 public class Map {
 	public String message;
 	public String mapName;
-	public List<Continent> continents;
-	public List<Country> countries;
+	public List<Continent> listOfContinent;
+	public List<Country> listOfCountries;
 
 	/**
 	 * @return the countries
 	 */
 	public List<Country> getCountries() {
-		return countries;
+		return listOfCountries;
 	}
 
 	/**
 	 * @param countries the countries to set
 	 */
 	public void setCountries(List<Country> countries) {
-		this.countries = countries;
+		this.listOfCountries = countries;
 	}
 
 	/**
 	 * @return the continents
 	 */
 	public List<Continent> getContinents() {
-		return continents;
+		return listOfContinent;
 	}
 
 	/**
 	 * @param continents the continents to set
 	 */
 	public void setContinents(List<Continent> continents) {
-		this.continents = continents;
+		this.listOfContinent = continents;
 	}
 
 	/**
