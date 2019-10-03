@@ -461,12 +461,28 @@ public class MapEditor {
 					if (!count.getContinentName().equals(neig.getContinentName())) {
 
 						createBridge(contInd1, contInd2, count, neig);
+						
+						displayBridge();
 
 					}
 
 				} else if (s.get(0).equals("remove")) {
-					
-					
+
+					// finding index of second country in first country's neighbor list
+					int countInNeigInd = findCountInd(neig.getName(), count.getNeighbours());
+					int neigInCountInd = findCountInd(count.getName(), neig.getNeighbours());
+
+					// removing from neighbor list
+					map.listOfCountries.get(countInd).getNeighbours().remove(countInNeigInd);
+					map.listOfCountries.get(neigInd).getNeighbours().remove(neigInCountInd);
+
+					// if different continents, create a bridge also
+					if (!count.getContinentName().equals(neig.getContinentName())) {
+
+						removeBridge(contInd1, contInd2, count, neig);
+						displayBridge();
+
+					}
 
 				}
 
@@ -477,6 +493,41 @@ public class MapEditor {
 			System.out.println("Error!!!");
 		}
 		}
+
+	}
+
+	private static void displayBridge() {
+		// TODO Auto-generated method stub
+		for (Continent cont : map.listOfContinent) {
+			for(Bridge bridge: cont.bridges) {
+				System.out.println("bridge: "+cont.getName()+"-"+bridge.neigCont.getName()+"( "+bridge.count1.name+" -> "+bridge.count2.name+" )");
+			}
+
+			
+		}
+		
+		
+	}
+
+	private static void removeBridge(int contInd1, int contInd2, Country count, Country neig) {
+		// TODO Auto-generated method stub
+//check all bridge in first continent
+		for (Bridge bridge : map.listOfContinent.get(contInd1).bridges) {
+
+			if (bridge.count1.equals(count) && bridge.count2.equals(neig)) {
+				map.listOfContinent.get(contInd1).bridges.remove(bridge);
+
+			}
+		}
+		
+		//check all bridge in second continent
+				for (Bridge bridge : map.listOfContinent.get(contInd2).bridges) {
+
+					if (bridge.count1.equals(neig) && bridge.count2.equals(count)) {
+						map.listOfContinent.get(contInd1).bridges.remove(bridge);
+
+					}
+				}
 
 	}
 
