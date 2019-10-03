@@ -1,4 +1,5 @@
 package Game;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,6 +16,11 @@ public class Map {
 	public String mapName;
 	public List<Continent> listOfContinent;
 	public List<Country> listOfCountries;
+	
+	public Map() {
+		this.listOfContinent=new ArrayList<Continent>();
+		this.listOfCountries=new ArrayList<Country>();
+	}
 
 	/**
 	 * @return the countries

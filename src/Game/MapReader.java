@@ -1,3 +1,4 @@
+
 package Game;
 
 import Game.Map;
@@ -79,9 +80,6 @@ public class MapReader {
 
 			}
 
-		} catch (Exception e) {
-			System.out.println(e);
-		}
 
 		// graph creation
 
@@ -122,6 +120,12 @@ public class MapReader {
 			}
 		} else
 			System.out.println("Invalid map");
+		
+
+		} catch (Exception e) {
+			if(e.toString().contains("FileNotFoundException"))
+			 System.out.println("Invalid filename");
+		}
 
 	}
 
@@ -192,7 +196,12 @@ public class MapReader {
 
 	public static void main(String args[]) {
 		MapReader m = new MapReader();
-		m.parseMapFile("C:\\Users\\ekjot\\Desktop\\Sample map.map");
+		String filename = "ameroki.map";
+		System.out.println(System.getProperty("user.dir"));
+		String currentPath = System.getProperty("user.dir");
+		currentPath += "\\src\\Maps\\"+filename ;
+		m.parseMapFile(currentPath);
 	}
 
 }
+

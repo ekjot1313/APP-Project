@@ -1,10 +1,15 @@
 package mapWorks;
 
+import Game.Continent;
+import Game.Country;
 import Game.Map;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import Game.MapReader;
 
 /**
  * Temporary class for user driven commands to edit map. This will be called
@@ -19,12 +24,12 @@ import java.util.ArrayList;
 public class MapEditor {
 	public static boolean good;
 	public static Map map;
-	public static ArrayList<String[]>stack=new ArrayList<String[]>();
 
-	public static void main(Map m) throws IOException {
-		map = m;
+	public static void main(String args[]) throws IOException {
 
 		BufferedReader brConsole = new BufferedReader(new InputStreamReader(System.in));
+
+		map = new Map();
 
 		String command[];
 		good = true;
@@ -36,7 +41,6 @@ public class MapEditor {
 			switch (command[0]) {
 			case "editcontinent": {
 				editContinent(command);
-				
 
 				break;
 			}
@@ -84,6 +88,7 @@ public class MapEditor {
 	 */
 	private static void editNeighbor(String[] command) {
 		// TODO Auto-generated method stub
+		ArrayList<ArrayList<String>> stack = new ArrayList<ArrayList<String>>();
 		int len = command.length;
 		if (len < 2) {
 			System.out.println("Invalid Command. Cannot find '-add' or '-remove'.");
@@ -97,7 +102,7 @@ public class MapEditor {
 				case "add": {
 					if (i + 2 < len) {
 						String countryName = command[++i], neighborCountryName = command[++i];
-						addNeighbor(countryName, neighborCountryName);
+						addNeighbor(countryName, neighborCountryName, stack);
 					} else {
 						System.out.println("Invalid Command. Cannot find 'countryname' or 'neighborcountryname'.");
 						good = false;
@@ -108,7 +113,7 @@ public class MapEditor {
 				case "remove": {
 					if (i + 1 < len) {
 						String countryName = command[++i], neighborCountryName = command[++i];
-						removeNeighbor(countryName, neighborCountryName);
+						removeNeighbor(countryName, neighborCountryName, stack);
 					} else {
 						System.out.println("Invalid Command. Cannot find 'countryname' or 'neighborcountryname'.");
 						good = false;
@@ -131,6 +136,9 @@ public class MapEditor {
 
 		}
 
+		if (good) {
+			executeStack("editcontinent", stack);
+		}
 	}
 
 	/**
@@ -138,20 +146,19 @@ public class MapEditor {
 	 * 
 	 * @param countryName
 	 * @param neighborCountryName
+	 * @param stack
 	 */
-	private static void removeNeighbor(String countryName, String neighborCountryName) {
+	private static void removeNeighbor(String countryName, String neighborCountryName,
+			ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
 		if (countryName.charAt(0) == '-' || neighborCountryName.charAt(0) == '-') {
 			System.out.println("Invalid Command. Type Again.");
 			good = false;
 			return;
 		}
-
+		stack.add(new ArrayList<>(Arrays.asList("remove", countryName, neighborCountryName)));
 		System.out.println("remove: " + countryName + " , " + neighborCountryName);
-		
-		
-		
-		
+
 	}
 
 	/**
@@ -159,15 +166,17 @@ public class MapEditor {
 	 * 
 	 * @param countryName
 	 * @param neighborCountryName
+	 * @param stack
 	 */
-	private static void addNeighbor(String countryName, String neighborCountryName) {
+	private static void addNeighbor(String countryName, String neighborCountryName,
+			ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
 		if (countryName.charAt(0) == '-' || neighborCountryName.charAt(0) == '-') {
 			System.out.println("Invalid Command. Type Again.");
 			good = false;
 			return;
 		}
-
+		stack.add(new ArrayList<>(Arrays.asList("add", countryName, neighborCountryName)));
 		System.out.println("add: " + countryName + " , " + neighborCountryName);
 	}
 
@@ -178,6 +187,7 @@ public class MapEditor {
 	 */
 	private static void editCountry(String[] command) {
 		// TODO Auto-generated method stub
+		ArrayList<ArrayList<String>> stack = new ArrayList<ArrayList<String>>();
 		int len = command.length;
 		if (len < 2) {
 			System.out.println("Invalid Command. Cannot find '-add' or '-remove'.");
@@ -191,7 +201,7 @@ public class MapEditor {
 				case "add": {
 					if (i + 2 < len) {
 						String countryName = command[++i], continentName = command[++i];
-						addCountry(countryName, continentName);
+						addCountry(countryName, continentName, stack);
 					} else {
 						System.out.println("Invalid Command. Cannot find 'countryname' or 'continentname'.");
 						good = false;
@@ -202,7 +212,7 @@ public class MapEditor {
 				case "remove": {
 					if (i + 1 < len) {
 						String countryName = command[++i];
-						removeCountry(countryName);
+						removeCountry(countryName, stack);
 					} else {
 						System.out.println("Invalid Command. Cannot find 'countryname'.");
 						good = false;
@@ -224,6 +234,9 @@ public class MapEditor {
 			}
 
 		}
+		if (good) {
+			executeStack("editcontinent", stack);
+		}
 
 	}
 
@@ -231,15 +244,16 @@ public class MapEditor {
 	 * This method will remove a country.
 	 * 
 	 * @param countryName
+	 * @param stack
 	 */
-	private static void removeCountry(String countryName) {
+	private static void removeCountry(String countryName, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
 		if (countryName.charAt(0) == '-') {
 			System.out.println("Invalid Command. Type Again.");
 			good = false;
 			return;
 		}
-
+		stack.add(new ArrayList<>(Arrays.asList("remove", countryName)));
 		System.out.println("remove: " + countryName);
 
 	}
@@ -249,16 +263,17 @@ public class MapEditor {
 	 * 
 	 * @param countryName
 	 * @param continentName
+	 * @param stack
 	 */
 
-	private static void addCountry(String countryName, String continentName) {
+	private static void addCountry(String countryName, String continentName, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
 		if (countryName.charAt(0) == '-' || continentName.charAt(0) == '-') {
 			System.out.println("Invalid Command. Type Again.");
 			good = false;
 			return;
 		}
-
+		stack.add(new ArrayList<>(Arrays.asList("add", countryName, continentName)));
 		System.out.println("add: " + countryName + " , " + continentName);
 
 	}
@@ -270,14 +285,13 @@ public class MapEditor {
 	 */
 	private static void editContinent(String[] command) {
 		// TODO Auto-generated method stub
+		ArrayList<ArrayList<String>> stack = new ArrayList<ArrayList<String>>();
 		int len = command.length;
 		if (len < 2) {
 			System.out.println("Invalid Command. Cannot find '-add' or '-remove'.");
 			good = false;
 			return;
 		}
-		
-		
 
 		for (int i = 1; i < len && good; i++) { // starting from 1 because 0th index was editcontinent
 			String word = command[i];
@@ -286,7 +300,7 @@ public class MapEditor {
 				case "add": {
 					if (i + 2 < len) {
 						String continentName = command[++i], continentValue = command[++i];
-						addContinent(continentName, continentValue);
+						addContinent(continentName, continentValue, stack);
 					} else {
 						System.out.println("Invalid Command. Cannot find 'continentname' or 'continentvalue'.");
 						good = false;
@@ -297,7 +311,7 @@ public class MapEditor {
 				case "remove": {
 					if (i + 1 < len) {
 						String continentName = command[++i];
-						removeContinent(continentName);
+						removeContinent(continentName, stack);
 					} else {
 						System.out.println("Invalid Command. Cannot find 'continentname'.");
 						good = false;
@@ -320,20 +334,26 @@ public class MapEditor {
 
 		}
 
+		if (good) {
+			executeStack("editcontinent", stack);
+		}
+
 	}
 
 	/**
 	 * This method will remove a continent.
 	 * 
 	 * @param continentName
+	 * @param stack
 	 */
-	private static void removeContinent(String continentName) {
+	private static void removeContinent(String continentName, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
 		if (continentName.charAt(0) == '-') {
 			System.out.println("Invalid Command. Type Again.");
 			good = false;
 			return;
 		}
+		stack.add(new ArrayList<>(Arrays.asList("remove", continentName)));
 		System.out.println("remove: " + continentName);
 
 	}
@@ -343,15 +363,73 @@ public class MapEditor {
 	 * 
 	 * @param continentName
 	 * @param continentValue
+	 * @param stack
 	 */
-	private static void addContinent(String continentName, String continentValue) {
+	private static void addContinent(String continentName, String continentValue, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
 		if (continentName.charAt(0) == '-' || continentValue.charAt(0) == '-') {
 			System.out.println("Invalid Command. Type Again.");
 			good = false;
 			return;
 		}
+		stack.add(new ArrayList<>(Arrays.asList("add", continentName, continentValue)));
 		System.out.println("add: " + continentName + " , " + continentValue);
+	}
+
+	/**
+	 * This method will excute command stacks of sub-commands
+	 * 
+	 * @param cmd
+	 * @param stk
+	 */
+	private static void executeStack(String cmd, ArrayList<ArrayList<String>> stack) {
+		// TODO Auto-generated method stub
+		switch (cmd) {
+		case "editcontinent": {
+			for (int i = 0; i < stack.size(); i++) {
+				ArrayList<String> s = stack.get(i);
+				if (s.get(0).equals("add")) {
+					Continent cont = new Continent();
+					cont.setName(s.get(1));
+					cont.setContinentValue(Integer.parseInt(s.get(2)));
+					map.listOfContinent.add(cont);
+					//(new MapReader()).display(map);
+
+				} else if (s.get(0).equals("remove")) {
+
+				}
+			}
+			break;
+		}
+		case "editcountry": {
+			for (int i = 0; i < stack.size(); i++) {
+				ArrayList<String> s = stack.get(i);
+				if (s.get(0).equals("add")) {
+					Country count = new Country();
+					count.setName(s.get(1));
+					count.setContinentName(map.listOfContinent.get(map.listOfContinent.indexOf(s.get(2))));
+					
+				} else if (s.get(0).equals("remove")) {
+
+				}
+			}
+			break;
+		}
+		case "editneighbor": {
+			for (int i = 0; i < stack.size(); i++) {
+				ArrayList<String> s = stack.get(i);
+				for (int j = 0; j < stack.get(i).size(); j++) {
+					System.out.print(s.get(j) + " ");
+				}
+				System.out.println();
+			}
+			break;
+		}
+		default: {
+			System.out.println("Error!!!");
+		}
+		}
+
 	}
 
 }
