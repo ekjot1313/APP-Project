@@ -455,14 +455,23 @@ public class MapEditor {
 					
 					map.listOfCountries.get(countInd).getNeighbours().add(neig);
 					map.listOfCountries.get(neigInd).getNeighbours().add(count);
-/*editcontinent -add abc 12 -add xyz 15 
-editcountry -add def abc -add ghi xyz
+/*editcontinent -add abc 12
+editcountry -add def abc -add ghi abc
 editneighbor -add def ghi*/
+					
+					//if same continent create a link only
+					if(count.getContinentName().equals(neig.getContinentName())) {
+						int ind=findContInd(count.getContinentName().getName(),map.listOfContinent);
+						
+					}
+					
 					
 					
 					
 					
 				} else if (s.get(0).equals("remove")) {
+					
+					
 				}
 
 			}
@@ -473,10 +482,15 @@ editneighbor -add def ghi*/
 		}
 		}
 		
-		(new MapReader()).display(map);
+		
 
 	}
-
+/**
+ *  This method find country index from listofcountry with its name
+ * @param countName
+ * @param listOfCountries
+ * @return
+ */
 	private static int findCountInd(String countName, List<Country> listOfCountries) {
 		// TODO Auto-generated method stub
 		for (int i = 0; i < listOfCountries.size(); i++) {
@@ -488,7 +502,7 @@ editneighbor -add def ghi*/
 	}
 
 	/**
-	 * This method find continent from listofcontinent with its name
+	 * This method find continent index from listofcontinent with its name
 	 * 
 	 * @param contName
 	 * @param listOfContinent
