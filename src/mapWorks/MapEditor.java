@@ -444,8 +444,8 @@ public class MapEditor {
 
 				} else if (s.get(0).equals("remove")) {
 					
-					for(int i=0;i<map.listOfCountries.get(coun))
-					executeStack("editneighbor",(new ArrayList<>(Arrays.asList("remove", count, neig));
+	///////////////////////				for(int i=0;i<map.listOfCountries.get(coun))
+	/////////////////////////				executeStack("editneighbor",(new ArrayList<>(Arrays.asList("remove", count, neig));
 
 				}
 			}
