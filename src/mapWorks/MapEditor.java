@@ -446,6 +446,7 @@ public class MapEditor {
 					
 	///////////////////////				for(int i=0;i<map.listOfCountries.get(coun))
 	/////////////////////////				executeStack("editneighbor",(new ArrayList<>(Arrays.asList("remove", count, neig));
+					
 
 				}
 			}
@@ -502,9 +503,12 @@ public class MapEditor {
 						displayBridge();
 
 					}
-					
-					map.listOfContinent.get(contInd1).countries.remove(count);
-					//map.listOfContinent.get(contInd1).countries.
+					//same continent
+					else {
+					map.listOfContinent.get(contInd1).countries.get(map.listOfContinent.get(contInd1).countries.indexOf(count)).getNeighbours().remove(neig);
+
+					map.listOfContinent.get(contInd1).countries.get(map.listOfContinent.get(contInd1).countries.indexOf(neig)).getNeighbours().remove(count);
+					}
 
 				}
 
