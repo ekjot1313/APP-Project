@@ -3,7 +3,10 @@ package mapWorks;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
+import Game.Continent;
+import Game.Country;
 import Game.Map;
 
 /**
@@ -15,21 +18,37 @@ import Game.Map;
 public class MapSaver {        //UNDER CONSTRUCTION
 	public Map map;
 	public String fileName;
-
 	
-	public void saveMap(Map map,String fileName) {
+	public String message1;
+	public String message2;
+	public String mapName;
+	public List<Continent> listOfContinent;
+	public List<Country> listOfCountries;
+
+	public static void main(String[] args) {
+		// (new MapSaver()).saveMap();
+	}
+	public void saveMap(Map map,String fileName) throws IOException {
+		
+		this.message1 = map.message1;
+		this.message2 = map.message2;
+		this.mapName = map.mapName;
+		this.listOfContinent = map.listOfContinent;
+		this.listOfCountries = map.listOfCountries;
+		
 		String currentPath = System.getProperty("user.dir")+"\\src\\Maps\\";
-		String mapPath=currentPath+mapSaver.fileName+".map";
+		String mapPath=currentPath+fileName+".map";
 		
 		BufferedWriter bwFile=new BufferedWriter(new FileWriter(mapPath));
 		
-	}
-	public static void main(String[] args) throws IOException {
+		bwFile.write(message1 + "/n");
+		bwFile.write("name " + mapName + " Map/n");
+		bwFile.write(message2 + "/n");
 		
-	
-
+		bwFile.write("[Continents]/n");
+		
 	}
-
+	
 	/**
 	 * @return the fileName
 	 */
