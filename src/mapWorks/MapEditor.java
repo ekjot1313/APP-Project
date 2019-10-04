@@ -393,6 +393,22 @@ public class MapEditor {
 				if (s.get(0).equals("add")) {
 					Continent cont = new Continent();
 					cont.setName(s.get(1));
+					
+					
+					//to check whether string is number or not
+					try { 
+				        Integer.parseInt(s.get(2)); 
+				    } catch(NumberFormatException e) { 
+				    	System.out.println("Invalid Command. 'continentvalue' should be a number.");
+				    	good=false;
+				        return; 
+				    } catch(NullPointerException e) {
+				    	System.out.println("Invalid Command. 'continentvalue' should be a number.");
+				    	good=false;
+				        return;
+				    }
+					
+					
 					cont.setContinentValue(Integer.parseInt(s.get(2)));
 					map.listOfContinent.add(cont);
 					// (new MapReader()).display(map);
@@ -495,6 +511,8 @@ public class MapEditor {
 		}
 
 	}
+
+	
 
 	private static void displayBridge() {
 		// TODO Auto-generated method stub
