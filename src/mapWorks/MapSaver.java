@@ -25,8 +25,17 @@ public class MapSaver {        //UNDER CONSTRUCTION
 	public List<Continent> listOfContinent;
 	public List<Country> listOfCountries;
 
-	public static void main(String[] args) {
-		// (new MapSaver()).saveMap();
+	public static void main(String[] args) throws IOException {
+		
+		
+		MapSaver ms=new MapSaver();
+		
+		ms.map.message1="message1";
+		ms.map.message2="message2";
+		ms.map.mapName="hartaj";
+		
+		
+		ms.saveMap(ms.map,"sample");
 	}
 	public void saveMap(Map map,String fileName) throws IOException {
 		
