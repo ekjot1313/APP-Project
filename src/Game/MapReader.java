@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class MapReader {
+	
 	public Map map;
 	private File fileObject;
 	private BufferedReader bufferReaderForFile;
