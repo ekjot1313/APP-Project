@@ -54,6 +54,7 @@ public class Main {
 
 	private static void editmap(String filename) {
 		// TODO Auto-generated method stub
+		
 		mr = new MapReader();
 		System.out.println(System.getProperty("user.dir"));
 		String currentPath = System.getProperty("user.dir");

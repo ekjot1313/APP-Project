@@ -16,6 +16,7 @@ public class MapReader {
 	public HashMap<Integer, List<Integer>> mapOfWorld = new HashMap<Integer, List<Integer>>();
 	
 	
+	
 
 	public void parseMapFile(File fileObject) {
 		map = new Map();
