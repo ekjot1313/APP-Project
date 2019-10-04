@@ -16,10 +16,17 @@ public class MapSaver {        //UNDER CONSTRUCTION
 	public Map map;
 	public String fileName;
 
+	
+	public void saveMap(Map map,String fileName) {
+		String currentPath = System.getProperty("user.dir")+"\\src\\Maps\\";
+		String mapPath=currentPath+mapSaver.fileName+".map";
+		
+		BufferedWriter bwFile=new BufferedWriter(new FileWriter(mapPath));
+		
+	}
 	public static void main(String[] args) throws IOException {
 		
-		MapSaver mapSaver=new MapSaver();
-		//BufferedWriter bwFile=new BufferedWriter(new FileWriter(mapSaver.fileName+".map"));
+	
 
 	}
 

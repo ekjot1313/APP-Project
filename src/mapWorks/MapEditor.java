@@ -393,6 +393,20 @@ public class MapEditor {
 				if (s.get(0).equals("add")) {
 					Continent cont = new Continent();
 					cont.setName(s.get(1));
+
+					// to check whether string is number or not
+					try {
+						Integer.parseInt(s.get(2));
+					} catch (NumberFormatException e) {
+						System.out.println("Invalid Command. 'continentvalue' should be a number.");
+						good = false;
+						return;
+					} catch (NullPointerException e) {
+						System.out.println("Invalid Command. 'continentvalue' should be a number.");
+						good = false;
+						return;
+					}
+
 					cont.setContinentValue(Integer.parseInt(s.get(2)));
 					map.listOfContinent.add(cont);
 					// (new MapReader()).display(map);
@@ -406,19 +420,21 @@ public class MapEditor {
 		case "editcountry": {
 			for (int i = 0; i < stack.size(); i++) {
 				ArrayList<String> s = stack.get(i);
+				
+				Country count = new Country();
+				count.setName(s.get(1));
+
+				int contInd = findContInd(s.get(2), map.listOfContinent);
+
+				if (contInd == -1) {
+					System.out.println("Continent Not Found.");
+					return;
+				}
+
+				count.setContinentName(map.listOfContinent.get(contInd));
 
 				if (s.get(0).equals("add")) {
-					Country count = new Country();
-					count.setName(s.get(1));
-
-					int contInd = findContInd(s.get(2), map.listOfContinent);
-
-					if (contInd == -1) {
-						System.out.println("Continent Not Found.");
-						return;
-					}
-
-					count.setContinentName(map.listOfContinent.get(contInd));
+					
 
 					map.listOfContinent.get(contInd).getCountries().add(count);
 
@@ -427,6 +443,9 @@ public class MapEditor {
 					// (new MapReader()).display(map);
 
 				} else if (s.get(0).equals("remove")) {
+					
+	///////////////////////				for(int i=0;i<map.listOfCountries.get(coun))
+	/////////////////////////				executeStack("editneighbor",(new ArrayList<>(Arrays.asList("remove", count, neig));
 
 				}
 			}
@@ -462,21 +481,80 @@ public class MapEditor {
 
 						createBridge(contInd1, contInd2, count, neig);
 
+						displayBridge();
+
 					}
 
 				} else if (s.get(0).equals("remove")) {
+
+					// finding index of second country in first country's neighbor list
+					int countInNeigInd = findCountInd(neig.getName(), count.getNeighbours());
+					int neigInCountInd = findCountInd(count.getName(), neig.getNeighbours());
+
+					// removing from neighbor list
+					map.listOfCountries.get(countInd).getNeighbours().remove(countInNeigInd);
+					map.listOfCountries.get(neigInd).getNeighbours().remove(neigInCountInd);
+
+					// if different continents, remove the bridge also
+					if (!count.getContinentName().equals(neig.getContinentName())) {
+
+						removeBridge(contInd1, contInd2, count, neig);
+						displayBridge();
+
+					}
 					
-					
+					map.listOfContinent.get(contInd1).countries.remove(count);
+					//map.listOfContinent.get(contInd1).countries.
 
 				}
 
 			}
+			(new MapReader()).display(map);
 			break;
 		}
 		default: {
 			System.out.println("Error!!!");
 		}
 		}
+
+	}
+
+	private static void displayBridge() {
+		// TODO Auto-generated method stub
+		for (Continent cont : map.listOfContinent) {
+			for (Bridge bridge : cont.bridges) {
+				System.out.println("bridge: " + cont.getName() + "-" + bridge.neigCont.getName() + "( "
+						+ bridge.count1.name + " -> " + bridge.count2.name + " )");
+			}
+
+		}
+
+	}
+
+	private static void removeBridge(int contInd1, int contInd2, Country count, Country neig) {
+		// TODO Auto-generated method stub
+//check all bridge in first continent
+		
+		for (int i=0;i<map.listOfContinent.get(contInd1).bridges.size();i++){
+			Bridge bridge=map.listOfContinent.get(contInd1).bridges.get(i);
+			if (bridge.count1.equals(count) && bridge.count2.equals(neig)) {
+				map.listOfContinent.get(contInd1).bridges.remove(bridge);
+				
+				
+			}
+		}
+		
+		// check all bridge in second continent
+		for (int i=0;i<map.listOfContinent.get(contInd2).bridges.size();i++){
+			Bridge bridge=map.listOfContinent.get(contInd2).bridges.get(i);
+			if (bridge.count1.equals(neig) && bridge.count2.equals(count)) {
+				map.listOfContinent.get(contInd2).bridges.remove(bridge);
+				
+				
+			}
+		}
+		
+	
 
 	}
 
