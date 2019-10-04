@@ -16,14 +16,15 @@ public class MapReader {
 	public HashMap<Integer, List<Integer>> mapOfWorld = new HashMap<Integer, List<Integer>>();
 	
 	
+	
 
-	public void parseMapFile(String filePath) {
+	public void parseMapFile(File fileObject) {
 		map = new Map();
 		map.listOfContinent = new ArrayList<Continent>();
 		map.listOfCountries = new ArrayList<Country>();
 		try {
 
-			bufferReaderForFile = new BufferedReader(new FileReader(new File(filePath)));
+			bufferReaderForFile = new BufferedReader(new FileReader(fileObject));
 			while ((currentLine = bufferReaderForFile.readLine()) != null) {
 
 				if (currentLine.contains("[continents]")) {
@@ -225,14 +226,16 @@ public class MapReader {
 		return duplicate;
 	}
 
-	public static void main(String args[]) {
+	/*public static void main(String args[]) {
 		MapReader m = new MapReader();
 		String filename = "ameroki.map";
 		System.out.println(System.getProperty("user.dir"));
 		String currentPath = System.getProperty("user.dir");
 		currentPath += "\\src\\Maps\\" + filename;
 		m.parseMapFile(currentPath);
-	}
+	}*/
+	
+	
 
 	/**
 	 * This method returns the currently loaded map
