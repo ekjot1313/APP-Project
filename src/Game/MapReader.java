@@ -54,6 +54,7 @@ public class MapReader {
 		} catch (Exception e) {
 			if (e.toString().contains("FileNotFoundException"))
 				System.out.println("Invalid filename");
+			System.out.println(e);
 		}
 
 	}
@@ -68,10 +69,13 @@ public class MapReader {
 			}
 			String[] neighbourDetails = currentLine.split(" ");
 			for (int i = 0; i < neighbourDetails.length - 1; i++) {
-				map.listOfCountries.get(Integer.parseInt(neighbourDetails[0]) - 1).neighbours
-						.add(map.listOfCountries.get(Integer.parseInt(neighbourDetails[i + 1]) - 1));
-
+				map.listOfCountries.get(Integer.parseInt(neighbourDetails[0]) - 1).neighbours.add(map.listOfCountries.get(Integer.parseInt(neighbourDetails[i + 1]) - 1));
+				if(!map.listOfCountries.get(Integer.parseInt(neighbourDetails[0]) - 1).continentName.equals(map.listOfCountries.get(Integer.parseInt(neighbourDetails[i + 1]) - 1).continentName))
+				{	
+					map.listOfCountries.get(Integer.parseInt(neighbourDetails[0]) - 1).getContinentName().bridges.add(new Bridge(map.listOfCountries.get(Integer.parseInt(neighbourDetails[i+1]) - 1).getContinentName(), map.listOfCountries.get(Integer.parseInt(neighbourDetails[0]) - 1),map.listOfCountries.get(Integer.parseInt(neighbourDetails[i+1]) - 1)));
+				}
 			}
+				
 		}
 	
 	}
@@ -127,6 +131,11 @@ public class MapReader {
 
 		for (Continent c : map2.listOfContinent) {
 			System.out.println("Continent :" + c.getName());
+			System.out.println("Bridges");
+			for(int i=0;i<c.bridges.size();i++)
+			{	
+				System.out.println(c.bridges.get(i).getNeigCont().getName()+" "+c.bridges.get(i).getCount1().getName()+" "+c.bridges.get(i).getCount2().getName());
+			}
 			for (Country c1 : c.getCountries()) {
 				System.out.print("Country :" + c1.getName() + ": Neighbours->");
 
