@@ -420,19 +420,21 @@ public class MapEditor {
 		case "editcountry": {
 			for (int i = 0; i < stack.size(); i++) {
 				ArrayList<String> s = stack.get(i);
+				
+				Country count = new Country();
+				count.setName(s.get(1));
+
+				int contInd = findContInd(s.get(2), map.listOfContinent);
+
+				if (contInd == -1) {
+					System.out.println("Continent Not Found.");
+					return;
+				}
+
+				count.setContinentName(map.listOfContinent.get(contInd));
 
 				if (s.get(0).equals("add")) {
-					Country count = new Country();
-					count.setName(s.get(1));
-
-					int contInd = findContInd(s.get(2), map.listOfContinent);
-
-					if (contInd == -1) {
-						System.out.println("Continent Not Found.");
-						return;
-					}
-
-					count.setContinentName(map.listOfContinent.get(contInd));
+					
 
 					map.listOfContinent.get(contInd).getCountries().add(count);
 
@@ -441,6 +443,9 @@ public class MapEditor {
 					// (new MapReader()).display(map);
 
 				} else if (s.get(0).equals("remove")) {
+					
+					for(int i=0;i<map.listOfCountries.get(coun))
+					executeStack("editneighbor",(new ArrayList<>(Arrays.asList("remove", count, neig));
 
 				}
 			}
@@ -490,13 +495,16 @@ public class MapEditor {
 					map.listOfCountries.get(countInd).getNeighbours().remove(countInNeigInd);
 					map.listOfCountries.get(neigInd).getNeighbours().remove(neigInCountInd);
 
-					// if different continents, create a bridge also
+					// if different continents, remove the bridge also
 					if (!count.getContinentName().equals(neig.getContinentName())) {
 
 						removeBridge(contInd1, contInd2, count, neig);
 						displayBridge();
 
 					}
+					
+					map.listOfContinent.get(contInd1).countries.remove(count);
+					//map.listOfContinent.get(contInd1).countries.
 
 				}
 
