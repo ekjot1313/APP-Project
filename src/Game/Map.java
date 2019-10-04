@@ -99,6 +99,34 @@ public class Map {
 	public void setMapName(String mapName) {
 		this.mapName = mapName;
 	}
+	
+	public void updateListOfCountries() {
+		this.listOfCountries.clear();
+		for(Continent continent:this.listOfContinent) {
+			for(Country country:continent.countries) {
+				this.listOfCountries.add(country);
+			}
+		}
+	}
+	
+	public Country getCountryFromName(String givenCountryName) {
+		for(Continent continent:this.listOfContinent) {
+			for(Country country:continent.countries) {
+				if(country.name.equals(givenCountryName)) {
+					return country;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public Continent getContinentFromName(String givenContinentName) {
+		for(Continent continent:this.listOfContinent) {
+			if(continent.getName().equals(givenContinentName)) {
+				return continent;
+			}
+		}
+		return null;}
 
 
 }

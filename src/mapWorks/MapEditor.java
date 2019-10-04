@@ -21,7 +21,7 @@ import Game.MapReader;
  *
  */
 
-// pending: addContinent(),removeContinent(), addCountry(), removeCountry(), addNeighbour(), removeNeighbour(), showMap(), saveMap()
+// pending: ,removeContinent(),  removeCountry() , showMap(), saveMap()
 
 public class MapEditor {
 	public static boolean good;
@@ -390,11 +390,10 @@ public class MapEditor {
 		case "editcontinent": {
 			for (int i = 0; i < stack.size(); i++) {
 				ArrayList<String> s = stack.get(i);
-				if (s.get(0).equals("add")) {
-					Continent cont = new Continent();
-					cont.setName(s.get(1));
 
-					// to check whether string is number or not
+				if (s.get(0).equals("add")) {
+
+					// to check whether string is number or not; this case is only for 'add'
 					try {
 						Integer.parseInt(s.get(2));
 					} catch (NumberFormatException e) {
@@ -407,11 +406,28 @@ public class MapEditor {
 						return;
 					}
 
+					if (map.getContinentFromName(s.get(1)) != null) {
+						System.out.println("Continent Already Exists.");
+						return;
+					}
+
+					Continent cont = new Continent();
+					cont.setName(s.get(1));
 					cont.setContinentValue(Integer.parseInt(s.get(2)));
+					cont.setContinentIndexInListOfContinent(map.listOfContinent.size());
+
 					map.listOfContinent.add(cont);
+					map.updateListOfCountries();
 					// (new MapReader()).display(map);
 
 				} else if (s.get(0).equals("remove")) {
+
+					if ((map.getContinentFromName(s.get(1)) == null)) {
+						System.out.println("Continent Not Found.");
+						return;
+					}
+
+					/////////////////////////////////////////// pending
 
 				}
 			}
@@ -420,33 +436,37 @@ public class MapEditor {
 		case "editcountry": {
 			for (int i = 0; i < stack.size(); i++) {
 				ArrayList<String> s = stack.get(i);
-				
-				Country count = new Country();
-				count.setName(s.get(1));
-
-				int contInd = findContInd(s.get(2), map.listOfContinent);
-
-				if (contInd == -1) {
-					System.out.println("Continent Not Found.");
-					return;
-				}
-
-				count.setContinentName(map.listOfContinent.get(contInd));
 
 				if (s.get(0).equals("add")) {
-					
+					Continent continent;
 
-					map.listOfContinent.get(contInd).getCountries().add(count);
+					if (map.getCountryFromName(s.get(1)) != null) {
+						System.out.println("Country Already Exists.");
+						return;
+					} else if ((continent = map.getContinentFromName(s.get(2))) == null) {
+						System.out.println("Continent Not Found.");
+						return;
+					}
 
-					map.listOfCountries.add(count);
+					Country count = new Country();
+					count.name = s.get(1);
+					count.continentName = continent;
+					count.continentIndexInListOfContinent = continent.continentIndexInListOfContinent;
+					count.countryIndexInContinent = continent.countries.size();
+
+					map.listOfContinent.get(count.continentIndexInListOfContinent).getCountries().add(count);
+					map.updateListOfCountries();
 
 					// (new MapReader()).display(map);
 
 				} else if (s.get(0).equals("remove")) {
-					
-	///////////////////////				for(int i=0;i<map.listOfCountries.get(coun))
-	/////////////////////////				executeStack("editneighbor",(new ArrayList<>(Arrays.asList("remove", count, neig));
-					
+
+					if (map.getCountryFromName(s.get(1)) == null) {
+						System.out.println("Country Not Found.");
+						return;
+					}
+
+					//////////////////////////// pending
 
 				}
 			}
@@ -455,65 +475,80 @@ public class MapEditor {
 		case "editneighbor": {
 			for (int i = 0; i < stack.size(); i++) {
 				ArrayList<String> s = stack.get(i);
-				int countInd = findCountInd(s.get(1), map.listOfCountries);
-				if (countInd == -1) {
+
+				// checking country existence
+
+				Country count = map.getCountryFromName(s.get(1));
+				Country neig = map.getCountryFromName(s.get(2));
+
+				if (count == null) {
 					System.out.println("Country Not Found.");
 					return;
-				}
-				int neigInd = findCountInd(s.get(2), map.listOfCountries);
-				if (neigInd == -1) {
+				} else if (neig == null) {
 					System.out.println("Neighbor Country Not Found.");
 					return;
 				}
 
-				Country count = map.listOfCountries.get(countInd);
-				Country neig = map.listOfCountries.get(neigInd);
+				boolean link = count.getNeighbours().contains(neig);
 
-				int contInd1 = map.listOfContinent.indexOf(count.getContinentName());
-				int contInd2 = map.listOfContinent.indexOf(neig.getContinentName());
+				int countContinentIndex = count.continentIndexInListOfContinent;
+				int neigContinentIndex = neig.continentIndexInListOfContinent;
 
 				if (s.get(0).equals("add")) {
+					if (link) {
+						// link already exists
 
-					map.listOfCountries.get(countInd).getNeighbours().add(neig);
-					map.listOfCountries.get(neigInd).getNeighbours().add(count);
+						System.out.println("Given Countries Are Already Neighbors.");
 
-					// if different continents, create a bridge also
-					if (!count.getContinentName().equals(neig.getContinentName())) {
-
-						createBridge(contInd1, contInd2, count, neig);
-
-						displayBridge();
+						good = false;
+						return;
 
 					}
 
+					// creating link
+					map.listOfContinent.get(countContinentIndex).countries.get(count.countryIndexInContinent).neighbours
+							.add(neig); // link : cont->neig in same or different continent
+
+					map.listOfContinent.get(neigContinentIndex).countries.get(neig.countryIndexInContinent).neighbours
+							.add(count); // link: neig->cont in same or different continent
+
+					// if different continents, create a bridge also
+					if (countContinentIndex != neigContinentIndex) {
+
+						createBridge(countContinentIndex, neigContinentIndex, count, neig);
+
+					}
+
+					map.updateListOfCountries();
 				} else if (s.get(0).equals("remove")) {
 
-					// finding index of second country in first country's neighbor list
-					int countInNeigInd = findCountInd(neig.getName(), count.getNeighbours());
-					int neigInCountInd = findCountInd(count.getName(), neig.getNeighbours());
+					if (!link) {
+						// link not found
+						System.out.println("Given Countries Are Not Neighbors.");
+						good = false;
+						return;
 
-					// removing from neighbor list
-					map.listOfCountries.get(countInd).getNeighbours().remove(countInNeigInd);
-					map.listOfCountries.get(neigInd).getNeighbours().remove(neigInCountInd);
+					}
+
+					// removing link
+					map.listOfContinent.get(countContinentIndex).countries.get(count.countryIndexInContinent).neighbours
+							.remove(neig); // removed link : cont->neig in same or different continent
+
+					map.listOfContinent.get(neigContinentIndex).countries.get(neig.countryIndexInContinent).neighbours
+							.remove(count); // removed link: neig->cont in same or different continent
 
 					// if different continents, remove the bridge also
 					if (!count.getContinentName().equals(neig.getContinentName())) {
 
-						removeBridge(contInd1, contInd2, count, neig);
-						displayBridge();
+						removeBridge(countContinentIndex, neigContinentIndex, count, neig);
 
 					}
-					//same continent
-					else {
-					map.listOfContinent.get(contInd1).countries.get(map.listOfContinent.get(contInd1).countries.indexOf(count)).getNeighbours().remove(neig);
-
-					map.listOfContinent.get(contInd1).countries.get(map.listOfContinent.get(contInd1).countries.indexOf(neig)).getNeighbours().remove(count);
-					}
+					map.updateListOfCountries();
 
 				}
 
 			}
-			(new MapReader()).display(map);
+			// (new MapReader()).display(map);
 			break;
 		}
 		default: {
@@ -523,42 +558,26 @@ public class MapEditor {
 
 	}
 
-	private static void displayBridge() {
-		// TODO Auto-generated method stub
-		for (Continent cont : map.listOfContinent) {
-			for (Bridge bridge : cont.bridges) {
-				System.out.println("bridge: " + cont.getName() + "-" + bridge.neigCont.getName() + "( "
-						+ bridge.count1.name + " -> " + bridge.count2.name + " )");
-			}
-
-		}
-
-	}
-
 	private static void removeBridge(int contInd1, int contInd2, Country count, Country neig) {
 		// TODO Auto-generated method stub
-//check all bridge in first continent
-		
-		for (int i=0;i<map.listOfContinent.get(contInd1).bridges.size();i++){
-			Bridge bridge=map.listOfContinent.get(contInd1).bridges.get(i);
+		// check all bridge in first continent
+
+		for (int i = 0; i < map.listOfContinent.get(contInd1).bridges.size(); i++) {
+			Bridge bridge = map.listOfContinent.get(contInd1).bridges.get(i);
 			if (bridge.count1.equals(count) && bridge.count2.equals(neig)) {
 				map.listOfContinent.get(contInd1).bridges.remove(bridge);
-				
-				
+
 			}
 		}
-		
+
 		// check all bridge in second continent
-		for (int i=0;i<map.listOfContinent.get(contInd2).bridges.size();i++){
-			Bridge bridge=map.listOfContinent.get(contInd2).bridges.get(i);
+		for (int i = 0; i < map.listOfContinent.get(contInd2).bridges.size(); i++) {
+			Bridge bridge = map.listOfContinent.get(contInd2).bridges.get(i);
 			if (bridge.count1.equals(neig) && bridge.count2.equals(count)) {
 				map.listOfContinent.get(contInd2).bridges.remove(bridge);
-				
-				
+
 			}
 		}
-		
-	
 
 	}
 

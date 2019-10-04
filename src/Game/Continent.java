@@ -9,11 +9,27 @@ import java.util.List;
  * @since 1.0.0
  */
 public class Continent {
-	private String name;
-	private int continentValue;
+	public String name;
+	public int continentValue;
 	public List<Country> countries;
 	public List<Bridge> bridges;
 	
+	public int continentIndexInListOfContinent;
+	
+/**
+	 * @return the continentIndexInListOfContinent
+	 */
+	public int getContinentIndexInListOfContinent() {
+		return continentIndexInListOfContinent;
+	}
+
+	/**
+	 * @param continentIndexInListOfContinent the continentIndexInListOfContinent to set
+	 */
+	public void setContinentIndexInListOfContinent(int continentIndexInListOfContinent) {
+		this.continentIndexInListOfContinent = continentIndexInListOfContinent;
+	}
+
 public Continent(){
 	this.countries=new ArrayList<Country>();
 	this.bridges = new ArrayList<Bridge>();
