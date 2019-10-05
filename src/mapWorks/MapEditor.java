@@ -417,7 +417,7 @@ public class MapEditor {
 					cont.setContinentIndexInListOfContinent(map.listOfContinent.size());
 
 					map.listOfContinent.add(cont);
-					map.updateListOfCountries();
+					//map.updateListOfCountries();
 					// (new MapReader()).display(map);
 
 				} else if (s.get(0).equals("remove")) {
@@ -454,8 +454,8 @@ public class MapEditor {
 					count.continentIndexInListOfContinent = continent.continentIndexInListOfContinent;
 					count.countryIndexInContinent = continent.countries.size();
 
-					map.listOfContinent.get(count.continentIndexInListOfContinent).getCountries().add(count);
-					map.updateListOfCountries();
+					map.listOfContinent.get(count.continentIndexInListOfContinent).getCountries().add(count.name);
+					//map.updateListOfCountries();
 
 					// (new MapReader()).display(map);
 
@@ -506,11 +506,11 @@ public class MapEditor {
 					}
 
 					// creating link
-					map.listOfContinent.get(countContinentIndex).countries.get(count.countryIndexInContinent).neighbours
-							.add(neig); // link : cont->neig in same or different continent
+					//map.listOfContinent.get(countContinentIndex).countries.get(count.countryIndexInContinent).neighbours
+						//	.add(neig); // link : cont->neig in same or different continent
 
-					map.listOfContinent.get(neigContinentIndex).countries.get(neig.countryIndexInContinent).neighbours
-							.add(count); // link: neig->cont in same or different continent
+					//map.listOfContinent.get(neigContinentIndex).countries.get(neig.countryIndexInContinent).neighbours
+							//.add(count); // link: neig->cont in same or different continent
 
 					// if different continents, create a bridge also
 					if (countContinentIndex != neigContinentIndex) {
@@ -519,7 +519,7 @@ public class MapEditor {
 
 					}
 
-					map.updateListOfCountries();
+					//map.updateListOfCountries();
 				} else if (s.get(0).equals("remove")) {
 
 					if (!link) {
@@ -531,11 +531,11 @@ public class MapEditor {
 					}
 
 					// removing link
-					map.listOfContinent.get(countContinentIndex).countries.get(count.countryIndexInContinent).neighbours
-							.remove(neig); // removed link : cont->neig in same or different continent
+					//map.listOfContinent.get(countContinentIndex).countries.get(count.countryIndexInContinent).neighbours
+						//	.remove(neig); // removed link : cont->neig in same or different continent
 
-					map.listOfContinent.get(neigContinentIndex).countries.get(neig.countryIndexInContinent).neighbours
-							.remove(count); // removed link: neig->cont in same or different continent
+					//map.listOfContinent.get(neigContinentIndex).countries.get(neig.countryIndexInContinent).neighbours
+					//		.remove(count); // removed link: neig->cont in same or different continent
 
 					// if different continents, remove the bridge also
 					if (!count.getContinentName().equals(neig.getContinentName())) {
@@ -543,7 +543,7 @@ public class MapEditor {
 						removeBridge(countContinentIndex, neigContinentIndex, count, neig);
 
 					}
-					map.updateListOfCountries();
+					//map.updateListOfCountries();
 
 				}
 

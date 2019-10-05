@@ -11,7 +11,7 @@ import java.util.List;
 public class Continent {
 	public String name;
 	public int continentValue;
-	public List<Country> countries;
+	public List<String> countries;
 	public List<Bridge> bridges;
 	
 	public int continentIndexInListOfContinent;
@@ -31,7 +31,7 @@ public class Continent {
 	}
 
 public Continent(){
-	this.countries=new ArrayList<Country>();
+	this.countries=new ArrayList<String>();
 	this.bridges = new ArrayList<Bridge>();
 }
 	
@@ -67,14 +67,14 @@ public Continent(){
 	 * This method gets the countries of the continent
 	 * @return
 	 */
-	public List<Country> getCountries() {
+	public List<String> getCountries() {
 		return countries;
 	}
 	/**
 	 * This method sets the countries of the continent
 	 * @param countries
 	 */
-	public void setCountries(List<Country> countries) {
+	public void setCountries(List<String> countries) {
 		this.countries = countries;
 	}
 	

@@ -100,16 +100,16 @@ public class Map {
 		this.mapName = mapName;
 	}
 	
-	public void updateListOfCountries() {
+	/*public void updateListOfCountries() {
 		this.listOfCountries.clear();
 		for(Continent continent:this.listOfContinent) {
 			for(Country country:continent.countries) {
 				this.listOfCountries.add(country);
 			}
 		}
-	}
+	}*/
 	
-	public Country getCountryFromName(String givenCountryName) {
+	/*public Country getCountryFromName(String givenCountryName) {
 		for(Continent continent:this.listOfContinent) {
 			for(Country country:continent.countries) {
 				if(country.name.equals(givenCountryName)) {
@@ -118,7 +118,7 @@ public class Map {
 			}
 		}
 		return null;
-	}
+	}*/
 	
 	public Continent getContinentFromName(String givenContinentName) {
 		for(Continent continent:this.listOfContinent) {
