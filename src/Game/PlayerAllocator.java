@@ -2,12 +2,12 @@ package Game;
 
 import java.util.*;
 
-public class PlayerAllocator {
-	public static List<Player> listOfPlayers;
+public class PlayerAllocator extends MapReader {
+	public List<Player> listOfPlayers;
 	PlayerAllocator(){
 	this.listOfPlayers=new ArrayList<Player>();
 	}
-	public static void allocate() {
+	public void allocate() {
 		Scanner in=new Scanner(System.in);
 		String cmd=in.nextLine();
 		do
@@ -50,6 +50,18 @@ public class PlayerAllocator {
 				System.out.println("Invalid command,Type again");
 			cmd=in.nextLine();
 		}while(!cmd.equals("populate countries"));
+		populateCountries(map);
+		printPlayerCountries();
+	}
+	public void printPlayerCountries() {
+		for(int i=0;i<listOfPlayers.size();i++) {
+			System.out.println("Player :"+listOfPlayers.get(i).name);
+			System.out.println("Countries owned:");
+			for(int j=0;j<listOfPlayers.get(i).assigned_countries.size();j++)
+			{
+				System.out.println(listOfPlayers.get(i).getAssigned_countries().get(j));
+			}
+		}
 	}
 	public static int validate(String command) {
 		String str[]=command.split(" ");
@@ -79,6 +91,29 @@ public class PlayerAllocator {
 		// TODO Auto-generated method stub
 		PlayerAllocator P= new PlayerAllocator();
 		P.allocate();
+	}
+	public void populateCountries(Map map) {
+		int countryCount=map.listOfCountries.size();
+		int playerCount=listOfPlayers.size();
+		int j=(countryCount/playerCount);
+		int count=0;
+		for(int i=0;i<j;i++)
+		{	
+			for(int k=0;k<playerCount;k++)
+			{
+				listOfPlayers.get(k).assigned_countries.add(map.listOfCountries.get(count));
+				map.listOfCountries.get(count).setOwner(listOfPlayers.get(k));
+				count++;	
+			}
+		}
+		int leftCountries=countryCount-count;
+		for(int m=0;m<leftCountries;m++)
+		{
+			listOfPlayers.get(m).assigned_countries.add(map.listOfCountries.get(count));
+			map.listOfCountries.get(count).setOwner(listOfPlayers.get(m));
+			count++;
+			
+		}
 	}
 
 }
