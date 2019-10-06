@@ -5,12 +5,8 @@ import java.util.Scanner;
 
 public class ArmyAllocator {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
 	
-	public void calculateTotalArmies(ArrayList<Player> listOfPLayers ) {
+	public void calculateTotalArmies(ArrayList<Player> listOfPLayers ,Map map) {
 		// TODO 2 player scenario TBD
 		// 2 -40 armies ,3 -35 armies , 4- 30 armies ,5 -25 armies ...
 		int maxArmiesForEachPlayer = 40;
@@ -22,16 +18,21 @@ public class ArmyAllocator {
 			p.setUnassignedarmies(assignedArmies);
 		}
 		
+		placeArmy(assignedArmies, listOfPLayers, map);
 		
 		
 	}
 	
 	public void placeArmy(int assignedArmies,ArrayList<Player> listOfPLayers,Map map) {
+		
+		
 		Scanner sc = new Scanner(System.in);
 		boolean isPlaceAll = false;
 		for(int i=0;i<assignedArmies;i++) {
 			for(Player p:listOfPLayers) {
-				System.out.println("Player "+p.getName() +"to place armies :\n Type placearmy <countryname> or placeall to randomly allocate armies ");
+				Boolean armyNotAllocated = true;
+				while (armyNotAllocated) {
+				System.out.println("Player "+p.getName() +" to place armies :\n Type placearmy <countryname> or placeall to randomly allocate armies ");
 				String input = sc.nextLine();
 				
 				String[] commands = input.split(" ");
@@ -48,6 +49,7 @@ public class ArmyAllocator {
 							if(tempCountry.getNoOfArmies() == 0) {			
 							tempCountry.noOfArmies ++;
 							p.unassignedarmies --;
+							armyNotAllocated =false;
 							}else {
 								//check if there is any other country assigned to the current player with 0 armies 
 								boolean isValid = true;
@@ -63,6 +65,7 @@ public class ArmyAllocator {
 								else {
 									tempCountry.noOfArmies ++;
 									p.unassignedarmies --;
+									armyNotAllocated = false;
 								}
 							}
 							
@@ -83,11 +86,36 @@ public class ArmyAllocator {
 			}
 			if(isPlaceAll)
 				break;
+			for(Country c:p.getAssigned_countries())
+			System.out.println("Player "+p.getName() +" "+c.getName() +" "+" " +c.getNoOfArmies()); 
+		}
+			if(isPlaceAll)
+				break;
 		}
 		
-		// logic for placeall 
+		// logic for placeall
+		if(isPlaceAll)
+		placeAll( listOfPLayers, map);
+		
 		
 	}
 	
 
+	public void placeAll(ArrayList<Player> listOfPLayers,Map map) {
+	
+		for(Player p: listOfPLayers) {
+			
+			while(p.unassignedarmies>0) {
+				for(int i=0;i<p.getAssigned_countries().size()&& p.unassignedarmies>0;i++) {
+				p.getAssigned_countries().get(i).noOfArmies++;
+				p.unassignedarmies--;
+				}
+			}
+		}
+		
+		for(Player p :listOfPLayers) {
+			for(Country c:p.getAssigned_countries())
+				System.out.println("Player "+p.getName() +" "+c.getName() +" "+" " +c.getNoOfArmies()); 
+		}
+	}
 }

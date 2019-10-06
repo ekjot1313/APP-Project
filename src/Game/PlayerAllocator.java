@@ -91,6 +91,8 @@ public class PlayerAllocator extends MapReader {
 		// TODO Auto-generated method stub
 		PlayerAllocator P= new PlayerAllocator();
 		P.allocate();
+		
+		
 	}
 	public void populateCountries(Map map) {
 		int countryCount=map.listOfCountries.size();

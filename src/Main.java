@@ -1,7 +1,10 @@
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import Game.ArmyAllocator;
 import Game.MapReader;
+import Game.Player;
 import Game.PlayerAllocator;
 import mapWorks.MapEditor;
 
@@ -88,6 +91,8 @@ public class Main {
 			PlayerAllocator pa = new PlayerAllocator();
 			pa.map = mr.map;
 			pa.allocate();
+			ArmyAllocator aa=new ArmyAllocator();
+			aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, pa.map);
 		}
 		else
 		{
