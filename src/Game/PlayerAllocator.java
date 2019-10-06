@@ -4,7 +4,7 @@ import java.util.*;
 
 public class PlayerAllocator extends MapReader {
 	public List<Player> listOfPlayers;
-	PlayerAllocator(){
+	public PlayerAllocator(){
 	this.listOfPlayers=new ArrayList<Player>();
 	}
 	public void allocate() {
@@ -59,7 +59,7 @@ public class PlayerAllocator extends MapReader {
 			System.out.println("Countries owned:");
 			for(int j=0;j<listOfPlayers.get(i).assigned_countries.size();j++)
 			{
-				System.out.println(listOfPlayers.get(i).getAssigned_countries().get(j));
+				System.out.println(listOfPlayers.get(i).getAssigned_countries().get(j).getName());
 			}
 		}
 	}
@@ -101,6 +101,8 @@ public class PlayerAllocator extends MapReader {
 		{	
 			for(int k=0;k<playerCount;k++)
 			{
+				System.out.println(listOfPlayers.get(k).getName());
+				System.out.println(map.listOfCountries.get(count).getName());
 				listOfPlayers.get(k).assigned_countries.add(map.listOfCountries.get(count));
 				map.listOfCountries.get(count).setOwner(listOfPlayers.get(k));
 				count++;	

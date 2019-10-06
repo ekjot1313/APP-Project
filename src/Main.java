@@ -2,6 +2,7 @@ import java.io.File;
 import java.util.Scanner;
 
 import Game.MapReader;
+import Game.PlayerAllocator;
 import mapWorks.MapEditor;
 
 public class Main {
@@ -29,6 +30,7 @@ public class Main {
 					
 				case "gameplayer":
 					//TODO :allow only if map object is created.
+					
 					break;
 				case "exit":
 					return;
@@ -81,8 +83,12 @@ public class Main {
 		currentPath += "\\src\\Maps\\" + filename;
 		//mr.parseMapFile(currentPath);
 		File newFile = new File(currentPath);
-		if(newFile.exists())
+		if(newFile.exists()) {
 			mr.parseMapFile(newFile);
+			PlayerAllocator pa = new PlayerAllocator();
+			pa.map = mr.map;
+			pa.allocate();
+		}
 		else
 		{
 			System.out.println("File Not found .");

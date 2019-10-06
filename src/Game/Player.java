@@ -9,6 +9,10 @@ public class Player {
 	String name;
 	int noOfArmies;
 	List<Country> assigned_countries;
+	public Player(){
+		assigned_countries = new ArrayList<Country>();
+	}
+	
 	/**
 	 *  This method returns the name of the player.
 	 * @return
