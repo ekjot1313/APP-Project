@@ -127,6 +127,16 @@ public class Map {
 			}
 		}
 		return null;}
+	
+	public Country getCountryFromName(String givenCountryName) {
+		
+			for(Country country:this.listOfCountries) {
+				if(country.name.equals(givenCountryName)) {
+					return country;
+				}
+			}
+		return null;
+	}
 
 
 }

@@ -8,11 +8,29 @@ import java.util.*;
 public class Player {
 	String name;
 	int noOfArmies;
+	int unassignedarmies ;
 	List<Country> assigned_countries;
 	public Player(){
 		assigned_countries = new ArrayList<Country>();
 	}
-	
+
+	/**
+	 *  This method returns the name of the player.
+	 * @return 
+	 */
+	public int getUnassignedarmies() {
+		return unassignedarmies;
+	}
+
+	/**
+	 *  This method returns the name of the player.
+	 * @param
+	 */
+
+	public void setUnassignedarmies(int unassignedarmies) {
+		this.unassignedarmies = unassignedarmies;
+	}
+
 	/**
 	 *  This method returns the name of the player.
 	 * @return
