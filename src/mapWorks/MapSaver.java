@@ -31,20 +31,22 @@ public class MapSaver {        //UNDER CONSTRUCTION
 		
 		MapSaver ms=new MapSaver();
 		
-		ms.map.message1="message1";
-		ms.map.message2="message2";
-		ms.map.mapName="hartaj";
+		ms.map.setMessage1("message1");
+		ms.map.setMessage2("message2");
+		ms.map.setMapName("hartaj");
 		
 		
 		ms.saveMap(ms.map,"sample");
 	}
+	
+	
 	public void saveMap(Map map,String fileName) throws IOException {
 		
-		this.message1 = map.message1;
-		this.message2 = map.message2;
-		this.mapName = map.mapName;
-		this.listOfContinent = map.listOfContinent;
-		this.listOfCountries = map.listOfCountries;
+		this.message1 = map.getMessage1();
+		this.message2 = map.getMessage2();
+		this.mapName = map.getMapName();
+		this.listOfContinent = map.getListOfContinent();
+		this.listOfCountries = map.getListOfCountries();
 		
 		String currentPath = System.getProperty("user.dir")+"\\src\\Maps\\";
 		String mapPath=currentPath+fileName+".map";

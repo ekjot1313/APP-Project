@@ -65,7 +65,7 @@ public class MapReader {
 			String[] neighbourDetails = currentLine.split(" ");
 			for (int i = 0; i < neighbourDetails.length - 1; i++) {
 				map.getListOfCountries().get(Integer.parseInt(neighbourDetails[0]) - 1).getNeighbors()
-						.add(map.getListOfCountries().get(Integer.parseInt(neighbourDetails[i + 1]) - 1));
+						.add(map.getListOfCountries().get(Integer.parseInt(neighbourDetails[i + 1]) - 1).getName());
 				
 				
 				if (!map.getListOfCountries().get(Integer.parseInt(neighbourDetails[0]) - 1).getContinentName().equals(
@@ -73,7 +73,7 @@ public class MapReader {
 				
 				
 				{
-					map.getListOfCountries().get(Integer.parseInt(neighbourDetails[0]) - 1).getContinentName().bridges
+					map.getContinent(map.getListOfCountries().get(Integer.parseInt(neighbourDetails[0]) - 1).getContinentName()).getBridges()
 							.add(new Bridge(
 									map.getListOfCountries().get(Integer.parseInt(neighbourDetails[i + 1]) - 1)
 											.getContinentName(),
@@ -98,7 +98,7 @@ public class MapReader {
 			String[] countryDetails = currentLine.split(" ");
 			Country country = new Country();
 			country.setName(countryDetails[1]);
-			country.setContinentName(map.getListOfContinent().get((Integer.parseInt(countryDetails[2])) - 1));
+			country.setContinentName(map.getListOfContinent().get((Integer.parseInt(countryDetails[2])) - 1).getName());
 			map.getListOfCountries().add(country);
 			map.getListOfContinent().get((Integer.parseInt(countryDetails[2])) - 1).getCountries().add(countryDetails[1]);
 		}
@@ -137,15 +137,15 @@ public class MapReader {
 			System.out.println("Continent :" + c.getName());
 			System.out.println("Bridges");
 			for (int i = 0; i < c.getBridges().size(); i++) {
-				System.out.println(c.getBridges().get(i).getNeigCont().getName() + " "
-						+ c.getBridges().get(i).getCount1().getName() + " " + c.getBridges().get(i).getCount2().getName());
+				System.out.println(c.getBridges().get(i).getNeigCont() + " "
+						+ c.getBridges().get(i).getCount1() + " " + c.getBridges().get(i).getCount2());
 			}
 			for (String c1 : c.getCountries()) {
 				System.out.print("Country :" + c1 + ": Neighbours->");
-				for (int i = 0; i < map.listOfCountries.size(); i++) {
-					if (c1.equals(map.listOfCountries.get(i).getName())) {
-						for (Country c2 : map.listOfCountries.get(i).getNeighbors()) {
-							System.out.print(c2.getName() + "||");
+				for (int i = 0; i < map.getListOfCountries().size(); i++) {
+					if (c1.equals(map.getListOfCountries().get(i).getName())) {
+						for (String c2 : map.getListOfCountries().get(i).getNeighbors()) {
+							System.out.print(c2 + "||");
 						}
 						System.out.println();
 					}
@@ -162,10 +162,10 @@ public class MapReader {
 
 			// graph creation
 
-			for (int i = 0; i < map.listOfCountries.size(); i++) {
+			for (int i = 0; i < map.getListOfCountries().size(); i++) {
 				List<Integer> templist = new ArrayList<Integer>();
-				for (int j = 0; j < map.listOfCountries.get(i).getNeighbors().size(); j++)
-					templist.add(map.listOfCountries.indexOf(map.listOfCountries.get(i).neighbours.get(j)));
+				for (int j = 0; j < map.getListOfCountries().get(i).getNeighbors().size(); j++)
+					templist.add(map.getListOfCountries().indexOf(map.getListOfCountries().get(i).getNeighbors().get(j)));
 				mapOfWorld.put(i, templist);
 
 			}
@@ -211,19 +211,19 @@ public class MapReader {
 
 	public int checkDuplicates() {
 		int duplicate = 0;
-		for (int i = 0; i < (map.listOfContinent.size() - 1); i++)
-			for (int j = i + 1; j < map.listOfContinent.size(); j++)
-				if ((map.listOfContinent.get(i).getName()).equalsIgnoreCase(map.listOfContinent.get(j).getName())) {
+		for (int i = 0; i < (map.getListOfContinent().size() - 1); i++)
+			for (int j = i + 1; j < map.getListOfContinent().size(); j++)
+				if ((map.getListOfContinent().get(i).getName()).equalsIgnoreCase(map.getListOfContinent().get(j).getName())) {
 					duplicate = 1;
-					System.out.println("Duplicate Continent :" + map.listOfContinent.get(i).getName());
+					System.out.println("Duplicate Continent :" + map.getListOfContinent().get(i).getName());
 					break;
 				}
 		if (duplicate == 0)
-			for (int i = 0; i < (map.listOfCountries.size() - 1); i++)
-				for (int j = i + 1; j < map.listOfCountries.size(); j++)
-					if ((map.listOfCountries.get(i).getName()).equalsIgnoreCase(map.listOfCountries.get(j).getName())) {
+			for (int i = 0; i < (map.getListOfCountries().size() - 1); i++)
+				for (int j = i + 1; j < map.getListOfCountries().size(); j++)
+					if ((map.getListOfCountries().get(i).getName()).equalsIgnoreCase(map.getListOfCountries().get(j).getName())) {
 						duplicate = 1;
-						System.out.println("Duplicate Country :" + map.listOfCountries.get(i).getName());
+						System.out.println("Duplicate Country :" + map.getListOfCountries().get(i).getName());
 						break;
 					}
 		return duplicate;
