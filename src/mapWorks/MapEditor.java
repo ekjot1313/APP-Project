@@ -414,9 +414,9 @@ public class MapEditor {
 					Continent cont = new Continent();
 					cont.setName(s.get(1));
 					cont.setContinentValue(Integer.parseInt(s.get(2)));
-					cont.setContinentIndexInListOfContinent(map.listOfContinent.size());
+					cont.setContinentIndexInListOfContinent(map.getListOfContinent().size());
 
-					map.listOfContinent.add(cont);
+					map.getListOfContinent().add(cont);
 					// map.updateListOfCountries();
 					// (new MapReader()).display(map);
 
@@ -456,7 +456,7 @@ public class MapEditor {
 					// adding country name in continent
 					continent.getCountries().add(count.getName());
 					// adding country in listOfCountries
-					map.listOfCountries.add(count);
+					map.getListOfCountries().add(count);
 
 					(new MapReader()).display(map);
 
@@ -560,19 +560,19 @@ public class MapEditor {
 		// TODO Auto-generated method stub
 		// check all bridge in first continent
 
-		for (int i = 0; i < map.listOfContinent.get(contInd1).getBridges().size(); i++) {
-			Bridge bridge = map.listOfContinent.get(contInd1).getBridges().get(i);
-			if (bridge.count1.equals(count) && bridge.count2.equals(neig)) {
-				map.listOfContinent.get(contInd1).getBridges().remove(bridge);
+		for (int i = 0; i < map.getListOfContinent().get(contInd1).getBridges().size(); i++) {
+			Bridge bridge = map.getListOfContinent().get(contInd1).getBridges().get(i);
+			if (bridge.getCountry1().equals(count) && bridge.getCountry2().equals(neig)) {
+				map.getListOfContinent().get(contInd1).getBridges().remove(bridge);
 
 			}
 		}
 
 		// check all bridge in second continent
-		for (int i = 0; i < map.listOfContinent.get(contInd2).getBridges().size(); i++) {
-			Bridge bridge = map.listOfContinent.get(contInd2).getBridges().get(i);
-			if (bridge.count1.equals(neig) && bridge.count2.equals(count)) {
-				map.listOfContinent.get(contInd2).getBridges().remove(bridge);
+		for (int i = 0; i < map.getListOfContinent().get(contInd2).getBridges().size(); i++) {
+			Bridge bridge = map.getListOfContinent().get(contInd2).getBridges().get(i);
+			if (bridge.getCountry1().equals(neig) && bridge.getCountry2().equals(count)) {
+				map.getListOfContinent().get(contInd2).getBridges().remove(bridge);
 
 			}
 		}
@@ -589,10 +589,10 @@ public class MapEditor {
 	 */
 	private static void createBridge(int contInd1, int contInd2, Country count, Country neig) {
 		// TODO Auto-generated method stub
-		Bridge bridgeA2B = new Bridge(map.listOfContinent.get(contInd2), count, neig);
-		Bridge bridgeB2A = new Bridge(map.listOfContinent.get(contInd1), neig, count);
-		map.listOfContinent.get(contInd1).getBridges().add(bridgeA2B);
-		map.listOfContinent.get(contInd2).getBridges().add(bridgeB2A);
+		Bridge bridgeA2B = new Bridge(map.getListOfContinent().get(contInd2).getName(), count.getName(), neig.getName());
+		Bridge bridgeB2A = new Bridge(map.getListOfContinent().get(contInd1).getName(), neig.getName(), count.getName());
+		map.getListOfContinent().get(contInd1).getBridges().add(bridgeA2B);
+		map.getListOfContinent().get(contInd2).getBridges().add(bridgeB2A);
 	}
 
 	/**

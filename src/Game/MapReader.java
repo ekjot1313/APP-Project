@@ -137,8 +137,8 @@ public class MapReader {
 			System.out.println("Continent :" + c.getName());
 			System.out.println("Bridges");
 			for (int i = 0; i < c.getBridges().size(); i++) {
-				System.out.println(c.getBridges().get(i).getNeigCont() + " "
-						+ c.getBridges().get(i).getCount1() + " " + c.getBridges().get(i).getCount2());
+				System.out.println(c.getBridges().get(i).getNeigContinent() + " "
+						+ c.getBridges().get(i).getCountry1() + " " + c.getBridges().get(i).getCountry2());
 			}
 			for (String c1 : c.getCountries()) {
 				System.out.print("Country :" + c1 + ": Neighbours->");
