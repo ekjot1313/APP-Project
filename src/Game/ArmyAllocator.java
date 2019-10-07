@@ -38,10 +38,10 @@ public class ArmyAllocator {
 				String[] commands = input.split(" ");
 				if(commands.length == 2 && commands[0].equals("placearmy") ) {
 					//check if country is valid and assigned to the current player	
-					if(map.getCountry(commands[1]) == null) {
+					if(map.getCountryFromName(commands[1]) == null) {
 						System.out.println("Invalid country");
 					}else {
-						Country tempCountry = map.getCountry(commands[1]);
+						Country tempCountry = map.getCountryFromName(commands[1]);
 						if(tempCountry.getOwner() != p.getName() )
 							System.out.println("Country is not assigned to current player");
 						else {

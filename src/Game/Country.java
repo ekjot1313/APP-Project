@@ -12,6 +12,10 @@ public class Country {
 	private int noOfArmies;
 	private List<String> neighbors;
 	
+	public Country() {
+		this.neighbors=new ArrayList<String>();
+	}
+	
 	private int continentIndexInListOfContinent;
 	
 	/**
@@ -28,9 +32,7 @@ public class Country {
 		this.continentIndexInListOfContinent = continentIndexInListOfContinent;
 	}
 
-	public Country() {
-		this.neighbors=new ArrayList<String>();
-	}
+
 	
 	public String getName() {
 		return name;

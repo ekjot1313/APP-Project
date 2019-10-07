@@ -61,35 +61,6 @@ public class Map {
 	
 
 
-
-	/**
-	 * @return the countries
-	 */
-	public List<Country> getCountries() {
-		return listOfCountries;
-	}
-
-	/**
-	 * @param countries the countries to set
-	 */
-	public void setCountries(List<Country> countries) {
-		this.listOfCountries = countries;
-	}
-
-	/**
-	 * @return the continents
-	 */
-	public List<Continent> getContinents() {
-		return listOfContinent;
-	}
-
-	/**
-	 * @param continents the continents to set
-	 */
-	public void setContinents(List<Continent> continents) {
-		this.listOfContinent = continents;
-	}
-
 	/**
 	 * @return the mapName
 	 */
@@ -104,16 +75,7 @@ public class Map {
 		this.mapName = mapName;
 	}
 	
-	/*public void updateListOfCountries() {
-		this.listOfCountries.clear();
-		for(Continent continent:this.listOfContinent) {
-			for(Country country:continent.countries) {
-				this.listOfCountries.add(country);
-			}
-		}
-	}*/
-	
-	public Country getCountry(String givenCountryName) {
+	public Country getCountryFromName(String givenCountryName) {
 		
 			for(Country country:this.listOfCountries) {
 				if(country.getName().equals(givenCountryName)) {
@@ -124,13 +86,15 @@ public class Map {
 		return null;
 	}
 	
-	public Continent getContinent(String givenContinentName) {
+	public Continent getContinentFromName(String givenContinentName) {
 		for(Continent continent:this.listOfContinent) {
 			if(continent.getName().equals(givenContinentName)) {
 				return continent;
 			}
 		}
 		return null;}
+	
+	
 	
 
 
