@@ -38,23 +38,23 @@ public class ArmyAllocator {
 				String[] commands = input.split(" ");
 				if(commands.length == 2 && commands[0].equals("placearmy") ) {
 					//check if country is valid and assigned to the current player	
-					if(map.getCountryFromName(commands[1]) == null) {
+					if(map.getCountry(commands[1]) == null) {
 						System.out.println("Invalid country");
 					}else {
-						Country tempCountry = map.getCountryFromName(commands[1]);
-						if(tempCountry.owner.getName() != p.getName() )
+						Country tempCountry = map.getCountry(commands[1]);
+						if(tempCountry.getOwner() != p.getName() )
 							System.out.println("Country is not assigned to current player");
 						else {
 							//main logic
 							if(tempCountry.getNoOfArmies() == 0) {			
-							tempCountry.noOfArmies ++;
-							p.unassignedarmies --;
+							tempCountry.setNoOfArmies(tempCountry.getNoOfArmies() + 1);
+							p.setUnassignedarmies(p.getUnassignedarmies() - 1);
 							armyNotAllocated =false;
 							}else {
 								//check if there is any other country assigned to the current player with 0 armies 
 								boolean isValid = true;
 								for(Country c : p.getAssigned_countries()) {
-									if(c.noOfArmies == 0 && c.getName() != tempCountry.getName()) {
+									if(c.getNoOfArmies() == 0 && c.getName() != tempCountry.getName()) {
 										isValid = false;
 										break;
 									}
@@ -63,8 +63,8 @@ public class ArmyAllocator {
 								if(!isValid)
 									System.out.println("Cannot place army to this country");
 								else {
-									tempCountry.noOfArmies ++;
-									p.unassignedarmies --;
+									tempCountry.setNoOfArmies(tempCountry.getNoOfArmies() + 1);
+									p.setUnassignedarmies(p.getUnassignedarmies() - 1);
 									armyNotAllocated = false;
 								}
 							}
@@ -105,10 +105,10 @@ public class ArmyAllocator {
 	
 		for(Player p: listOfPLayers) {
 			
-			while(p.unassignedarmies>0) {
-				for(int i=0;i<p.getAssigned_countries().size()&& p.unassignedarmies>0;i++) {
-				p.getAssigned_countries().get(i).noOfArmies++;
-				p.unassignedarmies--;
+			while(p.getUnassignedarmies()>0) {
+				for(int i=0;i<p.getAssigned_countries().size()&& p.getUnassignedarmies()>0;i++) {
+				p.getAssigned_countries().get(i).setNoOfArmies(p.getAssigned_countries().get(i).getNoOfArmies()+1);
+				p.setUnassignedarmies(p.getUnassignedarmies() - 1);
 				}
 			}
 		}

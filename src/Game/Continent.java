@@ -9,13 +9,32 @@ import java.util.List;
  * @since 1.0.0
  */
 public class Continent {
-	public String name;
-	public int continentValue;
-	public List<String> countries;
-	public List<Bridge> bridges;
+	private String name;
+	private int continentValue;
+	private List<String> countries;
+	private List<Bridge> bridges;
 	
-	public int continentIndexInListOfContinent;
+	private int continentIndexInListOfContinent;
 	
+	public Continent(){
+		this.countries=new ArrayList<String>();
+		this.bridges = new ArrayList<Bridge>();
+	}
+	
+/**
+	 * @return the bridges
+	 */
+	public List<Bridge> getBridges() {
+		return bridges;
+	}
+
+	/**
+	 * @param bridges the bridges to set
+	 */
+	public void setBridges(List<Bridge> bridges) {
+		this.bridges = bridges;
+	}
+
 /**
 	 * @return the continentIndexInListOfContinent
 	 */
@@ -30,10 +49,7 @@ public class Continent {
 		this.continentIndexInListOfContinent = continentIndexInListOfContinent;
 	}
 
-public Continent(){
-	this.countries=new ArrayList<String>();
-	this.bridges = new ArrayList<Bridge>();
-}
+
 	
 	/**
 	 * This method returns the name of the continent

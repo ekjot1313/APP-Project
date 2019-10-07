@@ -13,7 +13,18 @@ import java.util.List;
 // pending pic, map, card, prv 
 
 public class Map {
-	public String message1;
+	private String message1;
+	private String message2;
+	private String mapName;
+	private List<Continent> listOfContinent;
+	private List<Country> listOfCountries;
+	
+	public Map() {
+		this.listOfContinent = new ArrayList<Continent>();
+		this.listOfCountries = new ArrayList<Country>();
+		
+	}
+	
 	public String getMessage1() {
 		return message1;
 	}
@@ -46,17 +57,10 @@ public class Map {
 		this.listOfCountries = listOfCountries;
 	}
 
-	public String message2;
-	public String mapName;
-	public List<Continent> listOfContinent;
-	public List<Country> listOfCountries;
+	
 	
 
-	public Map() {
-		this.listOfContinent = new ArrayList<Continent>();
-		this.listOfCountries = new ArrayList<Country>();
-		
-	}
+
 
 	/**
 	 * @return the countries
@@ -109,18 +113,18 @@ public class Map {
 		}
 	}*/
 	
-	/*public Country getCountryFromName(String givenCountryName) {
-		for(Continent continent:this.listOfContinent) {
-			for(Country country:continent.countries) {
-				if(country.name.equals(givenCountryName)) {
+	public Country getCountry(String givenCountryName) {
+		
+			for(Country country:this.listOfCountries) {
+				if(country.getName().equals(givenCountryName)) {
 					return country;
 				}
 			}
-		}
+		
 		return null;
-	}*/
+	}
 	
-	public Continent getContinentFromName(String givenContinentName) {
+	public Continent getContinent(String givenContinentName) {
 		for(Continent continent:this.listOfContinent) {
 			if(continent.getName().equals(givenContinentName)) {
 				return continent;
@@ -128,15 +132,7 @@ public class Map {
 		}
 		return null;}
 	
-	public Country getCountryFromName(String givenCountryName) {
-		
-			for(Country country:this.listOfCountries) {
-				if(country.name.equals(givenCountryName)) {
-					return country;
-				}
-			}
-		return null;
-	}
+
 
 
 }

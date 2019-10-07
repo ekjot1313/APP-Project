@@ -6,10 +6,12 @@ import java.util.*;
  *
  */
 public class Player {
-	String name;
-	int noOfArmies;
-	int unassignedarmies ;
-	List<Country> assigned_countries;
+	private String name;
+	private int noOfArmies;
+	private int unassignedarmies ;
+	private List<Country> assigned_countries;
+	
+	
 	public Player(){
 		assigned_countries = new ArrayList<Country>();
 	}

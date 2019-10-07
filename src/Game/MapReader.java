@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class MapReader {
-	
+
 	public Map map;
 	private File fileObject;
 	private BufferedReader bufferReaderForFile;
@@ -17,8 +17,7 @@ public class MapReader {
 
 	public void parseMapFile(File file) {
 		map = new Map();
-		map.listOfContinent = new ArrayList<Continent>();
-		map.listOfCountries = new ArrayList<Country>();
+		
 		try {
 
 			bufferReaderForFile = new BufferedReader(new FileReader(file));
@@ -27,7 +26,7 @@ public class MapReader {
 				if (currentLine.contains("[continents]")) {
 					loadContinents();
 				}
-				
+
 				if (currentLine.contains("[countries]")) {
 					loadCountries();
 				}
@@ -35,7 +34,7 @@ public class MapReader {
 					loadBorders();
 				}
 
-			}	
+			}
 			System.out.println(mapOfWorld.toString());
 			// validate map call
 			int notConnected = validateMap();
@@ -65,15 +64,26 @@ public class MapReader {
 			}
 			String[] neighbourDetails = currentLine.split(" ");
 			for (int i = 0; i < neighbourDetails.length - 1; i++) {
-				map.listOfCountries.get(Integer.parseInt(neighbourDetails[0]) - 1).neighbours.add(map.listOfCountries.get(Integer.parseInt(neighbourDetails[i + 1]) - 1));
-				if(!map.listOfCountries.get(Integer.parseInt(neighbourDetails[0]) - 1).continentName.equals(map.listOfCountries.get(Integer.parseInt(neighbourDetails[i + 1]) - 1).continentName))
-				{	
-					map.listOfCountries.get(Integer.parseInt(neighbourDetails[0]) - 1).getContinentName().bridges.add(new Bridge(map.listOfCountries.get(Integer.parseInt(neighbourDetails[i+1]) - 1).getContinentName(), map.listOfCountries.get(Integer.parseInt(neighbourDetails[0]) - 1),map.listOfCountries.get(Integer.parseInt(neighbourDetails[i+1]) - 1)));
+				map.getListOfCountries().get(Integer.parseInt(neighbourDetails[0]) - 1).getNeighbors()
+						.add(map.getListOfCountries().get(Integer.parseInt(neighbourDetails[i + 1]) - 1));
+				
+				
+				if (!map.getListOfCountries().get(Integer.parseInt(neighbourDetails[0]) - 1).getContinentName().equals(
+						map.getListOfCountries().get(Integer.parseInt(neighbourDetails[i + 1]) - 1).getContinentName())) 
+				
+				
+				{
+					map.getListOfCountries().get(Integer.parseInt(neighbourDetails[0]) - 1).getContinentName().bridges
+							.add(new Bridge(
+									map.getListOfCountries().get(Integer.parseInt(neighbourDetails[i + 1]) - 1)
+											.getContinentName(),
+									map.getListOfCountries().get(Integer.parseInt(neighbourDetails[0]) - 1).getName(),
+									map.getListOfCountries().get(Integer.parseInt(neighbourDetails[i + 1]) - 1).getName()));
 				}
 			}
-				
+
 		}
-	
+
 	}
 
 	private void loadCountries() throws NumberFormatException, IOException {
@@ -88,12 +98,11 @@ public class MapReader {
 			String[] countryDetails = currentLine.split(" ");
 			Country country = new Country();
 			country.setName(countryDetails[1]);
-			country.setContinentName(map.listOfContinent.get((Integer.parseInt(countryDetails[2])) - 1));
-			map.listOfCountries.add(country);
-			map.listOfContinent.get((Integer.parseInt(countryDetails[2])) - 1).getCountries().add(countryDetails[1]);
+			country.setContinentName(map.getListOfContinent().get((Integer.parseInt(countryDetails[2])) - 1));
+			map.getListOfCountries().add(country);
+			map.getListOfContinent().get((Integer.parseInt(countryDetails[2])) - 1).getCountries().add(countryDetails[1]);
 		}
-	
-		
+
 	}
 
 	private void loadContinents() throws NumberFormatException, IOException {
@@ -109,10 +118,10 @@ public class MapReader {
 			Continent continent = new Continent();
 			continent.setName(continentDetails[0]);
 			continent.setContinentValue(Integer.parseInt(continentDetails[1]));
-			map.listOfContinent.add(continent);
+			map.getListOfContinent().add(continent);
 
 		}
-	
+
 	}
 
 	/**
@@ -123,25 +132,24 @@ public class MapReader {
 	public void display(Map map2) {
 		// TODO Auto-generated method stub
 
-		for (Continent c : map2.listOfContinent) {
+		for (Continent c : map2.getListOfContinent()) {
 			System.out.println();
 			System.out.println("Continent :" + c.getName());
 			System.out.println("Bridges");
-			for(int i=0;i<c.bridges.size();i++)
-			{	
-				System.out.println(c.bridges.get(i).getNeigCont().getName()+" "+c.bridges.get(i).getCount1().getName()+" "+c.bridges.get(i).getCount2().getName());
+			for (int i = 0; i < c.getBridges().size(); i++) {
+				System.out.println(c.getBridges().get(i).getNeigCont().getName() + " "
+						+ c.getBridges().get(i).getCount1().getName() + " " + c.getBridges().get(i).getCount2().getName());
 			}
 			for (String c1 : c.getCountries()) {
 				System.out.print("Country :" + c1 + ": Neighbours->");
-				for(int i=0;i<map.listOfCountries.size();i++) {
-					if(c1.equals(map.listOfCountries.get(i).getName()))
-					{
-				for (Country c2 : map.listOfCountries.get(i).getNeighbours()) {
-					System.out.print(c2.getName() + "||");
+				for (int i = 0; i < map.listOfCountries.size(); i++) {
+					if (c1.equals(map.listOfCountries.get(i).getName())) {
+						for (Country c2 : map.listOfCountries.get(i).getNeighbors()) {
+							System.out.print(c2.getName() + "||");
+						}
+						System.out.println();
+					}
 				}
-				System.out.println();
-			}
-			}
 			}
 		}
 
@@ -151,12 +159,12 @@ public class MapReader {
 		// traversing
 		int notConnected = 0;
 		if (checkDuplicates() == 0) {
-			
+
 			// graph creation
 
 			for (int i = 0; i < map.listOfCountries.size(); i++) {
 				List<Integer> templist = new ArrayList<Integer>();
-				for (int j = 0; j < map.listOfCountries.get(i).getNeighbours().size(); j++)
+				for (int j = 0; j < map.listOfCountries.get(i).getNeighbors().size(); j++)
 					templist.add(map.listOfCountries.indexOf(map.listOfCountries.get(i).neighbours.get(j)));
 				mapOfWorld.put(i, templist);
 
@@ -196,8 +204,7 @@ public class MapReader {
 				}
 			}
 
-		} 
-		else
+		} else
 			notConnected = 1;
 		return notConnected;
 	}
@@ -228,11 +235,10 @@ public class MapReader {
 		System.out.println(System.getProperty("user.dir"));
 		String currentPath = System.getProperty("user.dir");
 		currentPath += "\\src\\Maps\\" + filename;
-		File file=new File(currentPath);
+		File file = new File(currentPath);
 		m.parseMapFile(file);
 	}
-	
-	
+
 	/**
 	 * This method returns the currently loaded map
 	 * 

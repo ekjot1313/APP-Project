@@ -6,17 +6,30 @@ import java.util.*;
  *
  */
 public class Country {
-	public String name;
-	public Player owner;
-	public Continent continentName;
-	public int noOfArmies;
-	public List<Country> neighbours;
+	private String name;
+	private String owner;
+	private String continentName;
+	private int noOfArmies;
+	private List<String> neighbors;
 	
-	public int continentIndexInListOfContinent;
-	public int countryIndexInContinent;
+	private int continentIndexInListOfContinent;
 	
+	/**
+	 * @return the continentIndexInListOfContinent
+	 */
+	public int getContinentIndexInListOfContinent() {
+		return continentIndexInListOfContinent;
+	}
+
+	/**
+	 * @param continentIndexInListOfContinent the continentIndexInListOfContinent to set
+	 */
+	public void setContinentIndexInListOfContinent(int continentIndexInListOfContinent) {
+		this.continentIndexInListOfContinent = continentIndexInListOfContinent;
+	}
+
 	public Country() {
-		this.neighbours=new ArrayList<Country>();
+		this.neighbors=new ArrayList<String>();
 	}
 	
 	public String getName() {
@@ -33,28 +46,28 @@ public class Country {
 	 * This method returns the owner of the country.
 	 * @return
 	 */
-	public Player getOwner() {
+	public String getOwner() {
 		return owner;
 	}
 	/**
 	 * This method sets the owner of the country.
 	 * @param owner
 	 */
-	public void setOwner(Player owner) {
+	public void setOwner(String owner) {
 		this.owner = owner;
 	}
 	/**
 	 * This method returns the continent of the country.
 	 * @return
 	 */
-	public Continent getContinentName() {
+	public String getContinentName() {
 		return continentName;
 	}
 	/**
 	 * This method sets the continent of the country.
 	 * @param continentName
 	 */
-	public void setContinentName(Continent continentName) {
+	public void setContinentName(String continentName) {
 		this.continentName = continentName;
 	}
 	/**
@@ -75,15 +88,15 @@ public class Country {
 	 * This method returns the list of the neighbours of the country.
 	 * @return
 	 */
-	public List<Country> getNeighbours() {
-		return neighbours;
+	public List<String> getNeighbors() {
+		return neighbors;
 	}
 	/**
 	 *  This method sets the list of the neighbours of the country.
 	 * @param neighbours
 	 */
-	public void setNeighbours(List<Country> neighbours) {
-		this.neighbours = neighbours;
+	public void setNeighbors(List<String> neighbours) {
+		this.neighbors = neighbours;
 	}
 	
 

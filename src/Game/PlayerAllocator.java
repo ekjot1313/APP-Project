@@ -18,7 +18,7 @@ public class PlayerAllocator extends MapReader {
 				for(int i=1;i<str.length;i++) {
 					if(str[i].equals("-add")) {
 						Player p=new Player();
-						p.name=str[i+1];
+						p.setName(str[i+1]);
 						listOfPlayers.add(p);
 						i++;
 					}
@@ -55,9 +55,9 @@ public class PlayerAllocator extends MapReader {
 	}
 	public void printPlayerCountries() {
 		for(int i=0;i<listOfPlayers.size();i++) {
-			System.out.println("Player :"+listOfPlayers.get(i).name);
+			System.out.println("Player :"+listOfPlayers.get(i).getName());
 			System.out.println("Countries owned:");
-			for(int j=0;j<listOfPlayers.get(i).assigned_countries.size();j++)
+			for(int j=0;j<listOfPlayers.get(i).getAssigned_countries().size();j++)
 			{
 				System.out.println(listOfPlayers.get(i).getAssigned_countries().get(j).getName());
 			}
@@ -95,7 +95,7 @@ public class PlayerAllocator extends MapReader {
 		
 	}
 	public void populateCountries(Map map) {
-		int countryCount=map.listOfCountries.size();
+		int countryCount=map.getListOfCountries().size();
 		int playerCount=listOfPlayers.size();
 		int j=(countryCount/playerCount);
 		int count=0;
@@ -104,17 +104,17 @@ public class PlayerAllocator extends MapReader {
 			for(int k=0;k<playerCount;k++)
 			{
 				System.out.println(listOfPlayers.get(k).getName());
-				System.out.println(map.listOfCountries.get(count).getName());
-				listOfPlayers.get(k).assigned_countries.add(map.listOfCountries.get(count));
-				map.listOfCountries.get(count).setOwner(listOfPlayers.get(k));
+				System.out.println(map.getListOfCountries().get(count).getName());
+				listOfPlayers.get(k).getAssigned_countries().add(map.getListOfCountries().get(count));
+				map.getListOfCountries().get(count).setOwner(listOfPlayers.get(k).getName());
 				count++;	
 			}
 		}
 		int leftCountries=countryCount-count;
 		for(int m=0;m<leftCountries;m++)
 		{
-			listOfPlayers.get(m).assigned_countries.add(map.listOfCountries.get(count));
-			map.listOfCountries.get(count).setOwner(listOfPlayers.get(m));
+			listOfPlayers.get(m).getAssigned_countries().add(map.getListOfCountries().get(count));
+			map.getListOfCountries().get(count).setOwner(listOfPlayers.get(m).getName());
 			count++;
 			
 		}
