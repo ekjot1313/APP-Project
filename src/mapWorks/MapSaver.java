@@ -16,51 +16,69 @@ import Game.Map;
  *
  */
 
-public class MapSaver {        //UNDER CONSTRUCTION
+public class MapSaver { 
 	public Map map;
 	public String fileName;
-	
+
 	public String message1;
 	public String message2;
 	public String mapName;
 	public List<Continent> listOfContinent;
 	public List<Country> listOfCountries;
 
-	public static void main(String[] args) throws IOException {
-		
-		
-		MapSaver ms=new MapSaver();
-		
-		ms.map.setMessage1("message1");
-		ms.map.setMessage2("message2");
-		ms.map.setMapName("hartaj");
-		
-		
-		ms.saveMap(ms.map,"sample");
-	}
-	
-	
-	public void saveMap(Map map,String fileName) throws IOException {
-		
+
+	public void saveMap(Map map, String fileName) throws IOException {
+
 		this.message1 = map.getMessage1();
 		this.message2 = map.getMessage2();
 		this.mapName = map.getMapName();
 		this.listOfContinent = map.getListOfContinent();
 		this.listOfCountries = map.getListOfCountries();
+
+		String currentPath = System.getProperty("user.dir") + "\\src\\Maps\\";
+		String mapPath = currentPath + fileName + ".map";
+
+		BufferedWriter bwFile = new BufferedWriter(new FileWriter(mapPath));
+
+		String content = "";
 		
-		String currentPath = System.getProperty("user.dir")+"\\src\\Maps\\";
-		String mapPath=currentPath+fileName+".map";
 		
-		BufferedWriter bwFile=new BufferedWriter(new FileWriter(mapPath));
+
+		content+=(message1 + "\r\n");
+		content+=("\r\nname " + mapName + " Map\r\n");
+		content+=("\r\n"+message2 + "\r\n");
+		content+=("\r\n[continents]\r\n");
+
+		for (Continent continent : map.getListOfContinent()) {
+			content+=(continent.getName() + " " + continent.getContinentValue() + " 00000\r\n");
+		}
+		content+=("\r\n[countries]\r\n");
 		
-		bwFile.write(message1 + "/n");
-		bwFile.write("name " + mapName + " Map/n");
-		bwFile.write(message2 + "/n");
+		String borders="";
 		
-		bwFile.write("[Continents]/n");
+		for (Country country : map.getListOfCountries()) {
+			int countryIndex=map.getListOfCountries().indexOf(country)+1;
+			int continentIndex = map.getListOfContinent().indexOf(map.getContinentFromName(country.getContinentName()))+1;
+			
+			content+=(countryIndex + " " + country.getName() + " " + continentIndex + "\r\n");
+			borders+=(countryIndex+"");
+			for(String neighborName:country.getNeighbors()) {
+				int neighborIndex=map.getListOfCountries().indexOf(map.getCountryFromName(neighborName))+1;
+				borders+=(" "+neighborIndex);
+			}
+			borders+=("\r\n");
+			
+		}
+
+		content+=("\r\n[borders]\r\n"+borders);
 		
+		bwFile.write(content);
+		bwFile.close();
+		
+		
+
 	}
-	
+
 	/**
 	 * @return the fileName
 	 */

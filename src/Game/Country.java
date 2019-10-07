@@ -16,21 +16,6 @@ public class Country {
 		this.neighbors=new ArrayList<String>();
 	}
 	
-	private int continentIndexInListOfContinent;
-	
-	/**
-	 * @return the continentIndexInListOfContinent
-	 */
-	public int getContinentIndexInListOfContinent() {
-		return continentIndexInListOfContinent;
-	}
-
-	/**
-	 * @param continentIndexInListOfContinent the continentIndexInListOfContinent to set
-	 */
-	public void setContinentIndexInListOfContinent(int continentIndexInListOfContinent) {
-		this.continentIndexInListOfContinent = continentIndexInListOfContinent;
-	}
 
 
 	

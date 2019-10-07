@@ -56,6 +56,8 @@ public class MapEditor {
 			}
 			case "showmap": {
 				showMap();
+		
+
 				break;
 			}
 
@@ -462,7 +464,6 @@ public class MapEditor {
 					Country count = new Country();
 					count.setName(s.get(1));
 					count.setContinentName(continent.getName());
-					count.setContinentIndexInListOfContinent(continent.getContinentIndexInListOfContinent());
 
 					// adding country name in continent
 					continent.getCountries().add(count.getName());
@@ -488,8 +489,7 @@ public class MapEditor {
 					// removing country from listOfCountries
 					map.getListOfCountries().remove(country);
 					// removing country name from listOfContinents
-					map.getListOfContinent().get(country.getContinentIndexInListOfContinent()).getCountries()
-							.remove(country.getName());
+					map.getContinentFromName(country.getContinentName()).getCountries().remove(country.getName());
 
 				}
 			}
