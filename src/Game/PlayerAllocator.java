@@ -23,7 +23,7 @@ public class PlayerAllocator extends MapReader {
 						Player p=new Player();
 						p.setName(str[i+1]);
 						listOfPlayers.add(p);
-						i++;
+						//i++;
 					}
 					if(str[i].equals("-remove")) {
 						int j;
@@ -31,7 +31,7 @@ public class PlayerAllocator extends MapReader {
 						{
 							if(listOfPlayers.get(j).getName().contentEquals(str[i+1])) {
 								listOfPlayers.remove(j);
-								j++;
+								//j++;
 								break;
 							}
 						}
