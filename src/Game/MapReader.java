@@ -19,10 +19,11 @@ public class MapReader {
 		map = new Map();
 
 		try {
-
+			
 			bufferReaderForFile = new BufferedReader(new FileReader(file));
+			
 			while ((currentLine = bufferReaderForFile.readLine()) != null) {
-
+				System.out.println("curr line :" +currentLine);
 				if (currentLine.contains("[continents]")) {
 					loadContinents();
 				}
@@ -35,7 +36,7 @@ public class MapReader {
 				}
 
 			}
-			System.out.println(mapOfWorld.toString());
+			System.out.println("mapOfworld "+mapOfWorld.toString());
 			// validate map call
 			int notConnected = validateMap();
 			System.out.println();
@@ -111,8 +112,8 @@ public class MapReader {
 		// TODO Auto-generated method stub
 
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
-
-			// System.out.println(currentLine);
+			
+			System.out.println(currentLine);
 			if (currentLine.length() == 0) {
 				continue;
 			}
@@ -179,7 +180,7 @@ public class MapReader {
 				List<Integer> templist = new ArrayList<Integer>();
 				for (int j = 0; j < map.getListOfCountries().get(i).getNeighbors().size(); j++)
 					templist.add(
-							map.getListOfCountries().indexOf(map.getListOfCountries().get(i).getNeighbors().get(j)));
+							map.getListOfCountries().indexOf(map.getCountryFromName(map.getListOfCountries().get(i).getNeighbors().get(j))));
 				mapOfWorld.put(i, templist);
 
 			}
@@ -192,9 +193,10 @@ public class MapReader {
 			LinkedList<Integer> queue = new LinkedList<Integer>();
 			queue.add(0);
 			visited[0] = true;
-			// System.out.println(queue.poll().name);
+			 System.out.println(mapOfWorld.toString());
 
 			while (queue.size() > 0) {
+				 System.out.println(queue.peek());
 				Integer c1 = queue.poll();
 				Iterator i = mapOfWorld.get(c1).listIterator();
 				while (i.hasNext()) {

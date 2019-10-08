@@ -9,7 +9,7 @@ import Game.PlayerAllocator;
 import mapWorks.MapEditor;
 
 public class Main {
-	private static MapReader mr;
+	//private static MapReader mr;
 	public static void main(String[] args) {
 		
 		System.out.println("Welcome to RISK GAME!");
@@ -30,11 +30,7 @@ public class Main {
 				case "editmap":
 					editmap(commands[1]);
 					break;	
-					
-				case "gameplayer":
-					//TODO :allow only if map object is created.
-					
-					break;
+
 				case "exit":
 					return;
 					
@@ -60,7 +56,7 @@ public class Main {
 	private static void editmap(String filename) {
 		// TODO Auto-generated method stub
 		
-		mr = new MapReader();
+		MapReader mr = new MapReader();
 		System.out.println(System.getProperty("user.dir"));
 		String currentPath = System.getProperty("user.dir");
 		currentPath += "\\src\\Maps\\" + filename;
@@ -80,7 +76,7 @@ public class Main {
 
 	private static void loadmap(String filename) {
 		// TODO Auto-generated method stub
-		mr = new MapReader();
+		MapReader mr = new MapReader();
 		System.out.println(System.getProperty("user.dir"));
 		String currentPath = System.getProperty("user.dir");
 		currentPath += "\\src\\Maps\\" + filename;
@@ -88,16 +84,30 @@ public class Main {
 		File newFile = new File(currentPath);
 		if(newFile.exists()) {
 			mr.parseMapFile(newFile);
-			PlayerAllocator pa = new PlayerAllocator();
-			pa.map = mr.map;
-			pa.allocate();
-			ArmyAllocator aa=new ArmyAllocator();
-			aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, pa.map);
+			System.out.println("Map is loaded successfully");
+			gameplayer(mr);
+			
 		}
 		else
 		{
 			System.out.println("File Not found .");
 		}
 	}
+	
+	private static void gameplayer(MapReader mr) {
+		
+		PlayerAllocator pa = new PlayerAllocator();
+		pa.map = mr.map;
+		pa.allocate();
+		placearmies(pa);
+		
+		
+	}
+	private static void placearmies (PlayerAllocator pa) {
+		ArmyAllocator aa=new ArmyAllocator();
+		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, pa.map);
+	}
+	
+	
 
 }

@@ -9,9 +9,12 @@ public class PlayerAllocator extends MapReader {
 	}
 	public void allocate() {
 		Scanner in=new Scanner(System.in);
-		String cmd=in.nextLine();
+		String cmd;
+		
 		do
 		{
+			System.out.println("Type \ngameplayer -add<PlayerName> or -remove <PlayerName> \npopulatecountries - assign countries to players");
+			cmd=in.nextLine();
 			if(validate(cmd)==1)
 			{	String str[]=cmd.split(" ");
 				System.out.println("Valid command");
@@ -48,8 +51,8 @@ public class PlayerAllocator extends MapReader {
 			}
 			else
 				System.out.println("Invalid command,Type again");
-			cmd=in.nextLine();
-		}while(!cmd.equals("populate countries"));
+			//cmd=in.nextLine();
+		}while(!cmd.equals("populatecountries"));
 		populateCountries(map);
 		printPlayerCountries();
 	}
