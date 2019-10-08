@@ -27,8 +27,8 @@ public class MapEditor {
 	public static boolean good;
 	public static Map map;
 
-	public static void main(String args[]) throws IOException {
-
+	//public static void main(String args[]) throws IOException {
+	public static Map mapeditorInit() throws IOException {
 		BufferedReader brConsole = new BufferedReader(new InputStreamReader(System.in));
 
 		map = new Map();
@@ -72,6 +72,7 @@ public class MapEditor {
 		}
 
 		System.out.println("savemap found");
+		return map;
 
 	}
 
