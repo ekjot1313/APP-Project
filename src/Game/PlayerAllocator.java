@@ -15,6 +15,14 @@ public class PlayerAllocator extends MapReader {
 		{
 			System.out.println("Type \ngameplayer -add<PlayerName> or -remove <PlayerName> \npopulatecountries - assign countries to players");
 			cmd=in.nextLine();
+			if(cmd.equals("populatecountries") && listOfPlayers.size() == 0) {
+				System.out.println("Player list is empty, add players first.");
+				do
+				{
+					System.out.println("Type \ngameplayer -add<PlayerName> or -remove <PlayerName> \npopulatecountries - assign countries to players");
+					cmd=in.nextLine();
+				}while(cmd.equals("populatecountries"));
+			}
 			if(validate(cmd)==1)
 			{	String str[]=cmd.split(" ");
 				System.out.println("Valid command");
