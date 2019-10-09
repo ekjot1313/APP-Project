@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,6 +8,7 @@ import Game.MapReader;
 import Game.Player;
 import Game.PlayerAllocator;
 import mapWorks.MapEditor;
+import mapWorks.MapSaver;
 
 public class Main {
 	//private static MapReader mr;
@@ -57,18 +59,33 @@ public class Main {
 		// TODO Auto-generated method stub
 		
 		MapReader mr = new MapReader();
+		MapEditor mpe = new MapEditor();
 		System.out.println(System.getProperty("user.dir"));
 		String currentPath = System.getProperty("user.dir");
 		currentPath += "\\src\\Maps\\" + filename;
 		File newFile = new File(currentPath);
-		if(newFile.exists())
+		if(newFile.exists()) {
 			mr.parseMapFile(newFile);
+			try {
+				mr.map = mpe.mapeditorInit(mr.map);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		else
 		{
 			System.out.println("Map file does not exist .New File created .\nType editcontinent -add <continentname> <continentvalue> -remove <continentname>");
 			System.out.println("Type editcountry -add <countryname> <continentname> -remove <countryname>");
 			System.out.println("Type editneighbor -add <countryname> <neighborcountryname> -remove <countryname> <neighborcountryname>");
-			MapEditor mpe = new MapEditor();
+			
+			try {
+				mr.map = mpe.mapeditorInit(null);
+			
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			//call MapEditor -- MapEditor.map will be the map loaded.
 		}
 		

@@ -28,10 +28,13 @@ public class MapEditor {
 	public static Map map;
 
 	//public static void main(String args[]) throws IOException {
-	public static Map mapeditorInit() throws IOException {
+	public Map mapeditorInit(Map map) throws IOException {
 		BufferedReader brConsole = new BufferedReader(new InputStreamReader(System.in));
-
+		
+		if(map == null)
 		map = new Map();
+		else
+			this.map = map;
 
 		String command[];
 		good = true;
@@ -72,6 +75,8 @@ public class MapEditor {
 		}
 
 		System.out.println("savemap found");
+		MapSaver ms = new MapSaver();
+		ms.saveMap(map, command[1]);
 		return map;
 
 	}

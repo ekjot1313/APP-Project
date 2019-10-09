@@ -16,9 +16,6 @@ public class Country {
 		this.neighbors=new ArrayList<String>();
 	}
 	
-
-
-	
 	public String getName() {
 		return name;
 	}

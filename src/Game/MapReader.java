@@ -134,39 +134,50 @@ public class MapReader {
 	 */
 	public void display(Map map2) {
 		// TODO Auto-generated method stub
-		if (map2.getListOfContinent().size() > 0) {
-			for (Continent c : map2.getListOfContinent()) {
-				System.out.println();
-				System.out.println("Continent :" + c.getName());
+		map =map2;
+		int notConnected = validateMap();
+		System.out.println();
+		if (notConnected == 0) {
+			System.out.println("Valid Map");
+			// display
+			if (map2.getListOfContinent().size() > 0) {
+				for (Continent c : map2.getListOfContinent()) {
+					System.out.println();
+					System.out.println("Continent :" + c.getName());
 
-				if(c.getBridges().size()>0) {
-				System.out.println("Bridges");
-				for (Bridge bridge : c.getBridges()) {
-					System.out.println(
-							bridge.getNeigContinent() + " " + bridge.getCountry1() + " " + bridge.getCountry2());
-				}
-
-			}
-				for (String c1 : c.getCountries()) {
-					System.out.print("Country :" + c1 + ": Neighbours->");
-
-					for (Country country : map2.getListOfCountries()) {
-						if (c1.equals(country.getName())) {
-
-							for (String c2 : country.getNeighbors()) {
-								System.out.print(c2 + "||");
-							}
-
-							System.out.println();
-						}
+					if(c.getBridges().size()>0) {
+					System.out.println("Bridges");
+					for (Bridge bridge : c.getBridges()) {
+						System.out.println(
+								bridge.getNeigContinent() + " " + bridge.getCountry1() + " " + bridge.getCountry2());
 					}
 
 				}
+					for (String c1 : c.getCountries()) {
+						System.out.print("Country :" + c1 + ": Neighbours->");
 
+						for (Country country : map2.getListOfCountries()) {
+							if (c1.equals(country.getName())) {
+
+								for (String c2 : country.getNeighbors()) {
+									System.out.print(c2 + "||");
+								}
+
+								System.out.println();
+							}
+						}
+
+					}
+
+				}
+			} else {
+				System.out.println("Map Empty.");
 			}
-		} else {
-			System.out.println("Map Empty.");
-		}
+		} else
+			System.out.println("Invalid map");
+		
+		
+		
 	}
 
 	public int validateMap() {
@@ -227,7 +238,7 @@ public class MapReader {
 
 	public int checkDuplicates() {
 		int duplicate = 0;
-		for (int i = 0; i < (map.getListOfContinent().size() - 1); i++)
+		for (int i = 0; i < (map.getListOfContinent().size()-1); i++)
 			for (int j = i + 1; j < map.getListOfContinent().size(); j++)
 				if ((map.getListOfContinent().get(i).getName())
 						.equalsIgnoreCase(map.getListOfContinent().get(j).getName())) {
@@ -236,7 +247,7 @@ public class MapReader {
 					break;
 				}
 		if (duplicate == 0)
-			for (int i = 0; i < (map.getListOfCountries().size() - 1); i++)
+			for (int i = 0; i < (map.getListOfCountries().size()-1); i++)
 				for (int j = i + 1; j < map.getListOfCountries().size(); j++)
 					if ((map.getListOfCountries().get(i).getName())
 							.equalsIgnoreCase(map.getListOfCountries().get(j).getName())) {
