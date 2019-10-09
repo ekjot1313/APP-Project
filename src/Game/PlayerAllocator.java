@@ -2,7 +2,7 @@ package Game;
 
 import java.util.*;
 
-public class PlayerAllocator extends MapReader {
+public class PlayerAllocator{
 	public List<Player> listOfPlayers;
 	public PlayerAllocator(){
 	this.listOfPlayers=new ArrayList<Player>();
@@ -15,23 +15,20 @@ public class PlayerAllocator extends MapReader {
 		{
 			System.out.println("Type \ngameplayer -add<PlayerName> or -remove <PlayerName> \npopulatecountries - assign countries to players");
 			cmd=in.nextLine();
-			if(cmd.equals("populatecountries") && listOfPlayers.size() == 0) {
+			while(cmd.equals("populatecountries") && listOfPlayers.size() == 0) {
 				System.out.println("Player list is empty, add players first.");
-				do
-				{
-					System.out.println("Type \ngameplayer -add<PlayerName> or -remove <PlayerName> \npopulatecountries - assign countries to players");
-					cmd=in.nextLine();
-				}while(cmd.equals("populatecountries"));
+				System.out.println("Type \ngameplayer -add<PlayerName> or -remove <PlayerName> \npopulatecountries - assign countries to players");
+				cmd=in.nextLine();
 			}
 			if(validate(cmd)==1)
 			{	String str[]=cmd.split(" ");
-				System.out.println("Valid command");
+				//System.out.println("Valid command");
 				for(int i=1;i<str.length;i++) {
 					if(str[i].equals("-add")) {
 						Player p=new Player();
 						p.setName(str[i+1]);
 						listOfPlayers.add(p);
-						//i++;
+						i++;
 					}
 					if(str[i].equals("-remove")) {
 						int j;
@@ -50,19 +47,20 @@ public class PlayerAllocator extends MapReader {
 						
 					}
 				}
-				System.out.println("Player List");
-				for(int i=0;i<listOfPlayers.size();i++)
-				{
-					System.out.println(listOfPlayers.get(i).getName());
-				}
-					
+				
 			}
 			else
 				System.out.println("Invalid command,Type again");
-			//cmd=in.nextLine();
 		}while(!cmd.equals("populatecountries"));
-		populateCountries(map);
-		printPlayerCountries();
+		
+	}
+	public void printPlayerList() {
+		System.out.println("Player List");
+		for(int i=0;i<listOfPlayers.size();i++)
+		{
+			System.out.println(listOfPlayers.get(i).getName());
+		}
+		System.out.println();	
 	}
 	public void printPlayerCountries() {
 		for(int i=0;i<listOfPlayers.size();i++) {
@@ -73,11 +71,14 @@ public class PlayerAllocator extends MapReader {
 				System.out.println(listOfPlayers.get(i).getAssigned_countries().get(j).getName());
 			}
 		}
+		System.out.println();
 	}
 	public static int validate(String command) {
 		String str[]=command.split(" ");
 		int flag=0,count;
 		if((str.length%2)!=0) {
+			if(str[0].equals("populatecountries"))
+				return 1;
 			if(str[0].equals("gameplayer") && (str[1].equals("-add") || str[1].equals("-remove"))) {
 					for(int i=1;i<str.length;i++)
 					{	count=0;

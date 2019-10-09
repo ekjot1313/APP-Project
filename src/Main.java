@@ -114,15 +114,16 @@ public class Main {
 	private static void gameplayer(MapReader mr) {
 		
 		PlayerAllocator pa = new PlayerAllocator();
-		pa.map = mr.map;
+		//pa.map = mr.map;
 		pa.allocate();
-		placearmies(pa);
-		
-		
+		pa.populateCountries(mr.map);
+		pa.printPlayerList();
+		pa.printPlayerCountries();
+		placearmies(pa,mr);	
 	}
-	private static void placearmies (PlayerAllocator pa) {
+	private static void placearmies (PlayerAllocator pa,MapReader mr) {
 		ArmyAllocator aa=new ArmyAllocator();
-		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, pa.map);
+		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers,mr.map);
 	}
 	
 	
