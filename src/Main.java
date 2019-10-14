@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Game.ArmyAllocator;
+import Game.GamePlay;
 import Game.MapReader;
 import Game.Player;
 import Game.PlayerAllocator;
@@ -125,6 +126,15 @@ public class Main {
 		ArmyAllocator aa=new ArmyAllocator();
 		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers,mr.map);
 		aa.showPlayerDetails((ArrayList<Player>) pa.listOfPlayers,mr.map);
+		// gameplay
+		GamePlay gp = new GamePlay();
+		for(int i=0;i< pa.listOfPlayers.size() ;i++)
+		{
+			System.out.println("Player "+ pa.listOfPlayers.get(i).getName()+" reinforcement phase begins");
+			gp.reinforcement((ArrayList<Player>) pa.listOfPlayers, mr.map, i);
+		}
+		
+		
 	}
 	
 	
