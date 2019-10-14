@@ -113,6 +113,9 @@ public class ArmyAllocator {
 			}
 		}
 		
+		
+	}
+	public void showPlayerDetails(ArrayList<Player> listOfPLayers,Map map) {
 		for(Player p :listOfPLayers) {
 			for(Country c:p.getAssigned_countries())
 				System.out.println("Player "+p.getName() +" "+c.getName() +" "+" " +c.getNoOfArmies()); 
