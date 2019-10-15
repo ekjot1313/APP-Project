@@ -1,7 +1,9 @@
 package Game;
+
 import java.util.*;
+
 /**
- * This class is created to represent the Player details
+ * This class represents the Player details
  * @author Piyush
  *
  */
@@ -11,13 +13,15 @@ public class Player {
 	private int unassignedarmies ;
 	private List<Country> assigned_countries;
 	
-	
+	/**
+	 * Constructor
+	 */
 	public Player(){
 		assigned_countries = new ArrayList<Country>();
 	}
 
 	/**
-	 *  This method returns the name of the player.
+	 *  This method returns the .
 	 * @return 
 	 */
 	public int getUnassignedarmies() {
