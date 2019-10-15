@@ -105,7 +105,7 @@ public class MapEditor {
 	/**
 	 * This method will display the map
 	 */
-	private static void showMap() {
+	public static void showMap() {
 		// TODO Auto-generated method stub
 
 		(new MapReader()).display(map);
