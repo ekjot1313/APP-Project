@@ -76,9 +76,16 @@ public class MapEditor {
 
 		System.out.println("savemap found");
 		MapSaver ms = new MapSaver();
+		MapReader mr =new MapReader();
+		mr.map=map;
+		if(mr.validateMap() == 0) {
 		ms.saveMap(map, command[1]);
 		return map;
-
+		}
+		else {
+			System.out.println("The map file cannot be saved as the map is not connected");
+			return null;
+		}
 	}
 
 	/**
