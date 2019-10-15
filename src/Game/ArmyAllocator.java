@@ -2,7 +2,7 @@ package Game;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.util.Random;
 public class ArmyAllocator {
 
 	
@@ -105,12 +105,27 @@ public class ArmyAllocator {
 	
 		for(Player p: listOfPLayers) {
 			
-			while(p.getUnassignedarmies()>0) {
+			/*while(p.getUnassignedarmies()>0) {
 				for(int i=0;i<p.getAssigned_countries().size()&& p.getUnassignedarmies()>0;i++) {
 				p.getAssigned_countries().get(i).setNoOfArmies(p.getAssigned_countries().get(i).getNoOfArmies()+1);
 				p.setUnassignedarmies(p.getUnassignedarmies() - 1);
 				}
-			}
+			}*/
+			for(int i=0;i<p.getAssigned_countries().size()&& p.getUnassignedarmies()>0;i++) {
+				if(p.getAssigned_countries().get(i).getNoOfArmies() == 0 ) {
+					p.getAssigned_countries().get(i).setNoOfArmies(p.getAssigned_countries().get(i).getNoOfArmies()+1);
+					p.setUnassignedarmies(p.getUnassignedarmies() - 1);
+					}
+				}
+			
+			Random r =  new Random();
+			while(p.getUnassignedarmies()>0) {
+				//random function to get a country randomly
+				int i = r.nextInt(p.getAssigned_countries().size() );
+				p.getAssigned_countries().get(i).setNoOfArmies(p.getAssigned_countries().get(i).getNoOfArmies()+1);
+				p.setUnassignedarmies(p.getUnassignedarmies() - 1);
+			}	
+			
 		}
 		
 		
