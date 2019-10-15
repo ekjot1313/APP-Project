@@ -27,6 +27,14 @@ public class MapEditor {
 	public static boolean good;
 	public static Map map;
 
+	public static Map getMap() {
+		return map;
+	}
+
+	public static void setMap(Map map) {
+		MapEditor.map = map;
+	}
+
 	//public static void main(String args[]) throws IOException {
 	public Map mapeditorInit(Map map) throws IOException {
 		BufferedReader brConsole = new BufferedReader(new InputStreamReader(System.in));

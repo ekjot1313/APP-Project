@@ -13,13 +13,17 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import mapWorks.MapEditor;
+
 /**
  * @author divya_000
  *
  */
 public class MapReaderTest {
 
-	Map expectedMap;
+	Map testMap;
+	MapEditor mapEditor;
+	MapReader mapReader;
 	
 	
 	
@@ -30,8 +34,12 @@ public class MapReaderTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	
-	
-	
+	mapEditor= new MapEditor("abc");
+	mapEditor.editContinent("-add asia 10 -add africa 14");
+	mapEditor.editCountry("-add india asia -add pakistan asia -add china asia -add congo africa -add uganda africa");
+	mapEditor.editNeighbor("-add india pakistan -add pakistan china -add india congo -add congo uganda");
+	testMap= mapEditor.getMap();
+	mapReader= new MapReader();
 	
 	}
 
@@ -62,6 +70,7 @@ public class MapReaderTest {
 	@Test
 	public void testValidateMap() {
 	
+		assertEquals(0,mapReader.validateMap(testMap));
 	}
 
 }
