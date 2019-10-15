@@ -32,7 +32,7 @@ public class MapEditor {
 		BufferedReader brConsole = new BufferedReader(new InputStreamReader(System.in));
 		
 		if(map == null)
-		map = new Map();
+			this.map = new Map();
 		else
 			this.map = map;
 
@@ -422,7 +422,7 @@ public class MapEditor {
 						good = false;
 						return;
 					}
-
+						//System.out.println(map);
 					if (map.getContinentFromName(s.get(1)) != null) {
 						System.out.println("Continent Already Exists.");
 						return;
