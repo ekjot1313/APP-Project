@@ -40,9 +40,9 @@ public class MapEditor {
 		good = true;
 
 		command = brConsole.readLine().split(" ");
-
-		while (!command[0].equals("savemap")) {
-
+		
+		while (good ) {
+			
 			switch (command[0]) {
 			case "editcontinent": {
 				editContinent(command);
@@ -59,11 +59,16 @@ public class MapEditor {
 			}
 			case "showmap": {
 				showMap();
-		
-
 				break;
 			}
-
+			case "savemap":{
+				if(command.length == 2){
+					good= false;
+					continue;
+				}else
+				System.out.println("Invalid Command. Type Again.");
+					break;
+			}
 			default: {
 				System.out.println("Invalid Command. Type Again.");
 			}
@@ -71,16 +76,17 @@ public class MapEditor {
 
 			command = brConsole.readLine().split(" ");
 			good = true;
+				
 
 		}
 
-		System.out.println("savemap found");
+		//System.out.println("savemap found");
 		MapSaver ms = new MapSaver();
 		MapReader mr =new MapReader();
-		mr.map=map;
-		if(mr.validateMap() == 0) {
-		ms.saveMap(map, command[1]);
-		return map;
+		mr.map=this.map;
+		if(mr.validateMap(mr.map) == 0) {
+		ms.saveMap(mr.map, command[1]);
+		return mr.map;
 		}
 		else {
 			System.out.println("The map file cannot be saved as the map is not connected");

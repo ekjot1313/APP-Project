@@ -38,7 +38,7 @@ public class MapReader {
 			}
 			System.out.println("mapOfworld "+mapOfWorld.toString());
 			// validate map call
-			int notConnected = validateMap();
+			int notConnected = validateMap(map);
 			System.out.println();
 			if (notConnected == 0) {
 				System.out.println("Valid Map");
@@ -135,7 +135,7 @@ public class MapReader {
 	public void display(Map map2) {
 		// TODO Auto-generated method stub
 		map =map2;
-		int notConnected = validateMap();
+		int notConnected = validateMap(map);
 		System.out.println();
 		if (notConnected == 0) {
 			System.out.println("Valid Map");
@@ -180,7 +180,7 @@ public class MapReader {
 		
 	}
 
-	public int validateMap() {
+	public int validateMap(Map map) {
 		// traversing
 		int notConnected = 0;
 		if (checkDuplicates() == 0) {
@@ -276,5 +276,9 @@ public class MapReader {
 	public Map getMap() {
 		return this.map;
 	}
+	
+	
+	
+	
 
 }
