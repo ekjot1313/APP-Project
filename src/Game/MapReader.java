@@ -192,7 +192,7 @@ public class MapReader {
 	public int validateMap(Map map) {
 		// traversing
 		int notConnected = 0;
-		if (checkDuplicates() == 0) {
+		if (checkDuplicates(map) == 0) {
 
 			// graph creation
 
@@ -245,7 +245,7 @@ public class MapReader {
 		return notConnected;
 	}
 
-	public int checkDuplicates() {
+	public int checkDuplicates(Map map) {
 		int duplicate = 0;
 		for (int i = 0; i < (map.getListOfContinent().size()-1); i++)
 			for (int j = i + 1; j < map.getListOfContinent().size(); j++)
