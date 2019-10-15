@@ -1,6 +1,8 @@
 package Game;
 
 import Game.Map;
+import mapWorks.MapEditor;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -8,6 +10,10 @@ import java.io.IOException;
 import java.util.*;
 
 public class MapReader {
+	
+	public MapReader(){
+		this.map = new Map();
+	}
 
 	public Map map;
 	private File fileObject;
@@ -39,8 +45,9 @@ public class MapReader {
 			System.out.println("mapOfworld "+mapOfWorld.toString());
 			// validate map call
 			int notConnected = validateMap(map);
+			int notConnectedSubGraph = validateContinent(map);
 			System.out.println();
-			if (notConnected == 0) {
+			if (notConnected == 0 && notConnectedSubGraph == 0) {
 				System.out.println("Valid Map");
 				// display
 				display(map);
@@ -136,8 +143,10 @@ public class MapReader {
 		// TODO Auto-generated method stub
 		map =map2;
 		int notConnected = validateMap(map);
+		int notConnectedSubGraph = validateContinent(map);
 		System.out.println();
-		if (notConnected == 0) {
+		
+		if (notConnected == 0  && notConnectedSubGraph == 0) {
 			System.out.println("Valid Map");
 			// display
 			if (map2.getListOfContinent().size() > 0) {
@@ -277,7 +286,29 @@ public class MapReader {
 		return this.map;
 	}
 	
-	
+	public int validateContinent(Map map) {
+
+		MapEditor mpe = new MapEditor();
+		MapReader mr = new MapReader();
+		mpe.map = map;
+			for(int i =0;i<map.getListOfContinent().size();i++) {
+				String remainingContinent =""; 
+			
+				for(int j=0;j<map.getListOfContinent().size();j++) {
+					if(i != j )
+						remainingContinent +="-remove "+map.getListOfContinent().get(j).getName()+" ";
+					
+				}
+				remainingContinent.trim();
+				System.out.println(remainingContinent);
+				mpe.editContinent(remainingContinent.split(" "));
+				if(mr.validateMap(mpe.map) == 1) {
+					return 0;
+				}
+				mpe.map = map;
+			}
+		return 0;
+	}
 	
 	
 
