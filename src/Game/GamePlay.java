@@ -1,6 +1,10 @@
 package Game;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class GamePlay {
@@ -55,6 +59,94 @@ public class GamePlay {
 		
 		
 	}
-	
+	public void fortification(ArrayList<Player> listPlayer ,Map map,int playerIndex) {
+		Scanner sc = new Scanner(System.in);
+		int flag=0;
+		do {
+			
+			System.out.println("Type fortify <from country name> <to country name> <number of armies>");
+			String in= sc.nextLine();
+			String input[]= in.split(" ");
+			
+			if(input.length == 4 && input[0].equals("fortify")) {
+				HashMap<Integer, List<Integer>> mapOfAssignedCountries = new HashMap<Integer, List<Integer>>();
+				for (int i = 0; i < listPlayer.get(playerIndex).getAssigned_countries().size(); i++) {
+					List<Integer> templist = new ArrayList<Integer>();
+					for (int j = 0; j < listPlayer.get(playerIndex).getAssigned_countries().get(i).getNeighbors().size(); j++) {
+						if(map.getCountryFromName(listPlayer.get(playerIndex).getAssigned_countries().get(i).getNeighbors().get(j)).getOwner().equals(listPlayer.get(playerIndex).getName())) {
+							for(int k=0;k<listPlayer.get(playerIndex).getAssigned_countries().size();k++) {
+								if(listPlayer.get(playerIndex).getAssigned_countries().get(k).equals(map.getCountryFromName(listPlayer.get(playerIndex).getAssigned_countries().get(i).getNeighbors().get(j)))) {
+									templist.add(k);
+								}
+							}
+						}
+					}
+					mapOfAssignedCountries.put(i, templist);
+				}
+				System.out.println(mapOfAssignedCountries.toString());
+				int source=0,destination=0,validPath=0;
+				for(int k=0;k<listPlayer.get(playerIndex).getAssigned_countries().size();k++) {
+						if(listPlayer.get(playerIndex).getAssigned_countries().get(k).getName().equals(input[1])) {
+							source=k;
+						}
+						if(listPlayer.get(playerIndex).getAssigned_countries().get(k).getName().equals(input[2])) {
+							destination=k;
+						}
+				}
+				Boolean[] visited = new Boolean[mapOfAssignedCountries.keySet().size()];
+				for (int i = 0; i < visited.length; i++) {
+					visited[i] = false;
+				}
+				System.out.println("source"+source);System.out.println("dest"+destination);
+				LinkedList<Integer> queue = new LinkedList<Integer>();
+				queue.add(source);
+				visited[source] = true;
+				while (queue.size() > 0) {
+					 //System.out.println(queue.peek());
+					Integer c1 = queue.poll();
+					Iterator i = mapOfAssignedCountries.get(c1).listIterator();
+					while (i.hasNext()) {
+						int n = (int) i.next();
+						System.out.println("n"+n);
+						if(n== destination) {
+							validPath=1;
+							break;
+						}
+						if (visited[n] == false) {
+							visited[n] = true;
+							queue.add(n);
+						}
+						}
+					if(validPath==1)
+						break;
+				}
+				if(validPath ==1) {
+					
+					System.out.println("Valid Path");
+					if(Integer.parseInt(input[3]) >0 &&  (Integer.parseInt(input[3]) < listPlayer.get(playerIndex).getAssigned_countries().get(source).getNoOfArmies() )) {
+					listPlayer.get(playerIndex).getAssigned_countries().get(source).setNoOfArmies((listPlayer.get(playerIndex).getAssigned_countries().get(source).getNoOfArmies()) - Integer.parseInt(input[3]));
+					listPlayer.get(playerIndex).getAssigned_countries().get(destination).setNoOfArmies((listPlayer.get(playerIndex).getAssigned_countries().get(destination).getNoOfArmies()) + Integer.parseInt(input[3]));
+					for(Player p :listPlayer) {
+						for(Country c:p.getAssigned_countries())
+							System.out.println("Player "+p.getName() +" "+c.getName() +" "+" " +c.getNoOfArmies());
+						return;
+					}
+					}
+					else
+						System.out.println("Invalid no of armies specified, for these two countries it can be 1-"+(listPlayer.get(playerIndex).getAssigned_countries().get(source).getNoOfArmies()-1));
+					
+				}
+				else {
+					
+					System.out.println("There's no path between the mentioned countries.(You can move any number of armies from one of the owned countries to the other, provided that there is a path between these two countries that is composed of countries owned by you)");
+				}
+			}
+			else if(input.length == 3 && input[0].equals("fortify")) {
+				return;
+			}
+			else
+				System.out.println("Invalid command,type again");
+		}while(flag == 0);
+	}
 
 }
