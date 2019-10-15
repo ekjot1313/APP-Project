@@ -6,10 +6,19 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-
+/**
+ * This class contains three methods each for reinforcement, fortification and attack phase.
+ * @author Piyush
+ *
+ */
 public class GamePlay {
 	
-	
+	/**
+	 * This function is used for reinforcement phase.
+	 * @param listPlayer List of players
+	 * @param map Map object which contains the map details like continents and countries.
+	 * @param playerIndex	Index of a particular player in the List of player passed from a main function
+	 */
 	
 	public void reinforcement(ArrayList<Player> listPlayer ,Map map,int playerIndex) {
 		
@@ -59,12 +68,18 @@ public class GamePlay {
 		
 		
 	}
+	/**
+	 * This function is used for fortification phase.
+	 * @param listPlayer List of players
+	 * @param map Map object which contains the map details like continents and countries.
+	 * @param playerIndex	Index of a particular player in the List of player passed from a main function
+	 */
 	public void fortification(ArrayList<Player> listPlayer ,Map map,int playerIndex) {
 		Scanner sc = new Scanner(System.in);
 		int flag=0;
 		do {
 			
-			System.out.println("Type fortify <from country name> <to country name> <number of armies>");
+			System.out.println("Type fortify <from country name> <to country name> <number of armies> or fortify none (choose to not do a move)");
 			String in= sc.nextLine();
 			String input[]= in.split(" ");
 			
@@ -141,7 +156,7 @@ public class GamePlay {
 					System.out.println("There's no path between the mentioned countries.(You can move any number of armies from one of the owned countries to the other, provided that there is a path between these two countries that is composed of countries owned by you)");
 				}
 			}
-			else if(input.length == 3 && input[0].equals("fortify")) {
+			else if(in.equals("fortify none")) {
 				return;
 			}
 			else

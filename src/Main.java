@@ -16,11 +16,12 @@ public class Main {
 	public static void main(String[] args) {
 		
 		System.out.println("Welcome to RISK GAME!");
-		System.out.println("Type \nloadmap <filename> -load an existing map \neditmap <filename> -edit an existing map or create a new map");
+		
 		
 		
 		while(true) {
 			Scanner sc = new Scanner(System.in);
+			System.out.println("Type \nloadmap <filename> -load an existing map \neditmap <filename> -edit an existing map or create a new map");
 			String[] commands = sc.nextLine().split(" ");
 			if(commands.length == 1 && !commands[0].equals("exit") ) {
 				System.out.println("Invalid command .Type exit to end game");
