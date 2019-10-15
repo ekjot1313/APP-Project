@@ -35,6 +35,10 @@ public class MapEditor {
 		MapEditor.map = map;
 	}
 
+	public MapEditor() {
+		this.good=true;
+		this.map=new Map();
+	}
 	//public static void main(String args[]) throws IOException {
 	public Map mapeditorInit(Map map) throws IOException {
 		BufferedReader brConsole = new BufferedReader(new InputStreamReader(System.in));
