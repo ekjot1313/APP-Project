@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Game;
+package Test;
 
 import static org.junit.Assert.*;
 
@@ -13,6 +13,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import Game.Map;
+import Game.MapReader;
 import mapWorks.MapEditor;
 
 /**
@@ -21,12 +23,9 @@ import mapWorks.MapEditor;
  */
 public class MapReaderTest {
 
-	Map testMap;
-	MapEditor mapEditor;
-	MapReader mapReader;
-	
-	
-	
+	static Map testMap;
+	static MapEditor mapEditor;
+	static MapReader mapReader;
 	
 	/**
 	 * @throws java.lang.Exception
@@ -34,10 +33,10 @@ public class MapReaderTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	
-	mapEditor= new MapEditor("abc");
-	mapEditor.editContinent("-add asia 10 -add africa 14");
-	mapEditor.editCountry("-add india asia -add pakistan asia -add china asia -add congo africa -add uganda africa");
-	mapEditor.editNeighbor("-add india pakistan -add pakistan china -add india congo -add congo uganda");
+	mapEditor= new MapEditor();
+	mapEditor.editContinent(("editcontinent -add asia 10 -add africa 14").split(" "));
+	mapEditor.editCountry(("editcountry -add india asia -add pakistan asia -add china asia -add congo africa -add uganda africa").split(" "));
+	mapEditor.editNeighbor(("editneighbor -add india pakistan -add pakistan china -add india congo -add congo uganda").split(" "));
 	testMap= mapEditor.getMap();
 	mapReader= new MapReader();
 	
@@ -71,6 +70,7 @@ public class MapReaderTest {
 	public void testValidateMap() {
 	
 		assertEquals(0,mapReader.validateMap(testMap));
+		System.out.println("Running");
 	}
 
 }
