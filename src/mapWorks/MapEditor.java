@@ -29,6 +29,7 @@ public class MapEditor {
 
 	public static Map getMap() {
 		return map;
+		
 	}
 
 	public static void setMap(Map map) {
