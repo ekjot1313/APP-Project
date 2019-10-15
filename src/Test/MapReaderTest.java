@@ -70,7 +70,7 @@ public class MapReaderTest {
 	public void testValidateMap() {
 	
 		assertEquals(0,mapReader.validateMap(testMap));
-		System.out.println("Running");
+		
 	}
 
 }
