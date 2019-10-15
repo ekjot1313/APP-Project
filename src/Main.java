@@ -98,7 +98,7 @@ public class Main {
 		MapReader mr = new MapReader();
 		System.out.println(System.getProperty("user.dir"));
 		String currentPath = System.getProperty("user.dir");
-		currentPath += "\\src\\Maps\\" + filename;
+		currentPath += "\\Maps\\" + filename;
 		//mr.parseMapFile(currentPath);
 		File newFile = new File(currentPath);
 		if(newFile.exists()) {
