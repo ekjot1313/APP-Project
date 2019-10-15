@@ -117,7 +117,7 @@ public class MapEditor {
 	 * 
 	 * @param command
 	 */
-	private static void editNeighbor(String[] command) {
+	public static void editNeighbor(String[] command) {
 		// TODO Auto-generated method stub
 		ArrayList<ArrayList<String>> stack = new ArrayList<ArrayList<String>>();
 		int len = command.length;
@@ -218,7 +218,7 @@ public class MapEditor {
 	 * 
 	 * @param command
 	 */
-	private static void editCountry(String[] command) {
+	public static void editCountry(String[] command) {
 		// TODO Auto-generated method stub
 		ArrayList<ArrayList<String>> stack = new ArrayList<ArrayList<String>>();
 		int len = command.length;
@@ -316,7 +316,7 @@ public class MapEditor {
 	 * 
 	 * @param command
 	 */
-	private static void editContinent(String[] command) {
+	public static void editContinent(String[] command) {
 		// TODO Auto-generated method stub
 		ArrayList<ArrayList<String>> stack = new ArrayList<ArrayList<String>>();
 		int len = command.length;
