@@ -35,7 +35,7 @@ public class MapSaver {
 		this.listOfContinent = map.getListOfContinent();
 		this.listOfCountries = map.getListOfCountries();
 
-		String currentPath = System.getProperty("user.dir") + "\\src\\Maps\\";
+		String currentPath = System.getProperty("user.dir") + "\\Maps\\";
 		String mapPath = currentPath + fileName + ".map";
 
 		BufferedWriter bwFile = new BufferedWriter(new FileWriter(mapPath));
