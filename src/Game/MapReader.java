@@ -92,7 +92,11 @@ public class MapReader {
 		}
 		return 1;
 	}
-
+	/**
+	 * method to load borders to the map object
+	 * @throws NumberFormatException
+	 * @throws IOException
+	 */
 	private void loadBorders() throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
 
@@ -125,7 +129,11 @@ public class MapReader {
 		}
 
 	}
-
+	/**
+	 * method to loadcountries to the map object
+	 * @throws NumberFormatException
+	 * @throws IOException
+	 */
 	private void loadCountries() throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
 
@@ -145,7 +153,11 @@ public class MapReader {
 		}
 
 	}
-
+	/**
+	 * method to load the continents in the map object
+	 * @throws NumberFormatException
+	 * @throws IOException
+	 */
 	private void loadContinents() throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
 
@@ -220,7 +232,11 @@ public class MapReader {
 		
 		
 	}
-
+	/**
+	 * method to check if the entire map is valid
+	 * @param map
+	 * @return 0 if valid else 1
+	 */
 	public int validateMap(Map map) {
 		// traversing
 		int notConnected = 0;
@@ -276,7 +292,11 @@ public class MapReader {
 			notConnected = 1;
 		return notConnected;
 	}
-
+	/**
+	 * method to check if duplicate continents or countries exist
+	 * @param map
+	 * @return 0 if no duplicates else  1
+	 */
 	public int checkDuplicates(Map map) {
 		int duplicate = 0;
 		for (int i = 0; i < (map.getListOfContinent().size()-1); i++)
@@ -299,32 +319,23 @@ public class MapReader {
 		return duplicate;
 	}
 
-	public static void main(String args[]) {
-		MapReader m = new MapReader();
-		String filename = "ameroki.map";
-		System.out.println(System.getProperty("user.dir"));
-		String currentPath = System.getProperty("user.dir");
-		currentPath += "\\src\\Maps\\" + filename;
-		File file = new File(currentPath);
-		m.parseMapFile(file);
-	}
 
 	/**
 	 * This method returns the currently loaded map
 	 * 
-	 * @return
+	 * @return Map
 	 */
 	public Map getMap() {
 		return this.map;
 	}
 	
 	
-	public Map returnCopyOfMap(Object a) {
-		return (Map)a;
-		
-	}
 	
-	
+	/**
+	 * method to check if every subgraph is  valid
+	 * @param map
+	 * @return int 0 if valid else 1 if invalid
+	 */
 	public int validateContinent(Map map) {
 
 		MapEditor mpeNew = new MapEditor();
