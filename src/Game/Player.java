@@ -14,7 +14,7 @@ public class Player {
 	private List<Country> assigned_countries;
 	
 	/**
-	 * Constructor
+	 * Constructor initializes the list of assigned countries
 	 */
 	public Player(){
 		assigned_countries = new ArrayList<Country>();
