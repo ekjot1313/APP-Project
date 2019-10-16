@@ -121,9 +121,7 @@ public class MapReaderTest {
 		player.listOfPlayers.add(B);
 		player.listOfPlayers.add(C);
 		player.populateCountries(testMap);
-		
 		int reinforce= reinforceArmies.calculateReinforceArmies((ArrayList<Player>) player.listOfPlayers, testMap, 1);
-		
 		assertEquals(3, reinforce);
 	}
 }
