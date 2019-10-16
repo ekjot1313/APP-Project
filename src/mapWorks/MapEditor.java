@@ -607,7 +607,7 @@ public class MapEditor {
 
 	}
 
-	private void removeBridge(String continent1Name, String continent2Name, String country1Name,
+	public boolean removeBridge(String continent1Name, String continent2Name, String country1Name,
 			String country2Name) {
 		// TODO Auto-generated method stub
 		// check all bridge in first continent
@@ -622,6 +622,8 @@ public class MapEditor {
 				continent1.getBridges().remove(bridge);
 
 			}
+			else
+				return !good;
 		}
 
 		// check all bridge in second continent
@@ -631,8 +633,10 @@ public class MapEditor {
 				continent2.getBridges().remove(bridge);
 
 			}
+			else
+				return !good;
 		}
-
+		return good;
 	}
 
 	/**

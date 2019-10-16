@@ -145,4 +145,11 @@ public class MapReaderTest {
 		assertEquals(35, result);
 		
 	}
+	/**
+	 * method to test whether the bridge between two continents is removed
+	 */
+	@Test
+	public void testRemoveBridges() {
+		assertTrue(mapEditor.removeBridge("asia", "africa", "india", "congo"));
+	}
 }
