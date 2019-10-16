@@ -6,8 +6,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+
 /**
- * This class contains three methods each for reinforcement, fortification and attack phase.
+ * This class handles gameplay and contains three methods each for reinforcement, fortification and attack phase.
  * @author Piyush
  *
  */
@@ -24,9 +25,8 @@ public class GamePlay {
 	 * This function is used for reinforcement phase.
 	 * @param listPlayer List of players
 	 * @param map Map object which contains the map details like continents and countries.
-	 * @param playerIndex	Index of a particular player in the List of player passed from a main function
+	 * @param playerIndex Index of a particular player in the List of player passed from main function
 	 */
-	
 	public void reinforcement(ArrayList<Player> listPlayer ,Map map,int playerIndex) {
 		
 		Scanner sc = new Scanner(System.in);
@@ -73,11 +73,12 @@ public class GamePlay {
 		
 		
 	}
+	
 	/**
 	 * This function is used for fortification phase.
 	 * @param listPlayer List of players
 	 * @param map Map object which contains the map details like continents and countries.
-	 * @param playerIndex	Index of a particular player in the List of player passed from a main function
+	 * @param playerIndex Index of a particular player in the List of player passed from main function
 	 */
 	public void fortification(ArrayList<Player> listPlayer ,Map map,int playerIndex) {
 		Scanner sc = new Scanner(System.in);
