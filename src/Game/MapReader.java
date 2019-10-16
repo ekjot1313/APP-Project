@@ -144,6 +144,7 @@ public class MapReader {
 		map =map2;
 		int notConnected = validateMap(map);
 		int notConnectedSubGraph = validateContinent(map);
+		//int notConnectedSubGraph =0;
 		System.out.println();
 		
 		if (notConnected == 0  && notConnectedSubGraph == 0) {
@@ -286,15 +287,23 @@ public class MapReader {
 		return this.map;
 	}
 	
+	
+	public Map returnCopyOfMap(Object a) {
+		return (Map)a;
+		
+	}
+	
+	
 	public int validateContinent(Map map) {
 
 		MapEditor mpe = new MapEditor();
 		MapReader mr = new MapReader();
-		mpe.map = map;
-			for(int i =0;i<map.getListOfContinent().size();i++) {
-				String remainingContinent =""; 
+		Map newMap = new Map(map);
+		mpe.setMap(newMap);
+			for(int i =0;i<newMap.getListOfContinent().size();i++) {
+				String remainingContinent ="editcontinent "; 
 			
-				for(int j=0;j<map.getListOfContinent().size();j++) {
+				for(int j=0;j<newMap.getListOfContinent().size();j++) {
 					if(i != j )
 						remainingContinent +="-remove "+map.getListOfContinent().get(j).getName()+" ";
 					
@@ -305,8 +314,11 @@ public class MapReader {
 				if(mr.validateMap(mpe.map) == 1) {
 					return 0;
 				}
-				mpe.map = map;
+				//mpe.map.setListOfContinent(map.getListOfContinent());
+				newMap = new Map(map);
+				mpe.setMap(newMap);
 			}
+		
 		return 0;
 	}
 	

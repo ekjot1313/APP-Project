@@ -24,6 +24,10 @@ public class Map {
 		this.listOfCountries = new ArrayList<Country>();
 		
 	}
+	public Map(Map m) {
+		listOfContinent = m.listOfContinent;
+		listOfCountries = m.listOfCountries;
+	}
 	
 	public String getMessage1() {
 		return message1;
