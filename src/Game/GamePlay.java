@@ -13,11 +13,17 @@ import java.util.Scanner;
  *
  */
 public class GamePlay {
-	
+	/**
+	 * method to calculate reinforcement armies
+	 * @param listPlayer
+	 * @param map
+	 * @param playerIndex
+	 * @return reinformentArmies
+	 */
 	public int calculateReinforceArmies(ArrayList<Player> listPlayer ,Map map,int playerIndex) {
 		int noOfArmies = listPlayer.get(playerIndex).getAssigned_countries().size() /3;
 		int reinforcementArmies =  noOfArmies <= 3? 3 :noOfArmies;
-		System.out.println("reinforcementArmies "+ reinforcementArmies);
+		//System.out.println("reinforcementArmies "+ reinforcementArmies);
 		return reinforcementArmies;
 	}
 	
@@ -59,6 +65,7 @@ public class GamePlay {
 						 listPlayer.get(playerIndex).setNoOfArmies(listPlayer.get(playerIndex).getNoOfArmies() + armiesTobeplaced);
 						 map.getCountryFromName(inputArray[1]).setNoOfArmies(map.getCountryFromName(inputArray[1]).getNoOfArmies() + armiesTobeplaced);
 						 reinforcementArmies -= armiesTobeplaced;
+						 System.out.println("Reinforcement armies placed successfully");
 					 }else
 						 System.out.println("Number of armies to be assigned should be in the range : 1 -"+reinforcementArmies);
 				 }
@@ -67,10 +74,7 @@ public class GamePlay {
 			 
 		}
 		
-		for(Player p :listPlayer) {
-			for(Country c:p.getAssigned_countries())
-				System.out.println("Player "+p.getName() +" "+c.getName() +" "+" " +c.getNoOfArmies()); 
-		}
+		
 		
 		
 		
@@ -111,7 +115,7 @@ public class GamePlay {
 					}
 					mapOfAssignedCountries.put(i, templist);
 				}
-				System.out.println(mapOfAssignedCountries.toString());
+				//System.out.println(mapOfAssignedCountries.toString());
 				int source=-1,destination=-1,validPath=0;
 				for(int k=0;k<listPlayer.get(playerIndex).getAssigned_countries().size();k++) {
 						if(listPlayer.get(playerIndex).getAssigned_countries().get(k).getName().equals(input[1])) {
@@ -123,11 +127,11 @@ public class GamePlay {
 				}
 				if(source == -1 || destination == -1) {
 					if(source == -1 && destination == -1)
-						System.out.println("Sorry!From Country:" +input[1]+"and To Country :"+input[2]+"doesn't belong to you");
+						System.out.println("Sorry!From Country:" +input[1]+" and To Country :"+input[2]+" doesn't belong to you");
 					else if(source == -1)
-						System.out.println("Sorry!From Country :"+input[1]+"doesn't belong to you");
+						System.out.println("Sorry!From Country :"+input[1]+" doesn't belong to you");
 					else
-						System.out.println("Sorry!To Country :"+input[2]+"doesn't belong to you");
+						System.out.println("Sorry!To Country :"+input[2]+" doesn't belong to you");
 				}else {
 				Boolean[] visited = new Boolean[mapOfAssignedCountries.keySet().size()];
 				for (int i = 0; i < visited.length; i++) {
@@ -143,7 +147,7 @@ public class GamePlay {
 					Iterator i = mapOfAssignedCountries.get(c1).listIterator();
 					while (i.hasNext()) {
 						int n = (int) i.next();
-						System.out.println("n"+n);
+						//System.out.println("n"+n);
 						if(n== destination) {
 							validPath=1;
 							break;
@@ -158,15 +162,15 @@ public class GamePlay {
 				}
 				if(validPath ==1) {
 					
-					System.out.println("Valid Path");
+					//System.out.println("Valid Path");
 					if(Integer.parseInt(input[3]) >0 &&  (Integer.parseInt(input[3]) < listPlayer.get(playerIndex).getAssigned_countries().get(source).getNoOfArmies() )) {
 					listPlayer.get(playerIndex).getAssigned_countries().get(source).setNoOfArmies((listPlayer.get(playerIndex).getAssigned_countries().get(source).getNoOfArmies()) - Integer.parseInt(input[3]));
 					listPlayer.get(playerIndex).getAssigned_countries().get(destination).setNoOfArmies((listPlayer.get(playerIndex).getAssigned_countries().get(destination).getNoOfArmies()) + Integer.parseInt(input[3]));
-					for(Player p :listPlayer) {
+					/*for(Player p :listPlayer) {
 						for(Country c:p.getAssigned_countries())
-							System.out.println("Player "+p.getName() +" "+c.getName() +" "+" " +c.getNoOfArmies());
+							System.out.println("Player "+p.getName() +" "+c.getName() +" "+" " +c.getNoOfArmies());*/
+					System.out.println("Fortification successful");
 						return;
-					}
 					}
 					else
 						System.out.println("Invalid no of armies specified, for these two countries it can be 1-"+(listPlayer.get(playerIndex).getAssigned_countries().get(source).getNoOfArmies()-1));
@@ -179,6 +183,7 @@ public class GamePlay {
 			}
 			}
 			else if(in.equals("fortify none")) {
+				System.out.println("Skipped fortification");
 				return;
 			}
 			else

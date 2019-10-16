@@ -138,13 +138,14 @@ public class Main {
 		//aa.showPlayerDetails((ArrayList<Player>) pa.listOfPlayers,mr.map);
 		// gameplay
 		GamePlay gp = new GamePlay();
+		while(true) {
 		for(int i=0;i< pa.listOfPlayers.size() ;i++)
 		{
 			System.out.println("Player "+ pa.listOfPlayers.get(i).getName()+" reinforcement phase begins");
 			gp.reinforcement((ArrayList<Player>) pa.listOfPlayers, mr.map, i);
 			gp.fortification( (ArrayList<Player>) pa.listOfPlayers, mr.map, i);
 		}
-		
+		}
 		
 	}
 	
