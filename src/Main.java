@@ -102,10 +102,12 @@ public class Main {
 	private static void loadmap(String filename) {
 		// TODO Auto-generated method stub
 		MapReader mr = new MapReader();
-		System.out.println(System.getProperty("user.dir"));
+		//System.out.println(System.getProperty("user.dir"));
 		String currentPath = System.getProperty("user.dir");
-		currentPath += "\\Maps\\" + filename;
+		currentPath += "\\Maps\\";
 		//mr.parseMapFile(currentPath);
+		System.out.println(currentPath);
+		currentPath += filename;
 		File newFile = new File(currentPath);
 		if(newFile.exists()) {
 			mr.parseMapFile(newFile);
@@ -125,8 +127,8 @@ public class Main {
 		//pa.map = mr.map;
 		pa.allocate(mr.map);
 		pa.populateCountries(mr.map);
-		pa.printPlayerList();
-		pa.printPlayerCountries();
+		//pa.printPlayerList();
+		//pa.printPlayerCountries();
 		placearmies(pa,mr);	
 	}
 	private static void placearmies (PlayerAllocator pa,MapReader mr) {

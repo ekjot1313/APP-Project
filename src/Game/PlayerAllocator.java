@@ -43,18 +43,22 @@ public class PlayerAllocator{
 						p.setName(str[i+1]);
 						listOfPlayers.add(p);
 						i++;
+						System.out.println("Player "+p.getName()+" has been added successfully.");
 					}
 					if(str[i].equals("-remove")) {
 						int j;
+						int flag=0;
 						for(j=0;j<listOfPlayers.size();j++)
 						{
 							if(listOfPlayers.get(j).getName().contentEquals(str[i+1])) {
+								System.out.println("Player "+listOfPlayers.get(j).getName()+" has been removed successfully.");
 								listOfPlayers.remove(j);
 								//j++;
+								flag=1;
 								break;
 							}
 						}
-						if(j==listOfPlayers.size()) {
+						if(flag==0) {
 							System.out.println("Player Not found");
 							break;
 						}
@@ -66,7 +70,7 @@ public class PlayerAllocator{
 			else
 				System.out.println("Invalid command,Type again");
 			if(cmd.equals("populatecountries") && listOfPlayers.size()==1 ) {
-				System.out.println("Single player cannot the game, please add more players");
+				System.out.println("Single player cannot play the game, please add more players");
 				continue;
 			}
 		}while(!cmd.equals("populatecountries") || listOfPlayers.size()<=1);
@@ -149,8 +153,6 @@ public class PlayerAllocator{
 		{	
 			for(int k=0;k<playerCount;k++)
 			{
-				System.out.println(listOfPlayers.get(k).getName());
-				System.out.println(map.getListOfCountries().get(count).getName());
 				listOfPlayers.get(k).getAssigned_countries().add(map.getListOfCountries().get(count));
 				map.getListOfCountries().get(count).setOwner(listOfPlayers.get(k).getName());
 				count++;	
