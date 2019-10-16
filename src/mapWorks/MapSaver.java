@@ -10,12 +10,11 @@ import Game.Country;
 import Game.Map;
 
 /**
- * This Class will save the given Map object to .map file
+ * This Class is used to save the given Map object to .map file
  * 
- * @author ekjot
+ * @author Ekjot
  *
  */
-
 public class MapSaver { 
 	public Map map;
 	public String fileName;
@@ -26,7 +25,12 @@ public class MapSaver {
 	public List<Continent> listOfContinent;
 	public List<Country> listOfCountries;
 
-
+	/**
+	 * This method saves the map to .map file
+	 * @param map Map Object
+	 * @param fileName Name of the file
+	 * @throws IOException
+	 */
 	public void saveMap(Map map, String fileName) throws IOException {
 
 		this.message1 = map.getMessage1();
@@ -80,28 +84,32 @@ public class MapSaver {
 	}
 
 	/**
-	 * @return the fileName
+	 * This method returns the name of the file
+	 * @return File Name
 	 */
 	public String getFileName() {
 		return fileName;
 	}
 
 	/**
-	 * @param fileName the fileName to set
+	 * This method sets the name of the file
+	 * @param fileName File Name to set
 	 */
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
 
 	/**
-	 * @return the map
+	 * This method returns the map object
+	 * @return Map Object
 	 */
 	public Map getMap() {
 		return map;
 	}
 
 	/**
-	 * @param map the map to set
+	 * This method sets the map object
+	 * @param map Map Object 
 	 */
 	public void setMap(Map map) {
 		this.map = map;
