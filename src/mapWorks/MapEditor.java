@@ -20,9 +20,6 @@ import Game.MapReader;
  * @author ekjot
  *
  */
-
-// pending: ,removeContinent(),  removeCountry() , showMap(), saveMap()
-
 public class MapEditor {
 	/**
 	 * static flag to store the status
