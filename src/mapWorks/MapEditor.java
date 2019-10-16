@@ -24,23 +24,42 @@ import Game.MapReader;
 // pending: ,removeContinent(),  removeCountry() , showMap(), saveMap()
 
 public class MapEditor {
+	/**
+	 * static flag to store the status
+	 */
 	public static boolean good;
+	/**
+	 * to store map object
+	 */
 	public Map map;
-
+	/**
+	 * fetch map object
+	 * @return Map
+	 */
 	public Map getMap() {
 		return this.map;
 		
 	}
-
+	/**
+	 * set map object
+	 * @param map
+	 */
 	public void setMap(Map map) {
 		this.map = map;
 	}
-
+	/**
+	 * Default Constructor
+	 */
 	public MapEditor() {
 		this.good=true;
 		this.map=new Map();
 	}
-	//public static void main(String args[]) throws IOException {
+	/**
+	 * method to initialize map editor
+	 * @param map
+	 * @return Map object
+	 * @throws IOException
+	 */
 	public Map mapeditorInit(Map map) throws IOException {
 		BufferedReader brConsole = new BufferedReader(new InputStreamReader(System.in));
 		
@@ -110,14 +129,17 @@ public class MapEditor {
 			return null;
 		}
 	}
-	
+	/**
+	 * method to validate the map object
+	 * 
+	 */
 	private void validatemap() {
 		// TODO Auto-generated method stub
 		int notConnected = (new MapReader()).validateMap(map);
 		int notConnectedSubGraph = (new MapReader()).validateContinent(map);
 		//int notConnectedSubGraph =0;
-		System.out.println(notConnected +" notConnected");
-		System.out.println(notConnectedSubGraph +" notConnectedSubGraph");
+		//System.out.println(notConnected +" notConnected");
+		//System.out.println(notConnectedSubGraph +" notConnectedSubGraph");
 		
 		if (notConnected == 0  && notConnectedSubGraph == 0) {
 			System.out.println("Map is valid");
@@ -627,7 +649,14 @@ public class MapEditor {
 		}
 
 	}
-
+	/**
+	 * method to remove the bridge between two continents
+	 * @param continent1Name
+	 * @param continent2Name
+	 * @param country1Name
+	 * @param country2Name
+	 * @return true if removed else false
+	 */
 	public boolean removeBridge(String continent1Name, String continent2Name, String country1Name,
 			String country2Name) {
 		// TODO Auto-generated method stub
