@@ -6,7 +6,7 @@ import java.util.Random;
 public class ArmyAllocator {
 
 	
-	public void calculateTotalArmies(ArrayList<Player> listOfPLayers ,Map map) {
+	public int calculateTotalArmies(ArrayList<Player> listOfPLayers ,Map map) {
 		// TODO 2 player scenario TBD
 		// 2 -40 armies ,3 -35 armies , 4- 30 armies ,5 -25 armies ...
 		int maxArmiesForEachPlayer = 40;
@@ -20,7 +20,7 @@ public class ArmyAllocator {
 		
 		placeArmy(assignedArmies, listOfPLayers, map);
 		
-		
+		return assignedArmies;
 	}
 	
 	public void placeArmy(int assignedArmies,ArrayList<Player> listOfPLayers,Map map) {

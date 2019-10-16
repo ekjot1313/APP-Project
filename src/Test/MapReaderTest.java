@@ -19,6 +19,7 @@ import Game.Map;
 import Game.MapReader;
 import Game.Player;
 import mapWorks.MapEditor;
+import Game.ArmyAllocator;
 import Game.GamePlay;
 import Game.PlayerAllocator;
 
@@ -33,6 +34,7 @@ public class MapReaderTest {
 	static MapReader mapReader;
 	static GamePlay reinforceArmies;
 	static PlayerAllocator player;
+	static ArmyAllocator armyAlloc;
 	
 	/**
 	 * @throws java.lang.Exception
@@ -48,6 +50,12 @@ public class MapReaderTest {
 	mapReader= new MapReader();
 	reinforceArmies = new GamePlay();
 	player= new PlayerAllocator();
+	Player A= new Player();
+	Player B= new Player();
+	Player C= new Player();
+	player.listOfPlayers.add(A);
+	player.listOfPlayers.add(B);
+	player.listOfPlayers.add(C);
 
 	}
 
@@ -90,7 +98,7 @@ public class MapReaderTest {
 		File newFile = new File(currentPath);
 		int test=mapReader.parseMapFile(newFile);
 		
-		assertEquals(1, test);
+		assertEquals(0, test);
 		
 	}
 	/**
@@ -114,14 +122,17 @@ public class MapReaderTest {
 	}
 	@Test
 	public void testcalculateReinforceArmies() {
-		Player A= new Player();
-		Player B= new Player();
-		Player C= new Player();
-		player.listOfPlayers.add(A);
-		player.listOfPlayers.add(B);
-		player.listOfPlayers.add(C);
+		
 		player.populateCountries(testMap);
 		int reinforce= reinforceArmies.calculateReinforceArmies((ArrayList<Player>) player.listOfPlayers, testMap, 1);
 		assertEquals(3, reinforce);
+	}
+	
+	@Test
+	public void testNumerOfAssignedArmies() {
+		System.out.println("hhhhhhhhhhhhh");
+		int result= armyAlloc.calculateTotalArmies((ArrayList<Player>) player.listOfPlayers,testMap );
+		assertEquals(35, result);
+		
 	}
 }
