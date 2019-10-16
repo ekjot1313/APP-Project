@@ -57,7 +57,7 @@ public class MapReader {
 			bufferReaderForFile = new BufferedReader(new FileReader(file));
 			
 			while ((currentLine = bufferReaderForFile.readLine()) != null) {
-				System.out.println("curr line :" +currentLine);
+				//System.out.println("curr line :" +currentLine);
 				if (currentLine.contains("[continents]")) {
 					loadContinents();
 				}
@@ -70,7 +70,7 @@ public class MapReader {
 				}
 
 			}
-			System.out.println("mapOfworld "+mapOfWorld.toString());
+			//System.out.println("mapOfworld "+mapOfWorld.toString());
 			// validate map call
 			int notConnected = validateMap(map);
 			int notConnectedSubGraph = validateContinent(map);
@@ -188,8 +188,8 @@ public class MapReader {
 		int notConnected = validateMap(map);
 		int notConnectedSubGraph = validateContinent(map);
 		//int notConnectedSubGraph =0;
-		System.out.println(notConnected +" notConnected");
-		System.out.println(notConnectedSubGraph +" notConnectedSubGraph");
+		//System.out.println(notConnected +" notConnected");
+		//System.out.println(notConnectedSubGraph +" notConnectedSubGraph");
 		
 		if (notConnected == 0  && notConnectedSubGraph == 0) {
 			System.out.println("Valid Map");
@@ -261,7 +261,7 @@ public class MapReader {
 			LinkedList<Integer> queue = new LinkedList<Integer>();
 			queue.add(0);
 			visited[0] = true;
-			 System.out.println(mapOfWorld.toString());
+		//	 System.out.println(mapOfWorld.toString());
 
 			while (queue.size() > 0) {
 				 System.out.println(queue.peek());
@@ -279,7 +279,7 @@ public class MapReader {
 			}
 
 			for (int i = 0; i < visited.length; i++) {
-				System.out.print(i + "=" + visited[i] + " ||");
+				System.out.print(i + "=" + visited[i] + " || ");
 				if (!visited[i]) {
 					notConnected = 1;
 					System.out.println();
