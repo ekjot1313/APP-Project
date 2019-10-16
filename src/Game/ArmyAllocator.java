@@ -11,14 +11,14 @@ import java.util.Random;
  *
  */
 public class ArmyAllocator {
-
+	
 	/**
 	 * This method calculates the total number of armies based on the number of players 
 	 * @param listOfPLayers List of all Players
 	 * @param map Map Object	
 	 * @return Number of assigned armies
 	 */
-	public int calculateTotalArmies(ArrayList<Player> listOfPLayers ,Map map) {
+	public int calculateTotalArmies(ArrayList<Player> listOfPLayers ,Map map,int test) {
 		// TODO 2 player scenario TBD
 		// 2 -40 armies ,3 -35 armies , 4- 30 armies ,5 -25 armies ...
 		int maxArmiesForEachPlayer = 40;
@@ -29,9 +29,10 @@ public class ArmyAllocator {
 			p.setNoOfArmies(assignedArmies);
 			p.setUnassignedarmies(assignedArmies);
 		}
-		
-		placeArmy(assignedArmies, listOfPLayers, map);
-		
+		if(test ==1)
+		placeArmy(assignedArmies, listOfPLayers, map, 1);
+		else
+			placeArmy(assignedArmies, listOfPLayers, map, 1);
 		return assignedArmies;
 	}
 	
@@ -41,18 +42,21 @@ public class ArmyAllocator {
 	 * @param listOfPLayers List of all players
 	 * @param map Map Object
 	 */
-	public void placeArmy(int assignedArmies,ArrayList<Player> listOfPLayers,Map map) {
+	public void placeArmy(int assignedArmies, ArrayList<Player> listOfPLayers,Map map,int test) {
 		
-		
+		//int assignedArmies= calculateTotalArmies(listOfPLayers, map);
 		Scanner sc = new Scanner(System.in);
 		boolean isPlaceAll = false;
+		if(test == 1) {
+			placeAll( listOfPLayers, map);
+		}
+		else {
 		for(int i=0;i<assignedArmies;i++) {
 			for(Player p:listOfPLayers) {
 				Boolean armyNotAllocated = true;
 				while (armyNotAllocated) {
 				System.out.println("Player "+p.getName() +" to place armies :\n Type placearmy <countryname> or placeall to randomly allocate armies ");
 				String input = sc.nextLine();
-				
 				String[] commands = input.split(" ");
 				if(commands.length == 2 && commands[0].equals("placearmy") ) {
 					//check if country is valid and assigned to the current player	
@@ -114,7 +118,7 @@ public class ArmyAllocator {
 		// logic for placeall
 		if(isPlaceAll)
 		placeAll( listOfPLayers, map);
-		
+		}	
 		
 	}
 	

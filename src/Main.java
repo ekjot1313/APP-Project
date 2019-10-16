@@ -125,7 +125,9 @@ public class Main {
 	}
 	private static void placearmies (PlayerAllocator pa,MapReader mr) {
 		ArmyAllocator aa=new ArmyAllocator();
-		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers,mr.map);
+		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers,mr.map,0);
+		
+		//aa.placeArmy((ArrayList<Player>) pa.listOfPlayers, mr.map);
 		aa.showPlayerDetails((ArrayList<Player>) pa.listOfPlayers,mr.map);
 		// gameplay
 		GamePlay gp = new GamePlay();

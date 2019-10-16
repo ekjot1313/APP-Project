@@ -56,7 +56,7 @@ public class MapReaderTest {
 	player.listOfPlayers.add(A);
 	player.listOfPlayers.add(B);
 	player.listOfPlayers.add(C);
-
+	armyAlloc= new ArmyAllocator();
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class MapReaderTest {
 	/**
 	 * Method to check parsing of the input file
 	 */
-	@Test
+	/*@Test
 	public void testParseMap() {
 		String filename= "ameroki.map";
 		String currentPath = System.getProperty("user.dir");
@@ -103,7 +103,7 @@ public class MapReaderTest {
 		
 		assertEquals(0, test);
 		
-	}
+	}*/
 	/**
 	 * Function to test the gameplayer command
 	 */
@@ -140,14 +140,9 @@ public class MapReaderTest {
 	 */
 	@Test
 	public void testNumerOfAssignedArmies() {
-		/*for(int i=0; i<player.listOfPlayers.size();i++) {
-		System.out.println("list of players"+ player.listOfPlayers.get(i).getName());
-		player.listOfPlayers.get(i).setNoOfArmies(0);
-		player.listOfPlayers.get(i).setUnassignedarmies(0);
+		player.populateCountries(testMap);
+		int result= armyAlloc.calculateTotalArmies((ArrayList<Player>) player.listOfPlayers, testMap,1 );
 		
-		}*/
-		
-		int result= armyAlloc.calculateTotalArmies((ArrayList<Player>) player.listOfPlayers, testMap );
 		assertEquals(35, result);
 	}
 	/**
