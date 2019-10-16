@@ -74,6 +74,10 @@ public class MapEditor {
 				showMap();
 				break;
 			}
+			case "validatemap": {
+				validatemap();
+				break;
+			}
 			case "savemap":{
 				if(command.length == 2){
 					good= false;
@@ -105,6 +109,23 @@ public class MapEditor {
 			System.out.println("The map file cannot be saved as the map is not connected");
 			return null;
 		}
+	}
+	
+	private void validatemap() {
+		// TODO Auto-generated method stub
+		int notConnected = (new MapReader()).validateMap(map);
+		int notConnectedSubGraph = (new MapReader()).validateContinent(map);
+		//int notConnectedSubGraph =0;
+		System.out.println(notConnected +" notConnected");
+		System.out.println(notConnectedSubGraph +" notConnectedSubGraph");
+		
+		if (notConnected == 0  && notConnectedSubGraph == 0) {
+			System.out.println("Map is valid");
+		}else {
+			System.out.println("Map is invalid");
+		}
+		
+		
 	}
 
 	/**
