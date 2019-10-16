@@ -8,9 +8,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
-
 /**
- * This class parses the given map file and displays it 
+ * 
  * @author Piyush
  * @author Mitalee Naik
  * @since 1.0.0
@@ -37,7 +36,7 @@ public class MapReader {
 	/**
 	 * Map to store the Index of countries
 	 */
-	public HashMap<Integer, List<Integer>> mapOfWorld = new HashMap<Integer, List<Integer>>();
+	public HashMap<Integer, List<Integer>> mapOfWorld ;
 	
 	/**
 	 * Default Constructor
@@ -45,11 +44,10 @@ public class MapReader {
 	public MapReader(){
 		this.map = new Map();
 	}
-	
 	/**
-	 * This method is used to parse the map file
-	 * @param file Map file to be parsed
-	 * @return 0 if successful else 1
+	 * method to parse the map file
+	 * @param file
+	 * @return
 	 */
 	public int parseMapFile(File file) {
 		map = new Map();
@@ -77,10 +75,11 @@ public class MapReader {
 			int notConnected = validateMap(map);
 			int notConnectedSubGraph = validateContinent(map);
 			System.out.println();
+			//System.out.println(notConnected +" "+notConnectedSubGraph);
 			if (notConnected == 0 && notConnectedSubGraph == 0) {
 				System.out.println("Valid Map");
 				// display
-				display(map);
+				//display(map);
 			} else {
 				System.out.println("Invalid map");
 				return 0;
@@ -94,9 +93,8 @@ public class MapReader {
 		}
 		return 1;
 	}
-	
 	/**
-	 * This method is used to load borders to the map object
+	 * method to load borders to the map object
 	 * @throws NumberFormatException
 	 * @throws IOException
 	 */
@@ -132,9 +130,8 @@ public class MapReader {
 		}
 
 	}
-	
 	/**
-	 * This method is used to load countries to the map object
+	 * method to loadcountries to the map object
 	 * @throws NumberFormatException
 	 * @throws IOException
 	 */
@@ -157,9 +154,8 @@ public class MapReader {
 		}
 
 	}
-	
 	/**
-	 * This method is used to load the continents in the map object
+	 * method to load the continents in the map object
 	 * @throws NumberFormatException
 	 * @throws IOException
 	 */
@@ -168,7 +164,7 @@ public class MapReader {
 
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
 			
-			System.out.println(currentLine);
+			//System.out.println(currentLine);
 			if (currentLine.length() == 0) {
 				continue;
 			}
@@ -183,20 +179,13 @@ public class MapReader {
 	}
 
 	/**
-	 * This method displays/prints the map
-	 * @param map2 Map to be displayed
+	 * This method display/print the map
+	 * 
+	 * @param map2
 	 */
 	public void display(Map map2) {
 		// TODO Auto-generated method stub
 		map =map2;
-		int notConnected = validateMap(map);
-		int notConnectedSubGraph = validateContinent(map);
-		//int notConnectedSubGraph =0;
-		//System.out.println(notConnected +" notConnected");
-		//System.out.println(notConnectedSubGraph +" notConnectedSubGraph");
-		
-		if (notConnected == 0  && notConnectedSubGraph == 0) {
-			System.out.println("Valid Map");
 			// display
 			if (map2.getListOfContinent().size() > 0) {
 				for (Continent c : map2.getListOfContinent()) {
@@ -212,13 +201,13 @@ public class MapReader {
 
 				}
 					for (String c1 : c.getCountries()) {
-						System.out.print("Country :" + c1 + ": Neighbours->");
+						System.out.print("Country :" + c1 + ": Neighbours -> ");
 
 						for (Country country : map2.getListOfCountries()) {
 							if (c1.equals(country.getName())) {
 
 								for (String c2 : country.getNeighbors()) {
-									System.out.print(c2 + "||");
+									System.out.print(c2 + " || ");
 								}
 
 								System.out.println();
@@ -231,29 +220,27 @@ public class MapReader {
 			} else {
 				System.out.println("Map Empty.");
 			}
-		} else
-			System.out.println("Invalid map");
 		
 		
 	}
-	
 	/**
-	 * This method is used to check if the entire map is valid
-	 * @param map Map to be validated
+	 * method to check if the entire map is valid
+	 * @param map
 	 * @return 0 if valid else 1
 	 */
-	public int validateMap(Map map) {
+	public int validateMap(Map map2) {
 		// traversing
 		int notConnected = 0;
-		if (checkDuplicates(map) == 0) {
+		mapOfWorld = new HashMap<Integer, List<Integer>>();
+		if (checkDuplicates(map2) == 0) {
 
 			// graph creation
 
-			for (int i = 0; i < map.getListOfCountries().size(); i++) {
+			for (int i = 0; i < map2.getListOfCountries().size(); i++) {
 				List<Integer> templist = new ArrayList<Integer>();
-				for (int j = 0; j < map.getListOfCountries().get(i).getNeighbors().size(); j++)
+				for (int j = 0; j < map2.getListOfCountries().get(i).getNeighbors().size(); j++)
 					templist.add(
-							map.getListOfCountries().indexOf(map.getCountryFromName(map.getListOfCountries().get(i).getNeighbors().get(j))));
+							map2.getListOfCountries().indexOf(map2.getCountryFromName(map2.getListOfCountries().get(i).getNeighbors().get(j))));
 				mapOfWorld.put(i, templist);
 
 			}
@@ -269,7 +256,7 @@ public class MapReader {
 		//	 System.out.println(mapOfWorld.toString());
 
 			while (queue.size() > 0) {
-				 System.out.println(queue.peek());
+				 //System.out.println(queue.peek());
 				Integer c1 = queue.poll();
 				Iterator i = mapOfWorld.get(c1).listIterator();
 				while (i.hasNext()) {
@@ -284,11 +271,10 @@ public class MapReader {
 			}
 
 			for (int i = 0; i < visited.length; i++) {
-				System.out.print(i + "=" + visited[i] + " || ");
+				//System.out.print(i + "=" + visited[i] + " || ");
 				if (!visited[i]) {
 					notConnected = 1;
-					System.out.println();
-					System.out.println("Not a connected graph");
+				//	System.out.println("Not a connected graph");
 					break;
 				}
 			}
@@ -297,29 +283,28 @@ public class MapReader {
 			notConnected = 1;
 		return notConnected;
 	}
-	
 	/**
-	 * This method is used to check if duplicate continents or countries exist
-	 * @param map Map Object
+	 * method to check if duplicate continents or countries exist
+	 * @param map
 	 * @return 0 if no duplicates else  1
 	 */
-	public int checkDuplicates(Map map) {
+	public int checkDuplicates(Map map3) {
 		int duplicate = 0;
-		for (int i = 0; i < (map.getListOfContinent().size()-1); i++)
-			for (int j = i + 1; j < map.getListOfContinent().size(); j++)
-				if ((map.getListOfContinent().get(i).getName())
-						.equalsIgnoreCase(map.getListOfContinent().get(j).getName())) {
+		for (int i = 0; i < (map3.getListOfContinent().size()-1); i++)
+			for (int j = i + 1; j < map3.getListOfContinent().size(); j++)
+				if ((map3.getListOfContinent().get(i).getName())
+						.equalsIgnoreCase(map3.getListOfContinent().get(j).getName())) {
 					duplicate = 1;
-					System.out.println("Duplicate Continent :" + map.getListOfContinent().get(i).getName());
+					System.out.println("Duplicate Continent :" + map3.getListOfContinent().get(i).getName());
 					break;
 				}
 		if (duplicate == 0)
-			for (int i = 0; i < (map.getListOfCountries().size()-1); i++)
+			for (int i = 0; i < (map3.getListOfCountries().size()-1); i++)
 				for (int j = i + 1; j < map.getListOfCountries().size(); j++)
-					if ((map.getListOfCountries().get(i).getName())
-							.equalsIgnoreCase(map.getListOfCountries().get(j).getName())) {
+					if ((map3.getListOfCountries().get(i).getName())
+							.equalsIgnoreCase(map3.getListOfCountries().get(j).getName())) {
 						duplicate = 1;
-						System.out.println("Duplicate Country :" + map.getListOfCountries().get(i).getName());
+						System.out.println("Duplicate Country :" + map3.getListOfCountries().get(i).getName());
 						break;
 					}
 		return duplicate;
@@ -328,6 +313,7 @@ public class MapReader {
 
 	/**
 	 * This method returns the currently loaded map
+	 * 
 	 * @return Map
 	 */
 	public Map getMap() {
@@ -337,9 +323,9 @@ public class MapReader {
 	
 	
 	/**
-	 * This method is used to check if every subgraph is  valid
-	 * @param map Map Object
-	 * @return 0 if valid else 1 
+	 * method to check if every subgraph is  valid
+	 * @param map
+	 * @return int 0 if valid else 1 if invalid
 	 */
 	public int validateContinent(Map map) {
 
@@ -357,13 +343,16 @@ public class MapReader {
 					
 				}
 				remainingContinent.trim();
+				
 				mpeNew.editContinent(remainingContinent.split(" "));
+				
 				if(mr.validateMap(mpeNew.map) == 1) {
 					return 1;
 				}
 				newMap = new Map(map);
 				mpeNew.map = newMap;
 			}
+			
 		
 		return 0;
 	}
