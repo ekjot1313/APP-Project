@@ -8,19 +8,47 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
-
+/**
+ * 
+ * @author Piyush
+ * @author Mitalee Naik
+ * @since 1.0.0
+ *
+ */
 public class MapReader {
 	
+	/**
+	 * Map to store the current map object
+	 */
+	public Map map;
+	/**
+	 * FileObject to parse the map file
+	 */
+	private File fileObject;
+	/**
+	 * BufferedReader to process map file
+	 */
+	private BufferedReader bufferReaderForFile;
+	/**
+	 * CurrentLine to store the current line of parsing
+	 */
+	private String currentLine;
+	/**
+	 * Map to store the Index of countries
+	 */
+	public HashMap<Integer, List<Integer>> mapOfWorld = new HashMap<Integer, List<Integer>>();
+	
+	/**
+	 * Default Constructor
+	 */
 	public MapReader(){
 		this.map = new Map();
 	}
-
-	public Map map;
-	private File fileObject;
-	private BufferedReader bufferReaderForFile;
-	private String currentLine;
-	public HashMap<Integer, List<Integer>> mapOfWorld = new HashMap<Integer, List<Integer>>();
-
+	/**
+	 * method to parse the map file
+	 * @param file
+	 * @return
+	 */
 	public int parseMapFile(File file) {
 		map = new Map();
 
