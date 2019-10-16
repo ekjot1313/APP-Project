@@ -2,11 +2,19 @@ package Game;
 
 import java.util.*;
 
+/**
+ * This class is used to add or remove players and also to assign countries to players initially
+ *
+ */
 public class PlayerAllocator{
 	public List<Player> listOfPlayers;
 	public PlayerAllocator(){
 	this.listOfPlayers=new ArrayList<Player>();
 	}
+	
+	/**
+	 * This method adds or removes the player
+	 */
 	public void allocate() {
 		Scanner in=new Scanner(System.in);
 		String cmd;
@@ -58,6 +66,10 @@ public class PlayerAllocator{
 		}while(!cmd.equals("populatecountries") || listOfPlayers.size()<=1);
 		
 	}
+	
+	/**
+	 * This method displays the list of players
+	 */
 	public void printPlayerList() {
 		System.out.println("Player List");
 		for(int i=0;i<listOfPlayers.size();i++)
@@ -66,6 +78,10 @@ public class PlayerAllocator{
 		}
 		System.out.println();	
 	}
+	
+	/**
+	 * This method displays the countries owned by each player
+	 */
 	public void printPlayerCountries() {
 		for(int i=0;i<listOfPlayers.size();i++) {
 			System.out.println("Player :"+listOfPlayers.get(i).getName());
@@ -77,6 +93,12 @@ public class PlayerAllocator{
 		}
 		System.out.println();
 	}
+	
+	/**
+	 * This method checks whether the user command is valid or not
+	 * @param command Command given by the user
+	 * @return 1 if valid else 0
+	 */
 	public int validate(String command) {
 		String str[]=command.split(" ");
 		int flag=0,count;
@@ -105,6 +127,7 @@ public class PlayerAllocator{
 		return 0;
 		
 	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		PlayerAllocator P= new PlayerAllocator();
@@ -112,6 +135,11 @@ public class PlayerAllocator{
 		
 		
 	}
+	
+	/**
+	 * This method assigns countries to the players 
+	 * @param map Map Object
+	 */
 	public void populateCountries(Map map) {
 		int countryCount=map.getListOfCountries().size();
 		int playerCount=listOfPlayers.size();
