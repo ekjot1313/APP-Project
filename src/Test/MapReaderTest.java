@@ -101,7 +101,7 @@ public class MapReaderTest {
 		File newFile = new File(currentPath);
 		int test=mapReader.parseMapFile(newFile);
 		
-		assertEquals(0, test);
+		assertEquals(1, test);
 		
 	}
 	/**
@@ -151,5 +151,12 @@ public class MapReaderTest {
 	@Test
 	public void testRemoveBridges() {
 		assertTrue(mapEditor.removeBridge("asia", "africa", "india", "congo"));
+	}
+	
+	@Test
+	public void testValidateContinent() {
+		
+		assertEquals(0,mapReader.validateContinent(testMap));
+		
 	}
 }
