@@ -20,6 +20,16 @@ public class Country {
 	public Country() {
 		this.neighbors=new ArrayList<String>();
 	}
+	/**
+	 * Copy constructor
+	 * @param Country
+	 */
+	public Country(Country c) {
+		this.name = name ;
+		this.owner = owner;
+		this.continentName =continentName;
+		this.neighbors=new ArrayList<String>(c.getNeighbors());
+	}
 	
 	/**
 	 * This method returns name of the country
