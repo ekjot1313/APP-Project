@@ -104,7 +104,7 @@ public class GamePlay {
 					mapOfAssignedCountries.put(i, templist);
 				}
 				System.out.println(mapOfAssignedCountries.toString());
-				int source=0,destination=0,validPath=0;
+				int source=-1,destination=-1,validPath=0;
 				for(int k=0;k<listPlayer.get(playerIndex).getAssigned_countries().size();k++) {
 						if(listPlayer.get(playerIndex).getAssigned_countries().get(k).getName().equals(input[1])) {
 							source=k;
@@ -113,11 +113,19 @@ public class GamePlay {
 							destination=k;
 						}
 				}
+				if(source == -1 || destination == -1) {
+					if(source == -1 && destination == -1)
+						System.out.println();
+					else if(source == -1)
+						System.out.println("Sorry!From Country :"+input[1]+"doesn't belong to you");
+					else
+						System.out.println("Sorry!To Country :"+input[1]+"doesn't belong to you");
+				}else {
 				Boolean[] visited = new Boolean[mapOfAssignedCountries.keySet().size()];
 				for (int i = 0; i < visited.length; i++) {
 					visited[i] = false;
 				}
-				System.out.println("source"+source);System.out.println("dest"+destination);
+				//System.out.println("source"+source);System.out.println("dest"+destination);
 				LinkedList<Integer> queue = new LinkedList<Integer>();
 				queue.add(source);
 				visited[source] = true;
@@ -160,6 +168,7 @@ public class GamePlay {
 					
 					System.out.println("There's no path between the mentioned countries.(You can move any number of armies from one of the owned countries to the other, provided that there is a path between these two countries that is composed of countries owned by you)");
 				}
+			}
 			}
 			else if(in.equals("fortify none")) {
 				return;
