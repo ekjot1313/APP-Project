@@ -90,6 +90,9 @@ public class MapReaderTest {
 		
 	}
 	
+	/**
+	 * Method to check parsing of the input file
+	 */
 	@Test
 	public void testParseMap() {
 		String filename= "ameroki.map";
@@ -120,6 +123,10 @@ public class MapReaderTest {
 		System.out.println(result);
 		assertTrue(result==1);	
 	}
+	
+	/*
+	 * method to check calculation of number of reinforcement armies for a player
+	 */
 	@Test
 	public void testcalculateReinforceArmies() {
 		
@@ -128,6 +135,9 @@ public class MapReaderTest {
 		assertEquals(3, reinforce);
 	}
 	
+	/*
+	 * method to check the number of assigned armies to players
+	 */
 	@Test
 	public void testNumerOfAssignedArmies() {
 		System.out.println("hhhhhhhhhhhhh");
