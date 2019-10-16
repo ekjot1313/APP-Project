@@ -163,7 +163,9 @@ public class MapReaderTest {
 	public void testRemoveBridges() {
 		assertTrue(mapEditor.removeBridge("asia", "africa", "india", "congo"));
 	}
-	
+	/**
+	 * method to test whether the continent is valid or not
+	 */
 	@Test
 	public void testValidateContinent() {
 		
@@ -171,6 +173,9 @@ public class MapReaderTest {
 		
 	}
 	
+	/*
+	 *method to test whether the map is saved 
+	 */
 	@Test
 	public void testMapSaver() {
 		
@@ -189,7 +194,9 @@ public class MapReaderTest {
 		
 	}
 	
-	
+	/*
+	 * method to check whether the given country exists or not 
+	 */
 	@Test
 	public void testCountryFromName() {
 		
@@ -198,6 +205,9 @@ public class MapReaderTest {
 		assertEquals("india", country.getName());
 	}
 	
+	/*
+	 * method to check whether the given continent exists or not 
+	 */
 	@Test
 	public void testContinentFromName() {
 		
