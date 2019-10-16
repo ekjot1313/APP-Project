@@ -22,6 +22,7 @@ import Game.Player;
 import mapWorks.MapEditor;
 import mapWorks.MapSaver;
 import Game.ArmyAllocator;
+import Game.Continent;
 import Game.Country;
 import Game.GamePlay;
 import Game.PlayerAllocator;
@@ -40,6 +41,7 @@ public class MapReaderTest {
 	static ArmyAllocator armyAlloc;
 	static MapSaver mapSaver;
 	static Country country;
+	static Continent continent;
 	
 	/**
 	 * @throws java.lang.Exception
@@ -64,6 +66,8 @@ public class MapReaderTest {
 	armyAlloc= new ArmyAllocator();
 	mapSaver = new MapSaver();
 	country = new Country();
+	continent= new Continent();
+	
 	}
 
 	/**
@@ -194,5 +198,12 @@ public class MapReaderTest {
 		assertEquals("india", country.getName());
 	}
 	
+	@Test
+	public void testContinentFromName() {
+		
+		
+		continent= testMap.getContinentFromName("asia");
+		assertEquals("asia", continent.getName());
+	}
 	
 }
