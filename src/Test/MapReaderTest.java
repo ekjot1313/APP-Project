@@ -93,7 +93,7 @@ public class MapReaderTest {
 	/**
 	 * Method to check parsing of the input file
 	 */
-	/*@Test
+	@Test
 	public void testParseMap() {
 		String filename= "ameroki.map";
 		String currentPath = System.getProperty("user.dir");
@@ -103,7 +103,7 @@ public class MapReaderTest {
 		
 		assertEquals(0, test);
 		
-	}*/
+	}
 	/**
 	 * Function to test the gameplayer command
 	 */
