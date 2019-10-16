@@ -64,7 +64,7 @@ public class Main {
 		MapEditor mpe = new MapEditor();
 		System.out.println(System.getProperty("user.dir"));
 		String currentPath = System.getProperty("user.dir");
-		currentPath += "\\src\\Maps\\" + filename;
+		currentPath += "\\Maps\\" + filename;
 		File newFile = new File(currentPath);
 		if(newFile.exists()) {
 			mr.parseMapFile(newFile);

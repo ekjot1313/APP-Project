@@ -1,12 +1,12 @@
 package Game;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class is created to represent the Continent details
- * 
+ * This class contains details of the continent
  * @author Mitalee Naik
- * @since 1.0.0
+ * 
  */
 public class Continent {
 	private String name;
@@ -16,12 +16,17 @@ public class Continent {
 	
 	private int continentIndexInListOfContinent;
 	
+	/**
+	 * Constructor initializes list of bridges and countries
+	 */
 	public Continent(){
 		this.countries=new ArrayList<String>();
 		this.bridges = new ArrayList<Bridge>();
 	}
+	
 	/**
-	 * 
+	 * Copy Constructor
+	 * @param c Continent Object 
 	 */
 	public Continent(Continent c){
 		this.name = c.name;
@@ -34,79 +39,84 @@ public class Continent {
 		}
 	}
 	
-/**
-	 * @return the bridges
+	/**
+	 * This method gives the list of bridges
+	 * @return Bridges List
 	 */
 	public List<Bridge> getBridges() {
 		return bridges;
 	}
 
 	/**
-	 * @param bridges the bridges to set
+	 * This method sets the list of bridges
+	 * @param bridges Bridges List
 	 */
 	public void setBridges(List<Bridge> bridges) {
 		this.bridges = bridges;
 	}
 
-/**
-	 * @return the continentIndexInListOfContinent
+	/**
+	 * This method returns index of the continent in the Continent List
+	 * @return Continent Index
 	 */
 	public int getContinentIndexInListOfContinent() {
 		return continentIndexInListOfContinent;
 	}
 
 	/**
-	 * @param continentIndexInListOfContinent the continentIndexInListOfContinent to set
+	 * This method sets index of the continent in the Continent List
+	 * @param continentIndexInListOfContinent Continent Index
 	 */
 	public void setContinentIndexInListOfContinent(int continentIndexInListOfContinent) {
 		this.continentIndexInListOfContinent = continentIndexInListOfContinent;
 	}
 
-
-	
 	/**
 	 * This method returns the name of the continent
-	 * @return name of the country
+	 * @return Continent Name
 	 */
 	public String getName() {
 		return name;
 	}
+	
 	/**
 	 * This method sets the name of the continent
-	 * @param name
+	 * @param name Continent Name
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	/**
 	 * This method returns the continent value of the continent
-	 * @return continentValue
+	 * @return Continent Value
 	 */
 	public int getContinentValue() {
 		return continentValue;
 	}
+	
 	/**
 	 * This method sets the continent value of the continent
-	 * @param continentValue
+	 * @param continentValue Continent Value
 	 */
 	public void setContinentValue(int continentValue) {
 		this.continentValue = continentValue;
 	}
+	
 	/**
-	 * This method gets the countries of the continent
-	 * @return
+	 * This method returns the countries of the continent
+	 * @return List of Countries belonging to the Continent
 	 */
 	public List<String> getCountries() {
 		return countries;
 	}
+	
 	/**
 	 * This method sets the countries of the continent
-	 * @param countries
+	 * @param countries List of Countries belonging to the Continent
 	 */
 	public void setCountries(List<String> countries) {
 		this.countries = countries;
 	}
-	
-	
 	
 }

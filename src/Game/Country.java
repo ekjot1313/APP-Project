@@ -20,9 +20,10 @@ public class Country {
 	public Country() {
 		this.neighbors=new ArrayList<String>();
 	}
+	
 	/**
-	 * Copy constructor
-	 * @param Country
+	 * Copy Constructor
+	 * @param c Country Object
 	 */
 	public Country(Country c) {
 		this.name = c.name ;
@@ -54,6 +55,7 @@ public class Country {
 	public String getOwner() {
 		return owner;
 	}
+	
 	/**
 	 * This method sets the owner of the country.
 	 * @param owner Country Owner
@@ -61,6 +63,7 @@ public class Country {
 	public void setOwner(String owner) {
 		this.owner = owner;
 	}
+	
 	/**
 	 * This method returns the continent of the country.
 	 * @return Continent to which country belong to
@@ -68,6 +71,7 @@ public class Country {
 	public String getContinentName() {
 		return continentName;
 	}
+	
 	/**
 	 * This method sets the continent of the country.
 	 * @param continentName Continent to which country belong to
@@ -75,13 +79,15 @@ public class Country {
 	public void setContinentName(String continentName) {
 		this.continentName = continentName;
 	}
+	
 	/**
-	 *  This method returns the number of armies present in the country.
+	 * This method returns the number of armies present in the country.
 	 * @return Number of armies in the country
 	 */
 	public int getNoOfArmies() {
 		return noOfArmies;
 	}
+	
 	/**
 	 * This method sets the number of armies of the country.
 	 * @param noOfArmies Number of armies in the country
@@ -89,6 +95,7 @@ public class Country {
 	public void setNoOfArmies(int noOfArmies) {
 		this.noOfArmies = noOfArmies;
 	}
+	
 	/**
 	 * This method returns the list of the neighbors of the country.
 	 * @return List of neighbors of the country
@@ -96,8 +103,9 @@ public class Country {
 	public List<String> getNeighbors() {
 		return neighbors;
 	}
+	
 	/**
-	 *  This method sets the list of the neighbors of the country.
+	 * This method sets the list of the neighbors of the country.
 	 * @param neighbours List of neighbors of the country
 	 */
 	public void setNeighbors(List<String> neighbours) {
