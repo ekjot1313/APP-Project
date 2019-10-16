@@ -3,9 +3,19 @@ package Game;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
+
+/** 
+ * This class allows the players to allocate armies to their countries
+ *
+ */
 public class ArmyAllocator {
 
-	
+	/**
+	 * This method calculates the total number of armies based on the number of players 
+	 * @param listOfPLayers List of all Players
+	 * @param map Map Object	
+	 * @return Number of assigned armies
+	 */
 	public int calculateTotalArmies(ArrayList<Player> listOfPLayers ,Map map) {
 		// TODO 2 player scenario TBD
 		// 2 -40 armies ,3 -35 armies , 4- 30 armies ,5 -25 armies ...
@@ -23,6 +33,12 @@ public class ArmyAllocator {
 		return assignedArmies;
 	}
 	
+	/**
+	 * This method allows the players to place armies on their countries in a round robin manner
+	 * @param assignedArmies Number of armies assigned
+	 * @param listOfPLayers List of all players
+	 * @param map Map Object
+	 */
 	public void placeArmy(int assignedArmies,ArrayList<Player> listOfPLayers,Map map) {
 		
 		
@@ -100,7 +116,11 @@ public class ArmyAllocator {
 		
 	}
 	
-
+	/**
+	 * This method places the remaining unassigned armies randomly 
+	 * @param listOfPLayers List of all players
+	 * @param map Map Object
+	 */
 	public void placeAll(ArrayList<Player> listOfPLayers,Map map) {
 	
 		for(Player p: listOfPLayers) {
@@ -130,6 +150,12 @@ public class ArmyAllocator {
 		
 		
 	}
+	
+	/**
+	 * This method displays information about the number of armies on each country for each player
+	 * @param listOfPLayers List of all players
+	 * @param map Map Object
+	 */
 	public void showPlayerDetails(ArrayList<Player> listOfPLayers,Map map) {
 		for(Player p :listOfPLayers) {
 			for(Country c:p.getAssigned_countries())
