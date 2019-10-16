@@ -6,6 +6,7 @@ package Test;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import Game.Map;
 import Game.MapReader;
 import Game.Player;
 import mapWorks.MapEditor;
+import mapWorks.MapSaver;
 import Game.ArmyAllocator;
 import Game.GamePlay;
 import Game.PlayerAllocator;
@@ -35,6 +37,7 @@ public class MapReaderTest {
 	static GamePlay reinforceArmies;
 	static PlayerAllocator player;
 	static ArmyAllocator armyAlloc;
+	static MapSaver mapSaver;
 	
 	/**
 	 * @throws java.lang.Exception
@@ -57,6 +60,7 @@ public class MapReaderTest {
 	player.listOfPlayers.add(B);
 	player.listOfPlayers.add(C);
 	armyAlloc= new ArmyAllocator();
+	mapSaver = new MapSaver();
 	}
 
 	/**
@@ -157,6 +161,24 @@ public class MapReaderTest {
 	public void testValidateContinent() {
 		
 		assertEquals(0,mapReader.validateContinent(testMap));
+		
+	}
+	
+	@Test
+	public void testMapSaver() {
+		
+		try {
+			mapSaver.saveMap(testMap, "testMap1");
+			//String filename= "ameroki.map";
+			String currentPath = System.getProperty("user.dir");
+			currentPath += "\\Maps\\" + "testMap1.map";
+			File newFile = new File(currentPath);
+			assertTrue(newFile.exists());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 }
