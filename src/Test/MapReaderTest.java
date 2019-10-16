@@ -140,7 +140,7 @@ public class MapReaderTest {
 	 */
 	@Test
 	public void testNumerOfAssignedArmies() {
-		System.out.println("hhhhhhhhhhhhh");
+		
 		int result= armyAlloc.calculateTotalArmies((ArrayList<Player>) player.listOfPlayers,testMap );
 		assertEquals(35, result);
 		
