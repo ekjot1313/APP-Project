@@ -115,11 +115,11 @@ public class GamePlay {
 				}
 				if(source == -1 || destination == -1) {
 					if(source == -1 && destination == -1)
-						System.out.println();
+						System.out.println("Sorry!From Country:" +input[1]+"and To Country :"+input[2]+"doesn't belong to you");
 					else if(source == -1)
 						System.out.println("Sorry!From Country :"+input[1]+"doesn't belong to you");
 					else
-						System.out.println("Sorry!To Country :"+input[1]+"doesn't belong to you");
+						System.out.println("Sorry!To Country :"+input[2]+"doesn't belong to you");
 				}else {
 				Boolean[] visited = new Boolean[mapOfAssignedCountries.keySet().size()];
 				for (int i = 0; i < visited.length; i++) {
