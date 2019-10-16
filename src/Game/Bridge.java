@@ -1,7 +1,7 @@
 package Game;
 
 /**
- * Bridge to store details of bridge between two continents
+ * This class stores details of the bridges between two continents
  * 
  * @author ekjot
  *
@@ -12,10 +12,16 @@ public class Bridge {
 	private String country1;
 	private String country2;
 	
+	/**
+	 * Constructor to initialize variables
+	 * @param neigContinent Neighboring Continent
+	 * @param country1 First Country
+	 * @param country2 Second Country
+	 */
 	public Bridge(String neigContinent,String country1,String country2) {
-		this.neigContinent=neigContinent;
-		this.country1=country1;
-		this.country2=country2;
+		this.neigContinent = neigContinent;
+		this.country1 = country1;
+		this.country2 = country2;
 	}
 	
 	public Bridge(Bridge b) {
@@ -26,46 +32,51 @@ public class Bridge {
 	
 
 	/**
-	 * @return the neigCont
+	 * This method returns the neighboring continent
+	 * @return Neighboring Continent
 	 */
 	public String getNeigContinent() {
 		return neigContinent;
 	}
 
 	/**
-	 * @param neigCont the neigCont to set
+	 * This method sets the neighboring continent
+	 * @param neigCont Neighboring Continent
 	 */
 	public void setNeigContinent(String neigCont) {
 		this.neigContinent = neigCont;
 	}
-
+	
+	/**
+	 * This method returns the name of first country
+	 * @return Country Name
+	 */
 	public String getCountry1() {
 		return country1;
 	}
 
 	/**
-	 * @param count1 the count1 to set
+	 * This method sets the name of first country
+	 * @param count1 Country Name
 	 */
 	public void setCountry1(String count1) {
 		this.country1 = count1;
 	}
 
 	/**
-	 * @return the count2
+	 * This method returns the name of the second country
+	 * @return Country Name
 	 */
 	public String getCountry2() {
 		return country2;
 	}
 
 	/**
-	 * @param count2 the count2 to set
+	 * This method sets the name of second country
+	 * @param count2 Country Name
 	 */
 	public void setCountry2(String count2) {
 		this.country2 = count2;
 	}
-
-	
-	
-	
 
 }
