@@ -25,9 +25,9 @@ public class Country {
 	 * @param Country
 	 */
 	public Country(Country c) {
-		this.name = name ;
-		this.owner = owner;
-		this.continentName =continentName;
+		this.name = c.name ;
+		this.owner = c.owner;
+		this.continentName =c.continentName;
 		this.neighbors=new ArrayList<String>(c.getNeighbors());
 	}
 	

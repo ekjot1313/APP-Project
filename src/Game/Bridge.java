@@ -18,6 +18,11 @@ public class Bridge {
 		this.country2=country2;
 	}
 	
+	public Bridge(Bridge b) {
+		this.neigContinent = b.neigContinent;
+		this.country1 = b.country1;
+		this.country2 = b.country2;
+	}
 	
 
 	/**
