@@ -3,7 +3,7 @@ package Game;
 /**
  * This class stores details of the bridges between two continents
  * 
- * @author ekjot
+ * @author Ekjot
  *
  */
 public class Bridge {

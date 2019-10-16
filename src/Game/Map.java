@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * class to define map
+ * This class defines Map
  * 
- * @author ekjot
+ * @author Ekjot
  *
  */
 
@@ -19,11 +19,19 @@ public class Map {
 	private List<Continent> listOfContinent;
 	private List<Country> listOfCountries;
 	
+	/**
+	 * Constructor initializes list of countries and continents
+	 */
 	public Map() {
 		this.listOfContinent = new ArrayList<Continent>();
 		this.listOfCountries = new ArrayList<Country>();
 		
 	}
+	
+	/**
+	 * Constructor initializes list of countries and continents and then add items to these lists using the passed Map
+	 * @param m Map Object
+	 */
 	public Map(Map m) {
 		listOfContinent = new ArrayList<Continent>();
 		listOfCountries = new ArrayList<Country>();
@@ -37,34 +45,66 @@ public class Map {
 		}
 	}
 	
+	/**
+	 * This method returns the first message that is displayed in map file
+	 * @return First Message
+	 */
 	public String getMessage1() {
 		return message1;
 	}
 
+	/**
+	 * This method sets the first message that is displayed in map file
+	 * @param message1 First Message
+	 */
 	public void setMessage1(String message1) {
 		this.message1 = message1;
 	}
 
+	/**
+	 * This method returns the second message that is displayed in map file
+	 * @return Second Message
+	 */
 	public String getMessage2() {
 		return message2;
 	}
 
+	/**
+	 * This method sets the second message that is displayed in map file
+	 * @param message2 Second Message
+	 */
 	public void setMessage2(String message2) {
 		this.message2 = message2;
 	}
 
+	/**
+	 * This method returns the list of continents
+	 * @return Continent List
+	 */
 	public List<Continent> getListOfContinent() {
 		return listOfContinent;
 	}
-
+	
+	/**
+	 * This method sets the list of continents
+	 * @param listOfContinent Continent List
+	 */
 	public void setListOfContinent(List<Continent> listOfContinent) {
 		this.listOfContinent = listOfContinent;
 	}
 
+	/**
+	 * This method returns the list of countries
+	 * @return Country List
+	 */
 	public List<Country> getListOfCountries() {
 		return listOfCountries;
 	}
 
+	/**
+	 * This method sets the list of countries
+	 * @param listOfCountries Country List
+	 */
 	public void setListOfCountries(List<Country> listOfCountries) {
 		this.listOfCountries = listOfCountries;
 	}
@@ -74,19 +114,26 @@ public class Map {
 
 
 	/**
-	 * @return the mapName
+	 * This method returns the name of the map
+	 * @return Map Name
 	 */
 	public String getMapName() {
 		return mapName;
 	}
 
 	/**
-	 * @param mapName the mapName to set
+	 * This method sets the name of the map
+	 * @param mapName Map Name
 	 */
 	public void setMapName(String mapName) {
 		this.mapName = mapName;
 	}
 	
+	/**
+	 * This method returns the object of a country using the given country name
+	 * @param givenCountryName Country Name
+	 * @return Country Object
+	 */
 	public Country getCountryFromName(String givenCountryName) {
 		
 			for(Country country:this.listOfCountries) {
@@ -98,6 +145,11 @@ public class Map {
 		return null;
 	}
 	
+	/**
+	 * This method returns the object of a continent using the given continent name
+	 * @param givenContinentName Continent Name
+	 * @return Continent Object
+	 */
 	public Continent getContinentFromName(String givenContinentName) {
 		for(Continent continent:this.listOfContinent) {
 			if(continent.getName().equals(givenContinentName)) {
