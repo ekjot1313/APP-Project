@@ -41,7 +41,7 @@ public class GamePlay {
 			 String[] inputArray = input.split(" ");
 			 if(input.equals("showmap")) {
 				 MapReader mr=new MapReader();
-					mr.display(map);
+					mr.displayAll(map);
 			 }
 			 else if(inputArray.length == 3 && inputArray[0].equals("reinforce")) {
 				 int armiesTobeplaced = Integer.parseInt(inputArray[2]);
@@ -92,9 +92,9 @@ public class GamePlay {
 			System.out.println("Type fortify <from country name> <to country name> <number of armies> or fortify none (choose to not do a move)\n Type showmap");
 			String in= sc.nextLine();
 			String input[]= in.split(" ");
-			 if(input.equals("showmap")) {
+			 if(in.equals("showmap")) {
 				 MapReader mr=new MapReader();
-					mr.display(map);
+					mr.displayAll(map);
 			 }
 			 else if(input.length == 4 && input[0].equals("fortify")) {
 				HashMap<Integer, List<Integer>> mapOfAssignedCountries = new HashMap<Integer, List<Integer>>();

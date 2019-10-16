@@ -60,7 +60,7 @@ public class ArmyAllocator {
 				String[] commands = input.split(" ");
 				if(input.equals("showmap")) {
 					MapReader mr=new MapReader();
-					mr.display(map);
+					mr.displayAll(map);
 				}
 				else if(commands.length == 2 && commands[0].equals("placearmy") ) {
 					//check if country is valid and assigned to the current player	
