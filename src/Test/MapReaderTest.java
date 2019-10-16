@@ -123,7 +123,6 @@ public class MapReaderTest {
 		System.out.println(result);
 		assertTrue(result==1);	
 	}
-	
 	/*
 	 * method to check calculation of number of reinforcement armies for a player
 	 */
