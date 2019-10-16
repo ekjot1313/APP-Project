@@ -8,8 +8,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
+
 /**
- * 
+ * This class parses the given map file and displays it 
  * @author Piyush
  * @author Mitalee Naik
  * @since 1.0.0
@@ -44,10 +45,11 @@ public class MapReader {
 	public MapReader(){
 		this.map = new Map();
 	}
+	
 	/**
-	 * method to parse the map file
-	 * @param file
-	 * @return
+	 * This method is used to parse the map file
+	 * @param file Map file to be parsed
+	 * @return 0 if successful else 1
 	 */
 	public int parseMapFile(File file) {
 		map = new Map();
@@ -92,8 +94,9 @@ public class MapReader {
 		}
 		return 1;
 	}
+	
 	/**
-	 * method to load borders to the map object
+	 * This method is used to load borders to the map object
 	 * @throws NumberFormatException
 	 * @throws IOException
 	 */
@@ -129,8 +132,9 @@ public class MapReader {
 		}
 
 	}
+	
 	/**
-	 * method to loadcountries to the map object
+	 * This method is used to load countries to the map object
 	 * @throws NumberFormatException
 	 * @throws IOException
 	 */
@@ -153,8 +157,9 @@ public class MapReader {
 		}
 
 	}
+	
 	/**
-	 * method to load the continents in the map object
+	 * This method is used to load the continents in the map object
 	 * @throws NumberFormatException
 	 * @throws IOException
 	 */
@@ -178,9 +183,8 @@ public class MapReader {
 	}
 
 	/**
-	 * This method display/print the map
-	 * 
-	 * @param map2
+	 * This method displays/prints the map
+	 * @param map2 Map to be displayed
 	 */
 	public void display(Map map2) {
 		// TODO Auto-generated method stub
@@ -232,9 +236,10 @@ public class MapReader {
 		
 		
 	}
+	
 	/**
-	 * method to check if the entire map is valid
-	 * @param map
+	 * This method is used to check if the entire map is valid
+	 * @param map Map to be validated
 	 * @return 0 if valid else 1
 	 */
 	public int validateMap(Map map) {
@@ -292,9 +297,10 @@ public class MapReader {
 			notConnected = 1;
 		return notConnected;
 	}
+	
 	/**
-	 * method to check if duplicate continents or countries exist
-	 * @param map
+	 * This method is used to check if duplicate continents or countries exist
+	 * @param map Map Object
 	 * @return 0 if no duplicates else  1
 	 */
 	public int checkDuplicates(Map map) {
@@ -322,7 +328,6 @@ public class MapReader {
 
 	/**
 	 * This method returns the currently loaded map
-	 * 
 	 * @return Map
 	 */
 	public Map getMap() {
@@ -332,9 +337,9 @@ public class MapReader {
 	
 	
 	/**
-	 * method to check if every subgraph is  valid
-	 * @param map
-	 * @return int 0 if valid else 1 if invalid
+	 * This method is used to check if every subgraph is  valid
+	 * @param map Map Object
+	 * @return 0 if valid else 1 
 	 */
 	public int validateContinent(Map map) {
 
