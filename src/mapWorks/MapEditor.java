@@ -195,7 +195,7 @@ public class MapEditor {
 			return;
 		}
 		stack.add(new ArrayList<>(Arrays.asList("remove", countryName, neighborCountryName)));
-		System.out.println("remove: " + countryName + " , " + neighborCountryName);
+		//System.out.println("remove: " + countryName + " , " + neighborCountryName);
 
 	}
 
@@ -215,7 +215,7 @@ public class MapEditor {
 			return;
 		}
 		stack.add(new ArrayList<>(Arrays.asList("add", countryName, neighborCountryName)));
-		System.out.println("add: " + countryName + " , " + neighborCountryName);
+		//System.out.println("add: " + countryName + " , " + neighborCountryName);
 	}
 
 	/**
@@ -292,7 +292,7 @@ public class MapEditor {
 			return;
 		}
 		stack.add(new ArrayList<>(Arrays.asList("remove", countryName)));
-		System.out.println("remove: " + countryName);
+	//	System.out.println("remove: " + countryName);
 
 	}
 
@@ -312,7 +312,7 @@ public class MapEditor {
 			return;
 		}
 		stack.add(new ArrayList<>(Arrays.asList("add", countryName, continentName)));
-		System.out.println("add: " + countryName + " , " + continentName);
+	//	System.out.println("add: " + countryName + " , " + continentName);
 
 	}
 
@@ -392,7 +392,7 @@ public class MapEditor {
 			return;
 		}
 		stack.add(new ArrayList<>(Arrays.asList("remove", continentName)));
-		System.out.println("remove: " + continentName);
+	//	System.out.println("remove: " + continentName);
 
 	}
 
@@ -411,7 +411,7 @@ public class MapEditor {
 			return;
 		}
 		stack.add(new ArrayList<>(Arrays.asList("add", continentName, continentValue)));
-		System.out.println("add: " + continentName + " , " + continentValue);
+		//System.out.println("add: " + continentName + " , " + continentValue);
 	}
 
 	/**
