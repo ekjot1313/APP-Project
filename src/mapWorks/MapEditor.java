@@ -25,15 +25,15 @@ import Game.MapReader;
 
 public class MapEditor {
 	public static boolean good;
-	public static Map map;
+	public Map map;
 
-	public static Map getMap() {
-		return map;
+	public Map getMap() {
+		return this.map;
 		
 	}
 
-	public static void setMap(Map map) {
-		MapEditor.map = map;
+	public void setMap(Map map) {
+		this.map = map;
 	}
 
 	public MapEditor() {
@@ -110,7 +110,7 @@ public class MapEditor {
 	/**
 	 * This method will display the map
 	 */
-	public static void showMap() {
+	public void showMap() {
 		// TODO Auto-generated method stub
 
 		(new MapReader()).display(map);
@@ -122,7 +122,7 @@ public class MapEditor {
 	 * 
 	 * @param command
 	 */
-	public static void editNeighbor(String[] command) {
+	public void editNeighbor(String[] command) {
 		// TODO Auto-generated method stub
 		ArrayList<ArrayList<String>> stack = new ArrayList<ArrayList<String>>();
 		int len = command.length;
@@ -223,7 +223,7 @@ public class MapEditor {
 	 * 
 	 * @param command
 	 */
-	public static void editCountry(String[] command) {
+	public void editCountry(String[] command) {
 		// TODO Auto-generated method stub
 		ArrayList<ArrayList<String>> stack = new ArrayList<ArrayList<String>>();
 		int len = command.length;
@@ -321,7 +321,7 @@ public class MapEditor {
 	 * 
 	 * @param command
 	 */
-	public static void editContinent(String[] command) {
+	public void editContinent(String[] command) {
 		// TODO Auto-generated method stub
 		ArrayList<ArrayList<String>> stack = new ArrayList<ArrayList<String>>();
 		int len = command.length;
@@ -420,7 +420,7 @@ public class MapEditor {
 	 * @param cmd
 	 * @param stk
 	 */
-	private static void executeStack(String cmd, ArrayList<ArrayList<String>> stack) {
+	private void executeStack(String cmd, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
 		switch (cmd) {
 		case "editcontinent": {
@@ -607,7 +607,7 @@ public class MapEditor {
 
 	}
 
-	private static void removeBridge(String continent1Name, String continent2Name, String country1Name,
+	private void removeBridge(String continent1Name, String continent2Name, String country1Name,
 			String country2Name) {
 		// TODO Auto-generated method stub
 		// check all bridge in first continent
@@ -643,7 +643,7 @@ public class MapEditor {
 	 * @param count
 	 * @param country2Name
 	 */
-	private static void createBridge(String continent1Name, String continent2Name, String country1Name,
+	private void createBridge(String continent1Name, String continent2Name, String country1Name,
 			String country2Name) {
 		// TODO Auto-generated method stub
 		Bridge bridgeA2B = new Bridge(continent2Name, country1Name, country2Name);
@@ -659,7 +659,7 @@ public class MapEditor {
 	 * @param listOfCountries
 	 * @return
 	 */
-	private static int findCountInd(String countName, List<Country> listOfCountries) {
+	private  int findCountInd(String countName, List<Country> listOfCountries) {
 		// TODO Auto-generated method stub
 		for (int i = 0; i < listOfCountries.size(); i++) {
 			if (listOfCountries.get(i).getName().equals(countName)) {
@@ -676,7 +676,7 @@ public class MapEditor {
 	 * @param listOfContinent
 	 * @return
 	 */
-	private static int findContInd(String contName, List<Continent> listOfContinent) {
+	private int findContInd(String contName, List<Continent> listOfContinent) {
 		// TODO Auto-generated method stub
 		for (int i = 0; i < listOfContinent.size(); i++) {
 			if (listOfContinent.get(i).getName().equals(contName)) {

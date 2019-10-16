@@ -32,7 +32,7 @@ public class Map {
 			listOfContinent.add(newc);
 		}
 		for(Country c :m.getListOfCountries()) {
-			Country newc = new Country();
+			Country newc = new Country(c);
 			listOfCountries.add(newc);
 		}
 	}

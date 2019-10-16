@@ -298,27 +298,48 @@ public class MapReader {
 	
 	public int validateContinent(Map map) {
 
-		MapEditor mpe = new MapEditor();
+		MapEditor mpeNew = new MapEditor();
 		MapReader mr = new MapReader();
 		Map newMap = new Map(map);
-		mpe.setMap(newMap);
+		mpeNew.map = newMap;
+		for(Continent c:newMap.getListOfContinent()) {
+			System.out.println("::"+c.getName());
+		}
+		for(Country c:newMap.getListOfCountries()) {
+			System.out.println("::"+c.getName());
+		}
+		mpeNew.map = newMap;
+		//mpeNew.editContinent("editcontinent -remove Asia".split(" "));
+		for(Continent c:newMap.getListOfContinent()) {
+			System.out.println("after::"+c.getName());
+		}
+		for(Country c:newMap.getListOfCountries()) {
+			System.out.println("after::"+c.getName());
+		}
+		for(Continent c:map.getListOfContinent()) {
+			System.out.println("after2::"+c.getName());
+		}
+		for(Country c:map.getListOfCountries()) {
+			System.out.println("after2::"+c.getName());
+		}
+		
 			for(int i =0;i<newMap.getListOfContinent().size();i++) {
 				String remainingContinent ="editcontinent "; 
 			
 				for(int j=0;j<newMap.getListOfContinent().size();j++) {
 					if(i != j )
-						remainingContinent +="-remove "+map.getListOfContinent().get(j).getName()+" ";
+						remainingContinent +="-remove "+newMap.getListOfContinent().get(j).getName()+" ";
 					
 				}
 				remainingContinent.trim();
 				System.out.println(remainingContinent);
-				mpe.editContinent(remainingContinent.split(" "));
-				if(mr.validateMap(mpe.map) == 1) {
-					return 0;
+				mpeNew.editContinent(remainingContinent.split(" "));
+				if(mr.validateMap(mpeNew.map) == 1) {
+					return 1;
 				}
 				//mpe.map.setListOfContinent(map.getListOfContinent());
 				newMap = new Map(map);
-				mpe.setMap(newMap);
+				mpeNew.map = newMap;
 			}
 		
 		return 0;
