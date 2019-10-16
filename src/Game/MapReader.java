@@ -195,8 +195,7 @@ public class MapReader {
 					if(c.getBridges().size()>0) {
 					System.out.println("Bridges");
 					for (Bridge bridge : c.getBridges()) {
-						System.out.println(
-								bridge.getNeigContinent() + " " + bridge.getCountry1() + " " + bridge.getCountry2());
+						System.out.println("To Continent: "+bridge.getNeigContinent() + "|| From Country: " + bridge.getCountry1() + " To country: " + bridge.getCountry2());
 					}
 
 				}

@@ -69,6 +69,11 @@ public class Main {
 		if(newFile.exists()) {
 			mr.parseMapFile(newFile);
 			try {
+				System.out.println("Type editcontinent -add <continentname> <continentvalue> -remove <continentname>");
+				System.out.println("Type editcountry -add <countryname> <continentname> -remove <countryname>");
+				System.out.println("Type editneighbor -add <countryname> <neighborcountryname> -remove <countryname> <neighborcountryname>");
+				System.out.println("Type showmap");
+				System.out.println("Type validatemap");
 				mr.map = mpe.mapeditorInit(mr.map);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -80,7 +85,8 @@ public class Main {
 			System.out.println("Map file does not exist .New File created .\nType editcontinent -add <continentname> <continentvalue> -remove <continentname>");
 			System.out.println("Type editcountry -add <countryname> <continentname> -remove <countryname>");
 			System.out.println("Type editneighbor -add <countryname> <neighborcountryname> -remove <countryname> <neighborcountryname>");
-			
+			System.out.println("Type showmap");
+			System.out.println("Type validatemap");
 			try {
 				mr.map = mpe.mapeditorInit(null);
 			
@@ -126,8 +132,7 @@ public class Main {
 	private static void placearmies (PlayerAllocator pa,MapReader mr) {
 		ArmyAllocator aa=new ArmyAllocator();
 		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers,mr.map,0);
-		
-		//aa.placeArmy((ArrayList<Player>) pa.listOfPlayers, mr.map);
+		//aa.placeArmy((ArrayList<Player>) pa.listOfPlayers, mr.map,0);
 		aa.showPlayerDetails((ArrayList<Player>) pa.listOfPlayers,mr.map);
 		// gameplay
 		GamePlay gp = new GamePlay();
