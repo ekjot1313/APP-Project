@@ -14,9 +14,10 @@ import java.util.List;
 import Game.MapReader;
 
 /**
- * This class implements the user driven commands to edit map. 
- * This will be called when user enters 'editmap' command
- * @author Ekjot
+ * Temporary class for user driven commands to edit map. This will be called
+ * when user will enter 'editmap' command
+ * 
+ * @author ekjot
  *
  */
 public class MapEditor {
@@ -28,24 +29,21 @@ public class MapEditor {
 	 * to store map object
 	 */
 	public Map map;
-	
 	/**
-	 * This method returns map object
-	 * @return Map Object
+	 * fetch map object
+	 * @return Map
 	 */
 	public Map getMap() {
 		return this.map;
 		
 	}
-	
 	/**
-	 * This method sets the map object
-	 * @param map Map Object
+	 * set map object
+	 * @param map
 	 */
 	public void setMap(Map map) {
 		this.map = map;
 	}
-	
 	/**
 	 * Default Constructor
 	 */
@@ -53,10 +51,9 @@ public class MapEditor {
 		this.good=true;
 		this.map=new Map();
 	}
-	
 	/**
-	 * This method initializes map editor
-	 * @param map Map Object
+	 * method to initialize map editor
+	 * @param map
 	 * @return Map object
 	 * @throws IOException
 	 */
@@ -90,11 +87,11 @@ public class MapEditor {
 				break;
 			}
 			case "showmap": {
-				showMap();
+				showMap(this.map);
 				break;
 			}
 			case "validatemap": {
-				validatemap();
+				validatemap(this.map);
 				break;
 			}
 			case "savemap":{
@@ -129,12 +126,11 @@ public class MapEditor {
 			return null;
 		}
 	}
-	
 	/**
-	 * This method is used to validate the map object
+	 * method to validate the map object
 	 * 
 	 */
-	private void validatemap() {
+	private void validatemap(Map map) {
 		// TODO Auto-generated method stub
 		int notConnected = (new MapReader()).validateMap(map);
 		int notConnectedSubGraph = (new MapReader()).validateContinent(map);
@@ -152,9 +148,9 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method displays the map
+	 * This method will display the map
 	 */
-	public void showMap() {
+	public void showMap(Map map) {
 		// TODO Auto-generated method stub
 
 		(new MapReader()).display(map);
@@ -162,8 +158,9 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method is used to edit the neighbour
-	 * @param command Command given by the user
+	 * This method will edit neighbour
+	 * 
+	 * @param command
 	 */
 	public void editNeighbor(String[] command) {
 		// TODO Auto-generated method stub
@@ -223,11 +220,11 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method removes a neighboring country.
+	 * This method will remove a neighbor country.
 	 * 
-	 * @param countryName Country Name
-	 * @param neighborCountryName Name of the Neighboring Country
-	 * @param stack Stack
+	 * @param countryName
+	 * @param neighborCountryName
+	 * @param stack
 	 */
 	private static void removeNeighbor(String countryName, String neighborCountryName,
 			ArrayList<ArrayList<String>> stack) {
@@ -243,11 +240,11 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method adds a neighboring country.
+	 * This method will add a neighbor country.
 	 * 
-	 * @param countryName Country Name
-	 * @param neighborCountryName Name of the neighboring Country
-	 * @param stack Stack
+	 * @param countryName
+	 * @param neighborCountryName
+	 * @param stack
 	 */
 	private static void addNeighbor(String countryName, String neighborCountryName,
 			ArrayList<ArrayList<String>> stack) {
@@ -262,8 +259,9 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method is used edit country
-	 * @param command Command given by the user
+	 * This method will edit country
+	 * 
+	 * @param command
 	 */
 	public void editCountry(String[] command) {
 		// TODO Auto-generated method stub
@@ -321,9 +319,10 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method is used to remove a country.
-	 * @param countryName Country Name to be removed
-	 * @param stack Stack
+	 * This method will remove a country.
+	 * 
+	 * @param countryName
+	 * @param stack
 	 */
 	private static void removeCountry(String countryName, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
@@ -338,11 +337,13 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method is used add a country.
-	 * @param countryName Country Name to be added 
-	 * @param continentName Continent to which the country is to be added
-	 * @param stack Stack
+	 * This method will add a country.
+	 * 
+	 * @param countryName
+	 * @param continentName
+	 * @param stack
 	 */
+
 	private static void addCountry(String countryName, String continentName, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
 		if (countryName.charAt(0) == '-' || continentName.charAt(0) == '-') {
@@ -356,8 +357,9 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method is used edit continent
-	 * @param command Command given the user
+	 * This method will edit continent
+	 * 
+	 * @param command
 	 */
 	public void editContinent(String[] command) {
 		// TODO Auto-generated method stub
@@ -417,10 +419,10 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method is used to remove a continent.
+	 * This method will remove a continent.
 	 * 
-	 * @param continentName Continent name to be removed
-	 * @param stack Stack
+	 * @param continentName
+	 * @param stack
 	 */
 	private static void removeContinent(String continentName, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
@@ -435,11 +437,11 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method is used add a continent.
+	 * This method will add a continent.
 	 * 
-	 * @param continentName Continent name to be added
-	 * @param continentValue Continent Value
-	 * @param stack Stack
+	 * @param continentName
+	 * @param continentValue
+	 * @param stack
 	 */
 	private static void addContinent(String continentName, String continentValue, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
@@ -453,9 +455,10 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method executes command stacks of sub-commands
-	 * @param cmd Command
-	 * @param stk Stack
+	 * This method will excute command stacks of sub-commands
+	 * 
+	 * @param cmd
+	 * @param stk
 	 */
 	private void executeStack(String cmd, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
@@ -643,13 +646,12 @@ public class MapEditor {
 		}
 
 	}
-	
 	/**
-	 * This method removes the bridge between two continents
-	 * @param continent1Name Name of first Continent
-	 * @param continent2Name Name of second Continent
-	 * @param country1Name Name of first Country
-	 * @param country2Name Name of second Country
+	 * method to remove the bridge between two continents
+	 * @param continent1Name
+	 * @param continent2Name
+	 * @param country1Name
+	 * @param country2Name
 	 * @return true if removed else false
 	 */
 	public boolean removeBridge(String continent1Name, String continent2Name, String country1Name,
@@ -687,10 +689,10 @@ public class MapEditor {
 	/**
 	 * This method creates a bridge
 	 * 
-	 * @param continent1Name Name of first continent
-	 * @param continent2Name Name of second continent
-	 * @param country1Name Name of first country
-	 * @param country2Name Name of second country
+	 * @param continent1Name
+	 * @param continent2Name
+	 * @param count
+	 * @param country2Name
 	 */
 	private void createBridge(String continent1Name, String continent2Name, String country1Name,
 			String country2Name) {
@@ -702,10 +704,11 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method find country index from the list of countries with its name
-	 * @param countName Country Name
-	 * @param listOfCountries Country List
-	 * @return Index of country if found else -1
+	 * This method find country index from listofcountry with its name
+	 * 
+	 * @param countName
+	 * @param listOfCountries
+	 * @return
 	 */
 	private  int findCountInd(String countName, List<Country> listOfCountries) {
 		// TODO Auto-generated method stub
@@ -718,10 +721,11 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method find continent index from the list of continents with its name
-	 * @param contName Continent Name
-	 * @param listOfContinent Continent List
-	 * @return Index of continent if found else -1
+	 * This method find continent index from listofcontinent with its name
+	 * 
+	 * @param contName
+	 * @param listOfContinent
+	 * @return
 	 */
 	private int findContInd(String contName, List<Continent> listOfContinent) {
 		// TODO Auto-generated method stub
