@@ -32,7 +32,7 @@ public class ArmyAllocator {
 		if(test ==1)
 		placeArmy(assignedArmies, listOfPLayers, map, 1);
 		else
-			placeArmy(assignedArmies, listOfPLayers, map, 1);
+			placeArmy(assignedArmies, listOfPLayers, map, 0);
 		return assignedArmies;
 	}
 	
