@@ -200,7 +200,6 @@ public class MapReaderTest {
 	@Test
 	public void testCountryFromName() {
 		
-		
 		country= testMap.getCountryFromName("india");
 		assertEquals("india", country.getName());
 	}
@@ -210,8 +209,7 @@ public class MapReaderTest {
 	 */
 	@Test
 	public void testContinentFromName() {
-		
-		
+	
 		continent= testMap.getContinentFromName("asia");
 		assertEquals("asia", continent.getName());
 	}
