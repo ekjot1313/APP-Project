@@ -22,6 +22,7 @@ import Game.Player;
 import mapWorks.MapEditor;
 import mapWorks.MapSaver;
 import Game.ArmyAllocator;
+import Game.Country;
 import Game.GamePlay;
 import Game.PlayerAllocator;
 
@@ -38,6 +39,7 @@ public class MapReaderTest {
 	static PlayerAllocator player;
 	static ArmyAllocator armyAlloc;
 	static MapSaver mapSaver;
+	static Country country;
 	
 	/**
 	 * @throws java.lang.Exception
@@ -61,6 +63,7 @@ public class MapReaderTest {
 	player.listOfPlayers.add(C);
 	armyAlloc= new ArmyAllocator();
 	mapSaver = new MapSaver();
+	country = new Country();
 	}
 
 	/**
@@ -181,4 +184,15 @@ public class MapReaderTest {
 		
 		
 	}
+	
+	
+	@Test
+	public void testCountryFromName() {
+		
+		
+		country= testMap.getCountryFromName("india");
+		assertEquals("india", country.getName());
+	}
+	
+	
 }
