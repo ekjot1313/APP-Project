@@ -5,6 +5,8 @@ package Test;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.After;
@@ -15,7 +17,10 @@ import org.junit.Test;
 
 import Game.Map;
 import Game.MapReader;
+import Game.Player;
 import mapWorks.MapEditor;
+import Game.GamePlay;
+import Game.PlayerAllocator;
 
 /**
  * @author divya_000
@@ -26,6 +31,8 @@ public class MapReaderTest {
 	static Map testMap;
 	static MapEditor mapEditor;
 	static MapReader mapReader;
+	static GamePlay reinforceArmies;
+	static PlayerAllocator player;
 	
 	/**
 	 * @throws java.lang.Exception
@@ -39,7 +46,9 @@ public class MapReaderTest {
 	mapEditor.editNeighbor(("editneighbor -add india pakistan -add pakistan china -add india congo -add congo uganda").split(" "));
 	testMap= mapEditor.getMap();
 	mapReader= new MapReader();
-	
+	reinforceArmies = new GamePlay();
+	player= new PlayerAllocator();
+
 	}
 
 	/**
@@ -72,5 +81,29 @@ public class MapReaderTest {
 		assertEquals(0,mapReader.validateMap(testMap));
 		
 	}
+	
+	@Test
+	public void testParseMap() {
+		String filename= "ameroki.map";
+		String currentPath = System.getProperty("user.dir");
+		currentPath += "\\Maps\\" + filename;
+		File newFile = new File(currentPath);
+		int test=mapReader.parseMapFile(newFile);
+		
+		assertEquals(1, test);
+		
+	}
+
+	/*@Test
+	public void testcalculateReinforceArmies() {
+		
+		player.allocate();
+		player.populateCountries(testMap);
+		
+		int reinforce= reinforceArmies.calculateReinforceArmies((ArrayList<Player>) player.listOfPlayers, testMap, 1);
+		
+		assertEquals(3, reinforce);
+	}*/
+
 
 }

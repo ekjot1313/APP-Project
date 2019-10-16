@@ -21,7 +21,7 @@ public class MapReader {
 	private String currentLine;
 	public HashMap<Integer, List<Integer>> mapOfWorld = new HashMap<Integer, List<Integer>>();
 
-	public void parseMapFile(File file) {
+	public int parseMapFile(File file) {
 		map = new Map();
 
 		try {
@@ -51,15 +51,18 @@ public class MapReader {
 				System.out.println("Valid Map");
 				// display
 				display(map);
-			} else
+			} else {
 				System.out.println("Invalid map");
+				return 0;
+			}
 
 		} catch (Exception e) {
 			if (e.toString().contains("FileNotFoundException"))
 				System.out.println("Invalid filename");
 			System.out.println(e);
+			return 0;
 		}
-
+		return 1;
 	}
 
 	private void loadBorders() throws NumberFormatException, IOException {
@@ -185,7 +188,6 @@ public class MapReader {
 			}
 		} else
 			System.out.println("Invalid map");
-		
 		
 		
 	}
