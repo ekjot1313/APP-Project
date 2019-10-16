@@ -75,11 +75,11 @@ public class MapReader {
 			int notConnected = validateMap(map);
 			int notConnectedSubGraph = validateContinent(map);
 			System.out.println();
-			System.out.println(notConnected +" "+notConnectedSubGraph);
+			//System.out.println(notConnected +" "+notConnectedSubGraph);
 			if (notConnected == 0 && notConnectedSubGraph == 0) {
 				System.out.println("Valid Map");
 				// display
-				display(map);
+				//display(map);
 			} else {
 				System.out.println("Invalid map");
 				return 0;
@@ -274,7 +274,6 @@ public class MapReader {
 				//System.out.print(i + "=" + visited[i] + " || ");
 				if (!visited[i]) {
 					notConnected = 1;
-					System.out.println("esg"+i);
 				//	System.out.println("Not a connected graph");
 					break;
 				}
@@ -334,27 +333,26 @@ public class MapReader {
 		MapReader mr = new MapReader();
 		Map newMap = new Map(map);
 		mpeNew.map = newMap;
-		//display(mpeNew.map);
+		
 			for(int i =0;i<newMap.getListOfContinent().size();i++) {
 				String remainingContinent ="editcontinent "; 
-			//System.out.println("For :"+newMap.getListOfContinent().get(i).getName());
+			
 				for(int j=0;j<newMap.getListOfContinent().size();j++) {
 					if(i != j )
 						remainingContinent +="-remove "+newMap.getListOfContinent().get(j).getName()+" ";
 					
 				}
 				remainingContinent.trim();
-				//System.out.println(remainingContinent);
+				
 				mpeNew.editContinent(remainingContinent.split(" "));
-				//display(mpeNew.map);
+				
 				if(mr.validateMap(mpeNew.map) == 1) {
 					return 1;
 				}
 				newMap = new Map(map);
 				mpeNew.map = newMap;
 			}
-			//System.out.println("Original Map");
-			//display(map);
+			
 		
 		return 0;
 	}
