@@ -20,6 +20,15 @@ public class Continent {
 		this.countries=new ArrayList<String>();
 		this.bridges = new ArrayList<Bridge>();
 	}
+	/**
+	 * 
+	 */
+	public Continent(Continent c){
+		this.name = c.name;
+		this.continentValue = c.continentValue;
+		this.countries=new ArrayList<String>(c.getCountries());
+		this.bridges = new ArrayList<Bridge>(c.getBridges());
+	}
 	
 /**
 	 * @return the bridges
