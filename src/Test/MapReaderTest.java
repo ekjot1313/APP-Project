@@ -142,7 +142,6 @@ public class MapReaderTest {
 	public void testNumerOfAssignedArmies() {
 		player.populateCountries(testMap);
 		int result= armyAlloc.calculateTotalArmies((ArrayList<Player>) player.listOfPlayers, testMap,1 );
-		
 		assertEquals(35, result);
 	}
 	/**
