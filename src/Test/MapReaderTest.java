@@ -93,7 +93,25 @@ public class MapReaderTest {
 		assertEquals(1, test);
 		
 	}
-
+	/**
+	 * Function to test the gameplayer command
+	 */
+	@Test
+	public void testGameplayerCommand() {
+		PlayerAllocator p=new PlayerAllocator();
+		int result=p.validate("gameplayer");
+		System.out.println(result);
+		assertTrue(result == 0);
+		result=p.validate("gameplayer -add--add");
+		System.out.println(result);
+		assertTrue(result == 0);
+		result=p.validate("gameplayer -add A -add B -remove B -remove A -add C");
+		System.out.println(result);
+		assertTrue(result==1);
+		result=p.validate("populatecountries");
+		System.out.println(result);
+		assertTrue(result==1);	
+	}
 	/*@Test
 	public void testcalculateReinforceArmies() {
 		

@@ -77,12 +77,14 @@ public class PlayerAllocator{
 		}
 		System.out.println();
 	}
-	public static int validate(String command) {
+	public int validate(String command) {
 		String str[]=command.split(" ");
 		int flag=0,count;
 		if((str.length%2)!=0) {
 			if(str[0].equals("populatecountries"))
 				return 1;
+			if(str[0].contentEquals("gameplayer") && str.length == 1)
+				return 0;
 			if(str[0].equals("gameplayer") && (str[1].equals("-add") || str[1].equals("-remove"))) {
 					for(int i=1;i<str.length;i++)
 					{	count=0;
