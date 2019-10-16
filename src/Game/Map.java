@@ -25,8 +25,16 @@ public class Map {
 		
 	}
 	public Map(Map m) {
-		listOfContinent = m.listOfContinent;
-		listOfCountries = m.listOfCountries;
+		listOfContinent = new ArrayList<Continent>();
+		listOfCountries = new ArrayList<Country>();
+		for(Continent c :m.getListOfContinent()) {
+			Continent newc = new Continent(c);
+			listOfContinent.add(newc);
+		}
+		for(Country c :m.getListOfCountries()) {
+			Country newc = new Country();
+			listOfCountries.add(newc);
+		}
 	}
 	
 	public String getMessage1() {
