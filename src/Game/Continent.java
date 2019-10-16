@@ -27,7 +27,11 @@ public class Continent {
 		this.name = c.name;
 		this.continentValue = c.continentValue;
 		this.countries=new ArrayList<String>(c.getCountries());
-		this.bridges = new ArrayList<Bridge>(c.getBridges());
+		this.bridges = new ArrayList<Bridge>();
+		for(Bridge b :c.getBridges()) {
+			Bridge newBridge = new Bridge(b);
+			this.bridges.add(newBridge);
+		}
 	}
 	
 /**
