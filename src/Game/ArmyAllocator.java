@@ -55,10 +55,14 @@ public class ArmyAllocator {
 			for(Player p:listOfPLayers) {
 				Boolean armyNotAllocated = true;
 				while (armyNotAllocated) {
-				System.out.println("Player "+p.getName() +" to place armies :\n Type placearmy <countryname> or placeall to randomly allocate armies ");
+				System.out.println("Player "+p.getName() +" to place armies :\n Type placearmy <countryname> or placeall to randomly allocate armies.\n Type showmap ");
 				String input = sc.nextLine();
 				String[] commands = input.split(" ");
-				if(commands.length == 2 && commands[0].equals("placearmy") ) {
+				if(input.equals("showmap")) {
+					MapReader mr=new MapReader();
+					mr.display(map);
+				}
+				else if(commands.length == 2 && commands[0].equals("placearmy") ) {
 					//check if country is valid and assigned to the current player	
 					if(map.getCountryFromName(commands[1]) == null) {
 						System.out.println("Invalid country");

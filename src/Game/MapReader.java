@@ -223,6 +223,53 @@ public class MapReader {
 		
 	}
 	/**
+	 * This method display/print the map
+	 * 
+	 * @param map2
+	 */
+	public void displayAll(Map map2) {
+		// TODO Auto-generated method stub
+		map =map2;
+			// display
+			if (map2.getListOfContinent().size() > 0) {
+				for (Continent c : map2.getListOfContinent()) {
+					System.out.println();
+					System.out.println("Continent :" + c.getName());
+
+					if(c.getBridges().size()>0) {
+					System.out.println("Bridges");
+					for (Bridge bridge : c.getBridges()) {
+						System.out.println("To Continent: "+bridge.getNeigContinent() + "|| From Country: " + bridge.getCountry1() + " To country: " + bridge.getCountry2());
+					}
+
+				}
+					for (String c1 : c.getCountries()) {
+						//System.out.print("Country :" + c1 + ": Neighbours -> ");
+						System.out.print("Country :" + c1);
+						System.out.print(" No of Armies :"+map2.getCountryFromName(c1).getNoOfArmies());
+						System.out.println(" Owner :"+map2.getCountryFromName(c1).getOwner());
+						System.out.print("Neighbors :");
+						for (Country country : map2.getListOfCountries()) {
+							if (c1.equals(country.getName())) {
+
+								for (String c2 : country.getNeighbors()) {
+									System.out.print(c2 + " || ");
+								}
+
+								System.out.println();
+							}
+						}
+
+					}
+
+				}
+			} else {
+				System.out.println("Map Empty.");
+			}
+		
+		
+	}
+	/**
 	 * method to check if the entire map is valid
 	 * @param map
 	 * @return 0 if valid else 1

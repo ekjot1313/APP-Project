@@ -36,10 +36,14 @@ public class GamePlay {
 		//loop over playerlist and assign reinforcement armies
 		while(reinforcementArmies != 0 ) {
 			 System.out.println("Reinforcement armies to be assigned :" + reinforcementArmies);
-			 System.out.println("Type reinforce <countryname> <num>  to assign armies");
+			 System.out.println("Type reinforce <countryname> <num>  to assign armies\n Type showmap");
 			 String input = sc.nextLine();
 			 String[] inputArray = input.split(" ");
-			 if(inputArray.length == 3 && inputArray[0].equals("reinforce")) {
+			 if(input.equals("showmap")) {
+				 MapReader mr=new MapReader();
+					mr.display(map);
+			 }
+			 else if(inputArray.length == 3 && inputArray[0].equals("reinforce")) {
 				 int armiesTobeplaced = Integer.parseInt(inputArray[2]);
 				 int countryFound =0;
 				
@@ -85,11 +89,14 @@ public class GamePlay {
 		int flag=0;
 		do {
 			
-			System.out.println("Type fortify <from country name> <to country name> <number of armies> or fortify none (choose to not do a move)");
+			System.out.println("Type fortify <from country name> <to country name> <number of armies> or fortify none (choose to not do a move)\n Type showmap");
 			String in= sc.nextLine();
 			String input[]= in.split(" ");
-			
-			if(input.length == 4 && input[0].equals("fortify")) {
+			 if(input.equals("showmap")) {
+				 MapReader mr=new MapReader();
+					mr.display(map);
+			 }
+			 else if(input.length == 4 && input[0].equals("fortify")) {
 				HashMap<Integer, List<Integer>> mapOfAssignedCountries = new HashMap<Integer, List<Integer>>();
 				for (int i = 0; i < listPlayer.get(playerIndex).getAssigned_countries().size(); i++) {
 					List<Integer> templist = new ArrayList<Integer>();

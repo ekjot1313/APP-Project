@@ -123,7 +123,7 @@ public class Main {
 		
 		PlayerAllocator pa = new PlayerAllocator();
 		//pa.map = mr.map;
-		pa.allocate();
+		pa.allocate(mr.map);
 		pa.populateCountries(mr.map);
 		pa.printPlayerList();
 		pa.printPlayerCountries();
@@ -133,7 +133,7 @@ public class Main {
 		ArmyAllocator aa=new ArmyAllocator();
 		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers,mr.map,0);
 		//aa.placeArmy((ArrayList<Player>) pa.listOfPlayers, mr.map,0);
-		aa.showPlayerDetails((ArrayList<Player>) pa.listOfPlayers,mr.map);
+		//aa.showPlayerDetails((ArrayList<Player>) pa.listOfPlayers,mr.map);
 		// gameplay
 		GamePlay gp = new GamePlay();
 		for(int i=0;i< pa.listOfPlayers.size() ;i++)

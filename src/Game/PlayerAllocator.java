@@ -15,20 +15,26 @@ public class PlayerAllocator{
 	/**
 	 * This method adds or removes the player
 	 */
-	public void allocate() {
+	public void allocate(Map map) {
 		Scanner in=new Scanner(System.in);
 		String cmd;
 		
 		do
 		{
 			System.out.println("Type \ngameplayer -add<PlayerName> or -remove <PlayerName> \npopulatecountries - assign countries to players");
+			System.out.println("Type showmap");
 			cmd=in.nextLine();
 			while(cmd.equals("populatecountries") && listOfPlayers.size() == 0) {
 				System.out.println("Player list is empty, add players first.");
 				System.out.println("Type \ngameplayer -add<PlayerName> or -remove <PlayerName> \npopulatecountries - assign countries to players");
+				System.out.println("Type showmap");
 				cmd=in.nextLine();
 			}
-			if(validate(cmd)==1)
+			if(cmd.equals("showmap")) {
+				MapReader mr=new MapReader();
+				mr.displayAll(map);
+			}
+			else if(validate(cmd)==1)
 			{	String str[]=cmd.split(" ");
 				//System.out.println("Valid command");
 				for(int i=1;i<str.length;i++) {
@@ -128,13 +134,7 @@ public class PlayerAllocator{
 		
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		PlayerAllocator P= new PlayerAllocator();
-		P.allocate();
-		
-		
-	}
+	
 	
 	/**
 	 * This method assigns countries to the players 
