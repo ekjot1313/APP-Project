@@ -148,7 +148,8 @@ public class MapReader {
 		int notConnected = validateMap(map);
 		int notConnectedSubGraph = validateContinent(map);
 		//int notConnectedSubGraph =0;
-		System.out.println();
+		System.out.println(notConnected +" notConnected");
+		System.out.println(notConnectedSubGraph +" notConnectedSubGraph");
 		
 		if (notConnected == 0  && notConnectedSubGraph == 0) {
 			System.out.println("Valid Map");
@@ -302,26 +303,6 @@ public class MapReader {
 		MapReader mr = new MapReader();
 		Map newMap = new Map(map);
 		mpeNew.map = newMap;
-		for(Continent c:newMap.getListOfContinent()) {
-			System.out.println("::"+c.getName());
-		}
-		for(Country c:newMap.getListOfCountries()) {
-			System.out.println("::"+c.getName());
-		}
-		mpeNew.map = newMap;
-		//mpeNew.editContinent("editcontinent -remove Asia".split(" "));
-		for(Continent c:newMap.getListOfContinent()) {
-			System.out.println("after::"+c.getName());
-		}
-		for(Country c:newMap.getListOfCountries()) {
-			System.out.println("after::"+c.getName());
-		}
-		for(Continent c:map.getListOfContinent()) {
-			System.out.println("after2::"+c.getName());
-		}
-		for(Country c:map.getListOfCountries()) {
-			System.out.println("after2::"+c.getName());
-		}
 		
 			for(int i =0;i<newMap.getListOfContinent().size();i++) {
 				String remainingContinent ="editcontinent "; 
@@ -332,12 +313,10 @@ public class MapReader {
 					
 				}
 				remainingContinent.trim();
-				System.out.println(remainingContinent);
 				mpeNew.editContinent(remainingContinent.split(" "));
 				if(mr.validateMap(mpeNew.map) == 1) {
 					return 1;
 				}
-				//mpe.map.setListOfContinent(map.getListOfContinent());
 				newMap = new Map(map);
 				mpeNew.map = newMap;
 			}
