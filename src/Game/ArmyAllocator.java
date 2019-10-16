@@ -6,6 +6,8 @@ import java.util.Random;
 
 /** 
  * This class allows the players to allocate armies to their countries
+ * @author Mitalee Naik
+ * @since 1.0.0
  *
  */
 public class ArmyAllocator {
@@ -125,12 +127,6 @@ public class ArmyAllocator {
 	
 		for(Player p: listOfPLayers) {
 			
-			/*while(p.getUnassignedarmies()>0) {
-				for(int i=0;i<p.getAssigned_countries().size()&& p.getUnassignedarmies()>0;i++) {
-				p.getAssigned_countries().get(i).setNoOfArmies(p.getAssigned_countries().get(i).getNoOfArmies()+1);
-				p.setUnassignedarmies(p.getUnassignedarmies() - 1);
-				}
-			}*/
 			for(int i=0;i<p.getAssigned_countries().size()&& p.getUnassignedarmies()>0;i++) {
 				if(p.getAssigned_countries().get(i).getNoOfArmies() == 0 ) {
 					p.getAssigned_countries().get(i).setNoOfArmies(p.getAssigned_countries().get(i).getNoOfArmies()+1);
