@@ -97,6 +97,9 @@ public class ArmyAllocator {
 							
 						}
 					}
+					if(armyNotAllocated == false)
+					System.out.println("Army placed successfully");
+					
 				}
 				else if(commands.length == 1 && commands[0].equals("placearmy")) {
 					System.out.println("Invalid command.");
@@ -112,9 +115,7 @@ public class ArmyAllocator {
 			}
 			if(isPlaceAll)
 				break;
-			for(Country c:p.getAssigned_countries())
-			System.out.println("Player "+p.getName() +" "+c.getName() +" "+" " +c.getNoOfArmies()); 
-		}
+			}
 			if(isPlaceAll)
 				break;
 		}
@@ -151,7 +152,7 @@ public class ArmyAllocator {
 			}	
 			
 		}
-		
+		System.out.println("All armies have been placed successfully");
 		
 	}
 	
