@@ -51,7 +51,11 @@ public class PlayerAllocator{
 			}
 			else
 				System.out.println("Invalid command,Type again");
-		}while(!cmd.equals("populatecountries"));
+			if(cmd.equals("populatecountries") && listOfPlayers.size()==1 ) {
+				System.out.println("Single player cannot the game, please add more players");
+				continue;
+			}
+		}while(!cmd.equals("populatecountries") || listOfPlayers.size()<=1);
 		
 	}
 	public void printPlayerList() {
