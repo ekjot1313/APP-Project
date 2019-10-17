@@ -117,8 +117,6 @@ public class MapEditor {
 			good = true;
 
 		}
-
-		// System.out.println("savemap found");
 		MapSaver ms = new MapSaver();
 		MapReader mr = new MapReader();
 		mr.map = this.map;
@@ -140,10 +138,6 @@ public class MapEditor {
 		// TODO Auto-generated method stub
 		int notConnected = (new MapReader()).validateMap(map);
 		int notConnectedSubGraph = (new MapReader()).validateContinent(map);
-		// int notConnectedSubGraph =0;
-		// System.out.println(notConnected +" notConnected");
-		// System.out.println(notConnectedSubGraph +" notConnectedSubGraph");
-
 		if (notConnected == 0 && notConnectedSubGraph == 0) {
 			System.out.println("Map is valid");
 		} else {
@@ -242,8 +236,6 @@ public class MapEditor {
 			return;
 		}
 		stack.add(new ArrayList<>(Arrays.asList("remove", countryName, neighborCountryName)));
-		// System.out.println("remove: " + countryName + " , " + neighborCountryName);
-
 	}
 
 	/**
@@ -262,7 +254,6 @@ public class MapEditor {
 			return;
 		}
 		stack.add(new ArrayList<>(Arrays.asList("add", countryName, neighborCountryName)));
-		// System.out.println("add: " + countryName + " , " + neighborCountryName);
 	}
 
 	/**
@@ -339,8 +330,6 @@ public class MapEditor {
 			return;
 		}
 		stack.add(new ArrayList<>(Arrays.asList("remove", countryName)));
-		// System.out.println("remove: " + countryName);
-
 	}
 
 	/**
@@ -358,8 +347,6 @@ public class MapEditor {
 			return;
 		}
 		stack.add(new ArrayList<>(Arrays.asList("add", countryName, continentName)));
-		// System.out.println("add: " + countryName + " , " + continentName);
-
 	}
 
 	/**
@@ -438,8 +425,6 @@ public class MapEditor {
 			return;
 		}
 		stack.add(new ArrayList<>(Arrays.asList("remove", continentName)));
-		// System.out.println("remove: " + continentName);
-
 	}
 
 	/**
@@ -457,7 +442,6 @@ public class MapEditor {
 			return;
 		}
 		stack.add(new ArrayList<>(Arrays.asList("add", continentName, continentValue)));
-		// System.out.println("add: " + continentName + " , " + continentValue);
 	}
 
 	/**
@@ -487,7 +471,6 @@ public class MapEditor {
 						good = false;
 						return;
 					}
-					// System.out.println(map);
 					if (map.getContinentFromName(s.get(1)) != null) {
 						System.out.println("Continent Already Exists.");
 						return;
@@ -507,9 +490,6 @@ public class MapEditor {
 						System.out.println("Continent Not Found.");
 						return;
 					}
-
-					/////////////////////////////////////////// pending
-
 					ArrayList<ArrayList<String>> s1 = new ArrayList<ArrayList<String>>();
 					// removing all countries
 					for (String countryName : continent.getCountries()) {
@@ -542,7 +522,6 @@ public class MapEditor {
 					Country count = new Country();
 					count.setName(s.get(1));
 					count.setContinentName(continent.getName());
-
 					// adding country name in continent
 					continent.getCountries().add(count.getName());
 					// adding country in listOfCountries

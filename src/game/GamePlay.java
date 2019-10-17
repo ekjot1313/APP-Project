@@ -34,7 +34,6 @@ public class GamePlay {
 	public int calculateReinforceArmies(ArrayList<Player> listPlayer, Map map, int playerIndex) {
 		int noOfArmies = listPlayer.get(playerIndex).getAssigned_countries().size() / 3;
 		int reinforcementArmies = noOfArmies <= 3 ? 3 : noOfArmies;
-		// System.out.println("reinforcementArmies "+ reinforcementArmies);
 		return reinforcementArmies;
 	}
 

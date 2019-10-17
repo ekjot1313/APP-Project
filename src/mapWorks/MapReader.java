@@ -60,7 +60,6 @@ public class MapReader {
 			bufferReaderForFile = new BufferedReader(new FileReader(file));
 
 			while ((currentLine = bufferReaderForFile.readLine()) != null) {
-				// System.out.println("curr line :" +currentLine);
 				if (currentLine.contains("[continents]")) {
 					loadContinents();
 				}
@@ -73,16 +72,12 @@ public class MapReader {
 				}
 
 			}
-			// System.out.println("mapOfworld "+mapOfWorld.toString());
 			// validate map call
 			int notConnected = validateMap(map);
 			int notConnectedSubGraph = validateContinent(map);
 			System.out.println();
-			// System.out.println(notConnected +" "+notConnectedSubGraph);
 			if (notConnected == 0 && notConnectedSubGraph == 0) {
 				System.out.println("Valid Map");
-				// display
-				// display(map);
 			} else {
 				System.out.println("Invalid map");
 				return 0;
@@ -107,7 +102,6 @@ public class MapReader {
 		// TODO Auto-generated method stub
 
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
-			// System.out.println(currentLine);
 			if (currentLine.length() == 0) {
 				continue;
 			}
@@ -146,8 +140,6 @@ public class MapReader {
 		// TODO Auto-generated method stub
 
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
-
-			// System.out.println(currentLine);
 			if (currentLine.length() == 0) {
 				continue;
 			}
@@ -172,8 +164,6 @@ public class MapReader {
 		// TODO Auto-generated method stub
 
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
-
-			// System.out.println(currentLine);
 			if (currentLine.length() == 0) {
 				continue;
 			}
@@ -255,7 +245,6 @@ public class MapReader {
 
 				}
 				for (String c1 : c.getCountries()) {
-					// System.out.print("Country :" + c1 + ": Neighbours -> ");
 					System.out.print("Country :" + c1);
 					System.out.print(" No of Armies :" + map2.getCountryFromName(c1).getNoOfArmies());
 					System.out.println(" Owner :" + map2.getCountryFromName(c1).getOwner());
@@ -311,10 +300,7 @@ public class MapReader {
 			LinkedList<Integer> queue = new LinkedList<Integer>();
 			queue.add(0);
 			visited[0] = true;
-			// System.out.println(mapOfWorld.toString());
-
 			while (queue.size() > 0) {
-				// System.out.println(queue.peek());
 				Integer c1 = queue.poll();
 				Iterator<Integer> i = mapOfWorld.get(c1).listIterator();
 				while (i.hasNext()) {
@@ -329,10 +315,8 @@ public class MapReader {
 			}
 
 			for (int i = 0; i < visited.length; i++) {
-				// System.out.print(i + "=" + visited[i] + " || ");
 				if (!visited[i]) {
 					notConnected = 1;
-					// System.out.println("Not a connected graph");
 					break;
 				}
 			}
