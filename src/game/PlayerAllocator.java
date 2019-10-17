@@ -52,7 +52,6 @@ public class PlayerAllocator {
 				mr.displayAll(map);
 			} else if (validate(cmd) == 1) {
 				String str[] = cmd.split(" ");
-				// System.out.println("Valid command");
 				for (int i = 1; i < str.length; i++) {
 					if (str[i].equals("-add")) {
 						Player p = new Player();
