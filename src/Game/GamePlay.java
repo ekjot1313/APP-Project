@@ -10,6 +10,9 @@ import java.util.Scanner;
 /**
  * This class handles gameplay and contains three methods each for reinforcement, fortification and attack phase.
  * @author Piyush
+ * @author Mitalee Naik
+ * @author Divya_000
+ * @since 1.0.0
  *
  */
 public class GamePlay {

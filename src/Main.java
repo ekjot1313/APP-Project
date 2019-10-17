@@ -9,9 +9,11 @@ import Game.MapReader;
 import Game.Player;
 import Game.PlayerAllocator;
 import mapWorks.MapEditor;
-
-/**
- * Main Class
+/** 
+ * This is the main class
+ * @author Mitalee Naik
+ * @since 1.0.0
+ *
  */
 public class Main {
 	

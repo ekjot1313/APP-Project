@@ -7,6 +7,7 @@ import java.util.Random;
 /** 
  * This class allows the players to allocate armies to their countries
  * @author Mitalee Naik
+ * @author Divya_000
  * @since 1.0.0
  *
  */

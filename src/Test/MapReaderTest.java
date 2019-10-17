@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package Test;
 
 import static org.junit.Assert.*;
@@ -30,6 +28,8 @@ import Game.PlayerAllocator;
 /**
  * Test Class
  * @author divya_000
+ * @author Ekjot
+ * 
  */
 public class MapReaderTest {
 

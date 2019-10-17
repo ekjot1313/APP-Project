@@ -4,7 +4,8 @@ import java.util.*;
 
 /**
  * This class is used to add or remove players and also to assign countries to players initially
- *
+ * @author Piyush
+ * @author Hartaj
  */
 public class PlayerAllocator{
 	/**
