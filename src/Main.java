@@ -10,6 +10,9 @@ import Game.Player;
 import Game.PlayerAllocator;
 import mapWorks.MapEditor;
 
+/**
+ * Main Class
+ */
 public class Main {
 	
 	public static void main(String[] args) {
@@ -47,7 +50,11 @@ public class Main {
 		}
 		
 	}
-
+	
+	/** 
+	 * This method is called when user gives 'editmap' command
+	 * @param filename Map file to be edited
+	 */
 	private static void editmap(String filename) {
 		// TODO Auto-generated method stub
 		
@@ -90,6 +97,10 @@ public class Main {
 		
 	}
 
+	/**
+	 * This method is called when user gives 'loadmap' command
+	 * @param filename Map file to be loaded
+	 */
 	private static void loadmap(String filename) {
 		// TODO Auto-generated method stub
 		MapReader mr = new MapReader();
@@ -110,6 +121,10 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * This method is called to add or remove a player, assign countries to players and allow them to place armies
+	 * @param mr MapReader Object
+	 */
 	private static void gameplayer(MapReader mr) {
 		
 		PlayerAllocator pa = new PlayerAllocator();
@@ -117,6 +132,12 @@ public class Main {
 		pa.populateCountries(mr.map);
 		placearmies(pa,mr);	
 	}
+	
+	/**
+	 * This method allows user to place armies on their countries
+	 * @param pa PlayerAllocator Object
+	 * @param mr MapReader Object
+	 */
 	private static void placearmies (PlayerAllocator pa,MapReader mr) {
 		ArmyAllocator aa=new ArmyAllocator();
 		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers,mr.map,0);
