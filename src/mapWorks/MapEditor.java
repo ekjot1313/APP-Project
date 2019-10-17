@@ -97,7 +97,7 @@ public class MapEditor {
 				break;
 			}
 			case "validatemap": {
-				validatemap(this.map);
+				validateMap(this.map);
 				break;
 			}
 			case "savemap": {
@@ -134,7 +134,7 @@ public class MapEditor {
 	 * 
 	 * @param map Map object to be validated
 	 */
-	private void validatemap(Map map) {
+	private void validateMap(Map map) {
 		// TODO Auto-generated method stub
 		int notConnected = (new MapReader()).validateMap(map);
 		int notConnectedSubGraph = (new MapReader()).validateContinent(map);
@@ -476,12 +476,13 @@ public class MapEditor {
 						return;
 					}
 
-					Continent cont = new Continent();
-					cont.setName(s.get(1));
-					cont.setContinentValue(Integer.parseInt(s.get(2)));
-					cont.setContinentIndexInListOfContinent(map.getListOfContinent().size());
+					Continent continent = new Continent();
+					continent.setName(s.get(1));
+					continent.setContinentValue(Integer.parseInt(s.get(2)));
+					continent.setContinentIndexInListOfContinent(map.getListOfContinent().size());
 
-					map.getListOfContinent().add(cont);
+					map.getListOfContinent().add(continent);
+					System.out.println("Added Continent: "+continent.getName());
 
 				} else if (s.get(0).equals("remove")) {
 					Continent continent = map.getContinentFromName(s.get(1));
@@ -500,6 +501,7 @@ public class MapEditor {
 					// removing continent from listOfContinent
 					map.getListOfContinent().remove(continent);
 
+					System.out.println("Removed Continent: "+continent.getName());
 				}
 			}
 			break;
@@ -527,6 +529,7 @@ public class MapEditor {
 					// adding country in listOfCountries
 					map.getListOfCountries().add(count);
 
+					System.out.println("Added Country: "+count.getName()+" To: "+count.getContinentName());
 				} else if (s.get(0).equals("remove")) {
 					Country country = map.getCountryFromName(s.get(1));
 
@@ -548,6 +551,7 @@ public class MapEditor {
 					// removing country name from listOfContinents
 					map.getContinentFromName(country.getContinentName()).getCountries().remove(country.getName());
 
+					System.out.println("Removed Country: "+country.getName()+" From: "+country.getContinentName());
 				}
 			}
 			break;
@@ -598,6 +602,7 @@ public class MapEditor {
 
 					}
 
+					System.out.println("Added Neighbors: "+count.getName()+", "+neig.getName());
 				} else if (s.get(0).equals("remove")) {
 
 					if (!link) {
@@ -619,6 +624,7 @@ public class MapEditor {
 
 					}
 
+					System.out.println("Removed Neighbors: "+count.getName()+", "+neig.getName());
 				}
 
 			}
