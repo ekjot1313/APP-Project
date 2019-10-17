@@ -9,10 +9,9 @@ import Game.MapReader;
 import Game.Player;
 import Game.PlayerAllocator;
 import mapWorks.MapEditor;
-import mapWorks.MapSaver;
 
 public class Main {
-	//private static MapReader mr;
+	
 	public static void main(String[] args) {
 		
 		System.out.println("Welcome to RISK GAME!");
@@ -47,14 +46,6 @@ public class Main {
 			
 		}
 		
-		/*
-		 case "showmap":
-					break;
-				case "validatemap":
-					break;
-				case "savemap":
-					break;
-		 */
 	}
 
 	private static void editmap(String filename) {
@@ -102,10 +93,8 @@ public class Main {
 	private static void loadmap(String filename) {
 		// TODO Auto-generated method stub
 		MapReader mr = new MapReader();
-		//System.out.println(System.getProperty("user.dir"));
 		String currentPath = System.getProperty("user.dir");
 		currentPath += "\\Maps\\";
-		//mr.parseMapFile(currentPath);
 		System.out.println(currentPath);
 		currentPath += filename;
 		File newFile = new File(currentPath);
@@ -124,19 +113,13 @@ public class Main {
 	private static void gameplayer(MapReader mr) {
 		
 		PlayerAllocator pa = new PlayerAllocator();
-		//pa.map = mr.map;
 		pa.allocate(mr.map);
 		pa.populateCountries(mr.map);
-		//pa.printPlayerList();
-		//pa.printPlayerCountries();
 		placearmies(pa,mr);	
 	}
 	private static void placearmies (PlayerAllocator pa,MapReader mr) {
 		ArmyAllocator aa=new ArmyAllocator();
 		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers,mr.map,0);
-		//aa.placeArmy((ArrayList<Player>) pa.listOfPlayers, mr.map,0);
-		//aa.showPlayerDetails((ArrayList<Player>) pa.listOfPlayers,mr.map);
-		// gameplay
 		GamePlay gp = new GamePlay();
 		while(true) {
 		for(int i=0;i< pa.listOfPlayers.size() ;i++)
