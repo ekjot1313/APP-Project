@@ -13,6 +13,7 @@ import dao.Map;
  * This Class is used to save the given Map object to .map file
  * 
  * @author Ekjot
+ * @author Hartaj
  *
  */
 public class MapSaver {
