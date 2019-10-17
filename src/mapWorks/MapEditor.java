@@ -25,6 +25,10 @@ public class MapEditor {
 	 */
 	public static boolean good;
 	/**
+	 * static flag to print or not
+	 */
+	public static boolean print=true;
+	/**
 	 * to store map object
 	 */
 	public Map map;
@@ -56,6 +60,7 @@ public class MapEditor {
 		this.map = new Map();
 	}
 
+	
 	/**
 	 * This method initializes map editor
 	 * 
@@ -97,7 +102,7 @@ public class MapEditor {
 				break;
 			}
 			case "validatemap": {
-				validatemap(this.map);
+				validateMap(this.map);
 				break;
 			}
 			case "savemap": {
@@ -105,11 +110,11 @@ public class MapEditor {
 					good = false;
 					continue;
 				} else
-					System.out.println("Invalid Command. Type Again.");
+					print("Invalid Command. Type Again.");
 				break;
 			}
 			default: {
-				System.out.println("Invalid Command. Type Again.");
+				print("Invalid Command. Type Again.");
 			}
 			}
 
@@ -120,11 +125,11 @@ public class MapEditor {
 		MapSaver ms = new MapSaver();
 		MapReader mr = new MapReader();
 		mr.map = this.map;
-		if (mr.validateMap(mr.map) == 0) {
+		if (mr.validateMap(mr.map) == 0 && mr.validateContinent(mr.map) == 0) {
 			ms.saveMap(mr.map, command[1]);
 			return mr.map;
 		} else {
-			System.out.println("The map file cannot be saved as the map is not connected");
+			print("The map file cannot be saved as the map is not connected");
 			return null;
 		}
 	}
@@ -134,14 +139,14 @@ public class MapEditor {
 	 * 
 	 * @param map Map object to be validated
 	 */
-	private void validatemap(Map map) {
+	private void validateMap(Map map) {
 		// TODO Auto-generated method stub
 		int notConnected = (new MapReader()).validateMap(map);
 		int notConnectedSubGraph = (new MapReader()).validateContinent(map);
 		if (notConnected == 0 && notConnectedSubGraph == 0) {
-			System.out.println("Map is valid");
+			print("Map is valid");
 		} else {
-			System.out.println("Map is invalid");
+			print("Map is invalid");
 		}
 
 	}
@@ -168,7 +173,7 @@ public class MapEditor {
 		ArrayList<ArrayList<String>> stack = new ArrayList<ArrayList<String>>();
 		int len = command.length;
 		if (len < 2) {
-			System.out.println("Invalid Command. Cannot find '-add' or '-remove'.");
+			print("Invalid Command. Cannot find '-add' or '-remove'.");
 			return;
 		}
 
@@ -181,7 +186,7 @@ public class MapEditor {
 						String countryName = command[++i], neighborCountryName = command[++i];
 						addNeighbor(countryName, neighborCountryName, stack);
 					} else {
-						System.out.println("Invalid Command. Cannot find 'countryname' or 'neighborcountryname'.");
+						print("Invalid Command. Cannot find 'countryname' or 'neighborcountryname'.");
 						good = false;
 						return;
 					}
@@ -192,21 +197,21 @@ public class MapEditor {
 						String countryName = command[++i], neighborCountryName = command[++i];
 						removeNeighbor(countryName, neighborCountryName, stack);
 					} else {
-						System.out.println("Invalid Command. Cannot find 'countryname' or 'neighborcountryname'.");
+						print("Invalid Command. Cannot find 'countryname' or 'neighborcountryname'.");
 						good = false;
 						return;
 					}
 					break;
 				}
 				default: {
-					System.out.println("Invalid Command. Cannot find '-add' or '-remove'.");
+					print("Invalid Command. Cannot find '-add' or '-remove'.");
 					good = false;
 					return;
 				}
 
 				}
 			} else {
-				System.out.println("Invalid Command. Cannot find '-add' or '-remove'.");
+				print("Invalid Command. Cannot find '-add' or '-remove'.");
 				good = false;
 				return;
 			}
@@ -216,7 +221,7 @@ public class MapEditor {
 		if (good) {
 			executeStack("editneighbor", stack);
 		} else {
-			System.out.println("Error!!!");
+			print("Error!!!");
 		}
 	}
 
@@ -231,7 +236,7 @@ public class MapEditor {
 			ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
 		if (countryName.charAt(0) == '-' || neighborCountryName.charAt(0) == '-') {
-			System.out.println("Invalid Command. Type Again.");
+			print("Invalid Command. Type Again.");
 			good = false;
 			return;
 		}
@@ -249,7 +254,7 @@ public class MapEditor {
 			ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
 		if (countryName.charAt(0) == '-' || neighborCountryName.charAt(0) == '-') {
-			System.out.println("Invalid Command. Type Again.");
+			print("Invalid Command. Type Again.");
 			good = false;
 			return;
 		}
@@ -266,7 +271,7 @@ public class MapEditor {
 		ArrayList<ArrayList<String>> stack = new ArrayList<ArrayList<String>>();
 		int len = command.length;
 		if (len < 2) {
-			System.out.println("Invalid Command. Cannot find '-add' or '-remove'.");
+			print("Invalid Command. Cannot find '-add' or '-remove'.");
 			return;
 		}
 
@@ -279,7 +284,7 @@ public class MapEditor {
 						String countryName = command[++i], continentName = command[++i];
 						addCountry(countryName, continentName, stack);
 					} else {
-						System.out.println("Invalid Command. Cannot find 'countryname' or 'continentname'.");
+						print("Invalid Command. Cannot find 'countryname' or 'continentname'.");
 						good = false;
 						return;
 					}
@@ -290,21 +295,21 @@ public class MapEditor {
 						String countryName = command[++i];
 						removeCountry(countryName, stack);
 					} else {
-						System.out.println("Invalid Command. Cannot find 'countryname'.");
+						print("Invalid Command. Cannot find 'countryname'.");
 						good = false;
 						return;
 					}
 					break;
 				}
 				default: {
-					System.out.println("Invalid Command. Cannot find '-add' or '-remove'.");
+					print("Invalid Command. Cannot find '-add' or '-remove'.");
 					good = false;
 					return;
 				}
 
 				}
 			} else {
-				System.out.println("Invalid Command. Cannot find '-add' or '-remove'.");
+				print("Invalid Command. Cannot find '-add' or '-remove'.");
 				good = false;
 				return;
 			}
@@ -325,7 +330,7 @@ public class MapEditor {
 	private static void removeCountry(String countryName, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
 		if (countryName.charAt(0) == '-') {
-			System.out.println("Invalid Command. Type Again.");
+			print("Invalid Command. Type Again.");
 			good = false;
 			return;
 		}
@@ -342,7 +347,7 @@ public class MapEditor {
 	private static void addCountry(String countryName, String continentName, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
 		if (countryName.charAt(0) == '-' || continentName.charAt(0) == '-') {
-			System.out.println("Invalid Command. Type Again.");
+			print("Invalid Command. Type Again.");
 			good = false;
 			return;
 		}
@@ -359,7 +364,7 @@ public class MapEditor {
 		ArrayList<ArrayList<String>> stack = new ArrayList<ArrayList<String>>();
 		int len = command.length;
 		if (len < 2) {
-			System.out.println("Invalid Command. Cannot find '-add' or '-remove'.");
+			print("Invalid Command. Cannot find '-add' or '-remove'.");
 			good = false;
 			return;
 		}
@@ -373,7 +378,7 @@ public class MapEditor {
 						String continentName = command[++i], continentValue = command[++i];
 						addContinent(continentName, continentValue, stack);
 					} else {
-						System.out.println("Invalid Command. Cannot find 'continentname' or 'continentvalue'.");
+						print("Invalid Command. Cannot find 'continentname' or 'continentvalue'.");
 						good = false;
 						return;
 					}
@@ -384,21 +389,21 @@ public class MapEditor {
 						String continentName = command[++i];
 						removeContinent(continentName, stack);
 					} else {
-						System.out.println("Invalid Command. Cannot find 'continentname'.");
+						print("Invalid Command. Cannot find 'continentname'.");
 						good = false;
 						return;
 					}
 					break;
 				}
 				default: {
-					System.out.println("Invalid Command. Cannot find '-add' or '-remove'.");
+					print("Invalid Command. Cannot find '-add' or '-remove'.");
 					good = false;
 					return;
 				}
 
 				}
 			} else {
-				System.out.println("Invalid Command. Cannot find '-add' or '-remove'.");
+				print("Invalid Command. Cannot find '-add' or '-remove'.");
 				good = false;
 				return;
 			}
@@ -420,7 +425,7 @@ public class MapEditor {
 	private static void removeContinent(String continentName, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
 		if (continentName.charAt(0) == '-') {
-			System.out.println("Invalid Command. Type Again.");
+			print("Invalid Command. Type Again.");
 			good = false;
 			return;
 		}
@@ -437,7 +442,7 @@ public class MapEditor {
 	private static void addContinent(String continentName, String continentValue, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
 		if (continentName.charAt(0) == '-' || continentValue.charAt(0) == '-') {
-			System.out.println("Invalid Command. Type Again.");
+			print("Invalid Command. Type Again.");
 			good = false;
 			return;
 		}
@@ -463,31 +468,32 @@ public class MapEditor {
 					try {
 						Integer.parseInt(s.get(2));
 					} catch (NumberFormatException e) {
-						System.out.println("Invalid Command. 'continentvalue' should be a number.");
+						print("Invalid Command. 'continentvalue' should be a number.");
 						good = false;
 						return;
 					} catch (NullPointerException e) {
-						System.out.println("Invalid Command. 'continentvalue' should be a number.");
+						print("Invalid Command. 'continentvalue' should be a number.");
 						good = false;
 						return;
 					}
 					if (map.getContinentFromName(s.get(1)) != null) {
-						System.out.println("Continent Already Exists.");
+						print("Continent Already Exists.");
 						return;
 					}
 
-					Continent cont = new Continent();
-					cont.setName(s.get(1));
-					cont.setContinentValue(Integer.parseInt(s.get(2)));
-					cont.setContinentIndexInListOfContinent(map.getListOfContinent().size());
+					Continent continent = new Continent();
+					continent.setName(s.get(1));
+					continent.setContinentValue(Integer.parseInt(s.get(2)));
+					continent.setContinentIndexInListOfContinent(map.getListOfContinent().size());
 
-					map.getListOfContinent().add(cont);
+					map.getListOfContinent().add(continent);
+					print("Added Continent: "+continent.getName());
 
 				} else if (s.get(0).equals("remove")) {
 					Continent continent = map.getContinentFromName(s.get(1));
 
 					if (continent == null) {
-						System.out.println("Continent Not Found.");
+						print("Continent Not Found.");
 						return;
 					}
 					ArrayList<ArrayList<String>> s1 = new ArrayList<ArrayList<String>>();
@@ -500,6 +506,7 @@ public class MapEditor {
 					// removing continent from listOfContinent
 					map.getListOfContinent().remove(continent);
 
+					print("Removed Continent: "+continent.getName());
 				}
 			}
 			break;
@@ -512,10 +519,10 @@ public class MapEditor {
 					Continent continent;
 
 					if (map.getCountryFromName(s.get(1)) != null) {
-						System.out.println("Country Already Exists.");
+						print("Country Already Exists.");
 						return;
 					} else if ((continent = map.getContinentFromName(s.get(2))) == null) {
-						System.out.println("Continent Not Found.");
+						print("Continent Not Found.");
 						return;
 					}
 
@@ -527,11 +534,12 @@ public class MapEditor {
 					// adding country in listOfCountries
 					map.getListOfCountries().add(count);
 
+					print("Added Country: "+count.getName()+" To: "+count.getContinentName());
 				} else if (s.get(0).equals("remove")) {
 					Country country = map.getCountryFromName(s.get(1));
 
 					if (country == null) {
-						System.out.println("Country Not Found.");
+						print("Country Not Found.");
 						return;
 					}
 
@@ -548,6 +556,7 @@ public class MapEditor {
 					// removing country name from listOfContinents
 					map.getContinentFromName(country.getContinentName()).getCountries().remove(country.getName());
 
+					print("Removed Country: "+country.getName()+" From: "+country.getContinentName());
 				}
 			}
 			break;
@@ -563,10 +572,10 @@ public class MapEditor {
 				Country count, neig;
 
 				if ((count = map.getCountryFromName(s.get(1))) == null) {
-					System.out.println("Country Not Found.");
+					print("Country Not Found.");
 					return;
 				} else if ((neig = map.getCountryFromName(s.get(2))) == null) {
-					System.out.println("Neighbor Country Not Found.");
+					print("Neighbor Country Not Found.");
 					return;
 				}
 
@@ -579,7 +588,7 @@ public class MapEditor {
 					if (link) {
 						// link already exists
 
-						System.out.println("Given Countries Are Already Neighbors.");
+						print("Given Countries Are Already Neighbors.");
 
 						good = false;
 						return;
@@ -598,11 +607,12 @@ public class MapEditor {
 
 					}
 
+					print("Added Neighbors: "+count.getName()+", "+neig.getName());
 				} else if (s.get(0).equals("remove")) {
 
 					if (!link) {
 						// link not found
-						System.out.println("Given Countries Are Not Neighbors.");
+						print("Given Countries Are Not Neighbors.");
 						good = false;
 						return;
 
@@ -619,6 +629,7 @@ public class MapEditor {
 
 					}
 
+					print("Removed Neighbors: "+count.getName()+", "+neig.getName());
 				}
 
 			}
@@ -626,10 +637,17 @@ public class MapEditor {
 			break;
 		}
 		default: {
-			System.out.println("Error!!!");
+			print("Error!!!");
 		}
 		}
 
+	}
+
+	private static void print(String string) {
+		// TODO Auto-generated method stub
+		if(print) {
+			System.out.println(string);
+		}
 	}
 
 	/**
