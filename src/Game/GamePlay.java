@@ -14,11 +14,11 @@ import java.util.Scanner;
  */
 public class GamePlay {
 	/**
-	 * method to calculate reinforcement armies
-	 * @param listPlayer
-	 * @param map
-	 * @param playerIndex
-	 * @return reinformentArmies
+	 * This method calculates the number of reinforcement armies
+	 * @param listPlayer List of Players
+	 * @param map Map Object
+	 * @param playerIndex Index of the player in the list
+	 * @return Number of reinforcement armies
 	 */
 	public int calculateReinforceArmies(ArrayList<Player> listPlayer ,Map map,int playerIndex) {
 		int noOfArmies = listPlayer.get(playerIndex).getAssigned_countries().size() /3;
@@ -28,7 +28,7 @@ public class GamePlay {
 	}
 	
 	/**
-	 * This function is used for reinforcement phase.
+	 * This method is used for reinforcement phase.
 	 * @param listPlayer List of players
 	 * @param map Map object which contains the map details like continents and countries.
 	 * @param playerIndex Index of a particular player in the List of player passed from main function
