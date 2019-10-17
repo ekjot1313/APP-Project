@@ -12,10 +12,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import mapWorks.MapReader;
 
-
 /**
- * This class is used to edit the map. 
- * This will be called when user will enter 'editmap' command
+ * This class is used to edit the map. This will be called when user will enter
+ * 'editmap' command
  * 
  * @author Ekjot
  *
@@ -29,42 +28,45 @@ public class MapEditor {
 	 * to store map object
 	 */
 	public Map map;
-	
+
 	/**
 	 * This method returns map object
+	 * 
 	 * @return Map Object
 	 */
 	public Map getMap() {
 		return this.map;
-		
+
 	}
-	
+
 	/**
 	 * This method sets map object
+	 * 
 	 * @param map Map Object
 	 */
 	public void setMap(Map map) {
 		this.map = map;
 	}
-	
+
 	/**
 	 * Default Constructor
 	 */
 	public MapEditor() {
-		MapEditor.good=true;
-		this.map=new Map();
+		MapEditor.good = true;
+		this.map = new Map();
 	}
-	
+
 	/**
 	 * This method initializes map editor
+	 * 
 	 * @param map Map Object
 	 * @return Map object
 	 * @throws IOException
 	 */
 	public Map mapeditorInit(Map map) throws IOException {
 		BufferedReader brConsole = new BufferedReader(new InputStreamReader(System.in));
-		
-		if(map == null)
+
+		if (map == null)
 			this.map = new Map();
 		else
 			this.map = map;
@@ -73,9 +75,9 @@ public class MapEditor {
 		good = true;
 
 		command = brConsole.readLine().split(" ");
-		
-		while (good ) {
-			
+
+		while (good) {
+
 			switch (command[0]) {
 			case "editcontinent": {
 				editContinent(command);
@@ -98,13 +100,13 @@ public class MapEditor {
 				validatemap(this.map);
 				break;
 			}
-			case "savemap":{
-				if(command.length == 2){
-					good= false;
+			case "savemap": {
+				if (command.length == 2) {
+					good = false;
 					continue;
-				}else
-				System.out.println("Invalid Command. Type Again.");
-					break;
+				} else
+					System.out.println("Invalid Command. Type Again.");
+				break;
 			}
 			default: {
 				System.out.println("Invalid Command. Type Again.");
@@ -113,47 +115,46 @@ public class MapEditor {
 
 			command = brConsole.readLine().split(" ");
 			good = true;
-				
 
 		}
 
-		//System.out.println("savemap found");
+		// System.out.println("savemap found");
 		MapSaver ms = new MapSaver();
-		MapReader mr =new MapReader();
-		mr.map=this.map;
-		if(mr.validateMap(mr.map) == 0) {
-		ms.saveMap(mr.map, command[1]);
-		return mr.map;
-		}
-		else {
+		MapReader mr = new MapReader();
+		mr.map = this.map;
+		if (mr.validateMap(mr.map) == 0) {
+			ms.saveMap(mr.map, command[1]);
+			return mr.map;
+		} else {
 			System.out.println("The map file cannot be saved as the map is not connected");
 			return null;
 		}
 	}
-	
+
 	/**
 	 * This method is used to validate the map object
+	 * 
 	 * @param map Map object to be validated
 	 */
 	private void validatemap(Map map) {
 		// TODO Auto-generated method stub
 		int notConnected = (new MapReader()).validateMap(map);
 		int notConnectedSubGraph = (new MapReader()).validateContinent(map);
-		//int notConnectedSubGraph =0;
-		//System.out.println(notConnected +" notConnected");
-		//System.out.println(notConnectedSubGraph +" notConnectedSubGraph");
-		
-		if (notConnected == 0  && notConnectedSubGraph == 0) {
+		// int notConnectedSubGraph =0;
+		// System.out.println(notConnected +" notConnected");
+		// System.out.println(notConnectedSubGraph +" notConnectedSubGraph");
+
+		if (notConnected == 0 && notConnectedSubGraph == 0) {
 			System.out.println("Map is valid");
-		}else {
+		} else {
 			System.out.println("Map is invalid");
 		}
-		
-		
+
 	}
 
 	/**
 	 * This method displays the map
+	 * 
 	 * @param map Map Object
 	 */
 	public void showMap(Map map) {
@@ -165,6 +166,7 @@ public class MapEditor {
 
 	/**
 	 * This method is used to edit neighbor
+	 * 
 	 * @param command Command given the user
 	 */
 	public void editNeighbor(String[] command) {
@@ -226,9 +228,10 @@ public class MapEditor {
 
 	/**
 	 * This method removes a neighboring country.
-	 * @param countryName Country Name
+	 * 
+	 * @param countryName         Country Name
 	 * @param neighborCountryName Neighboring country to be removed
-	 * @param stack Stack
+	 * @param stack               Stack
 	 */
 	private static void removeNeighbor(String countryName, String neighborCountryName,
 			ArrayList<ArrayList<String>> stack) {
@@ -239,15 +242,16 @@ public class MapEditor {
 			return;
 		}
 		stack.add(new ArrayList<>(Arrays.asList("remove", countryName, neighborCountryName)));
-		//System.out.println("remove: " + countryName + " , " + neighborCountryName);
+		// System.out.println("remove: " + countryName + " , " + neighborCountryName);
 
 	}
 
 	/**
 	 * This method adds a neighboring country.
-	 * @param countryName Country Name
+	 * 
+	 * @param countryName         Country Name
 	 * @param neighborCountryName Neighboring country to be added
-	 * @param stack Stack
+	 * @param stack               Stack
 	 */
 	private static void addNeighbor(String countryName, String neighborCountryName,
 			ArrayList<ArrayList<String>> stack) {
@@ -258,11 +262,12 @@ public class MapEditor {
 			return;
 		}
 		stack.add(new ArrayList<>(Arrays.asList("add", countryName, neighborCountryName)));
-		//System.out.println("add: " + countryName + " , " + neighborCountryName);
+		// System.out.println("add: " + countryName + " , " + neighborCountryName);
 	}
 
 	/**
 	 * This method is used to edit country
+	 * 
 	 * @param command Command given be the user
 	 */
 	public void editCountry(String[] command) {
@@ -322,8 +327,9 @@ public class MapEditor {
 
 	/**
 	 * This method removes a country.
+	 * 
 	 * @param countryName Country to be removed
-	 * @param stack Stack
+	 * @param stack       Stack
 	 */
 	private static void removeCountry(String countryName, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
@@ -333,15 +339,16 @@ public class MapEditor {
 			return;
 		}
 		stack.add(new ArrayList<>(Arrays.asList("remove", countryName)));
-	//	System.out.println("remove: " + countryName);
+		// System.out.println("remove: " + countryName);
 
 	}
 
 	/**
 	 * This method adds a country.
-	 * @param countryName Country to be added
+	 * 
+	 * @param countryName   Country to be added
 	 * @param continentName Continent in which the country is to be added
-	 * @param stack Stack
+	 * @param stack         Stack
 	 */
 	private static void addCountry(String countryName, String continentName, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
@@ -351,12 +358,13 @@ public class MapEditor {
 			return;
 		}
 		stack.add(new ArrayList<>(Arrays.asList("add", countryName, continentName)));
-	//	System.out.println("add: " + countryName + " , " + continentName);
+		// System.out.println("add: " + countryName + " , " + continentName);
 
 	}
 
 	/**
 	 * This method is used to edit continent
+	 * 
 	 * @param command Command given by the user
 	 */
 	public void editContinent(String[] command) {
@@ -418,8 +426,9 @@ public class MapEditor {
 
 	/**
 	 * This method removes a continent.
+	 * 
 	 * @param continentName Continent to be removed
-	 * @param stack Stack
+	 * @param stack         Stack
 	 */
 	private static void removeContinent(String continentName, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
@@ -429,15 +438,16 @@ public class MapEditor {
 			return;
 		}
 		stack.add(new ArrayList<>(Arrays.asList("remove", continentName)));
-	//	System.out.println("remove: " + continentName);
+		// System.out.println("remove: " + continentName);
 
 	}
 
 	/**
 	 * This method adds a continent.
-	 * @param continentName Continent to be added
+	 * 
+	 * @param continentName  Continent to be added
 	 * @param continentValue Continent Value
-	 * @param stack Stack
+	 * @param stack          Stack
 	 */
 	private static void addContinent(String continentName, String continentValue, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
@@ -447,11 +457,12 @@ public class MapEditor {
 			return;
 		}
 		stack.add(new ArrayList<>(Arrays.asList("add", continentName, continentValue)));
-		//System.out.println("add: " + continentName + " , " + continentValue);
+		// System.out.println("add: " + continentName + " , " + continentValue);
 	}
 
 	/**
 	 * This method executes command stacks of sub-commands
+	 * 
 	 * @param cmd Command
 	 * @param stk Stack
 	 */
@@ -476,7 +487,7 @@ public class MapEditor {
 						good = false;
 						return;
 					}
-						//System.out.println(map);
+					// System.out.println(map);
 					if (map.getContinentFromName(s.get(1)) != null) {
 						System.out.println("Continent Already Exists.");
 						return;
@@ -641,13 +652,14 @@ public class MapEditor {
 		}
 
 	}
-	
+
 	/**
 	 * This method removes the bridge between two continents
+	 * 
 	 * @param continent1Name Name of first Continent
 	 * @param continent2Name Name of second Continent
-	 * @param country1Name Name of first Country
-	 * @param country2Name Name of second Country
+	 * @param country1Name   Name of first Country
+	 * @param country2Name   Name of second Country
 	 * @return true if removed else false
 	 */
 	public boolean removeBridge(String continent1Name, String continent2Name, String country1Name,
@@ -664,8 +676,7 @@ public class MapEditor {
 			if (bridge.getCountry1().equals(country1Name) && bridge.getCountry2().equals(country2Name)) {
 				continent1.getBridges().remove(bridge);
 
-			}
-			else
+			} else
 				return !good;
 		}
 
@@ -675,8 +686,7 @@ public class MapEditor {
 			if (bridge.getCountry1().equals(country2Name) && bridge.getCountry2().equals(country1Name)) {
 				continent2.getBridges().remove(bridge);
 
-			}
-			else
+			} else
 				return !good;
 		}
 		return good;
@@ -684,19 +694,18 @@ public class MapEditor {
 
 	/**
 	 * This method creates a bridge
+	 * 
 	 * @param continent1Name Name of first continent
 	 * @param continent2Name Name of second continent
-	 * @param country1Name Name of first country
-	 * @param country2Name Name of second country
+	 * @param country1Name   Name of first country
+	 * @param country2Name   Name of second country
 	 */
-	private void createBridge(String continent1Name, String continent2Name, String country1Name,
-			String country2Name) {
+	private void createBridge(String continent1Name, String continent2Name, String country1Name, String country2Name) {
 		// TODO Auto-generated method stub
 		Bridge bridgeA2B = new Bridge(continent2Name, country1Name, country2Name);
 		Bridge bridgeB2A = new Bridge(continent1Name, country2Name, country1Name);
 		map.getContinentFromName(continent1Name).getBridges().add(bridgeA2B);
 		map.getContinentFromName(continent2Name).getBridges().add(bridgeB2A);
 	}
-
 
 }

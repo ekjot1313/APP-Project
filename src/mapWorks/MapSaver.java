@@ -15,10 +15,9 @@ import dao.Map;
  * @author Ekjot
  *
  */
-public class MapSaver { 
+public class MapSaver {
 	public Map map;
 	public String fileName;
-
 	public String message1;
 	public String message2;
 	public String mapName;
@@ -27,7 +26,8 @@ public class MapSaver {
 
 	/**
 	 * This method saves the map to .map file
-	 * @param map Map Object
+	 * 
+	 * @param map      Map Object
 	 * @param fileName Name of the file
 	 * @throws IOException
 	 */
@@ -38,53 +38,40 @@ public class MapSaver {
 		this.mapName = map.getMapName();
 		this.listOfContinent = map.getListOfContinent();
 		this.listOfCountries = map.getListOfCountries();
-
 		String currentPath = System.getProperty("user.dir") + "\\Maps\\";
 		String mapPath = currentPath + fileName + ".map";
-
 		BufferedWriter bwFile = new BufferedWriter(new FileWriter(mapPath));
-
 		String content = "";
-		
-		
-
-		content+=(message1 + "\r\n");
-		content+=("\r\nname " + mapName + " Map\r\n");
-		content+=("\r\n"+message2 + "\r\n");
-		content+=("\r\n[continents]\r\n");
-
+		content += (message1 + "\r\n");
+		content += ("\r\nname " + mapName + " Map\r\n");
+		content += ("\r\n" + message2 + "\r\n");
+		content += ("\r\n[continents]\r\n");
 		for (Continent continent : map.getListOfContinent()) {
-			content+=(continent.getName() + " " + continent.getContinentValue() + " 00000\r\n");
+			content += (continent.getName() + " " + continent.getContinentValue() + " 00000\r\n");
 		}
-		content+=("\r\n[countries]\r\n");
-		
-		String borders="";
-		
+		content += ("\r\n[countries]\r\n");
+		String borders = "";
 		for (Country country : map.getListOfCountries()) {
-			int countryIndex=map.getListOfCountries().indexOf(country)+1;
-			int continentIndex = map.getListOfContinent().indexOf(map.getContinentFromName(country.getContinentName()))+1;
-			
-			content+=(countryIndex + " " + country.getName() + " " + continentIndex + "\r\n");
-			borders+=(countryIndex+"");
-			for(String neighborName:country.getNeighbors()) {
-				int neighborIndex=map.getListOfCountries().indexOf(map.getCountryFromName(neighborName))+1;
-				borders+=(" "+neighborIndex);
-			}
-			borders+=("\r\n");
-			
-		}
+			int countryIndex = map.getListOfCountries().indexOf(country) + 1;
+			int continentIndex = map.getListOfContinent().indexOf(map.getContinentFromName(country.getContinentName()))
+					+ 1;
 
-		content+=("\r\n[borders]\r\n"+borders);
-		
+			content += (countryIndex + " " + country.getName() + " " + continentIndex + "\r\n");
+			borders += (countryIndex + "");
+			for (String neighborName : country.getNeighbors()) {
+				int neighborIndex = map.getListOfCountries().indexOf(map.getCountryFromName(neighborName)) + 1;
+				borders += (" " + neighborIndex);
+			}
+			borders += ("\r\n");
+		}
+		content += ("\r\n[borders]\r\n" + borders);
 		bwFile.write(content);
 		bwFile.close();
-		
-		
-
 	}
 
 	/**
 	 * This method returns the name of the file
+	 * 
 	 * @return File Name
 	 */
 	public String getFileName() {
@@ -93,6 +80,7 @@ public class MapSaver {
 
 	/**
 	 * This method sets the name of the file
+	 * 
 	 * @param fileName File Name to set
 	 */
 	public void setFileName(String fileName) {
@@ -101,6 +89,7 @@ public class MapSaver {
 
 	/**
 	 * This method returns the map object
+	 * 
 	 * @return Map Object
 	 */
 	public Map getMap() {
@@ -109,10 +98,10 @@ public class MapSaver {
 
 	/**
 	 * This method sets the map object
-	 * @param map Map Object 
+	 * 
+	 * @param map Map Object
 	 */
 	public void setMap(Map map) {
 		this.map = map;
 	}
-
 }

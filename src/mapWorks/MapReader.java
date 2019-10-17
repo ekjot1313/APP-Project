@@ -11,15 +11,17 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
+
 /**
  * This class reads the map file and displays it to user
+ * 
  * @author Piyush
  * @author Mitalee Naik
  * @since 1.0.0
  *
  */
 public class MapReader {
-	
+
 	/**
 	 * Map to store the current map object
 	 */
@@ -35,17 +37,18 @@ public class MapReader {
 	/**
 	 * Map to store the Index of countries
 	 */
-	public HashMap<Integer, List<Integer>> mapOfWorld ;
-	
+	public HashMap<Integer, List<Integer>> mapOfWorld;
+
 	/**
 	 * Default Constructor
 	 */
-	public MapReader(){
+	public MapReader() {
 		this.map = new Map();
 	}
-	
+
 	/**
 	 * This method parses the map file
+	 * 
 	 * @param file Map file to be parsed
 	 * @return 1 if successful else 0
 	 */
@@ -53,11 +56,11 @@ public class MapReader {
 		map = new Map();
 
 		try {
-			
+
 			bufferReaderForFile = new BufferedReader(new FileReader(file));
-			
+
 			while ((currentLine = bufferReaderForFile.readLine()) != null) {
-				//System.out.println("curr line :" +currentLine);
+				// System.out.println("curr line :" +currentLine);
 				if (currentLine.contains("[continents]")) {
 					loadContinents();
 				}
@@ -70,16 +73,16 @@ public class MapReader {
 				}
 
 			}
-			//System.out.println("mapOfworld "+mapOfWorld.toString());
+			// System.out.println("mapOfworld "+mapOfWorld.toString());
 			// validate map call
 			int notConnected = validateMap(map);
 			int notConnectedSubGraph = validateContinent(map);
 			System.out.println();
-			//System.out.println(notConnected +" "+notConnectedSubGraph);
+			// System.out.println(notConnected +" "+notConnectedSubGraph);
 			if (notConnected == 0 && notConnectedSubGraph == 0) {
 				System.out.println("Valid Map");
 				// display
-				//display(map);
+				// display(map);
 			} else {
 				System.out.println("Invalid map");
 				return 0;
@@ -93,9 +96,10 @@ public class MapReader {
 		}
 		return 1;
 	}
-	
+
 	/**
 	 * This method loads borders to the map object
+	 * 
 	 * @throws NumberFormatException
 	 * @throws IOException
 	 */
@@ -131,9 +135,10 @@ public class MapReader {
 		}
 
 	}
-	
+
 	/**
 	 * This method loads countries to the map object
+	 * 
 	 * @throws NumberFormatException
 	 * @throws IOException
 	 */
@@ -156,9 +161,10 @@ public class MapReader {
 		}
 
 	}
-	
+
 	/**
 	 * This method loads the continents to the map object
+	 * 
 	 * @throws NumberFormatException
 	 * @throws IOException
 	 */
@@ -166,8 +172,8 @@ public class MapReader {
 		// TODO Auto-generated method stub
 
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
-			
-			//System.out.println(currentLine);
+
+			// System.out.println(currentLine);
 			if (currentLine.length() == 0) {
 				continue;
 			}
@@ -183,97 +189,100 @@ public class MapReader {
 
 	/**
 	 * This method displays the map
+	 * 
 	 * @param map2 Map object of the map to be displayed
 	 */
 	public void display(Map map2) {
 		// TODO Auto-generated method stub
-		map =map2;
-			// display
-			if (map2.getListOfContinent().size() > 0) {
-				for (Continent c : map2.getListOfContinent()) {
-					System.out.println();
-					System.out.println("Continent :" + c.getName());
+		map = map2;
+		// display
+		if (map2.getListOfContinent().size() > 0) {
+			for (Continent c : map2.getListOfContinent()) {
+				System.out.println();
+				System.out.println("Continent :" + c.getName());
 
-					if(c.getBridges().size()>0) {
+				if (c.getBridges().size() > 0) {
 					System.out.println("Bridges");
 					for (Bridge bridge : c.getBridges()) {
-						System.out.println("To Continent: "+bridge.getNeigContinent() + "|| From Country: " + bridge.getCountry1() + " To country: " + bridge.getCountry2());
+						System.out.println("To Continent: " + bridge.getNeigContinent() + "|| From Country: "
+								+ bridge.getCountry1() + " To country: " + bridge.getCountry2());
 					}
 
 				}
-					for (String c1 : c.getCountries()) {
-						System.out.print("Country :" + c1 + ": Neighbours -> ");
+				for (String c1 : c.getCountries()) {
+					System.out.print("Country :" + c1 + ": Neighbours -> ");
 
-						for (Country country : map2.getListOfCountries()) {
-							if (c1.equals(country.getName())) {
+					for (Country country : map2.getListOfCountries()) {
+						if (c1.equals(country.getName())) {
 
-								for (String c2 : country.getNeighbors()) {
-									System.out.print(c2 + " || ");
-								}
-
-								System.out.println();
+							for (String c2 : country.getNeighbors()) {
+								System.out.print(c2 + " || ");
 							}
-						}
 
+							System.out.println();
+						}
 					}
 
 				}
-			} else {
-				System.out.println("Map Empty.");
+
 			}
-		
-		
+		} else {
+			System.out.println("Map Empty.");
+		}
+
 	}
-	
+
 	/**
 	 * This method displays the map
+	 * 
 	 * @param map2 Map object of the map to be displayed
 	 */
 	public void displayAll(Map map2) {
 		// TODO Auto-generated method stub
-		map =map2;
-			// display
-			if (map2.getListOfContinent().size() > 0) {
-				for (Continent c : map2.getListOfContinent()) {
-					System.out.println();
-					System.out.println("Continent :" + c.getName());
+		map = map2;
+		// display
+		if (map2.getListOfContinent().size() > 0) {
+			for (Continent c : map2.getListOfContinent()) {
+				System.out.println();
+				System.out.println("Continent :" + c.getName());
 
-					if(c.getBridges().size()>0) {
+				if (c.getBridges().size() > 0) {
 					System.out.println("Bridges");
 					for (Bridge bridge : c.getBridges()) {
-						System.out.println("To Continent: "+bridge.getNeigContinent() + "|| From Country: " + bridge.getCountry1() + " To country: " + bridge.getCountry2());
+						System.out.println("To Continent: " + bridge.getNeigContinent() + "|| From Country: "
+								+ bridge.getCountry1() + " To country: " + bridge.getCountry2());
 					}
 
 				}
-					for (String c1 : c.getCountries()) {
-						//System.out.print("Country :" + c1 + ": Neighbours -> ");
-						System.out.print("Country :" + c1);
-						System.out.print(" No of Armies :"+map2.getCountryFromName(c1).getNoOfArmies());
-						System.out.println(" Owner :"+map2.getCountryFromName(c1).getOwner());
-						System.out.print("Neighbors :");
-						for (Country country : map2.getListOfCountries()) {
-							if (c1.equals(country.getName())) {
+				for (String c1 : c.getCountries()) {
+					// System.out.print("Country :" + c1 + ": Neighbours -> ");
+					System.out.print("Country :" + c1);
+					System.out.print(" No of Armies :" + map2.getCountryFromName(c1).getNoOfArmies());
+					System.out.println(" Owner :" + map2.getCountryFromName(c1).getOwner());
+					System.out.print("Neighbors :");
+					for (Country country : map2.getListOfCountries()) {
+						if (c1.equals(country.getName())) {
 
-								for (String c2 : country.getNeighbors()) {
-									System.out.print(c2 + " || ");
-								}
-
-								System.out.println();
+							for (String c2 : country.getNeighbors()) {
+								System.out.print(c2 + " || ");
 							}
-						}
 
+							System.out.println();
+						}
 					}
 
 				}
-			} else {
-				System.out.println("Map Empty.");
+
 			}
-		
-		
+		} else {
+			System.out.println("Map Empty.");
+		}
+
 	}
-	
+
 	/**
-	 * This method checks whether the map is valid or  not
+	 * This method checks whether the map is valid or not
+	 * 
 	 * @param map Map to be validated
 	 * @return 0 if valid else 1
 	 */
@@ -288,8 +297,8 @@ public class MapReader {
 			for (int i = 0; i < map2.getListOfCountries().size(); i++) {
 				List<Integer> templist = new ArrayList<Integer>();
 				for (int j = 0; j < map2.getListOfCountries().get(i).getNeighbors().size(); j++)
-					templist.add(
-							map2.getListOfCountries().indexOf(map2.getCountryFromName(map2.getListOfCountries().get(i).getNeighbors().get(j))));
+					templist.add(map2.getListOfCountries()
+							.indexOf(map2.getCountryFromName(map2.getListOfCountries().get(i).getNeighbors().get(j))));
 				mapOfWorld.put(i, templist);
 
 			}
@@ -302,10 +311,10 @@ public class MapReader {
 			LinkedList<Integer> queue = new LinkedList<Integer>();
 			queue.add(0);
 			visited[0] = true;
-		//	 System.out.println(mapOfWorld.toString());
+			// System.out.println(mapOfWorld.toString());
 
 			while (queue.size() > 0) {
-				 //System.out.println(queue.peek());
+				// System.out.println(queue.peek());
 				Integer c1 = queue.poll();
 				Iterator<Integer> i = mapOfWorld.get(c1).listIterator();
 				while (i.hasNext()) {
@@ -320,10 +329,10 @@ public class MapReader {
 			}
 
 			for (int i = 0; i < visited.length; i++) {
-				//System.out.print(i + "=" + visited[i] + " || ");
+				// System.out.print(i + "=" + visited[i] + " || ");
 				if (!visited[i]) {
 					notConnected = 1;
-				//	System.out.println("Not a connected graph");
+					// System.out.println("Not a connected graph");
 					break;
 				}
 			}
@@ -332,15 +341,16 @@ public class MapReader {
 			notConnected = 1;
 		return notConnected;
 	}
-	
+
 	/**
 	 * This method checks if duplicate continents or countries exist
+	 * 
 	 * @param map Map Object
-	 * @return 0 if no duplicates else  1
+	 * @return 0 if no duplicates else 1
 	 */
 	public int checkDuplicates(Map map3) {
 		int duplicate = 0;
-		for (int i = 0; i < (map3.getListOfContinent().size()-1); i++)
+		for (int i = 0; i < (map3.getListOfContinent().size() - 1); i++)
 			for (int j = i + 1; j < map3.getListOfContinent().size(); j++)
 				if ((map3.getListOfContinent().get(i).getName())
 						.equalsIgnoreCase(map3.getListOfContinent().get(j).getName())) {
@@ -349,7 +359,7 @@ public class MapReader {
 					break;
 				}
 		if (duplicate == 0)
-			for (int i = 0; i < (map3.getListOfCountries().size()-1); i++)
+			for (int i = 0; i < (map3.getListOfCountries().size() - 1); i++)
 				for (int j = i + 1; j < map.getListOfCountries().size(); j++)
 					if ((map3.getListOfCountries().get(i).getName())
 							.equalsIgnoreCase(map3.getListOfCountries().get(j).getName())) {
@@ -360,19 +370,18 @@ public class MapReader {
 		return duplicate;
 	}
 
-
 	/**
 	 * This method returns the currently loaded map
+	 * 
 	 * @return Map Object
 	 */
 	public Map getMap() {
 		return this.map;
 	}
-	
-	
-	
+
 	/**
-	 * This method checks if every subgraph is  valid
+	 * This method checks if every subgraph is valid
+	 * 
 	 * @param map Map Object
 	 * @return 0 if valid else 1
 	 */
@@ -382,30 +391,27 @@ public class MapReader {
 		MapReader mr = new MapReader();
 		Map newMap = new Map(map);
 		mpeNew.map = newMap;
-		
-			for(int i =0;i<newMap.getListOfContinent().size();i++) {
-				String remainingContinent ="editcontinent "; 
-			
-				for(int j=0;j<newMap.getListOfContinent().size();j++) {
-					if(i != j )
-						remainingContinent +="-remove "+newMap.getListOfContinent().get(j).getName()+" ";
-					
-				}
-				remainingContinent.trim();
-				
-				mpeNew.editContinent(remainingContinent.split(" "));
-				
-				if(mr.validateMap(mpeNew.map) == 1) {
-					return 1;
-				}
-				newMap = new Map(map);
-				mpeNew.map = newMap;
+
+		for (int i = 0; i < newMap.getListOfContinent().size(); i++) {
+			String remainingContinent = "editcontinent ";
+
+			for (int j = 0; j < newMap.getListOfContinent().size(); j++) {
+				if (i != j)
+					remainingContinent += "-remove " + newMap.getListOfContinent().get(j).getName() + " ";
+
 			}
-			
-		
+			remainingContinent.trim();
+
+			mpeNew.editContinent(remainingContinent.split(" "));
+
+			if (mr.validateMap(mpeNew.map) == 1) {
+				return 1;
+			}
+			newMap = new Map(map);
+			mpeNew.map = newMap;
+		}
+
 		return 0;
 	}
-	
-	
 
 }

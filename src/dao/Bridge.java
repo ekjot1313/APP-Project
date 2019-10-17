@@ -19,28 +19,29 @@ public class Bridge {
 	 * To store To country
 	 */
 	private String country2;
-	
+
 	/**
 	 * Constructor to initialize variables
+	 * 
 	 * @param neigContinent Neighboring Continent
-	 * @param country1 First Country
-	 * @param country2 Second Country
+	 * @param country1      First Country
+	 * @param country2      Second Country
 	 */
-	public Bridge(String neigContinent,String country1,String country2) {
+	public Bridge(String neigContinent, String country1, String country2) {
 		this.neigContinent = neigContinent;
 		this.country1 = country1;
 		this.country2 = country2;
 	}
-	
+
 	public Bridge(Bridge b) {
 		this.neigContinent = b.neigContinent;
 		this.country1 = b.country1;
 		this.country2 = b.country2;
 	}
-	
 
 	/**
 	 * This method returns the neighboring continent
+	 * 
 	 * @return Neighboring Continent
 	 */
 	public String getNeigContinent() {
@@ -49,14 +50,16 @@ public class Bridge {
 
 	/**
 	 * This method sets the neighboring continent
+	 * 
 	 * @param neigCont Neighboring Continent
 	 */
 	public void setNeigContinent(String neigCont) {
 		this.neigContinent = neigCont;
 	}
-	
+
 	/**
 	 * This method returns the name of first country
+	 * 
 	 * @return Country Name
 	 */
 	public String getCountry1() {
@@ -65,6 +68,7 @@ public class Bridge {
 
 	/**
 	 * This method sets the name of first country
+	 * 
 	 * @param count1 Country Name
 	 */
 	public void setCountry1(String count1) {
@@ -73,6 +77,7 @@ public class Bridge {
 
 	/**
 	 * This method returns the name of the second country
+	 * 
 	 * @return Country Name
 	 */
 	public String getCountry2() {
@@ -81,6 +86,7 @@ public class Bridge {
 
 	/**
 	 * This method sets the name of second country
+	 * 
 	 * @param count2 Country Name
 	 */
 	public void setCountry2(String count2) {
