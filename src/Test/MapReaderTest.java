@@ -28,8 +28,8 @@ import Game.GamePlay;
 import Game.PlayerAllocator;
 
 /**
+ * Test Class
  * @author divya_000
- *
  */
 public class MapReaderTest {
 
@@ -44,6 +44,7 @@ public class MapReaderTest {
 	static Continent continent;
 	
 	/**
+	 * This method is used for initialization and set up before running tests
 	 * @throws java.lang.Exception
 	 */
 	@BeforeClass
@@ -116,7 +117,7 @@ public class MapReaderTest {
 		
 	}
 	/**
-	 * Function to test the gameplayer command
+	 * Method to test the 'gameplayer' command
 	 */
 	@Test
 	public void testGameplayerCommand() {
@@ -135,8 +136,8 @@ public class MapReaderTest {
 		assertTrue(result==1);	
 	}
 	
-	/*
-	 * method to check calculation of number of reinforcement armies for a player
+	/**
+	 * Method to check calculation of number of reinforcement armies for a player
 	 */
 	@Test
 	public void testcalculateReinforceArmies() {
@@ -146,8 +147,8 @@ public class MapReaderTest {
 		assertEquals(3, reinforce);
 	}
 	
-	/*
-	 * method to check the number of assigned armies to players
+	/**
+	 * Method to check the number of assigned armies to players
 	 */
 	@Test
 	public void testNumerOfAssignedArmies() {
@@ -157,14 +158,15 @@ public class MapReaderTest {
 	}
 	
 	/**
-	 * method to test whether the bridge between two continents is removed
+	 * Method to test whether the bridge between two continents is removed
 	 */
 	@Test
 	public void testRemoveBridges() {
 		assertTrue(mapEditor.removeBridge("asia", "africa", "india", "congo"));
 	}
+	
 	/**
-	 * method to test whether the continent is valid or not
+	 * Method to test whether the continent is valid or not
 	 */
 	@Test
 	public void testValidateContinent() {
@@ -173,8 +175,8 @@ public class MapReaderTest {
 		
 	}
 	
-	/*
-	 *method to test whether the map is saved 
+	/**
+	 * Method to test whether the map is saved 
 	 */
 	@Test
 	public void testMapSaver() {
@@ -194,8 +196,8 @@ public class MapReaderTest {
 		
 	}
 	
-	/*
-	 * method to check whether the given country exists or not 
+	/**
+	 * Method to check whether the given country exists or not 
 	 */
 	@Test
 	public void testCountryFromName() {
@@ -204,8 +206,8 @@ public class MapReaderTest {
 		assertEquals("india", country.getName());
 	}
 	
-	/*
-	 * method to check whether the given continent exists or not 
+	/**
+	 * Method to check whether the given continent exists or not 
 	 */
 	@Test
 	public void testContinentFromName() {
