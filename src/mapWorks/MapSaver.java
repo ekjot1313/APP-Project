@@ -29,7 +29,7 @@ public class MapSaver {
 	 * 
 	 * @param map      Map Object
 	 * @param fileName Name of the file
-	 * @throws IOException
+	 * @throws IOException for Buffered Reader
 	 */
 	public void saveMap(Map map, String fileName) throws IOException {
 

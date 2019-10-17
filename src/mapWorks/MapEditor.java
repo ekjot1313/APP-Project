@@ -61,7 +61,7 @@ public class MapEditor {
 	 * 
 	 * @param map Map Object
 	 * @return Map object
-	 * @throws IOException
+	 * @throws IOException BufferedReader used for user input
 	 */
 	public Map mapeditorInit(Map map) throws IOException {
 		BufferedReader brConsole = new BufferedReader(new InputStreamReader(System.in));
@@ -464,7 +464,7 @@ public class MapEditor {
 	 * This method executes command stacks of sub-commands
 	 * 
 	 * @param cmd Command
-	 * @param stk Stack
+	 * @param stack ArrayList of ArrayList of string to store all commands
 	 */
 	private void executeStack(String cmd, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub

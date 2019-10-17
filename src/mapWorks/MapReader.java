@@ -100,8 +100,8 @@ public class MapReader {
 	/**
 	 * This method loads borders to the map object
 	 * 
-	 * @throws NumberFormatException
-	 * @throws IOException
+	 * @throws NumberFormatException for Buffered Reader
+	 * @throws IOException for Buffered Reader
 	 */
 	private void loadBorders() throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
@@ -139,8 +139,8 @@ public class MapReader {
 	/**
 	 * This method loads countries to the map object
 	 * 
-	 * @throws NumberFormatException
-	 * @throws IOException
+	 * @throws NumberFormatException for Buffered Reader
+	 * @throws IOException for Buffered Reader
 	 */
 	private void loadCountries() throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
@@ -165,8 +165,8 @@ public class MapReader {
 	/**
 	 * This method loads the continents to the map object
 	 * 
-	 * @throws NumberFormatException
-	 * @throws IOException
+	 * @throws NumberFormatException for Buffered Reader
+	 * @throws IOException for Buffered Reader
 	 */
 	private void loadContinents() throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
@@ -283,7 +283,7 @@ public class MapReader {
 	/**
 	 * This method checks whether the map is valid or not
 	 * 
-	 * @param map Map to be validated
+	 * @param map2 Map to be validated
 	 * @return 0 if valid else 1
 	 */
 	public int validateMap(Map map2) {
@@ -345,7 +345,7 @@ public class MapReader {
 	/**
 	 * This method checks if duplicate continents or countries exist
 	 * 
-	 * @param map Map Object
+	 * @param map3 Map Object
 	 * @return 0 if no duplicates else 1
 	 */
 	public int checkDuplicates(Map map3) {

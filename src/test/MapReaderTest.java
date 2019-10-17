@@ -1,5 +1,5 @@
 
-package Test;
+package test;
 
 import static org.junit.Assert.*;
 
@@ -7,22 +7,19 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import mapWorks.MapEditor;
 import mapWorks.MapSaver;
-import Game.ArmyAllocator;
-import Game.GamePlay;
-import Game.PlayerAllocator;
 import dao.Continent;
 import dao.Country;
 import dao.Map;
 import mapWorks.MapReader;
 import dao.Player;
+import game.ArmyAllocator;
+import game.GamePlay;
+import game.PlayerAllocator;
 
 /**
  * Test Class
@@ -46,11 +43,10 @@ public class MapReaderTest {
 	/**
 	 * This method is used for initialization and set up before running tests
 	 * 
-	 * @throws java.lang.Exception
+	 * 
 	 */
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-
+	@Before
+	public void setUp()  {
 		mapEditor = new MapEditor();
 		mapEditor.editContinent(("editcontinent -add asia 10 -add africa 14").split(" "));
 		mapEditor.editCountry(
@@ -72,29 +68,8 @@ public class MapReaderTest {
 		mapSaver = new MapSaver();
 		country = new Country();
 		continent = new Continent();
-
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@After
-	public void tearDown() throws Exception {
-	}
 
 	/**
 	 * Test method for {@link Game.MapReader#validateMap()}.

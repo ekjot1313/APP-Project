@@ -3,11 +3,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Game.ArmyAllocator;
-import Game.GamePlay;
 import mapWorks.MapReader;
-import Game.PlayerAllocator;
 import dao.Player;
+import game.ArmyAllocator;
+import game.GamePlay;
+import game.PlayerAllocator;
 import mapWorks.MapEditor;
 
 /**
