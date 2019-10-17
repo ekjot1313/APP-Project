@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 import Game.ArmyAllocator;
 import Game.GamePlay;
-import Game.MapReader;
-import Game.Player;
+import mapWorks.MapReader;
 import Game.PlayerAllocator;
+import dao.Player;
 import mapWorks.MapEditor;
 /** 
  * This is the main class
@@ -22,9 +22,9 @@ public class Main {
 		System.out.println("Welcome to RISK GAME!");
 		
 		
-		
+		Scanner sc = new Scanner(System.in);
 		while(true) {
-			Scanner sc = new Scanner(System.in);
+			
 			System.out.println("Type \nloadmap <filename> -load an existing map \neditmap <filename> -edit an existing map or create a new map");
 			String[] commands = sc.nextLine().split(" ");
 			if(commands.length == 1 && !commands[0].equals("exit") ) {
@@ -40,6 +40,7 @@ public class Main {
 					break;	
 
 				case "exit":
+					sc.close();
 					return;
 					
 				default:
@@ -50,7 +51,6 @@ public class Main {
 			}
 			
 		}
-		
 	}
 	
 	/** 

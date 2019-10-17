@@ -1,4 +1,4 @@
-package Game;
+package dao;
 
 import java.util.*;
 

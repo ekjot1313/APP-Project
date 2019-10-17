@@ -6,7 +6,6 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -14,16 +13,16 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import Game.Map;
-import Game.MapReader;
-import Game.Player;
 import mapWorks.MapEditor;
 import mapWorks.MapSaver;
 import Game.ArmyAllocator;
-import Game.Continent;
-import Game.Country;
 import Game.GamePlay;
 import Game.PlayerAllocator;
+import dao.Continent;
+import dao.Country;
+import dao.Map;
+import mapWorks.MapReader;
+import dao.Player;
 
 /**
  * Test Class

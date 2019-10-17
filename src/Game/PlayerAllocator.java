@@ -2,6 +2,11 @@ package Game;
 
 import java.util.*;
 
+import dao.Map;
+import dao.Player;
+import mapWorks.MapReader;
+
+
 /**
  * This class is used to add or remove players and also to assign countries to players initially
  * @author Piyush
@@ -83,7 +88,7 @@ public class PlayerAllocator{
 				continue;
 			}
 		}while(!cmd.equals("populatecountries") || listOfPlayers.size()<=1);
-		
+		in.close();
 	}
 	
 	/**
@@ -120,7 +125,7 @@ public class PlayerAllocator{
 	 */
 	public int validate(String command) {
 		String str[]=command.split(" ");
-		int flag=0,count;
+		int count;
 		if((str.length%2)!=0) {
 			if(str[0].equals("populatecountries"))
 				return 1;

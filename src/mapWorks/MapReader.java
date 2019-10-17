@@ -1,6 +1,9 @@
-package Game;
+package mapWorks;
 
-import Game.Map;
+import dao.Bridge;
+import dao.Continent;
+import dao.Country;
+import dao.Map;
 import mapWorks.MapEditor;
 
 import java.io.BufferedReader;
@@ -21,10 +24,6 @@ public class MapReader {
 	 * Map to store the current map object
 	 */
 	public Map map;
-	/**
-	 * FileObject to parse the map file
-	 */
-	private File fileObject;
 	/**
 	 * BufferedReader to process map file
 	 */
@@ -308,7 +307,7 @@ public class MapReader {
 			while (queue.size() > 0) {
 				 //System.out.println(queue.peek());
 				Integer c1 = queue.poll();
-				Iterator i = mapOfWorld.get(c1).listIterator();
+				Iterator<Integer> i = mapOfWorld.get(c1).listIterator();
 				while (i.hasNext()) {
 					int n = (int) i.next();
 					if (visited[n] == false) {

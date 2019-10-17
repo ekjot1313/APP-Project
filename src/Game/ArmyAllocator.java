@@ -2,6 +2,12 @@ package Game;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import dao.Country;
+import dao.Map;
+import dao.Player;
+import mapWorks.MapReader;
+
 import java.util.Random;
 
 /** 
@@ -124,7 +130,7 @@ public class ArmyAllocator {
 		if(isPlaceAll)
 		placeAll( listOfPLayers, map);
 		}	
-		
+		sc.close();
 	}
 	
 	/**

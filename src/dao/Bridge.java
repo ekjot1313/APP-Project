@@ -1,4 +1,4 @@
-package Game;
+package dao;
 
 /**
  * This class stores details of the bridges between two continents

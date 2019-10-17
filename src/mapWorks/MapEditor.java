@@ -1,17 +1,17 @@
 package mapWorks;
 
-import Game.Bridge;
-import Game.Continent;
-import Game.Country;
-import Game.Map;
+import dao.Bridge;
+import dao.Continent;
+import dao.Country;
+import dao.Map;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import mapWorks.MapReader;
 
-import Game.MapReader;
 
 /**
  * This class is used to edit the map. 
@@ -51,7 +51,7 @@ public class MapEditor {
 	 * Default Constructor
 	 */
 	public MapEditor() {
-		this.good=true;
+		MapEditor.good=true;
 		this.map=new Map();
 	}
 	
@@ -698,36 +698,5 @@ public class MapEditor {
 		map.getContinentFromName(continent2Name).getBridges().add(bridgeB2A);
 	}
 
-	/**
-	 * This method find country index from the list of countries with its name
-	 * @param countName Country Name
-	 * @param listOfCountries Country List
-	 * @return Index of country if found else -1
-	 */
-	private  int findCountInd(String countName, List<Country> listOfCountries) {
-		// TODO Auto-generated method stub
-		for (int i = 0; i < listOfCountries.size(); i++) {
-			if (listOfCountries.get(i).getName().equals(countName)) {
-				return i;
-			}
-		}
-		return -1;
-	}
-
-	/**
-	 * This method finds continent index from the list of continents with its name
-	 * @param contName Continent Name
-	 * @param listOfContinent Continent List
-	 * @return Index of continent if found else -1
-	 */
-	private int findContInd(String contName, List<Continent> listOfContinent) {
-		// TODO Auto-generated method stub
-		for (int i = 0; i < listOfContinent.size(); i++) {
-			if (listOfContinent.get(i).getName().equals(contName)) {
-				return i;
-			}
-		}
-		return -1;
-	}
 
 }

@@ -7,6 +7,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+import dao.Country;
+import dao.Map;
+import dao.Player;
+import mapWorks.MapReader;
+
 /**
  * This class handles gameplay and contains three methods each for reinforcement, fortification and attack phase.
  * @author Piyush
@@ -82,7 +87,7 @@ public class GamePlay {
 		
 		
 		
-		
+		sc.close();
 	}
 	
 	/**
@@ -147,7 +152,7 @@ public class GamePlay {
 				while (queue.size() > 0) {
 					 //System.out.println(queue.peek());
 					Integer c1 = queue.poll();
-					Iterator i = mapOfAssignedCountries.get(c1).listIterator();
+					Iterator<Integer> i = mapOfAssignedCountries.get(c1).listIterator();
 					while (i.hasNext()) {
 						int n = (int) i.next();
 						//System.out.println("n"+n);
@@ -173,6 +178,7 @@ public class GamePlay {
 						for(Country c:p.getAssigned_countries())
 							System.out.println("Player "+p.getName() +" "+c.getName() +" "+" " +c.getNoOfArmies());*/
 					System.out.println("Fortification successful");
+					sc.close();
 						return;
 					}
 					else
@@ -187,11 +193,14 @@ public class GamePlay {
 			}
 			else if(in.equals("fortify none")) {
 				System.out.println("Skipped fortification");
+				sc.close();
 				return;
 			}
 			else
 				System.out.println("Invalid command,type again");
 		}while(flag == 0);
+		
+		sc.close();
 	}
 
 }

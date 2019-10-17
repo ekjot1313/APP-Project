@@ -5,9 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-import Game.Continent;
-import Game.Country;
-import Game.Map;
+import dao.Continent;
+import dao.Country;
+import dao.Map;
 
 /**
  * This Class is used to save the given Map object to .map file
