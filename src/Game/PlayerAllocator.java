@@ -11,6 +11,7 @@ public class PlayerAllocator{
 	 * list of players
 	 */
 	public List<Player> listOfPlayers;
+	
 	/**
 	 * Constructor to initialize list of players
 	 */
@@ -20,6 +21,7 @@ public class PlayerAllocator{
 	
 	/**
 	 * This method adds or removes the player
+	 * @param map Map Object
 	 */
 	public void allocate(Map map) {
 		Scanner in=new Scanner(System.in);

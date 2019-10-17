@@ -14,10 +14,10 @@ import java.util.List;
 import Game.MapReader;
 
 /**
- * Temporary class for user driven commands to edit map. This will be called
- * when user will enter 'editmap' command
+ * This class is used to edit the map. 
+ * This will be called when user will enter 'editmap' command
  * 
- * @author ekjot
+ * @author Ekjot
  *
  */
 public class MapEditor {
@@ -29,21 +29,24 @@ public class MapEditor {
 	 * to store map object
 	 */
 	public Map map;
+	
 	/**
-	 * fetch map object
-	 * @return Map
+	 * This method returns map object
+	 * @return Map Object
 	 */
 	public Map getMap() {
 		return this.map;
 		
 	}
+	
 	/**
-	 * set map object
-	 * @param map
+	 * This method sets map object
+	 * @param map Map Object
 	 */
 	public void setMap(Map map) {
 		this.map = map;
 	}
+	
 	/**
 	 * Default Constructor
 	 */
@@ -51,9 +54,10 @@ public class MapEditor {
 		this.good=true;
 		this.map=new Map();
 	}
+	
 	/**
-	 * method to initialize map editor
-	 * @param map
+	 * This method initializes map editor
+	 * @param map Map Object
 	 * @return Map object
 	 * @throws IOException
 	 */
@@ -126,9 +130,10 @@ public class MapEditor {
 			return null;
 		}
 	}
+	
 	/**
-	 * method to validate the map object
-	 * 
+	 * This method is used to validate the map object
+	 * @param map Map object to be validated
 	 */
 	private void validatemap(Map map) {
 		// TODO Auto-generated method stub
@@ -148,7 +153,8 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method will display the map
+	 * This method displays the map
+	 * @param map Map Object
 	 */
 	public void showMap(Map map) {
 		// TODO Auto-generated method stub
@@ -158,9 +164,8 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method will edit neighbour
-	 * 
-	 * @param command
+	 * This method is used to edit neighbor
+	 * @param command Command given the user
 	 */
 	public void editNeighbor(String[] command) {
 		// TODO Auto-generated method stub
@@ -220,11 +225,10 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method will remove a neighbor country.
-	 * 
-	 * @param countryName
-	 * @param neighborCountryName
-	 * @param stack
+	 * This method removes a neighboring country.
+	 * @param countryName Country Name
+	 * @param neighborCountryName Neighboring country to be removed
+	 * @param stack Stack
 	 */
 	private static void removeNeighbor(String countryName, String neighborCountryName,
 			ArrayList<ArrayList<String>> stack) {
@@ -240,11 +244,10 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method will add a neighbor country.
-	 * 
-	 * @param countryName
-	 * @param neighborCountryName
-	 * @param stack
+	 * This method adds a neighboring country.
+	 * @param countryName Country Name
+	 * @param neighborCountryName Neighboring country to be added
+	 * @param stack Stack
 	 */
 	private static void addNeighbor(String countryName, String neighborCountryName,
 			ArrayList<ArrayList<String>> stack) {
@@ -259,9 +262,8 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method will edit country
-	 * 
-	 * @param command
+	 * This method is used to edit country
+	 * @param command Command given be the user
 	 */
 	public void editCountry(String[] command) {
 		// TODO Auto-generated method stub
@@ -319,10 +321,9 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method will remove a country.
-	 * 
-	 * @param countryName
-	 * @param stack
+	 * This method removes a country.
+	 * @param countryName Country to be removed
+	 * @param stack Stack
 	 */
 	private static void removeCountry(String countryName, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
@@ -337,13 +338,11 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method will add a country.
-	 * 
-	 * @param countryName
-	 * @param continentName
-	 * @param stack
+	 * This method adds a country.
+	 * @param countryName Country to be added
+	 * @param continentName Continent in which the country is to be added
+	 * @param stack Stack
 	 */
-
 	private static void addCountry(String countryName, String continentName, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
 		if (countryName.charAt(0) == '-' || continentName.charAt(0) == '-') {
@@ -357,9 +356,8 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method will edit continent
-	 * 
-	 * @param command
+	 * This method is used to edit continent
+	 * @param command Command given by the user
 	 */
 	public void editContinent(String[] command) {
 		// TODO Auto-generated method stub
@@ -419,10 +417,9 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method will remove a continent.
-	 * 
-	 * @param continentName
-	 * @param stack
+	 * This method removes a continent.
+	 * @param continentName Continent to be removed
+	 * @param stack Stack
 	 */
 	private static void removeContinent(String continentName, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
@@ -437,11 +434,10 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method will add a continent.
-	 * 
-	 * @param continentName
-	 * @param continentValue
-	 * @param stack
+	 * This method adds a continent.
+	 * @param continentName Continent to be added
+	 * @param continentValue Continent Value
+	 * @param stack Stack
 	 */
 	private static void addContinent(String continentName, String continentValue, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
@@ -455,10 +451,9 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method will excute command stacks of sub-commands
-	 * 
-	 * @param cmd
-	 * @param stk
+	 * This method executes command stacks of sub-commands
+	 * @param cmd Command
+	 * @param stk Stack
 	 */
 	private void executeStack(String cmd, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
@@ -646,12 +641,13 @@ public class MapEditor {
 		}
 
 	}
+	
 	/**
-	 * method to remove the bridge between two continents
-	 * @param continent1Name
-	 * @param continent2Name
-	 * @param country1Name
-	 * @param country2Name
+	 * This method removes the bridge between two continents
+	 * @param continent1Name Name of first Continent
+	 * @param continent2Name Name of second Continent
+	 * @param country1Name Name of first Country
+	 * @param country2Name Name of second Country
 	 * @return true if removed else false
 	 */
 	public boolean removeBridge(String continent1Name, String continent2Name, String country1Name,
@@ -688,11 +684,10 @@ public class MapEditor {
 
 	/**
 	 * This method creates a bridge
-	 * 
-	 * @param continent1Name
-	 * @param continent2Name
-	 * @param count
-	 * @param country2Name
+	 * @param continent1Name Name of first continent
+	 * @param continent2Name Name of second continent
+	 * @param country1Name Name of first country
+	 * @param country2Name Name of second country
 	 */
 	private void createBridge(String continent1Name, String continent2Name, String country1Name,
 			String country2Name) {
@@ -704,11 +699,10 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method find country index from listofcountry with its name
-	 * 
-	 * @param countName
-	 * @param listOfCountries
-	 * @return
+	 * This method find country index from the list of countries with its name
+	 * @param countName Country Name
+	 * @param listOfCountries Country List
+	 * @return Index of country if found else -1
 	 */
 	private  int findCountInd(String countName, List<Country> listOfCountries) {
 		// TODO Auto-generated method stub
@@ -721,11 +715,10 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method find continent index from listofcontinent with its name
-	 * 
-	 * @param contName
-	 * @param listOfContinent
-	 * @return
+	 * This method finds continent index from the list of continents with its name
+	 * @param contName Continent Name
+	 * @param listOfContinent Continent List
+	 * @return Index of continent if found else -1
 	 */
 	private int findContInd(String contName, List<Continent> listOfContinent) {
 		// TODO Auto-generated method stub
