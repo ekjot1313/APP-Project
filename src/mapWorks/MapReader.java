@@ -96,7 +96,7 @@ public class MapReader {
 	 * This method loads borders to the map object
 	 * 
 	 * @throws NumberFormatException for Buffered Reader
-	 * @throws IOException for Buffered Reader
+	 * @throws IOException           for Buffered Reader
 	 */
 	private void loadBorders() throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
@@ -134,7 +134,7 @@ public class MapReader {
 	 * This method loads countries to the map object
 	 * 
 	 * @throws NumberFormatException for Buffered Reader
-	 * @throws IOException for Buffered Reader
+	 * @throws IOException           for Buffered Reader
 	 */
 	private void loadCountries() throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
@@ -158,7 +158,7 @@ public class MapReader {
 	 * This method loads the continents to the map object
 	 * 
 	 * @throws NumberFormatException for Buffered Reader
-	 * @throws IOException for Buffered Reader
+	 * @throws IOException           for Buffered Reader
 	 */
 	private void loadContinents() throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
@@ -372,27 +372,31 @@ public class MapReader {
 	public int validateContinent(Map map) {
 
 		MapEditor mpeNew = new MapEditor();
+		mpeNew.print=false;//no need to print background edits
 		MapReader mr = new MapReader();
 		Map newMap = new Map(map);
 		mpeNew.map = newMap;
 
-		for (int i = 0; i < newMap.getListOfContinent().size(); i++) {
-			String remainingContinent = "editcontinent ";
+		if (newMap.getListOfContinent().size() > 1) {// no need to check validation on continent if there is no or only
+														// one continent
+			for (int i = 0; i < newMap.getListOfContinent().size(); i++) {
+				String remainingContinent = "editcontinent ";
 
-			for (int j = 0; j < newMap.getListOfContinent().size(); j++) {
-				if (i != j)
-					remainingContinent += "-remove " + newMap.getListOfContinent().get(j).getName() + " ";
+				for (int j = 0; j < newMap.getListOfContinent().size(); j++) {
+					if (i != j)
+						remainingContinent += "-remove " + newMap.getListOfContinent().get(j).getName() + " ";
 
+				}
+				remainingContinent.trim();
+
+				mpeNew.editContinent(remainingContinent.split(" "));
+
+				if (mr.validateMap(mpeNew.map) == 1) {
+					return 1;
+				}
+				newMap = new Map(map);
+				mpeNew.map = newMap;
 			}
-			remainingContinent.trim();
-
-			mpeNew.editContinent(remainingContinent.split(" "));
-
-			if (mr.validateMap(mpeNew.map) == 1) {
-				return 1;
-			}
-			newMap = new Map(map);
-			mpeNew.map = newMap;
 		}
 
 		return 0;
