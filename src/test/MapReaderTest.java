@@ -90,7 +90,6 @@ public class MapReaderTest {
 
 	}
 	
-	
 	/**
 	 * Method to check parsing of the input file
 	 */
