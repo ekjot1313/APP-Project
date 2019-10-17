@@ -8,9 +8,21 @@ import java.util.*;
  *
  */
 public class Player {
+	/**
+	 * The name of the player
+	 */
 	private String name;
+	/**
+	 * Number of armies assigned ot the player
+	 */
 	private int noOfArmies;
+	/**
+	 * Number of unassigned armies
+	 */
 	private int unassignedarmies ;
+	/**
+	 * list of assigned countries
+	 */
 	private List<Country> assigned_countries;
 	
 	/**

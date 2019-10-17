@@ -13,10 +13,25 @@ import java.util.List;
 // pending pic, map, card, prv 
 
 public class Map {
+	/**
+	 * To store a message
+	 */
 	private String message1;
+	/**
+	 * To store a message
+	 */
 	private String message2;
+	/**
+	 * To stroe the the map name
+	 */
 	private String mapName;
+	/**
+	 * To store the list of continents
+	 */
 	private List<Continent> listOfContinent;
+	/**
+	 * To store the list of countries
+	 */
 	private List<Country> listOfCountries;
 	
 	/**

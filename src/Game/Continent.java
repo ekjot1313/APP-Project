@@ -9,11 +9,25 @@ import java.util.List;
  * 
  */
 public class Continent {
+	/**
+	 * To store the name of the continent
+	 */
 	private String name;
+	/**
+	 * To store the continent value
+	 */
 	private int continentValue;
+	/**
+	 * TO store list of countries in the continent
+	 */
 	private List<String> countries;
+	/**
+	 * To store the bridges between the continents
+	 */
 	private List<Bridge> bridges;
-	
+	/**
+	 * To store index of the continent in the list of continents in map
+	 */
 	private int continentIndexInListOfContinent;
 	
 	/**

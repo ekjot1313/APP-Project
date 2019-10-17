@@ -7,9 +7,17 @@ package Game;
  *
  */
 public class Bridge {
-
+	/**
+	 * To store neighboring continent
+	 */
 	private String neigContinent;
+	/**
+	 * To store from country
+	 */
 	private String country1;
+	/**
+	 * To store To country
+	 */
 	private String country2;
 	
 	/**

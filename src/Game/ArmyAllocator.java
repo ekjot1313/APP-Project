@@ -44,7 +44,6 @@ public class ArmyAllocator {
 	 */
 	public void placeArmy(int assignedArmies, ArrayList<Player> listOfPLayers,Map map,int test) {
 		
-		//int assignedArmies= calculateTotalArmies(listOfPLayers, map);
 		Scanner sc = new Scanner(System.in);
 		boolean isPlaceAll = false;
 		if(test == 1) {

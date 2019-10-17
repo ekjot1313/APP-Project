@@ -8,10 +8,25 @@ import java.util.*;
  *
  */
 public class Country {
+	/**
+	 * To store name of the country
+	 */
 	private String name;
+	/**
+	 * To store the owner of the Country (Player)
+	 */
 	private String owner;
+	/**
+	 * To store the country's continent name
+	 */
 	private String continentName;
+	/**
+	 * To store the number of armies in the country
+	 */
 	private int noOfArmies;
+	/**
+	 * To store the list of neighbors of the country
+	 */
 	private List<String> neighbors;
 	
 	/**

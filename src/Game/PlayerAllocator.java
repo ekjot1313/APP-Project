@@ -7,7 +7,13 @@ import java.util.*;
  *
  */
 public class PlayerAllocator{
+	/**
+	 * list of players
+	 */
 	public List<Player> listOfPlayers;
+	/**
+	 * Constructor to initialize list of players
+	 */
 	public PlayerAllocator(){
 	this.listOfPlayers=new ArrayList<Player>();
 	}
