@@ -72,7 +72,7 @@ public class MapReaderTest {
 
 
 	/**
-	 * Test method for {@link Game.MapReader#validateMap()}.
+	 * Test method for checking the map is valid or not.
 	 */
 	@Test
 	public void testValidateMap() {
