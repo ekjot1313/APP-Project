@@ -99,7 +99,7 @@ public class Main {
 		String currentPath = System.getProperty("user.dir");
 		currentPath += "\\Maps\\";
 		System.out.println(currentPath);
-		currentPath += filename;
+		currentPath += filename+".map";
 		File newFile = new File(currentPath);
 		if (newFile.exists()) {
 			mr.parseMapFile(newFile);
