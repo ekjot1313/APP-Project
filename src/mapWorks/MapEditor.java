@@ -22,42 +22,24 @@ import mapWorks.MapReader;
  */
 public class MapEditor {
 	/**
-	 * static flag to store the status
+	 * flag to store true if flow is good
 	 */
-	public static boolean good;
+	public boolean good;
 	/**
-	 * static flag to print or not
+	 * flag to allow print or not
 	 */
-	public boolean print = true;
+	public boolean print;
 	/**
 	 * to store map object
 	 */
 	public Map map;
 
 	/**
-	 * This method returns map object
-	 * 
-	 * @return Map Object
-	 */
-	public Map getMap() {
-		return this.map;
-
-	}
-
-	/**
-	 * This method sets map object
-	 * 
-	 * @param map Map Object
-	 */
-	public void setMap(Map map) {
-		this.map = map;
-	}
-
-	/**
 	 * Default Constructor
 	 */
 	public MapEditor() {
-		MapEditor.good = true;
+		this.good = true;
+		this.print = true;
 		this.map = new Map();
 	}
 
@@ -68,25 +50,24 @@ public class MapEditor {
 	 * @return Map object
 	 * @throws IOException BufferedReader used for user input
 	 */
-	public Map mapeditorInit(Map map) throws IOException {
+	public Map mapEditorInit(Map map) throws IOException {
 		BufferedReader brConsole = new BufferedReader(new InputStreamReader(System.in));
 
+		// if passed map is null then create new map otherwise copy map
 		if (map == null)
 			this.map = new Map();
 		else
 			this.map = map;
 
 		String command[];
-		good = true;
-
 		command = brConsole.readLine().split(" ");
 
+		// loop to read user commands; exits only on 'savemap' command
 		while (good) {
 
 			switch (command[0]) {
 			case "editcontinent": {
 				editContinent(command);
-
 				break;
 			}
 			case "editcountry": {
@@ -107,10 +88,25 @@ public class MapEditor {
 			}
 			case "savemap": {
 				if (command.length == 2) {
-					good = false;
-					continue;
-				} else
+
+					// validate and save map; if map is invalid, prompt user to edit map
+					MapReader mr = new MapReader();
+					mr.map = this.map;
+					if (mr.validateMap(mr.map) == 0 && mr.validateContinent(mr.map) == 0) {
+						(new MapSaver()).saveMap(mr.map, command[1]);
+
+						// map successfully edited and saved
+						return mr.map;
+					} else {
+						print("The map file cannot be saved as the map is not connected");
+
+					}
+
+					good = false; // to break loop
+					continue; // to skip next lines
+				} else {
 					print("Invalid Command. Type Again.");
+				}
 				break;
 			}
 			default: {
@@ -118,250 +114,29 @@ public class MapEditor {
 			}
 			}
 
+			// if invalid command found, prompt user again to enter valid command
 			command = brConsole.readLine().split(" ");
 			good = true;
 
 		}
-		MapSaver ms = new MapSaver();
-		MapReader mr = new MapReader();
-		mr.map = this.map;
-		if (mr.validateMap(mr.map) == 0 && mr.validateContinent(mr.map) == 0) {
-			ms.saveMap(mr.map, command[1]);
-			return mr.map;
-		} else {
-			print("The map file cannot be saved as the map is not connected");
-			return null;
-		}
-	}
 
-	/**
-	 * This method is used to validate the map object
-	 * 
-	 * @param map Map object to be validated
-	 */
-	private void validateMap(Map map) {
-		// TODO Auto-generated method stub
-		int notConnected = (new MapReader()).validateMap(map);
-		int notConnectedSubGraph = (new MapReader()).validateContinent(map);
-		if (notConnected == 0 && notConnectedSubGraph == 0) {
-			print("Map is valid");
-		} else {
-			print("Map is invalid");
-		}
+		// return null map if editing is unsuccessfull.
+		return null;
 
 	}
 
 	/**
-	 * This method displays the map
-	 * 
-	 * @param map Map Object
-	 */
-	public void showMap(Map map) {
-		// TODO Auto-generated method stub
-
-		(new MapReader()).display(map);
-
-	}
-
-	/**
-	 * This method is used to edit neighbor
-	 * 
-	 * @param command Command given the user
-	 */
-	public void editNeighbor(String[] command) {
-		// TODO Auto-generated method stub
-		ArrayList<ArrayList<String>> stack = new ArrayList<ArrayList<String>>();
-		int len = command.length;
-		if (len < 2) {
-			print("Invalid Command. Cannot find '-add' or '-remove'.");
-			return;
-		}
-
-		for (int i = 1; i < len && good; i++) { // starting from 1 because 0th index was editneighbor
-			String word = command[i];
-			if (word.charAt(0) == '-' && good) {
-				switch (word.substring(1)) {
-				case "add": {
-					if (i + 2 < len) {
-						String countryName = command[++i], neighborCountryName = command[++i];
-						addNeighbor(countryName, neighborCountryName, stack);
-					} else {
-						print("Invalid Command. Cannot find 'countryname' or 'neighborcountryname'.");
-						good = false;
-						return;
-					}
-					break;
-				}
-				case "remove": {
-					if (i + 1 < len) {
-						String countryName = command[++i], neighborCountryName = command[++i];
-						removeNeighbor(countryName, neighborCountryName, stack);
-					} else {
-						print("Invalid Command. Cannot find 'countryname' or 'neighborcountryname'.");
-						good = false;
-						return;
-					}
-					break;
-				}
-				default: {
-					print("Invalid Command. Cannot find '-add' or '-remove'.");
-					good = false;
-					return;
-				}
-
-				}
-			} else {
-				print("Invalid Command. Cannot find '-add' or '-remove'.");
-				good = false;
-				return;
-			}
-
-		}
-
-		if (good) {
-			executeStack("editneighbor", stack);
-		} else {
-			print("Error!!!");
-		}
-	}
-
-	/**
-	 * This method removes a neighboring country.
-	 * 
-	 * @param countryName         Country Name
-	 * @param neighborCountryName Neighboring country to be removed
-	 * @param stack               Stack
-	 */
-	private void removeNeighbor(String countryName, String neighborCountryName,
-			ArrayList<ArrayList<String>> stack) {
-		// TODO Auto-generated method stub
-		if (countryName.charAt(0) == '-' || neighborCountryName.charAt(0) == '-') {
-			print("Invalid Command. Type Again.");
-			good = false;
-			return;
-		}
-		stack.add(new ArrayList<>(Arrays.asList("remove", countryName, neighborCountryName)));
-	}
-
-	/**
-	 * This method adds a neighboring country.
-	 * 
-	 * @param countryName         Country Name
-	 * @param neighborCountryName Neighboring country to be added
-	 * @param stack               Stack
-	 */
-	private  void addNeighbor(String countryName, String neighborCountryName,
-			ArrayList<ArrayList<String>> stack) {
-		// TODO Auto-generated method stub
-		if (countryName.charAt(0) == '-' || neighborCountryName.charAt(0) == '-') {
-			print("Invalid Command. Type Again.");
-			good = false;
-			return;
-		}
-		stack.add(new ArrayList<>(Arrays.asList("add", countryName, neighborCountryName)));
-	}
-
-	/**
-	 * This method is used to edit country
-	 * 
-	 * @param command Command given be the user
-	 */
-	public void editCountry(String[] command) {
-		// TODO Auto-generated method stub
-		ArrayList<ArrayList<String>> stack = new ArrayList<ArrayList<String>>();
-		int len = command.length;
-		if (len < 2) {
-			print("Invalid Command. Cannot find '-add' or '-remove'.");
-			return;
-		}
-
-		for (int i = 1; i < len && good; i++) { // starting from 1 because 0th index was editcountry
-			String word = command[i];
-			if (word.charAt(0) == '-' && good) {
-				switch (word.substring(1)) {
-				case "add": {
-					if (i + 2 < len) {
-						String countryName = command[++i], continentName = command[++i];
-						addCountry(countryName, continentName, stack);
-					} else {
-						print("Invalid Command. Cannot find 'countryname' or 'continentname'.");
-						good = false;
-						return;
-					}
-					break;
-				}
-				case "remove": {
-					if (i + 1 < len) {
-						String countryName = command[++i];
-						removeCountry(countryName, stack);
-					} else {
-						print("Invalid Command. Cannot find 'countryname'.");
-						good = false;
-						return;
-					}
-					break;
-				}
-				default: {
-					print("Invalid Command. Cannot find '-add' or '-remove'.");
-					good = false;
-					return;
-				}
-
-				}
-			} else {
-				print("Invalid Command. Cannot find '-add' or '-remove'.");
-				good = false;
-				return;
-			}
-
-		}
-		if (good) {
-			executeStack("editcountry", stack);
-		}
-
-	}
-
-	/**
-	 * This method removes a country.
-	 * 
-	 * @param countryName Country to be removed
-	 * @param stack       Stack
-	 */
-	private  void removeCountry(String countryName, ArrayList<ArrayList<String>> stack) {
-		// TODO Auto-generated method stub
-		if (countryName.charAt(0) == '-') {
-			print("Invalid Command. Type Again.");
-			good = false;
-			return;
-		}
-		stack.add(new ArrayList<>(Arrays.asList("remove", countryName)));
-	}
-
-	/**
-	 * This method adds a country.
-	 * 
-	 * @param countryName   Country to be added
-	 * @param continentName Continent in which the country is to be added
-	 * @param stack         Stack
-	 */
-	private  void addCountry(String countryName, String continentName, ArrayList<ArrayList<String>> stack) {
-		// TODO Auto-generated method stub
-		if (countryName.charAt(0) == '-' || continentName.charAt(0) == '-') {
-			print("Invalid Command. Type Again.");
-			good = false;
-			return;
-		}
-		stack.add(new ArrayList<>(Arrays.asList("add", countryName, continentName)));
-	}
-
-	/**
-	 * This method is used to edit continent
+	 * This method is used to read editcontinent command, store sub-commands to
+	 * queue, and execute all sub-commands
 	 * 
 	 * @param command Command given by the user
 	 */
 	public void editContinent(String[] command) {
-		// TODO Auto-generated method stub
-		ArrayList<ArrayList<String>> stack = new ArrayList<ArrayList<String>>();
+
+		// to store sub-commands
+		ArrayList<ArrayList<String>> queue = new ArrayList<ArrayList<String>>();
+
+		// if command is incomplete; prompt user to type new command
 		int len = command.length;
 		if (len < 2) {
 			print("Invalid Command. Cannot find '-add' or '-remove'.");
@@ -369,14 +144,19 @@ public class MapEditor {
 			return;
 		}
 
-		for (int i = 1; i < len && good; i++) { // starting from 1 because 0th index was editcontinent
-			String word = command[i];
-			if (word.charAt(0) == '-') {
-				switch (word.substring(1)) {
+		// to read sub-commands
+		for (int i = 1; i < len && good; i++) { // starting from 1 because 0th index was 'editcontinent'
+			String tag = command[i];
+			if (tag.charAt(0) == '-') {
+
+				// finding tag
+				switch (tag.substring(1)) {
 				case "add": {
 					if (i + 2 < len) {
 						String continentName = command[++i], continentValue = command[++i];
-						addContinent(continentName, continentValue, stack);
+
+						// adding sub-command to queue
+						addContinentToQueue(continentName, continentValue, queue);
 					} else {
 						print("Invalid Command. Cannot find 'continentname' or 'continentvalue'.");
 						good = false;
@@ -387,7 +167,9 @@ public class MapEditor {
 				case "remove": {
 					if (i + 1 < len) {
 						String continentName = command[++i];
-						removeContinent(continentName, stack);
+
+						// adding sub-command to queue
+						removeContinentToQueue(continentName, queue);
 					} else {
 						print("Invalid Command. Cannot find 'continentname'.");
 						good = false;
@@ -402,7 +184,9 @@ public class MapEditor {
 				}
 
 				}
-			} else {
+			}
+			// if cannot find tag
+			else {
 				print("Invalid Command. Cannot find '-add' or '-remove'.");
 				good = false;
 				return;
@@ -410,58 +194,299 @@ public class MapEditor {
 
 		}
 
+		// after storing all sub-commands in queue, execute them
 		if (good) {
-			executeStack("editcontinent", stack);
+			executeQueue("editcontinent", queue);
 		}
 
 	}
 
 	/**
-	 * This method removes a continent.
+	 * This method is used to read editcountry command, store sub-commands to queue,
+	 * and execute all sub-commands
 	 * 
-	 * @param continentName Continent to be removed
-	 * @param stack         Stack
+	 * @param command Command given be the user
 	 */
-	private void removeContinent(String continentName, ArrayList<ArrayList<String>> stack) {
-		// TODO Auto-generated method stub
-		if (continentName.charAt(0) == '-') {
-			print("Invalid Command. Type Again.");
-			good = false;
+	public void editCountry(String[] command) {
+
+		// to store sub-commands
+		ArrayList<ArrayList<String>> queue = new ArrayList<ArrayList<String>>();
+
+		// if command is incomplete; prompt user to type new command
+		int len = command.length;
+		if (len < 2) {
+			print("Invalid Command. Cannot find '-add' or '-remove'.");
 			return;
 		}
-		stack.add(new ArrayList<>(Arrays.asList("remove", continentName)));
+
+		// to read sub-commands
+		for (int i = 1; i < len && good; i++) { // starting from 1 because 0th index was editcountry
+			String tag = command[i];
+			if (tag.charAt(0) == '-') {
+
+				// finding tag
+				switch (tag.substring(1)) {
+				case "add": {
+					if (i + 2 < len) {
+						String countryName = command[++i], continentName = command[++i];
+
+						// adding sub-command to queue
+						addCountryToQueue(countryName, continentName, queue);
+					} else {
+						print("Invalid Command. Cannot find 'countryname' or 'continentname'.");
+						good = false;
+						return;
+					}
+					break;
+				}
+				case "remove": {
+					if (i + 1 < len) {
+						String countryName = command[++i];
+
+						// adding sub-command to queue
+						removeCountryToQueue(countryName, queue);
+					} else {
+						print("Invalid Command. Cannot find 'countryname'.");
+						good = false;
+						return;
+					}
+					break;
+				}
+				default: {
+					print("Invalid Command. Cannot find '-add' or '-remove'.");
+					good = false;
+					return;
+				}
+
+				}
+			}
+			// if cannot find tag
+			else {
+				print("Invalid Command. Cannot find '-add' or '-remove'.");
+				good = false;
+				return;
+			}
+
+		}
+
+		// after storing all sub-commands in queue, execute them
+		if (good) {
+			executeQueue("editcountry", queue);
+		}
+
 	}
 
 	/**
-	 * This method adds a continent.
+	 * This method is used to read editneighbor command, store sub-commands to
+	 * queue, and execute all sub-commands
+	 * 
+	 * @param command Command given the user
+	 */
+	public void editNeighbor(String[] command) {
+
+		// to store sub-commands
+		ArrayList<ArrayList<String>> queue = new ArrayList<ArrayList<String>>();
+
+		// if command is incomplete; prompt user to type new command
+		int len = command.length;
+		if (len < 2) {
+			print("Invalid Command. Cannot find '-add' or '-remove'.");
+			return;
+		}
+
+		// to read sub-commands
+		for (int i = 1; i < len && good; i++) { // starting from 1 because 0th index was editneighbor
+			String tag = command[i];
+			if (tag.charAt(0) == '-') {
+
+				// finding tag
+				switch (tag.substring(1)) {
+				case "add": {
+					if (i + 2 < len) {
+						String countryName = command[++i], neighborCountryName = command[++i];
+
+						// adding sub-command to queue
+						addNeighborToQueue(countryName, neighborCountryName, queue);
+					} else {
+						print("Invalid Command. Cannot find 'countryname' or 'neighborcountryname'.");
+						good = false;
+						return;
+					}
+					break;
+				}
+				case "remove": {
+					if (i + 1 < len) {
+						String countryName = command[++i], neighborCountryName = command[++i];
+
+						// adding sub-command to queue
+						removeNeighborToQueue(countryName, neighborCountryName, queue);
+					} else {
+						print("Invalid Command. Cannot find 'countryname' or 'neighborcountryname'.");
+						good = false;
+						return;
+					}
+					break;
+				}
+				default: {
+					print("Invalid Command. Cannot find '-add' or '-remove'.");
+					good = false;
+					return;
+				}
+
+				}
+			}
+
+			// if cannot find tag
+			else {
+				print("Invalid Command. Cannot find '-add' or '-remove'.");
+				good = false;
+				return;
+			}
+
+		}
+
+		// after storing all sub-commands in queue, execute them
+		if (good) {
+			executeQueue("editneighbor", queue);
+		}
+	}
+
+	/**
+	 * This method adds sub-command, of adding continent, to queue.
 	 * 
 	 * @param continentName  Continent to be added
 	 * @param continentValue Continent Value
-	 * @param stack          Stack
+	 * @param queue          queue
 	 */
-	private void addContinent(String continentName, String continentValue, ArrayList<ArrayList<String>> stack) {
-		// TODO Auto-generated method stub
+	private void addContinentToQueue(String continentName, String continentValue, ArrayList<ArrayList<String>> queue) {
+
+		// if country name is actually a tag
 		if (continentName.charAt(0) == '-' || continentValue.charAt(0) == '-') {
 			print("Invalid Command. Type Again.");
 			good = false;
 			return;
 		}
-		stack.add(new ArrayList<>(Arrays.asList("add", continentName, continentValue)));
+
+		// add valid sub-command to queue
+		queue.add(new ArrayList<>(Arrays.asList("add", continentName, continentValue)));
 	}
 
 	/**
-	 * This method executes command stacks of sub-commands
+	 * This method adds sub-command, of removing continent, to queue.
+	 * 
+	 * @param continentName Continent to be removed
+	 * @param queue         queue
+	 */
+	private void removeContinentToQueue(String continentName, ArrayList<ArrayList<String>> queue) {
+
+		// if country name is actually a tag
+		if (continentName.charAt(0) == '-') {
+			print("Invalid Command. Type Again.");
+			good = false;
+			return;
+		}
+
+		// add valid sub-command to queue
+		queue.add(new ArrayList<>(Arrays.asList("remove", continentName)));
+	}
+
+	/**
+	 * This method adds sub-command, of adding country, to queue.
+	 * 
+	 * @param countryName   Country to be added
+	 * @param continentName Continent in which the country is to be added
+	 * @param queue         queue
+	 */
+	private void addCountryToQueue(String countryName, String continentName, ArrayList<ArrayList<String>> queue) {
+
+		// if country name is actually a tag
+		if (countryName.charAt(0) == '-' || continentName.charAt(0) == '-') {
+			print("Invalid Command. Type Again.");
+			good = false;
+			return;
+		}
+
+		// add valid sub-command to queue
+		queue.add(new ArrayList<>(Arrays.asList("add", countryName, continentName)));
+	}
+
+	/**
+	 * This method adds sub-command, of removing country, to queue.
+	 * 
+	 * @param countryName Country to be removed
+	 * @param queue       queue
+	 */
+	private void removeCountryToQueue(String countryName, ArrayList<ArrayList<String>> queue) {
+
+		// if country name is actually a tag
+		if (countryName.charAt(0) == '-') {
+			print("Invalid Command. Type Again.");
+			good = false;
+			return;
+		}
+
+		// add valid sub-command to queue
+		queue.add(new ArrayList<>(Arrays.asList("remove", countryName)));
+	}
+
+	/**
+	 * This method adds sub-command, of adding neighbors, to queue.
+	 * 
+	 * @param countryName         Country Name
+	 * @param neighborCountryName Neighboring country to be added
+	 * @param queue               queue
+	 */
+	private void addNeighborToQueue(String countryName, String neighborCountryName,
+			ArrayList<ArrayList<String>> queue) {
+
+		// if country name is actually a tag
+		if (countryName.charAt(0) == '-' || neighborCountryName.charAt(0) == '-') {
+			print("Invalid Command. Type Again.");
+			good = false;
+			return;
+		}
+
+		// add valid sub-command to queue
+		queue.add(new ArrayList<>(Arrays.asList("add", countryName, neighborCountryName)));
+	}
+
+	/**
+	 * This method adds sub-command, of removing neighbors, to queue.
+	 * 
+	 * @param countryName         Country Name
+	 * @param neighborCountryName Neighboring country to be removed
+	 * @param queue               queue
+	 */
+	private void removeNeighborToQueue(String countryName, String neighborCountryName,
+			ArrayList<ArrayList<String>> queue) {
+
+		// if country name is actually a tag
+		if (countryName.charAt(0) == '-' || neighborCountryName.charAt(0) == '-') {
+			print("Invalid Command. Type Again.");
+			good = false;
+			return;
+		}
+
+		// add valid sub-command to queue
+		queue.add(new ArrayList<>(Arrays.asList("remove", countryName, neighborCountryName)));
+	}
+
+	/**
+	 * This method executes queue of sub-commands
 	 * 
 	 * @param cmd   Command
-	 * @param stack ArrayList of ArrayList of string to store all commands
+	 * @param queue ArrayList of ArrayList of string to store all commands
 	 */
-	private void executeStack(String cmd, ArrayList<ArrayList<String>> stack) {
-		// TODO Auto-generated method stub
+	private void executeQueue(String cmd, ArrayList<ArrayList<String>> queue) {
+
+		// check type of command
 		switch (cmd) {
 		case "editcontinent": {
-			for (int i = 0; i < stack.size(); i++) {
-				ArrayList<String> s = stack.get(i);
+			// for all sub-commands
+			for (int i = 0; i < queue.size(); i++) {
+				ArrayList<String> s = queue.get(i);
 
+				// if tag is add
 				if (s.get(0).equals("add")) {
 
 					// to check whether string is number or not; this case is only for 'add'
@@ -481,29 +506,40 @@ public class MapEditor {
 						return;
 					}
 
+					// creating new continent object and adding properties
 					Continent continent = new Continent();
 					continent.setName(s.get(1));
 					continent.setContinentValue(Integer.parseInt(s.get(2)));
 					continent.setContinentIndexInListOfContinent(map.getListOfContinent().size());
 
+					// adding continent object to map
 					map.getListOfContinent().add(continent);
 					print("Added Continent: " + continent.getName());
 
-				} else if (s.get(0).equals("remove")) {
+				}
+
+				// if tag is remove
+				else if (s.get(0).equals("remove")) {
+
+					// getting continent object from map
 					Continent continent = map.getContinentFromName(s.get(1));
 
 					if (continent == null) {
 						print("Continent Not Found.");
 						return;
 					}
-					ArrayList<ArrayList<String>> s1 = new ArrayList<ArrayList<String>>();
-					// removing all countries
-					for (String countryName : continent.getCountries()) {
-						s1.add(new ArrayList<>(Arrays.asList("remove", countryName)));
-					}
-					executeStack("editcountry", s1);
 
-					// removing continent from listOfContinent
+					// creating sub-commands to remove all countries in continent, and storing in
+					// sub-queue
+					ArrayList<ArrayList<String>> subqueue = new ArrayList<ArrayList<String>>();
+					for (String countryName : continent.getCountries()) {
+						subqueue.add(new ArrayList<>(Arrays.asList("remove", countryName)));
+					}
+
+					// executing all sub-commands
+					executeQueue("editcountry", subqueue);
+
+					// removing empty continent from map
 					map.getListOfContinent().remove(continent);
 
 					print("Removed Continent: " + continent.getName());
@@ -512,30 +548,43 @@ public class MapEditor {
 			break;
 		}
 		case "editcountry": {
-			for (int i = 0; i < stack.size(); i++) {
-				ArrayList<String> s = stack.get(i);
 
+			// for all sub-commands
+			for (int i = 0; i < queue.size(); i++) {
+				ArrayList<String> s = queue.get(i);
+
+				// if tag is add
 				if (s.get(0).equals("add")) {
-					Continent continent;
+
+					// creating continent object to link parent continent of country
+					Continent parentContinent;
 
 					if (map.getCountryFromName(s.get(1)) != null) {
 						print("Country Already Exists.");
 						return;
-					} else if ((continent = map.getContinentFromName(s.get(2))) == null) {
+					} else if ((parentContinent = map.getContinentFromName(s.get(2))) == null) {
 						print("Continent Not Found.");
 						return;
 					}
 
+					// creating new country object and adding properties
 					Country count = new Country();
 					count.setName(s.get(1));
-					count.setContinentName(continent.getName());
+					count.setContinentName(parentContinent.getName());
+
 					// adding country name in continent
-					continent.getCountries().add(count.getName());
-					// adding country in listOfCountries
+					parentContinent.getCountries().add(count.getName());
+
+					// adding country in map
 					map.getListOfCountries().add(count);
 
 					print("Added Country: " + count.getName() + " To: " + count.getContinentName());
-				} else if (s.get(0).equals("remove")) {
+				}
+
+				// if tag is remove
+				else if (s.get(0).equals("remove")) {
+
+					// getting continent object from map
 					Country country = map.getCountryFromName(s.get(1));
 
 					if (country == null) {
@@ -543,17 +592,20 @@ public class MapEditor {
 						return;
 					}
 
-					ArrayList<ArrayList<String>> s1 = new ArrayList<ArrayList<String>>();
-					// removing all neighbors and bridges(implicitly)
+					// creating sub-commands to remove all neighbors of country, and
+					// storing in sub-queue
+					ArrayList<ArrayList<String>> subqueue = new ArrayList<ArrayList<String>>();
 					for (String neighborName : country.getNeighbors()) {
-
-						s1.add(new ArrayList<>(Arrays.asList("remove", country.getName(), neighborName)));
+						subqueue.add(new ArrayList<>(Arrays.asList("remove", country.getName(), neighborName)));
 					}
-					executeStack("editneighbor", s1);
 
-					// removing country from listOfCountries
+					// executing all sub-commands
+					executeQueue("editneighbor", subqueue);
+
+					// removing empty country from map
 					map.getListOfCountries().remove(country);
-					// removing country name from listOfContinents
+
+					// removing country name from parent continent
 					map.getContinentFromName(country.getContinentName()).getCountries().remove(country.getName());
 
 					print("Removed Country: " + country.getName() + " From: " + country.getContinentName());
@@ -563,14 +615,12 @@ public class MapEditor {
 		}
 		case "editneighbor": {
 
-			for (int i = 0; i < stack.size(); i++) {
+			// for all sub-commands
+			for (int i = 0; i < queue.size(); i++) {
+				ArrayList<String> s = queue.get(i);
 
-				ArrayList<String> s = stack.get(i);
-
-				// checking country existence
-
+				// checking countries existence
 				Country count, neig;
-
 				if ((count = map.getCountryFromName(s.get(1))) == null) {
 					print("Country Not Found.");
 					return;
@@ -579,43 +629,41 @@ public class MapEditor {
 					return;
 				}
 
+				// find if there is link between them
 				boolean link = count.getNeighbors().contains(neig.getName());
 
 				String countContinent = count.getContinentName();
 				String neigContinent = neig.getContinentName();
 
+				// if tag is add
 				if (s.get(0).equals("add")) {
+
+					// link already exists
 					if (link) {
-						// link already exists
-
 						print("Given Countries Are Already Neighbors.");
-
 						good = false;
 						return;
-
 					}
 
 					// if not neighbors, creating link
-
 					count.getNeighbors().add(neig.getName());
 					neig.getNeighbors().add(count.getName());
 
 					// if different continents, create a bridge also
 					if (countContinent != neigContinent) {
-
 						createBridge(countContinent, neigContinent, count.getName(), neig.getName());
-
 					}
 
 					print("Added Neighbors: " + count.getName() + ", " + neig.getName());
-				} else if (s.get(0).equals("remove")) {
+				}
 
+				// if tag is remove
+				else if (s.get(0).equals("remove")) {
+
+					// if link not found
 					if (!link) {
-						// link not found
 						print("Given Countries Are Not Neighbors.");
 						good = false;
-						return;
-
 					}
 
 					// removing link
@@ -624,9 +672,7 @@ public class MapEditor {
 
 					// if different continents, remove the bridge also
 					if (!count.getContinentName().equals(neig.getContinentName())) {
-
 						removeBridge(countContinent, neigContinent, count.getName(), neig.getName());
-
 					}
 
 					print("Removed Neighbors: " + count.getName() + ", " + neig.getName());
@@ -643,11 +689,20 @@ public class MapEditor {
 
 	}
 
-	private void print(String string) {
+	/**
+	 * This method creates a bridge
+	 * 
+	 * @param continent1Name Name of first continent
+	 * @param continent2Name Name of second continent
+	 * @param country1Name   Name of first country
+	 * @param country2Name   Name of second country
+	 */
+	private void createBridge(String continent1Name, String continent2Name, String country1Name, String country2Name) {
 		// TODO Auto-generated method stub
-		if (print) {
-			System.out.println(string);
-		}
+		Bridge bridgeA2B = new Bridge(continent2Name, country1Name, country2Name);
+		Bridge bridgeB2A = new Bridge(continent1Name, country2Name, country1Name);
+		map.getContinentFromName(continent1Name).getBridges().add(bridgeA2B);
+		map.getContinentFromName(continent2Name).getBridges().add(bridgeB2A);
 	}
 
 	/**
@@ -690,19 +745,63 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method creates a bridge
+	 * This method is used to validate the map object
 	 * 
-	 * @param continent1Name Name of first continent
-	 * @param continent2Name Name of second continent
-	 * @param country1Name   Name of first country
-	 * @param country2Name   Name of second country
+	 * @param map Map object to be validated
 	 */
-	private void createBridge(String continent1Name, String continent2Name, String country1Name, String country2Name) {
+	private void validateMap(Map map) {
 		// TODO Auto-generated method stub
-		Bridge bridgeA2B = new Bridge(continent2Name, country1Name, country2Name);
-		Bridge bridgeB2A = new Bridge(continent1Name, country2Name, country1Name);
-		map.getContinentFromName(continent1Name).getBridges().add(bridgeA2B);
-		map.getContinentFromName(continent2Name).getBridges().add(bridgeB2A);
+		int notConnected = (new MapReader()).validateMap(map);
+		int notConnectedSubGraph = (new MapReader()).validateContinent(map);
+		if (notConnected == 0 && notConnectedSubGraph == 0) {
+			print("Map is valid");
+		} else {
+			print("Map is invalid");
+		}
+
+	}
+
+	/**
+	 * This method displays the map
+	 * 
+	 * @param map Map Object
+	 */
+	public void showMap(Map map) {
+		// TODO Auto-generated method stub
+
+		(new MapReader()).display(map);
+
+	}
+
+	/**
+	 * This method is used to print some string if print flag is set to true
+	 * 
+	 * @param string String to print
+	 */
+	private void print(String string) {
+		// TODO Auto-generated method stub
+		if (print) {
+			System.out.println(string);
+		}
+	}
+
+	/**
+	 * This method returns map object
+	 * 
+	 * @return Map Object
+	 */
+	public Map getMap() {
+		return this.map;
+
+	}
+
+	/**
+	 * This method sets map object
+	 * 
+	 * @param map Map Object
+	 */
+	public void setMap(Map map) {
+		this.map = map;
 	}
 
 }

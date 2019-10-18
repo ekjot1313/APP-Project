@@ -66,7 +66,7 @@ public class Main {
 						"Type editneighbor -add <countryname> <neighborcountryname> -remove <countryname> <neighborcountryname>");
 				System.out.println("Type showmap");
 				System.out.println("Type validatemap");
-				mr.map = mpe.mapeditorInit(mr.map);
+				mr.map = mpe.mapEditorInit(mr.map);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -80,7 +80,7 @@ public class Main {
 			System.out.println("Type showmap");
 			System.out.println("Type validatemap");
 			try {
-				mr.map = mpe.mapeditorInit(null);
+				mr.map = mpe.mapEditorInit(null);
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
