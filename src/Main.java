@@ -105,7 +105,7 @@ public class Main {
 		if (newFile.exists()) {
 			int mapParseStatus = mr.parseMapFile(newFile);
 			// to check whether map is parsed successfully
-			if (mapParseStatus == 1) {
+			if (mapParseStatus == 1){
 				System.out.println("Map is loaded successfully.");
 				gameplayer(mr);
 			}
