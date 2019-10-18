@@ -100,7 +100,6 @@ public class PlayerAllocator {
 				continue;
 			}
 		} while (!cmd.equals("populatecountries") || listOfPlayers.size() <= 1);
-		in.close();
 	}
 
 	/**

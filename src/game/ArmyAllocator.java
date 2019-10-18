@@ -57,7 +57,7 @@ public class ArmyAllocator {
 	 */
 	public void placeArmy(int assignedArmies, ArrayList<Player> listOfPLayers, Map map, int test) {
 
-		Scanner sc = new Scanner(System.in);
+		Scanner sc1 = new Scanner(System.in);
 		boolean isPlaceAll = false;
 		if (test == 1) {
 			placeAll(listOfPLayers, map);
@@ -66,9 +66,9 @@ public class ArmyAllocator {
 				for (Player p : listOfPLayers) {
 					Boolean armyNotAllocated = true;
 					while (armyNotAllocated) {
-						System.out.println("Player " + p.getName()
-								+ " to place armies :\n Type placearmy <countryname> or placeall to randomly allocate armies.\n Type showmap ");
-						String input = sc.nextLine();
+						System.out.println("Player " + p.getName()+ " to place armies :\n Type placearmy <countryname> or placeall to randomly allocate armies.\n Type showmap");
+						
+						String input = sc1.nextLine();
 						String[] commands = input.split(" ");
 						if (input.equals("showmap")) {
 							MapReader mr = new MapReader();
@@ -133,7 +133,6 @@ public class ArmyAllocator {
 			if (isPlaceAll)
 				placeAll(listOfPLayers, map);
 		}
-		sc.close();
 	}
 
 	/**
