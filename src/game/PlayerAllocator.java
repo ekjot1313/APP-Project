@@ -52,13 +52,25 @@ public class PlayerAllocator {
 				mr.displayAll(map);
 			} else if (validate(cmd) == 1) {
 				String str[] = cmd.split(" ");
+				int checkDuplicate=0;
 				for (int i = 1; i < str.length; i++) {
 					if (str[i].equals("-add")) {
+						for(int h=0;h<listOfPlayers.size();h++) {
+							if(str[i+1].equals(listOfPlayers.get(h).getName())) {
+								System.out.println("This player is already added, kindly add a new player.");
+								checkDuplicate=1;
+								break;
+							}
+						}
+						if(checkDuplicate==1)
+							break;
+						else {
 						Player p = new Player();
 						p.setName(str[i + 1]);
 						listOfPlayers.add(p);
 						i++;
 						System.out.println("Player " + p.getName() + " has been added successfully.");
+						}
 					}
 					if (str[i].equals("-remove")) {
 						int j;
