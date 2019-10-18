@@ -65,6 +65,7 @@ public class Main {
 				System.out.println(
 						"Type editneighbor -add <countryname> <neighborcountryname> -remove <countryname> <neighborcountryname>");
 				System.out.println("Type showmap");
+				System.out.println("Type savemap");
 				System.out.println("Type validatemap");
 				mr.map = mpe.mapEditorInit(mr.map);
 			} catch (IOException e) {

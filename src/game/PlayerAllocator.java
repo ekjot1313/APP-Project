@@ -2,6 +2,7 @@ package game;
 
 import java.util.*;
 
+import dao.Country;
 import dao.Map;
 import dao.Player;
 import mapWorks.MapReader;
@@ -170,20 +171,45 @@ public class PlayerAllocator {
 		int countryCount = map.getListOfCountries().size();
 		int playerCount = listOfPlayers.size();
 		int j = (countryCount / playerCount);
+		ArrayList<String> countryList= new ArrayList<String>();
+		for(int p=0;p<j*listOfPlayers.size();p++) {
+			countryList.add(map.getListOfCountries().get(p).getName());
+		}
 		int count = 0;
 		for (int i = 0; i < j; i++) {
 			for (int k = 0; k < playerCount; k++) {
-				listOfPlayers.get(k).getAssigned_countries().add(map.getListOfCountries().get(count));
-				map.getListOfCountries().get(count).setOwner(listOfPlayers.get(k).getName());
+				Random r=new Random();
+				int index;
+				if(countryList.size()!=1)
+				index = r.nextInt(countryList.size()-1);
+				else
+					index=0;
+				Country c= map.getCountryFromName(countryList.get(index));
+				countryList.remove(index);
+				listOfPlayers.get(k).getAssigned_countries().add(c);
+				c.setOwner(listOfPlayers.get(k).getName());
 				count++;
 			}
 		}
+		for(int p=j*listOfPlayers.size();p<map.getListOfCountries().size();p++) {
+			countryList.add(map.getListOfCountries().get(p).getName());
+		}
 		int leftCountries = countryCount - count;
 		for (int m = 0; m < leftCountries; m++) {
-			listOfPlayers.get(m).getAssigned_countries().add(map.getListOfCountries().get(count));
-			map.getListOfCountries().get(count).setOwner(listOfPlayers.get(m).getName());
+			Random r=new Random();
+			int index;
+			if(countryList.size()!=1)
+				index = r.nextInt(countryList.size()-1);
+			else
+				index=0;
+			
+			Country c= map.getCountryFromName(countryList.get(index));
+			countryList.remove(index);
+			listOfPlayers.get(m).getAssigned_countries().add(c);
+			c.setOwner(listOfPlayers.get(m).getName());
 			count++;
 		}
+		printPlayerCountries();
 	}
 
 }
