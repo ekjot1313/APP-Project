@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -179,6 +180,39 @@ public class MapReaderTest {
 		}
 	}
 
+	/**
+	 * Method to check whether there exists duplicate elements in Map (duplicate continents and countries)
+	 */
+	/**
+	 * 
+	 */
+	@Test
+	public void testCheckDuplicates() {
+		
+		Continent A= new Continent();
+		List<Continent> listOfContinent = new ArrayList<Continent>();
+		listOfContinent.add(A);
+		
+		Country Q= new Country();
+		Country W= new Country();
+		Country E= new Country();
+		List<Country> listOfCountry = new ArrayList<Country>();
+		listOfCountry.add(Q);
+		listOfCountry.add(W);
+		listOfCountry.add(E);
+				
+		for(int i=0;i<listOfCountry.size();i++)
+			listOfCountry.get(i).setName("India");
+		
+		listOfContinent.get(0).setName("Asia");
+		
+		Map tempMap= new Map();
+		tempMap.setListOfContinent(listOfContinent);
+		tempMap.setListOfCountries(listOfCountry);
+		mapReader.display(tempMap);
+		assertEquals(1, mapReader.checkDuplicates(tempMap));
+	}
+	
 	/**
 	 * Method to check whether the given country exists or not
 	 */
