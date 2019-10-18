@@ -103,9 +103,11 @@ public class Main {
 		currentPath += filename + ".map";
 		File newFile = new File(currentPath);
 		if (newFile.exists()) {
-			mr.parseMapFile(newFile);
-			System.out.println("Map is loaded successfully");
-			gameplayer(mr);
+			int mapParseStatus = mr.parseMapFile(newFile);
+			if (mapParseStatus == 0) {
+				System.out.println("Map is loaded successfully.");
+				gameplayer(mr);
+			}
 
 		} else {
 			System.out.println("File Not found .");
