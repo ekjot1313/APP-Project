@@ -234,6 +234,7 @@ public class MapReader {
 		if (map2.getListOfContinent().size() > 0) {
 			for (Continent c : map2.getListOfContinent()) {
 				System.out.println();
+				System.out.println("------------------------------------------------------------------------------------");
 				System.out.println("Continent :" + c.getName());
 
 				if (c.getBridges().size() > 0) {
@@ -244,9 +245,10 @@ public class MapReader {
 					}
 
 				}
+				System.out.println();
 				for (String c1 : c.getCountries()) {
-					System.out.print(" Country :" + c1);
-					System.out.print(" No of Armies :" + map2.getCountryFromName(c1).getNoOfArmies());
+					System.out.println(" Country :" + c1);
+					System.out.print("\tNo of Armies :" + map2.getCountryFromName(c1).getNoOfArmies());
 					System.out.println(" Owner :" + map2.getCountryFromName(c1).getOwner());
 					System.out.print("\tNeighbors :");
 					for (Country country : map2.getListOfCountries()) {
