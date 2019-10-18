@@ -237,18 +237,18 @@ public class MapReader {
 				System.out.println("Continent :" + c.getName());
 
 				if (c.getBridges().size() > 0) {
-					System.out.println("Bridges");
+					System.out.println(" Bridges");
 					for (Bridge bridge : c.getBridges()) {
-						System.out.println("To Continent: " + bridge.getNeigContinent() + "|| From Country: "
+						System.out.println("  To Continent: " + bridge.getNeigContinent() + "|| From Country: "
 								+ bridge.getCountry1() + " To country: " + bridge.getCountry2());
 					}
 
 				}
 				for (String c1 : c.getCountries()) {
-					System.out.print("Country :" + c1);
+					System.out.print(" Country :" + c1);
 					System.out.print(" No of Armies :" + map2.getCountryFromName(c1).getNoOfArmies());
 					System.out.println(" Owner :" + map2.getCountryFromName(c1).getOwner());
-					System.out.print("Neighbors :");
+					System.out.print("\tNeighbors :");
 					for (Country country : map2.getListOfCountries()) {
 						if (c1.equals(country.getName())) {
 
