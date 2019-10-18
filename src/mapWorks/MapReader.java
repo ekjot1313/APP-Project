@@ -372,7 +372,7 @@ public class MapReader {
 	public int validateContinent(Map map) {
 
 		MapEditor mpeNew = new MapEditor();
-		mpeNew.print=false;//no need to print background edits
+		mpeNew.print = false;// no need to print background edits
 		MapReader mr = new MapReader();
 		Map newMap = new Map(map);
 		mpeNew.map = newMap;

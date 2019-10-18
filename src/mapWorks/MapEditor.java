@@ -28,7 +28,7 @@ public class MapEditor {
 	/**
 	 * static flag to print or not
 	 */
-	public static boolean print=true;
+	public static boolean print = true;
 	/**
 	 * to store map object
 	 */
@@ -61,7 +61,6 @@ public class MapEditor {
 		this.map = new Map();
 	}
 
-	
 	/**
 	 * This method initializes map editor
 	 * 
@@ -453,7 +452,7 @@ public class MapEditor {
 	/**
 	 * This method executes command stacks of sub-commands
 	 * 
-	 * @param cmd Command
+	 * @param cmd   Command
 	 * @param stack ArrayList of ArrayList of string to store all commands
 	 */
 	private void executeStack(String cmd, ArrayList<ArrayList<String>> stack) {
@@ -488,7 +487,7 @@ public class MapEditor {
 					continent.setContinentIndexInListOfContinent(map.getListOfContinent().size());
 
 					map.getListOfContinent().add(continent);
-					print("Added Continent: "+continent.getName());
+					print("Added Continent: " + continent.getName());
 
 				} else if (s.get(0).equals("remove")) {
 					Continent continent = map.getContinentFromName(s.get(1));
@@ -507,7 +506,7 @@ public class MapEditor {
 					// removing continent from listOfContinent
 					map.getListOfContinent().remove(continent);
 
-					print("Removed Continent: "+continent.getName());
+					print("Removed Continent: " + continent.getName());
 				}
 			}
 			break;
@@ -535,7 +534,7 @@ public class MapEditor {
 					// adding country in listOfCountries
 					map.getListOfCountries().add(count);
 
-					print("Added Country: "+count.getName()+" To: "+count.getContinentName());
+					print("Added Country: " + count.getName() + " To: " + count.getContinentName());
 				} else if (s.get(0).equals("remove")) {
 					Country country = map.getCountryFromName(s.get(1));
 
@@ -557,7 +556,7 @@ public class MapEditor {
 					// removing country name from listOfContinents
 					map.getContinentFromName(country.getContinentName()).getCountries().remove(country.getName());
 
-					print("Removed Country: "+country.getName()+" From: "+country.getContinentName());
+					print("Removed Country: " + country.getName() + " From: " + country.getContinentName());
 				}
 			}
 			break;
@@ -608,7 +607,7 @@ public class MapEditor {
 
 					}
 
-					print("Added Neighbors: "+count.getName()+", "+neig.getName());
+					print("Added Neighbors: " + count.getName() + ", " + neig.getName());
 				} else if (s.get(0).equals("remove")) {
 
 					if (!link) {
@@ -630,7 +629,7 @@ public class MapEditor {
 
 					}
 
-					print("Removed Neighbors: "+count.getName()+", "+neig.getName());
+					print("Removed Neighbors: " + count.getName() + ", " + neig.getName());
 				}
 
 			}
@@ -646,7 +645,7 @@ public class MapEditor {
 
 	private static void print(String string) {
 		// TODO Auto-generated method stub
-		if(print) {
+		if (print) {
 			System.out.println(string);
 		}
 	}

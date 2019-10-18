@@ -26,7 +26,7 @@ public class ArmyAllocator {
 	 * 
 	 * @param listOfPLayers List of all Players
 	 * @param map           Map Object
-	 * @param test flag for testing
+	 * @param test          flag for testing
 	 * @return Number of assigned armies
 	 */
 	public int calculateTotalArmies(ArrayList<Player> listOfPLayers, Map map, int test) {
