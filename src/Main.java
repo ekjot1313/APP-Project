@@ -75,7 +75,8 @@ public class Main {
 			System.out.println(
 					"Map file does not exist .New File created .\nType editcontinent -add <continentname> <continentvalue> -remove <continentname>");
 			System.out.println("Type editcountry -add <countryname> <continentname> -remove <countryname>");
-			System.out.println("Type editneighbor -add <countryname> <neighborcountryname> -remove <countryname> <neighborcountryname>");
+			System.out.println(
+					"Type editneighbor -add <countryname> <neighborcountryname> -remove <countryname> <neighborcountryname>");
 			System.out.println("Type showmap");
 			System.out.println("Type validatemap");
 			try {
@@ -99,7 +100,7 @@ public class Main {
 		String currentPath = System.getProperty("user.dir");
 		currentPath += "\\Maps\\";
 		System.out.println(currentPath);
-		currentPath += filename+".map";
+		currentPath += filename + ".map";
 		File newFile = new File(currentPath);
 		if (newFile.exists()) {
 			mr.parseMapFile(newFile);

@@ -44,8 +44,8 @@ public class Map {
 	}
 
 	/**
-	 * Constructor initializes list of countries and continents and then add items
-	 * to these lists using the passed Map
+	 * Constructor initializes list of countries and continents 
+	 * and then copy values of passed map to local map object
 	 * 
 	 * @param m Map Object
 	 */
