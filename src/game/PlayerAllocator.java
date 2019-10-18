@@ -63,6 +63,10 @@ public class PlayerAllocator {
 								break;
 							}
 						}
+						if(listOfPlayers.size()==map.getListOfCountries().size()) {
+							System.out.println("Sorry! Cannot add more players than no of countries");
+							break;
+						}
 						if (checkDuplicate == 1)
 							break;
 						else {
@@ -209,7 +213,6 @@ public class PlayerAllocator {
 			c.setOwner(listOfPlayers.get(m).getName());
 			count++;
 		}
-		printPlayerCountries();
 	}
 
 }
