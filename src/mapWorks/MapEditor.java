@@ -536,9 +536,14 @@ public class MapEditor {
 						subqueue.add(new ArrayList<>(Arrays.asList("remove", countryName)));
 					}
 
+					
 					// executing all sub-commands
-					executeQueue("editcountry", subqueue);
-
+					MapEditor me=new MapEditor();
+					me.map=this.map;
+					me.print=false; // not to print sub edits
+					me.executeQueue("editcountry", subqueue);
+					
+					
 					// removing empty continent from map
 					map.getListOfContinent().remove(continent);
 
@@ -599,8 +604,13 @@ public class MapEditor {
 						subqueue.add(new ArrayList<>(Arrays.asList("remove", country.getName(), neighborName)));
 					}
 
+					
 					// executing all sub-commands
-					executeQueue("editneighbor", subqueue);
+					MapEditor me=new MapEditor();
+					me.map=this.map;
+					me.print=false; // not to print sub edits
+					me.executeQueue("editneighbor", subqueue);
+					
 
 					// removing empty country from map
 					map.getListOfCountries().remove(country);
