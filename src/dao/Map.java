@@ -9,9 +9,6 @@ import java.util.List;
  * @author Ekjot
  *
  */
-
-// pending pic, map, card, prv 
-
 public class Map {
 	/**
 	 * To store a message

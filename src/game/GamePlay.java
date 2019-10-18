@@ -91,7 +91,7 @@ public class GamePlay {
 			} else
 				System.out.println("Invalid command .Type again");
 		}
-		sc.close();
+		
 	}
 
 	/**
@@ -188,7 +188,7 @@ public class GamePlay {
 									.setNoOfArmies((listPlayer.get(playerIndex).getAssigned_countries().get(destination)
 											.getNoOfArmies()) + Integer.parseInt(input[3]));
 							System.out.println("Fortification successful");
-							sc.close();
+							
 							return;
 						} else
 							System.out.println("Invalid no of armies specified, for these two countries it can be 1-"
@@ -201,13 +201,13 @@ public class GamePlay {
 				}
 			} else if (in.equals("fortify none")) {
 				System.out.println("Skipped fortification");
-				sc.close();
+				
 				return;
 			} else
 				System.out.println("Invalid command,type again");
 		} while (flag == 0);
 
-		sc.close();
+		
 	}
 
 }
