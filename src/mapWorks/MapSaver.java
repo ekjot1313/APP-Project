@@ -68,7 +68,7 @@ public class MapSaver {
 		content += ("\r\n[borders]\r\n" + borders);
 		bwFile.write(content);
 		bwFile.close();
-		System.out.println("Map file saved as: "+fileName+".map");
+		System.out.println("Map file saved as: " + fileName + ".map");
 	}
 
 	/**

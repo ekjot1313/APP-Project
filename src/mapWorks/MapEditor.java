@@ -17,6 +17,7 @@ import mapWorks.MapReader;
  * 'editmap' command
  * 
  * @author Ekjot
+ * @author Hartaj
  *
  */
 public class MapEditor {
