@@ -7,7 +7,6 @@ import java.util.List;
  * This class defines Map
  * 
  * @author Ekjot
- * @author Hartaj
  *
  */
 
@@ -44,8 +43,8 @@ public class Map {
 	}
 
 	/**
-	 * Constructor initializes list of countries and continents 
-	 * and then copy values of passed map to local map object
+	 * Constructor initializes list of countries and continents and then copy values
+	 * of passed map to local map object
 	 * 
 	 * @param m Map Object
 	 */

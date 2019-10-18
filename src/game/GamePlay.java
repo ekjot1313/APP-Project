@@ -74,8 +74,10 @@ public class GamePlay {
 				if (countryFound == 0)
 					System.out.println("Country is not assigned to player ");
 				else {
-					if (armiesTobeplaced <= reinforcementArmies && armiesTobeplaced > 0) { // check reinforce command and country is valid and assigned to player
-																							
+					if (armiesTobeplaced <= reinforcementArmies && armiesTobeplaced > 0) { // check reinforce command
+																							// and country is valid and
+																							// assigned to player
+
 						listPlayer.get(playerIndex)
 								.setNoOfArmies(listPlayer.get(playerIndex).getNoOfArmies() + armiesTobeplaced);
 						map.getCountryFromName(inputArray[1]).setNoOfArmies(
@@ -106,7 +108,8 @@ public class GamePlay {
 		int flag = 0;
 		do {
 
-			System.out.println("Type fortify <from country name> <to country name> <number of armies> or fortify none (choose to not do a move)\n Type showmap");
+			System.out.println(
+					"Type fortify <from country name> <to country name> <number of armies> or fortify none (choose to not do a move)\n Type showmap");
 			String in = sc.nextLine();
 			String input[] = in.split(" ");
 			if (in.equals("showmap")) {
@@ -143,7 +146,8 @@ public class GamePlay {
 				}
 				if (source == -1 || destination == -1) {
 					if (source == -1 && destination == -1)
-						System.out.println("Sorry!From Country:" + input[1] + " and To Country :" + input[2]+ " doesn't belong to you");
+						System.out.println("Sorry!From Country:" + input[1] + " and To Country :" + input[2]
+								+ " doesn't belong to you");
 					else if (source == -1)
 						System.out.println("Sorry!From Country :" + input[1] + " doesn't belong to you");
 					else
@@ -187,9 +191,12 @@ public class GamePlay {
 							sc.close();
 							return;
 						} else
-							System.out.println("Invalid no of armies specified, for these two countries it can be 1-"+ (listPlayer.get(playerIndex).getAssigned_countries().get(source).getNoOfArmies()- 1));
+							System.out.println("Invalid no of armies specified, for these two countries it can be 1-"
+									+ (listPlayer.get(playerIndex).getAssigned_countries().get(source).getNoOfArmies()
+											- 1));
 					} else {
-							System.out.println("There's no path between the mentioned countries.(You can move any number of armies from one of the owned countries to the other, provided that there is a path between these two countries that is composed of countries owned by you)");
+						System.out.println(
+								"There's no path between the mentioned countries.(You can move any number of armies from one of the owned countries to the other, provided that there is a path between these two countries that is composed of countries owned by you)");
 					}
 				}
 			} else if (in.equals("fortify none")) {

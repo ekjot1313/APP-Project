@@ -46,7 +46,7 @@ public class MapReaderTest {
 	 * 
 	 */
 	@Before
-	public void setUp()  {
+	public void setUp() {
 		mapEditor = new MapEditor();
 		mapEditor.editContinent(("editcontinent -add asia 10 -add africa 14").split(" "));
 		mapEditor.editCountry(
@@ -70,7 +70,6 @@ public class MapReaderTest {
 		continent = new Continent();
 	}
 
-
 	/**
 	 * Test method for checking the map is valid or not.
 	 */
@@ -78,18 +77,20 @@ public class MapReaderTest {
 	public void testValidateMap() {
 
 		assertEquals(0, mapReader.validateMap(testMap));
-		
-		MapEditor me= new MapEditor();
+
+		MapEditor me = new MapEditor();
 		me.editContinent(("editcontinent -add asia 10 -add africa 14").split(" "));
-		me.editCountry(("editcountry -add india asia -add pakistan asia -add china asia -add congo africa -add uganda africa").split(" "));
+		me.editCountry(
+				("editcountry -add india asia -add pakistan asia -add china asia -add congo africa -add uganda africa")
+						.split(" "));
 		me.editNeighbor(("editneighbor -add india pakistan -add india congo").split(" "));
-		
-		Map tempMap= new Map();
+
+		Map tempMap = new Map();
 		tempMap = me.getMap();
 		assertEquals(1, mapReader.validateMap(tempMap));
 
 	}
-	
+
 	/**
 	 * Method to check parsing of the input file
 	 */
