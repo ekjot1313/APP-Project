@@ -277,6 +277,10 @@ public class MapReader {
 	 */
 	public int validateMap(Map map2) {
 		// traversing
+		if(map2.getListOfContinent().size() ==0 || map2.getListOfCountries().size() == 0) {
+			System.out.println("Map is empty");
+			return 1;
+		}
 		int notConnected = 0;
 		mapOfWorld = new HashMap<Integer, List<Integer>>();
 		if (checkDuplicates(map2) == 0) {

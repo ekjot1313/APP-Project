@@ -28,7 +28,7 @@ public class MapEditor {
 	/**
 	 * static flag to print or not
 	 */
-	public static boolean print = true;
+	public boolean print = true;
 	/**
 	 * to store map object
 	 */
@@ -232,7 +232,7 @@ public class MapEditor {
 	 * @param neighborCountryName Neighboring country to be removed
 	 * @param stack               Stack
 	 */
-	private static void removeNeighbor(String countryName, String neighborCountryName,
+	private void removeNeighbor(String countryName, String neighborCountryName,
 			ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
 		if (countryName.charAt(0) == '-' || neighborCountryName.charAt(0) == '-') {
@@ -250,7 +250,7 @@ public class MapEditor {
 	 * @param neighborCountryName Neighboring country to be added
 	 * @param stack               Stack
 	 */
-	private static void addNeighbor(String countryName, String neighborCountryName,
+	private  void addNeighbor(String countryName, String neighborCountryName,
 			ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
 		if (countryName.charAt(0) == '-' || neighborCountryName.charAt(0) == '-') {
@@ -327,7 +327,7 @@ public class MapEditor {
 	 * @param countryName Country to be removed
 	 * @param stack       Stack
 	 */
-	private static void removeCountry(String countryName, ArrayList<ArrayList<String>> stack) {
+	private  void removeCountry(String countryName, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
 		if (countryName.charAt(0) == '-') {
 			print("Invalid Command. Type Again.");
@@ -344,7 +344,7 @@ public class MapEditor {
 	 * @param continentName Continent in which the country is to be added
 	 * @param stack         Stack
 	 */
-	private static void addCountry(String countryName, String continentName, ArrayList<ArrayList<String>> stack) {
+	private  void addCountry(String countryName, String continentName, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
 		if (countryName.charAt(0) == '-' || continentName.charAt(0) == '-') {
 			print("Invalid Command. Type Again.");
@@ -422,7 +422,7 @@ public class MapEditor {
 	 * @param continentName Continent to be removed
 	 * @param stack         Stack
 	 */
-	private static void removeContinent(String continentName, ArrayList<ArrayList<String>> stack) {
+	private void removeContinent(String continentName, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
 		if (continentName.charAt(0) == '-') {
 			print("Invalid Command. Type Again.");
@@ -439,7 +439,7 @@ public class MapEditor {
 	 * @param continentValue Continent Value
 	 * @param stack          Stack
 	 */
-	private static void addContinent(String continentName, String continentValue, ArrayList<ArrayList<String>> stack) {
+	private void addContinent(String continentName, String continentValue, ArrayList<ArrayList<String>> stack) {
 		// TODO Auto-generated method stub
 		if (continentName.charAt(0) == '-' || continentValue.charAt(0) == '-') {
 			print("Invalid Command. Type Again.");
@@ -643,7 +643,7 @@ public class MapEditor {
 
 	}
 
-	private static void print(String string) {
+	private void print(String string) {
 		// TODO Auto-generated method stub
 		if (print) {
 			System.out.println(string);
