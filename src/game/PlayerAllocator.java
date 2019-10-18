@@ -80,7 +80,6 @@ public class PlayerAllocator {
 								System.out.println(
 										"Player " + listOfPlayers.get(j).getName() + " has been removed successfully.");
 								listOfPlayers.remove(j);
-								// j++;
 								flag = 1;
 								break;
 							}

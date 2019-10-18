@@ -30,7 +30,6 @@ public class ArmyAllocator {
 	 * @return Number of assigned armies
 	 */
 	public int calculateTotalArmies(ArrayList<Player> listOfPLayers, Map map, int test) {
-		// TODO 2 player scenario TBD
 		// 2 -40 armies ,3 -35 armies , 4- 30 armies ,5 -25 armies ...
 		int maxArmiesForEachPlayer = 40;
 		// Maximum number of players can be 9 only
