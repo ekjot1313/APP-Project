@@ -60,7 +60,8 @@ public class GamePlay {
 			String[] inputArray = input.split(" ");
 			if (input.equals("showmap")) {
 				MapReader mr = new MapReader();
-				mr.displayAll(map);
+				
+				map.displayAll();
 			} else if (inputArray.length == 3 && inputArray[0].equals("reinforce")) {
 				int armiesTobeplaced = Integer.parseInt(inputArray[2]);
 				int countryFound = 0;
@@ -114,7 +115,7 @@ public class GamePlay {
 			String input[] = in.split(" ");
 			if (in.equals("showmap")) {
 				MapReader mr = new MapReader();
-				mr.displayAll(map);
+				map.displayAll();
 			} else if (input.length == 4 && input[0].equals("fortify")) {
 				HashMap<Integer, List<Integer>> mapOfAssignedCountries = new HashMap<Integer, List<Integer>>();
 				for (int i = 0; i < listPlayer.get(playerIndex).getAssigned_countries().size(); i++) {

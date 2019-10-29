@@ -90,13 +90,13 @@ public class MapEditor {
 				if (command.length == 2) {
 
 					// validate and save map; if map is invalid, prompt user to edit map
-					MapReader mr = new MapReader();
-					mr.map = this.map;
-					if (mr.validateMap(mr.map) == 0 && mr.validateContinent(mr.map) == 0) {
-						(new MapSaver()).saveMap(mr.map, command[1]);
+					//MapReader mr = new MapReader();
+					//mr.map = this.map;
+					if (this.map.validateMap() == 0 && this.map.validateContinent(this.map) == 0) {
+						(new MapSaver()).saveMap(this.map, command[1]);
 
 						// map successfully edited and saved
-						return mr.map;
+						return this.map;
 					} else {
 						print("The map file cannot be saved as the map is not connected");
 
@@ -761,8 +761,8 @@ public class MapEditor {
 	 */
 	private void validateMap(Map map) {
 		// TODO Auto-generated method stub
-		int notConnected = (new MapReader()).validateMap(map);
-		int notConnectedSubGraph = (new MapReader()).validateContinent(map);
+		int notConnected = map.validateMap();
+		int notConnectedSubGraph = map.validateContinent(map);
 		if (notConnected == 0 && notConnectedSubGraph == 0) {
 			print("Map is valid");
 		} else {
@@ -779,7 +779,7 @@ public class MapEditor {
 	public void showMap(Map map) {
 		// TODO Auto-generated method stub
 
-		(new MapReader()).display(map);
+		map.display();
 
 	}
 

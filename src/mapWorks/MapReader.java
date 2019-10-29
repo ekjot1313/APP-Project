@@ -34,10 +34,7 @@ public class MapReader {
 	 * CurrentLine to store the current line of parsing
 	 */
 	private String currentLine;
-	/**
-	 * Map to store the Index of countries
-	 */
-	public HashMap<Integer, List<Integer>> mapOfWorld;
+	
 
 	/**
 	 * Default Constructor
@@ -73,8 +70,8 @@ public class MapReader {
 
 			}
 			// validate map call
-			int notConnected = validateMap(map);
-			int notConnectedSubGraph = validateContinent(map);
+			int notConnected = map.validateMap();
+			int notConnectedSubGraph = map.validateContinent(map);
 			System.out.println();
 			if (notConnected == 0 && notConnectedSubGraph == 0) {
 				System.out.println("Valid Map");
@@ -176,190 +173,6 @@ public class MapReader {
 		}
 
 	}
-
-	/**
-	 * This method displays the map
-	 * 
-	 * @param map2 Map object of the map to be displayed
-	 */
-	public void display(Map map2) {
-		// TODO Auto-generated method stub
-		map = map2;
-		// display
-		if (map2.getListOfContinent().size() > 0) {
-			for (Continent c : map2.getListOfContinent()) {
-				System.out.println();
-				System.out.println("Continent :" + c.getName());
-
-				if (c.getBridges().size() > 0) {
-					System.out.println("Bridges");
-					for (Bridge bridge : c.getBridges()) {
-						System.out.println("To Continent: " + bridge.getNeigContinent() + "|| From Country: "
-								+ bridge.getCountry1() + " To country: " + bridge.getCountry2());
-					}
-
-				}
-				for (String c1 : c.getCountries()) {
-					System.out.print("Country :" + c1 + ": Neighbours -> ");
-
-					for (Country country : map2.getListOfCountries()) {
-						if (c1.equals(country.getName())) {
-
-							for (String c2 : country.getNeighbors()) {
-								System.out.print(c2 + " || ");
-							}
-
-							System.out.println();
-						}
-					}
-
-				}
-
-			}
-		} else {
-			System.out.println("Map Empty.");
-		}
-
-	}
-
-	/**
-	 * This method displays the map
-	 * 
-	 * @param map2 Map object of the map to be displayed
-	 */
-	public void displayAll(Map map2) {
-		// TODO Auto-generated method stub
-		map = map2;
-		// display
-		if (map2.getListOfContinent().size() > 0) {
-			for (Continent c : map2.getListOfContinent()) {
-				System.out.println();
-				System.out.println("------------------------------------------------------------------------------------");
-				System.out.println("Continent :" + c.getName());
-
-				if (c.getBridges().size() > 0) {
-					System.out.println(" Bridges");
-					for (Bridge bridge : c.getBridges()) {
-						System.out.println("  To Continent: " + bridge.getNeigContinent() + "|| From Country: "
-								+ bridge.getCountry1() + " To country: " + bridge.getCountry2());
-					}
-
-				}
-				System.out.println();
-				for (String c1 : c.getCountries()) {
-					System.out.println(" Country :" + c1);
-					System.out.print("\tNo of Armies :" + map2.getCountryFromName(c1).getNoOfArmies());
-					System.out.println(" Owner :" + map2.getCountryFromName(c1).getOwner());
-					System.out.print("\tNeighbors :");
-					for (Country country : map2.getListOfCountries()) {
-						if (c1.equals(country.getName())) {
-
-							for (String c2 : country.getNeighbors()) {
-								System.out.print(c2 + " || ");
-							}
-
-							System.out.println();
-						}
-					}
-
-				}
-
-			}
-		} else {
-			System.out.println("Map Empty.");
-		}
-
-	}
-
-	/**
-	 * This method checks whether the map is valid or not
-	 * 
-	 * @param map2 Map to be validated
-	 * @return 0 if valid else 1
-	 */
-	public int validateMap(Map map2) {
-		// traversing
-		if(map2.getListOfContinent().size() ==0 || map2.getListOfCountries().size() == 0) {
-			System.out.println("Map is empty");
-			return 1;
-		}
-		int notConnected = 0;
-		mapOfWorld = new HashMap<Integer, List<Integer>>();
-		if (checkDuplicates(map2) == 0) {
-
-			// graph creation
-
-			for (int i = 0; i < map2.getListOfCountries().size(); i++) {
-				List<Integer> templist = new ArrayList<Integer>();
-				for (int j = 0; j < map2.getListOfCountries().get(i).getNeighbors().size(); j++)
-					templist.add(map2.getListOfCountries()
-							.indexOf(map2.getCountryFromName(map2.getListOfCountries().get(i).getNeighbors().get(j))));
-				mapOfWorld.put(i, templist);
-
-			}
-
-			Boolean[] visited = new Boolean[mapOfWorld.keySet().size()];
-			for (int i = 0; i < visited.length; i++) {
-				visited[i] = false;
-			}
-
-			LinkedList<Integer> queue = new LinkedList<Integer>();
-			queue.add(0);
-			visited[0] = true;
-			while (queue.size() > 0) {
-				Integer c1 = queue.poll();
-				Iterator<Integer> i = mapOfWorld.get(c1).listIterator();
-				while (i.hasNext()) {
-					int n = (int) i.next();
-					if (visited[n] == false) {
-						visited[n] = true;
-						queue.add(n);
-					}
-
-				}
-
-			}
-
-			for (int i = 0; i < visited.length; i++) {
-				if (!visited[i]) {
-					notConnected = 1;
-					break;
-				}
-			}
-
-		} else
-			notConnected = 1;
-		return notConnected;
-	}
-
-	/**
-	 * This method checks if duplicate continents or countries exist
-	 * 
-	 * @param map3 Map Object
-	 * @return 0 if no duplicates else 1
-	 */
-	public int checkDuplicates(Map map3) {
-		int duplicate = 0;
-		for (int i = 0; i < (map3.getListOfContinent().size() - 1); i++)
-			for (int j = i + 1; j < map3.getListOfContinent().size(); j++)
-				if ((map3.getListOfContinent().get(i).getName())
-						.equalsIgnoreCase(map3.getListOfContinent().get(j).getName())) {
-					duplicate = 1;
-					System.out.println("Duplicate Continent :" + map3.getListOfContinent().get(i).getName());
-					break;
-				}
-		if (duplicate == 0)
-			for (int i = 0; i < (map3.getListOfCountries().size() - 1); i++)
-				for (int j = i + 1; j < map.getListOfCountries().size(); j++)
-					if ((map3.getListOfCountries().get(i).getName())
-							.equalsIgnoreCase(map3.getListOfCountries().get(j).getName())) {
-						duplicate = 1;
-						System.out.println("Duplicate Country :" + map3.getListOfCountries().get(i).getName());
-						break;
-					}
-		return duplicate;
-	}
-
 	/**
 	 * This method returns the currently loaded map
 	 * 
@@ -369,43 +182,6 @@ public class MapReader {
 		return this.map;
 	}
 
-	/**
-	 * This method checks if every subgraph is valid
-	 * 
-	 * @param map Map Object
-	 * @return 0 if valid else 1
-	 */
-	public int validateContinent(Map map) {
 
-		MapEditor mpeNew = new MapEditor();
-		mpeNew.print = false;// no need to print background edits
-		MapReader mr = new MapReader();
-		Map newMap = new Map(map);
-		mpeNew.map = newMap;
-
-		if (newMap.getListOfContinent().size() > 1) {// no need to check validation on continent if there is no or only
-														// one continent
-			for (int i = 0; i < newMap.getListOfContinent().size(); i++) {
-				String remainingContinent = "editcontinent ";
-
-				for (int j = 0; j < newMap.getListOfContinent().size(); j++) {
-					if (i != j)
-						remainingContinent += "-remove " + newMap.getListOfContinent().get(j).getName() + " ";
-
-				}
-				remainingContinent.trim();
-
-				mpeNew.editContinent(remainingContinent.split(" "));
-
-				if (mr.validateMap(mpeNew.map) == 1) {
-					return 1;
-				}
-				newMap = new Map(map);
-				mpeNew.map = newMap;
-			}
-		}
-
-		return 0;
-	}
 
 }

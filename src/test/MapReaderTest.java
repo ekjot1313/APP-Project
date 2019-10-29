@@ -75,7 +75,7 @@ public class MapReaderTest {
 	@Test
 	public void testValidateMap() {
 
-		assertEquals(0, mapReader.validateMap(testMap));
+		assertEquals(0, testMap.validateMap());
 
 		MapEditor me = new MapEditor();
 		me.editContinent(("editcontinent -add asia 10 -add africa 14").split(" "));
@@ -86,8 +86,8 @@ public class MapReaderTest {
 
 		Map tempMap = new Map();
 		tempMap = me.getMap();
-		assertEquals(1, mapReader.validateMap(tempMap));
-
+		//assertEquals(1, mapReader.validateMap(tempMap));
+		assertEquals(1, tempMap.validateMap());
 	}
 
 	/**
@@ -157,7 +157,7 @@ public class MapReaderTest {
 	@Test
 	public void testValidateContinent() {
 
-		assertEquals(0, mapReader.validateContinent(testMap));
+		assertEquals(0, testMap.validateContinent(testMap));
 	}
 
 	/**
@@ -207,8 +207,10 @@ public class MapReaderTest {
 		Map tempMap= new Map();
 		tempMap.setListOfContinent(listOfContinent);
 		tempMap.setListOfCountries(listOfCountry);
-		mapReader.display(tempMap);
-		assertEquals(1, mapReader.checkDuplicates(tempMap));
+		//mapReader.display(tempMap);
+		tempMap.display();
+		//assertEquals(1, mapReader.checkDuplicates(tempMap));
+		assertEquals(1, tempMap.checkDuplicates());
 	}
 	
 	/**

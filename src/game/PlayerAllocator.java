@@ -50,7 +50,7 @@ public class PlayerAllocator {
 			}
 			if (cmd.equals("showmap")) {
 				MapReader mr = new MapReader();
-				mr.displayAll(map);
+				map.displayAll();
 			} else if (validate(cmd) == 1) {
 				String str[] = cmd.split(" ");
 				int checkDuplicate = 0;
