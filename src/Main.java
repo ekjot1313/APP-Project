@@ -110,24 +110,17 @@ public class Main {
 	/**
 	 * This method is called to add or remove a player, assign countries to players
 	 * and allow them to place armies
+	 * The game phases (reinforcement, attack and fortification) start from this function
 	 * 
 	 * @param mr MapReader Object
 	 */
 	private static void gameplayer(MapReader mr) {
 		PlayerAllocator pa = new PlayerAllocator();
+		ArmyAllocator aa = new ArmyAllocator();
+		
 		pa.allocate(mr.map);
 		pa.populateCountries(mr.map);
-		placearmies(pa, mr);
-	}
-
-	/**
-	 * This method allows user to place armies on their countries
-	 * 
-	 * @param pa PlayerAllocator Object
-	 * @param mr MapReader Object
-	 */
-	private static void placearmies(PlayerAllocator pa, MapReader mr) {
-		ArmyAllocator aa = new ArmyAllocator();
+		
 		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, mr.map, 0);
 		GamePlay gp = new GamePlay();
 		while (true) {
@@ -139,6 +132,9 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * This method contains the commands provided after editmap option is selected
+	 */
 	private static void editMapCommands() {
 		
 		System.out.println("Type editcontinent -add <continentname> <continentvalue> -remove <continentname>");
