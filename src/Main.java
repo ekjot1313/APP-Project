@@ -60,26 +60,17 @@ public class Main {
 		if (newFile.exists()) {
 			mr.parseMapFile(newFile);
 			try {
-				System.out.println("Type editcontinent -add <continentname> <continentvalue> -remove <continentname>");
-				System.out.println("Type editcountry -add <countryname> <continentname> -remove <countryname>");
-				System.out.println(
-						"Type editneighbor -add <countryname> <neighborcountryname> -remove <countryname> <neighborcountryname>");
-				System.out.println("Type showmap");
+				editMapCommands();
 				System.out.println("Type savemap");
-				System.out.println("Type validatemap");
 				mr.map = mpe.mapEditorInit(mr.map);
+				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {
-			System.out.println(
-					"Map file does not exist .New File created .\nType editcontinent -add <continentname> <continentvalue> -remove <continentname>");
-			System.out.println("Type editcountry -add <countryname> <continentname> -remove <countryname>");
-			System.out.println(
-					"Type editneighbor -add <countryname> <neighborcountryname> -remove <countryname> <neighborcountryname>");
-			System.out.println("Type showmap");
-			System.out.println("Type validatemap");
+			System.out.println("Map file does not exist .New File created .");
+			editMapCommands();
 			try {
 				mr.map = mpe.mapEditorInit(null);
 
@@ -147,4 +138,15 @@ public class Main {
 			}
 		}
 	}
+	
+	private static void editMapCommands() {
+		
+		System.out.println("Type editcontinent -add <continentname> <continentvalue> -remove <continentname>");
+		System.out.println("Type editcountry -add <countryname> <continentname> -remove <countryname>");
+		System.out.println("Type editneighbor -add <countryname> <neighborcountryname> -remove <countryname> <neighborcountryname>");
+		System.out.println("Type showmap");
+		System.out.println("Type validatemap");
+	}
 }
+
+

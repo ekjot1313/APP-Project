@@ -43,8 +43,6 @@ public class MapReaderTest {
 
 	/**
 	 * This method is used for initialization and set up before running tests
-	 * 
-	 * 
 	 */
 	@Before
 	public void setUp() {
