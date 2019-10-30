@@ -19,7 +19,6 @@ import dao.Map;
 import mapWorks.MapReader;
 import dao.Player;
 import game.ArmyAllocator;
-import game.GamePlay;
 import game.PlayerAllocator;
 
 /**
@@ -34,12 +33,12 @@ public class MapReaderTest {
 	static Map testMap;
 	static MapEditor mapEditor;
 	static MapReader mapReader;
-	static GamePlay reinforceArmies;
 	static PlayerAllocator player;
 	static ArmyAllocator armyAlloc;
 	static MapSaver mapSaver;
 	static Country country;
 	static Continent continent;
+	static Player p;
 
 	/**
 	 * This method is used for initialization and set up before running tests
@@ -55,7 +54,6 @@ public class MapReaderTest {
 				("editneighbor -add india pakistan -add pakistan china -add india congo -add congo uganda").split(" "));
 		testMap = mapEditor.getMap();
 		mapReader = new MapReader();
-		reinforceArmies = new GamePlay();
 		player = new PlayerAllocator();
 		Player A = new Player();
 		Player B = new Player();
@@ -67,6 +65,7 @@ public class MapReaderTest {
 		mapSaver = new MapSaver();
 		country = new Country();
 		continent = new Continent();
+		p=new Player();
 	}
 
 	/**
@@ -129,7 +128,7 @@ public class MapReaderTest {
 	@Test
 	public void testcalculateReinforceArmies() {
 		player.populateCountries(testMap);
-		int reinforce = reinforceArmies.calculateReinforceArmies((ArrayList<Player>) player.listOfPlayers, testMap, 1);
+		int reinforce = p.calculateReinforceArmies(testMap,(ArrayList<Player>) player.listOfPlayers);
 		assertEquals(3, reinforce);
 	}
 

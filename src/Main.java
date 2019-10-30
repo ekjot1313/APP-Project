@@ -6,7 +6,6 @@ import java.util.Scanner;
 import mapWorks.MapReader;
 import dao.Player;
 import game.ArmyAllocator;
-import game.GamePlay;
 import game.PlayerAllocator;
 import mapWorks.MapEditor;
 
@@ -122,7 +121,6 @@ public class Main {
 		pa.populateCountries(mr.map);
 		
 		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, mr.map, 0);
-		GamePlay gp = new GamePlay();
 		while (true) {
 			for (int i = 0; i < pa.listOfPlayers.size(); i++) {
 				System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " reinforcement phase begins");
