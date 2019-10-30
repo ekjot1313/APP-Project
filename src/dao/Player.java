@@ -195,10 +195,11 @@ public class Player {
 		else
 			forceExchangeCards =0;
 		// loop over playerlist and assign reinforcement armies
+		System.out.println("Reinforcement armies to be assigned :" + reinforcementArmies);
+		System.out.println("Type reinforce <countryname> <num>  to assign armies\n Type showmap");
+		System.out.println("Type exchangecards <num> <num> <num> -none to exchange cards\n Type showmap");
+		
 		while (reinforcementArmies != 0 || forceExchangeCards == 1) {
-			System.out.println("Reinforcement armies to be assigned :" + reinforcementArmies);
-			System.out.println("Type reinforce <countryname> <num>  to assign armies\n Type showmap");
-			System.out.println("Type exchangecards <num> <num> <num> -none to exchange cards\n Type showmap");
 			String input = sc.nextLine();
 			String[] inputArray = input.split(" ");
 			
@@ -239,17 +240,28 @@ public class Player {
 				}
 			}
 		 else if(inputArray.length == 4 && inputArray[0].equals("exchangecards")){
+			 ArrayList<String> sample = new ArrayList();
+			 sample.add("Infantry");
+			 sample.add("Cavalry");
+			 sample.add("Artillery");
+			 this.setCards(sample);
 			 System.out.println(this.getCards());
+			 
+			 if(this.getCards().size() <3) {
+				 System.out.println("You don't have enough cards to exchange");
+				 continue;
+			 }
+			 
 			//check if three numbers are valid
 			int num1;
 			int num2;
 			int num3;
 			boolean IsExchangeCards =false;
 			try{
-				num1 = Integer.parseInt(inputArray[1]);
-				num2 = Integer.parseInt(inputArray[2]);
-				num3 = Integer.parseInt(inputArray[3]);
-			
+				num1 = Integer.parseInt(inputArray[1]) - 1;
+				num2 = Integer.parseInt(inputArray[2]) - 1;
+				num3 = Integer.parseInt(inputArray[3]) - 1;
+			System.out.println(num1 +""+num2 +""+num3);
 			//check if three numbers are valid cards indexes in player's hand
 				ArrayList<String> playerCards = this.getCards();
 				if(!playerCards.get(num1).isEmpty() && !playerCards.get(num2).isEmpty()&& !playerCards.get(num3).isEmpty() ){
@@ -276,8 +288,8 @@ public class Player {
 					
 				if(IsExchangeCards){
 					playerCards.remove(num1);
-					playerCards.remove(num2);
-					playerCards.remove(num3);
+					playerCards.remove(playerCards.indexOf(playerCards.get(num2)));
+					playerCards.remove(playerCards.indexOf(playerCards.get(num3)));
 					
 					this.setCardExchangeCounter(this.getCardExchangeCounter() + 5);
 					reinforcementArmies += this.getCardExchangeCounter();
@@ -293,12 +305,13 @@ public class Player {
 				continue;
 			}
 			catch(IndexOutOfBoundsException e){
+				e.printStackTrace();
 				System.out.println("Invalid card number.");
 				continue;
 			}
 			
 			
-		} else if(inputArray.length == 2 && inputArray[0].equals("exchangecards") && inputArray[0].equals("-none")){
+		} else if(inputArray.length == 2 && inputArray[0].equals("exchangecards") && inputArray[1].equals("-none")){
 			//Player chooses not to exchange cards
 			//check if cards is more than 5
 			if(forceExchangeCards == 1)
