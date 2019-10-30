@@ -195,10 +195,11 @@ public class Player {
 		else
 			forceExchangeCards =0;
 		// loop over playerlist and assign reinforcement armies
+		System.out.println("Reinforcement armies to be assigned :" + reinforcementArmies);
+		System.out.println("Type reinforce <countryname> <num>  to assign armies\n Type showmap");
+		System.out.println("Type exchangecards <num> <num> <num> -none to exchange cards\n Type showmap");
+		
 		while (reinforcementArmies != 0 || forceExchangeCards == 1) {
-			System.out.println("Reinforcement armies to be assigned :" + reinforcementArmies);
-			System.out.println("Type reinforce <countryname> <num>  to assign armies\n Type showmap");
-			System.out.println("Type exchangecards <num> <num> <num> -none to exchange cards\n Type showmap");
 			String input = sc.nextLine();
 			String[] inputArray = input.split(" ");
 			
@@ -242,6 +243,7 @@ public class Player {
 			 ArrayList<String> sample = new ArrayList();
 			 sample.add("Infantry");
 			 sample.add("Cavalry");
+			 sample.add("Artillery");
 			 this.setCards(sample);
 			 System.out.println(this.getCards());
 			 
@@ -256,10 +258,10 @@ public class Player {
 			int num3;
 			boolean IsExchangeCards =false;
 			try{
-				num1 = Integer.parseInt(inputArray[1]);
-				num2 = Integer.parseInt(inputArray[2]);
-				num3 = Integer.parseInt(inputArray[3]);
-			
+				num1 = Integer.parseInt(inputArray[1]) - 1;
+				num2 = Integer.parseInt(inputArray[2]) - 1;
+				num3 = Integer.parseInt(inputArray[3]) - 1;
+			System.out.println(num1 +""+num2 +""+num3);
 			//check if three numbers are valid cards indexes in player's hand
 				ArrayList<String> playerCards = this.getCards();
 				if(!playerCards.get(num1).isEmpty() && !playerCards.get(num2).isEmpty()&& !playerCards.get(num3).isEmpty() ){
