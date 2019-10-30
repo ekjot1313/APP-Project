@@ -514,6 +514,8 @@ public class Player {
 						String card=this.randomCard();
 						this.cards.add(card);
 						}
+						
+						
 					}
 				}
 			}
