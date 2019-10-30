@@ -26,11 +26,6 @@ public class Dice {
 	Dice(int attackerDice, int defenderDice) throws Exception {
 		setAttackerDice(attackerDice);
 		setDefenderDice(defenderDice);
-		if (attackerDice < defenderDice) {
-
-			throw new Exception("Defender cannot roll more dice than Attacker.");
-		} 
-
 	}
 
 	/**
