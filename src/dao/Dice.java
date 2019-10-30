@@ -29,14 +29,35 @@ public class Dice {
 	 * 
 	 * @return result 2D array of rolled numbers
 	 */
-	static int[][] rollAll() {
+	static int[][] rollAll(int attackerDice,int defenderDice) {
 		int[][] result = new int[2][3];
-
+		for(int i=0;i<2;i++)
+			for(int j=0;j<3;j++)
+				result[i][j]=0;
+		int common=Math.min(attackerDice,defenderDice);
+		int col;
+		for(col=0;col<common;col++) {
+			result[0][col]=Dice.roll();
+			result[1][col]=Dice.roll();
+		}
+		if(attackerDice != defenderDice) {
+		if(attackerDice>defenderDice) {
+			for(int n=col;n<attackerDice;n++) {
+				result[0][n]=Dice.roll();
+			}
+		}
+		else {
+			for(int n=col;n<defenderDice;n++) {
+				result[1][n]=Dice.roll();
+			}
+		}
+		}
+			/*
 		for (int i = 0; i < 2; i++) {
 			result[0][i] = roll();
 			result[1][i] = roll();
 		}
-		result[0][2] = roll();
+		result[0][2] = roll();*/
 		return result;
 	}
 
