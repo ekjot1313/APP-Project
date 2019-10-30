@@ -71,7 +71,7 @@ public class Player {
 	 */
 	public Player() {
 		assigned_countries = new ArrayList<Country>();
-		ArrayList<String> cards= new ArrayList<String>();
+		cards= new ArrayList<String>();
 	}
 	/**
 	 * 
@@ -239,6 +239,7 @@ public class Player {
 				}
 			}
 		 else if(inputArray.length == 4 && inputArray[0].equals("exchangecards")){
+			 System.out.println(this.getCards());
 			//check if three numbers are valid
 			int num1;
 			int num2;
