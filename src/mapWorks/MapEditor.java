@@ -42,7 +42,6 @@ public class MapEditor {
 		this.print = true;
 		this.map = new Map();
 	}
-
 	/**
 	 * This method initializes map editor
 	 * 

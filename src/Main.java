@@ -128,6 +128,7 @@ public class Main {
 				System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " reinforcement phase begins");
 				gp.reinforcement((ArrayList<Player>) pa.listOfPlayers, mr.map, i);
 				gp.fortification((ArrayList<Player>) pa.listOfPlayers, mr.map, i);
+				pa.listOfPlayers.get(i).attack(mr.map,(ArrayList<Player>) pa.listOfPlayers);
 			}
 		}
 	}
