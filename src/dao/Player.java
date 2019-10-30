@@ -288,8 +288,8 @@ public class Player {
 					
 				if(IsExchangeCards){
 					playerCards.remove(num1);
-					playerCards.remove(num2);
-					playerCards.remove(num3);
+					playerCards.remove(playerCards.indexOf(playerCards.get(num2)));
+					playerCards.remove(playerCards.indexOf(playerCards.get(num3)));
 					
 					this.setCardExchangeCounter(this.getCardExchangeCounter() + 5);
 					reinforcementArmies += this.getCardExchangeCounter();
@@ -305,6 +305,7 @@ public class Player {
 				continue;
 			}
 			catch(IndexOutOfBoundsException e){
+				e.printStackTrace();
 				System.out.println("Invalid card number.");
 				continue;
 			}
