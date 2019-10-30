@@ -345,8 +345,9 @@ public class Player {
 
 	/**
 	 * This method is used for attack phase.
+	 * @throws Exception 
 	 */
-	public void attack(Map map,ArrayList<Player> listPlayer) {
+	public void attack(Map map,ArrayList<Player> listPlayer) throws Exception {
 			Scanner sc = new Scanner(System.in);
 			int attackDeadlock=0;
 			System.out.println("Type attack <countrynamefrom> <countynameto> <numdice> for a single attack");
@@ -397,8 +398,8 @@ public class Player {
 					}
 				}
 				if(validCommand==1) {
-					Dice diceRoll=new Dice();
-					int result[][]=diceRoll.rollAll(attackerDice, defenderDice);
+					Dice diceRoll=new Dice(attackerDice, defenderDice);
+					int result[][]=diceRoll.rollAll();
 					result=diceRoll.sort(result);
 					int min=Math.min(attackerDice, defenderDice);
 					for(int i=0;i<min;i++) {

@@ -17,7 +17,7 @@ import mapWorks.MapEditor;
  *
  */
 public class Main {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		System.out.println("Welcome to RISK GAME!");
 		Scanner sc = new Scanner(System.in);
 		while (true) {
@@ -84,8 +84,9 @@ public class Main {
 	 * This method is called when user gives 'loadmap' command
 	 * 
 	 * @param filename Map file to be loaded
+	 * @throws Exception 
 	 */
-	private static void loadmap(String filename) {
+	private static void loadmap(String filename) throws Exception {
 		// TODO Auto-generated method stub
 		MapReader mr = new MapReader();
 		String currentPath = System.getProperty("user.dir");
@@ -112,8 +113,9 @@ public class Main {
 	 * The game phases (reinforcement, attack and fortification) start from this function
 	 * 
 	 * @param mr MapReader Object
+	 * @throws Exception 
 	 */
-	private static void gameplayer(MapReader mr) {
+	private static void gameplayer(MapReader mr) throws Exception {
 		PlayerAllocator pa = new PlayerAllocator();
 		ArmyAllocator aa = new ArmyAllocator();
 		

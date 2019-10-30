@@ -13,51 +13,56 @@ public class Dice {
 
 	// Random object to get random number.
 	Random number = new Random();
+	private int attackerDice = 0;
+	private int defenderDice = 0;
+
+	/**
+	 * Constructor sets attackerDice and defenderDice
+	 * 
+	 * @param attackerDice
+	 * @param defenderDice
+	 * @throws Exception
+	 */
+	Dice(int attackerDice, int defenderDice) throws Exception {
+		setAttackerDice(attackerDice);
+		setDefenderDice(defenderDice);
+		if (attackerDice < defenderDice) {
+
+			throw new Exception("Defender cannot roll more dice than Attacker.");
+		} 
+
+	}
 
 	/**
 	 * This method returns a random number between 1 and 6
+	 * 
 	 * @return rolledNumber Rolled number from dice.
 	 */
 	int roll() {
-		int rolledNumber=number.nextInt(6) + 1;
+		int rolledNumber = number.nextInt(6) + 1;
 		return rolledNumber;
 	}
 
 	/**
-	 * This method returns a 2D array of 2*3, of 3 rolledNumbers for both attacker and defender. 
-	 * 3rd rolledNumber for defender will always be 0.
+	 * This method returns a 2D array of 2*3, of 3 rolledNumbers for both attacker
+	 * and defender. 3rd rolledNumber for defender will always be 0.
 	 * 
 	 * @return result 2D array of rolled numbers
 	 */
-	int[][] rollAll(int attackerDice,int defenderDice) {
+	int[][] rollAll() {
+
 		int[][] result = new int[2][3];
-		for(int i=0;i<2;i++)
-			for(int j=0;j<3;j++)
-				result[i][j]=0;
-		int common=Math.min(attackerDice,defenderDice);
-		int col;
-		for(col=0;col<common;col++) {
-			result[0][col]=roll();
-			result[1][col]=roll();
-		}
-		if(attackerDice != defenderDice) {
-		if(attackerDice>defenderDice) {
-			for(int n=col;n<attackerDice;n++) {
-				result[0][n]=roll();
-			}
-		}
-		else {
-			for(int n=col;n<defenderDice;n++) {
-				result[1][n]=roll();
-			}
-		}
-		}
-			/*
-		for (int i = 0; i < 2; i++) {
+
+		for (int i = 0; i < attackerDice; i++) {
 			result[0][i] = roll();
-			result[1][i] = roll();
+
 		}
-		result[0][2] = roll();*/
+
+		for (int i = 0; i < defenderDice; i++) {
+			result[1][i] = roll();
+
+		}
+
 		return result;
 	}
 
@@ -82,22 +87,54 @@ public class Dice {
 		return result;
 	}
 
-	
 	/**
-	 * This method prints the given 2D array of 2*3 onto console
-	 * This will omit 3rd element in 2nd row(as it is always 0).
+	 * This method prints the given 2D array of 2*3 onto console This will omit 3rd
+	 * element in 2nd row(as it is always 0).
 	 * 
 	 * @param result
 	 * @return
 	 */
-	static String print(int[][] result) {
-		String str="";
-		for (int i = 0; i < 2; i++) {
+	String print(int[][] result) {
+		String str = "";
+		for (int i = 0; i < attackerDice; i++) {
 
-			str+=result[0][i] + "    " + result[1][i]+"\n";
+			str += result[0][i] + "\n";
 		}
-		str+=result[0][2]+"\n";
+
+		str += "\n\n";
+		for (int i = 0; i < defenderDice; i++) {
+
+			str += result[1][i] + "\n";
+		}
+
 		return str;
+	}
+
+	/**
+	 * @param attackerDice the attackerDice to set
+	 * @throws Exception
+	 */
+	private void setAttackerDice(int attackerDice) throws Exception {
+
+		if (attackerDice <= 3 && attackerDice > 0)
+			this.attackerDice = attackerDice;
+		else {
+
+			throw new Exception("Attacker can select dice from 1 to 3(max) only.");
+		}
+	}
+
+	/**
+	 * @param defenderDice the defenderDice to set
+	 * @throws Exception
+	 */
+	private void setDefenderDice(int defenderDice) throws Exception {
+		if (defenderDice <= 2 && defenderDice > 0)
+			this.defenderDice = defenderDice;
+		else {
+
+			throw new Exception("Defender can select dice from 1 to 2(max) only.");
+		}
 	}
 
 }
