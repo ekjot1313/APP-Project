@@ -239,7 +239,17 @@ public class Player {
 				}
 			}
 		 else if(inputArray.length == 4 && inputArray[0].equals("exchangecards")){
+			 ArrayList<String> sample = new ArrayList();
+			 sample.add("Infantry");
+			 sample.add("Cavalry");
+			 this.setCards(sample);
 			 System.out.println(this.getCards());
+			 
+			 if(this.getCards().size() <3) {
+				 System.out.println("You don't have enough cards to exchange");
+				 continue;
+			 }
+			 
 			//check if three numbers are valid
 			int num1;
 			int num2;
@@ -298,7 +308,7 @@ public class Player {
 			}
 			
 			
-		} else if(inputArray.length == 2 && inputArray[0].equals("exchangecards") && inputArray[0].equals("-none")){
+		} else if(inputArray.length == 2 && inputArray[0].equals("exchangecards") && inputArray[1].equals("-none")){
 			//Player chooses not to exchange cards
 			//check if cards is more than 5
 			if(forceExchangeCards == 1)
