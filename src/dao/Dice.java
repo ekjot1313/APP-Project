@@ -12,13 +12,13 @@ import java.util.Random;
 public class Dice {
 
 	// Random object to get random number.
-	static Random number = new Random();
+	Random number = new Random();
 
 	/**
 	 * This method returns a random number between 1 and 6
 	 * @return rolledNumber Rolled number from dice.
 	 */
-	static int roll() {
+	int roll() {
 		int rolledNumber=number.nextInt(6) + 1;
 		return rolledNumber;
 	}
@@ -29,7 +29,7 @@ public class Dice {
 	 * 
 	 * @return result 2D array of rolled numbers
 	 */
-	static int[][] rollAll(int attackerDice,int defenderDice) {
+	int[][] rollAll(int attackerDice,int defenderDice) {
 		int[][] result = new int[2][3];
 		for(int i=0;i<2;i++)
 			for(int j=0;j<3;j++)
@@ -37,18 +37,18 @@ public class Dice {
 		int common=Math.min(attackerDice,defenderDice);
 		int col;
 		for(col=0;col<common;col++) {
-			result[0][col]=Dice.roll();
-			result[1][col]=Dice.roll();
+			result[0][col]=roll();
+			result[1][col]=roll();
 		}
 		if(attackerDice != defenderDice) {
 		if(attackerDice>defenderDice) {
 			for(int n=col;n<attackerDice;n++) {
-				result[0][n]=Dice.roll();
+				result[0][n]=roll();
 			}
 		}
 		else {
 			for(int n=col;n<defenderDice;n++) {
-				result[1][n]=Dice.roll();
+				result[1][n]=roll();
 			}
 		}
 		}

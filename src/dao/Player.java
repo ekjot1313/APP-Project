@@ -73,7 +73,20 @@ public class Player {
 		assigned_countries = new ArrayList<Country>();
 		ArrayList<String> cards= new ArrayList<String>();
 	}
-
+	/**
+	 * 
+	 */
+	public String randomCard() {
+		String card;
+		Random number = new Random();
+		int no=number.nextInt(3) + 1;
+		if(no==1)
+			return "Infantry";
+		else if(no==2)
+			return "Artillery";
+		else
+			return "Cavalry";
+	}
 	/**
 	 * This method returns the number of unassigned armies.
 	 * 
@@ -339,23 +352,30 @@ public class Player {
 			System.out.println("Type attack <countrynamefrom> <countynameto> <numdice> for a single attack");
 			System.out.println("attack <countrynamefrom> <countynameto> -allout for an attack until no attack is possible");
 			System.out.println("–noattack to end attack phase");
-			String input=sc.nextLine();
+			String input;
+			do {
+			input=sc.nextLine();
 			String s[]=input.split(" ");
 			while(validate(input,map)==0) {
 				System.out.println("Kindly type again");
+				input=sc.nextLine();
 			}
-			Country countryFrom=map.getCountryFromName(s[1]);
+			if(s[3].equals("-allout")) {
+				
+			}
+			else {
+			Country fromCountry=map.getCountryFromName(s[1]);
 			System.out.println("Valid command");
 			int attackerDice=Integer.parseInt(s[3]);
-			int defenderDice;
-			while(!input.equals("-noattack") && attackDeadlock==0) {
-				Country toCountry=map.getCountryFromName(s[2]);
+			int defenderDice = 0;
+				Country toCountry=new Country();
+				toCountry=map.getCountryFromName(s[2]);
 				int validCommand=0;
 				String defend=toCountry.getOwner();
 				Player defender=new Player();
 				for(Player p:listPlayer) {
 					if(p.getName().equals(s[2])) {
-						
+						defender=p;
 					}
 				}
 				System.out.println("Player :"+defend+" has to defend country :"+s[2]+" \nType defend numdice to choose no of dices to defend your country.");
@@ -363,7 +383,7 @@ public class Player {
 				String str[]=input.split(" ");
 				while(validCommand==0) {
 					if(str.length == 2 && str[0].equals("defend")) {
-						int dice=Integer.parseInt(s[1]);
+						int dice=Integer.parseInt(str[1]);
 						int noOfArmies=toCountry.getNoOfArmies();
 						if(dice >0 && dice <3 && dice<=noOfArmies) {
 							defenderDice=dice;
@@ -377,9 +397,33 @@ public class Player {
 					}
 				}
 				if(validCommand==1) {
-					
+					Dice diceRoll=new Dice();
+					int result[][]=diceRoll.rollAll(attackerDice, defenderDice);
+					result=diceRoll.sort(result);
+					int min=Math.min(attackerDice, defenderDice);
+					for(int i=0;i<min;i++) {
+						if(result[0][i]>result[1][i])//attacker wins
+						{
+							defender.setNoOfArmies(defender.getNoOfArmies()-1);
+							toCountry.setNoOfArmies(toCountry.getNoOfArmies()-1);
+						}
+						else {  		//defender wins
+							this.noOfArmies=this.noOfArmies-1;
+							fromCountry.setNoOfArmies(fromCountry.getNoOfArmies()-1);
+						}
+					}
+					if(toCountry.getNoOfArmies()==0) { //attacker has conquered the defending country.
+						toCountry.setOwner(this.name);
+						this.getAssigned_countries().add(toCountry);
+						defender.getAssigned_countries().remove(toCountry);
+						toCountry.setNoOfArmies(1);
+						fromCountry.setNoOfArmies(fromCountry.getNoOfArmies()-1);
+						String card=this.randomCard();
+						this.cards.add(card);
+					}
 				}
 			}
+			}while(!input.equals("-noattack") && attackDeadlock==0);
 	}
 	/**
 	 * This is the method to check the attack command.
@@ -400,6 +444,7 @@ public class Player {
 				for(Country c:getAssigned_countries()) {
 					if(c.getName().equals(s[1])) {
 						countryFound=1;
+						if(c.getNoOfArmies()>1) {
 						for(int i=0;i<c.getNeighbors().size();i++) {
 							if(c.getNeighbors().get(i).equals(s[2])) {
 								neighborFound=1;
@@ -422,7 +467,7 @@ public class Player {
 											System.out.println("Number of dices cannot be 0");
 											return 0;
 										}
-										
+										return 1;
 									}
 								}
 								else {
@@ -432,6 +477,9 @@ public class Player {
 								
 							}
 						}
+						}
+						else
+							return 0;
 						if(neighborFound==0) {
 							System.out.println("Sorry!To country is not an adjacent country of From country.");
 							return 0;
