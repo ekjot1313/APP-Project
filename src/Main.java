@@ -127,8 +127,8 @@ public class Main {
 				//gp.reinforcement((ArrayList<Player>) pa.listOfPlayers, mr.map, i);
 				//gp.fortification((ArrayList<Player>) pa.listOfPlayers, mr.map, i);
 				pa.listOfPlayers.get(i).reinforcement(mr.map,(ArrayList<Player>) pa.listOfPlayers);
-				pa.listOfPlayers.get(i).fortification(mr.map,(ArrayList<Player>) pa.listOfPlayers);
 				pa.listOfPlayers.get(i).attack(mr.map,(ArrayList<Player>) pa.listOfPlayers);
+				pa.listOfPlayers.get(i).fortification(mr.map,(ArrayList<Player>) pa.listOfPlayers);
 			}
 		}
 	}
