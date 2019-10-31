@@ -234,17 +234,16 @@ public class Player {
 								map.getCountryFromName(inputArray[1]).getNoOfArmies() + armiesTobeplaced);
 						reinforcementArmies -= armiesTobeplaced;
 						System.out.println("Reinforcement armies placed successfully");
+						System.out.println("Remaining armies to be placed : "+reinforcementArmies);
+						if(forceExchangeCards == 1 && reinforcementArmies == 0)
+							System.out.println("You have more than 5 exchange cards ,please exchange cards to proceed to attack phase");
+						
 					} else
 						System.out.println(
 								"Number of armies to be assigned should be in the range : 1 -" + reinforcementArmies);
 				}
 			}
 		 else if(inputArray.length == 4 && inputArray[0].equals("exchangecards")){
-			 ArrayList<String> sample = new ArrayList();
-			 sample.add("Infantry");
-			 sample.add("Cavalry");
-			 sample.add("Artillery");
-			 this.setCards(sample);
 			 System.out.println(this.getCards());
 			 
 			 if(this.getCards().size() <3) {
@@ -264,17 +263,20 @@ public class Player {
 			System.out.println(num1 +""+num2 +""+num3);
 			//check if three numbers are valid cards indexes in player's hand
 				ArrayList<String> playerCards = this.getCards();
-				if(!playerCards.get(num1).isEmpty() && !playerCards.get(num2).isEmpty()&& !playerCards.get(num3).isEmpty() ){
+				String card1 = playerCards.get(num1);
+				String card2 = playerCards.get(num2);
+				String card3 = playerCards.get(num3);
+				if(!card1.isEmpty() && !card2.isEmpty()&& !card3.isEmpty() ){
 					//numbers are valid ,check if all same or all different
-					String concatCards =playerCards.get(num1)+playerCards.get(num2)+playerCards.get(num3);
+					String concatCards =card1+card2+card3;
 					if(concatCards.equalsIgnoreCase("infantryinfantryinfantry") || concatCards.equalsIgnoreCase("cavalrycavalrycavalry") || concatCards.equalsIgnoreCase("artilleryartilleryartillery")){
 						//all same
 						IsExchangeCards = true;
 					}else{
 						Set<String> diffChecker = new HashSet<String>();
-						diffChecker.add(playerCards.get(num1));
-						diffChecker.add(playerCards.get(num2));
-						diffChecker.add(playerCards.get(num3));
+						diffChecker.add(card1);
+						diffChecker.add(card2);
+						diffChecker.add(card3);
 						if(diffChecker.size() == 3){
 							//all different
 							IsExchangeCards = true;
@@ -287,13 +289,14 @@ public class Player {
 				
 					
 				if(IsExchangeCards){
-					playerCards.remove(num1);
-					playerCards.remove(playerCards.indexOf(playerCards.get(num2)));
-					playerCards.remove(playerCards.indexOf(playerCards.get(num3)));
+					playerCards.remove(card1);
+					playerCards.remove(card2);
+					playerCards.remove(card3);
 					
 					this.setCardExchangeCounter(this.getCardExchangeCounter() + 5);
 					reinforcementArmies += this.getCardExchangeCounter();
-					
+					System.out.println("Reinforcement armies added "+this.getCardExchangeCounter());
+					System.out.println("Remaining armies to be placed : "+reinforcementArmies);
 					
 				}
 			}
