@@ -126,8 +126,6 @@ public class Main {
 		while (true) {
 			for (int i = 0; i < pa.listOfPlayers.size(); i++) {
 				System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " reinforcement phase begins");
-				//gp.reinforcement((ArrayList<Player>) pa.listOfPlayers, mr.map, i);
-				//gp.fortification((ArrayList<Player>) pa.listOfPlayers, mr.map, i);
 				pa.listOfPlayers.get(i).reinforcement(mr.map,(ArrayList<Player>) pa.listOfPlayers);
 				gameOver=pa.listOfPlayers.get(i).attack(mr.map,(ArrayList<Player>) pa.listOfPlayers);
 				if(gameOver == 1)

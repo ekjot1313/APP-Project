@@ -454,7 +454,7 @@ public class Player {
 			int attackDeadlock=0;
 			System.out.println("Type attack <countrynamefrom> <countynameto> <numdice> for a single attack");
 			System.out.println("attack <countrynamefrom> <countynameto> -allout for an attack until no attack is possible");
-			System.out.println("–noattack to end attack phase");
+			System.out.println("attack –noattack to end attack phase");
 			String input;
 			do {
 			input=sc.nextLine();
@@ -465,7 +465,7 @@ public class Player {
 			}
 			attackDeadlock=0;
 			String s[]=input.split(" ");
-			if(!input.equals("-noattack")) {
+			if(!input.equals("attack -noattack")) {
 			Country fromCountry=map.getCountryFromName(s[1]);
 			System.out.println("Valid command");
 			int attackerDice=0;
@@ -484,7 +484,7 @@ public class Player {
 			}
 			Player defender=listPlayer.get(index);
 			int isAllout=0;
-			if(s[3].equals("-allout")) {
+			if(s[3].equals("attack -allout")) {
 				while(toCountry.getNoOfArmies()!=0 && fromCountry.getNoOfArmies()!=1) {
 					if(fromCountry.getNoOfArmies()>=3)
 						attackerDice=3;
@@ -620,7 +620,7 @@ public class Player {
 			}
 			//checking for deadlock
 			attackDeadlock= attackDeadlock(map);
-			}while(!input.equals("-noattack") && attackDeadlock==0);
+			}while(!input.equals("attack -noattack") && attackDeadlock==0);
 			return 0;
 	}
 	/**
@@ -657,8 +657,8 @@ public class Player {
 		String s[]=command.split(" ");
 		int countryFound=0;
 		int neighborFound=0;
-		if(s.length==1) {
-			if(s[0].equals("-noattack"))
+		if(s.length==2) {
+			if(command.equals("attack -noattack"))
 				return 1;
 		}
 		if(s.length==4) {
