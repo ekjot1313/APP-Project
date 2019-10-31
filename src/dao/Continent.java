@@ -20,6 +20,44 @@ public class Continent {
 	 */
 	private int continentValue;
 	/**
+	 * To store the name of the owner of the conitnent.
+	 */
+	private String owner;
+	/**
+	 * This method gives the owner
+	 * @return
+	 */
+	public String getOwner() {
+		return owner;
+	}
+	/**
+	 * This variable stores whether to assign no of armies(which is equal to the continent value) to the player in reinforcement phase .
+	 */
+	private int assignArmy;
+	/**
+	 * This method is used to get the value of assignArmy
+	 * @return
+	 */
+	public int getAssignArmy() {
+		return assignArmy;
+	}
+	/**
+	 * This method is used to set the value of assignArmy
+	 * @param assignArmy
+	 */
+	public void setAssignArmy(int assignArmy) {
+		this.assignArmy = assignArmy;
+	}
+
+	/**
+	 *  This method sets the owner
+	 * @param owner
+	 */
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
+	/**
 	 * TO store list of countries in the continent
 	 */
 	private List<String> countries;
@@ -38,6 +76,8 @@ public class Continent {
 	public Continent() {
 		this.countries = new ArrayList<String>();
 		this.bridges = new ArrayList<Bridge>();
+		this.setAssignArmy(0);
+		this.setOwner(null);
 	}
 
 	/**

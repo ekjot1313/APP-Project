@@ -520,6 +520,8 @@ public class Player {
 						defender.getAssigned_countries().remove(toCountry);
 						toCountry.setNoOfArmies(1);
 						fromCountry.setNoOfArmies(fromCountry.getNoOfArmies()-1);
+						
+						//card exchange logic
 						if(defender.getAssigned_countries().size()==0) {//defender is out of the game
 							for(int i=0;i<defender.getCards().size();i++) {
 								this.getCards().add(defender.getCards().get(i));
@@ -531,6 +533,7 @@ public class Player {
 						this.cards.add(card);
 						}
 						
+						//checking for continent 
 						
 					}
 				}
