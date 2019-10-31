@@ -455,14 +455,17 @@ public class Player {
 			System.out.println("Type attack <countrynamefrom> <countynameto> <numdice> for a single attack");
 			System.out.println("attack <countrynamefrom> <countynameto> -allout for an attack until no attack is possible");
 			System.out.println("attack –noattack to end attack phase");
+			System.out.println("Type showmap");
 			String input;
 			do {
 			input=sc.nextLine();
-			
 			while(validate(input,map)==0) {
 				System.out.println("Kindly type again");
 				input=sc.nextLine();
 			}
+			if(input.equals("showmap")) {
+				map.displayAll();
+			}else {
 			attackDeadlock=0;
 			String s[]=input.split(" ");
 			if(!input.equals("attack -noattack")) {
@@ -484,7 +487,7 @@ public class Player {
 			}
 			Player defender=listPlayer.get(index);
 			int isAllout=0;
-			if(s[3].equals("attack -allout")) {
+		if(s[3].equals("-allout")) {
 				while(toCountry.getNoOfArmies()!=0 && fromCountry.getNoOfArmies()!=1) {
 					if(fromCountry.getNoOfArmies()>=3)
 						attackerDice=3;
@@ -511,6 +514,9 @@ public class Player {
 						
 					}
 				}
+				if(fromCountry.getNoOfArmies()==1) {
+					System.out.println("Player :"+defender.getName()+" has won and attacking country :"+toCountry.getName()+" has only 1 army left");
+				}
 				isAllout=1;
 			}
 			else {
@@ -529,7 +535,7 @@ public class Player {
 							validCommand=1;
 						}
 						else
-							System.out.println("Dice range for a defender is 1-2");
+							System.out.println("Incorrect number of dices");
 					}
 					else {
 						System.out.println("Invalid command,type again.");
@@ -550,6 +556,7 @@ public class Player {
 						else {  		//defender wins
 							this.noOfArmies=this.noOfArmies-1;
 							fromCountry.setNoOfArmies(fromCountry.getNoOfArmies()-1);
+							System.out.println("Player :"+defender.getName()+" has won.");
 						}
 					}
 				}
@@ -563,6 +570,7 @@ public class Player {
 						toCountry.setNoOfArmies(1);
 						fromCountry.setNoOfArmies(fromCountry.getNoOfArmies()-1);
 						System.out.println("You have conquered country:"+toCountry.getName());
+						if(fromCountry.getNoOfArmies() != 1) {
 						System.out.println("Move armies from "+fromCountry.getName()+" to"+toCountry.getName());
 						System.out.println("Available armies you can move : 1-"+(fromCountry.getNoOfArmies()-1));
 						System.out.println("Type attackmove <number> to move");
@@ -587,6 +595,9 @@ public class Player {
 									System.out.println("Incorrect command, Kindly type again.");
 							}
 						}while(valid==0);
+						}
+						else
+							System.out.println("You cannot move armies to the conquered country as you have only 1 army left in the attacking country.");
 						//card exchange logic
 						if(defender.getAssigned_countries().size()==0) {//defender is out of the game
 							for(int i=0;i<defender.getCards().size();i++) {
@@ -617,6 +628,7 @@ public class Player {
 						}
 					}
 				}
+			}
 			}
 			//checking for deadlock
 			attackDeadlock= attackDeadlock(map);
@@ -657,6 +669,8 @@ public class Player {
 		String s[]=command.split(" ");
 		int countryFound=0;
 		int neighborFound=0;
+		if(command.equals("showmap"))
+			return 1;
 		if(s.length==2) {
 			if(command.equals("attack -noattack"))
 				return 1;
