@@ -2,6 +2,7 @@ package dao;
 
 import java.util.*;
 import dao.Map;
+import game.PlayerAllocator;
 import mapWorks.MapReader;
 
 /**
@@ -448,7 +449,7 @@ public class Player {
 	 * This method is used for attack phase.
 	 * @throws Exception 
 	 */
-	public int attack(Map map,ArrayList<Player> listPlayer) throws Exception {
+	public int attack(Map map,PlayerAllocator pa) throws Exception {
 			Scanner sc = new Scanner(System.in);
 			int attackDeadlock=0;
 			System.out.println("Type attack <countrynamefrom> <countynameto> <numdice> for a single attack");
@@ -457,33 +458,29 @@ public class Player {
 			String input;
 			do {
 			input=sc.nextLine();
-			String s[]=input.split(" ");
+			attackDeadlock=0;
 			while(validate(input,map)==0) {
 				System.out.println("Kindly type again");
 				input=sc.nextLine();
 			}
+			String s[]=input.split(" ");
 			if(!input.equals("-noattack")) {
 			Country fromCountry=map.getCountryFromName(s[1]);
 			System.out.println("Valid command");
-			int attackerDice=Integer.parseInt(s[3]);
+			int attackerDice=0;
+			
 			int defenderDice = 0;
-			Country toCountry=new Country();
-			toCountry=map.getCountryFromName(s[2]);
+			Country toCountry=map.getCountryFromName(s[2]);
 			int validCommand=0;
 			String defend=toCountry.getOwner();
-			Player defender=new Player();
-			for(Player p:listPlayer) {
-				if(p.getName().equals(s[2])) {
-					defender=p;
-				}
-			}
+			Player defender=pa.getPlayerFromName(defend);
 			int isAllout=0;
 			if(s[3].equals("-allout")) {
-				while(toCountry.getNoOfArmies()==0 || fromCountry.getNoOfArmies()==1) {
+				while(toCountry.getNoOfArmies()!=0 && fromCountry.getNoOfArmies()!=1) {
 					if(fromCountry.getNoOfArmies()>=3)
 						attackerDice=3;
 					else
-						attackerDice=fromCountry.getNoOfArmies();
+						attackerDice=2;
 					if(toCountry.getNoOfArmies()>=2)
 						defenderDice=2;
 					else
@@ -502,16 +499,19 @@ public class Player {
 							this.noOfArmies=this.noOfArmies-1;
 							fromCountry.setNoOfArmies(fromCountry.getNoOfArmies()-1);
 						}
+						
 					}
 				}
 				isAllout=1;
 			}
 			else {
 				//int gameOver=0;
+				attackerDice=Integer.parseInt(s[3]);
 				System.out.println("Player :"+defend+" has to defend country :"+s[2]+" \nType defend numdice to choose no of dices to defend your country.");
-				input=sc.nextLine();
-				String str[]=input.split(" ");
+				
 				while(validCommand==0) {
+					input=sc.nextLine();
+					String str[]=input.split(" ");
 					if(str.length == 2 && str[0].equals("defend")) {
 						int dice=Integer.parseInt(str[1]);
 						int noOfArmies=toCountry.getNoOfArmies();
@@ -558,8 +558,8 @@ public class Player {
 							for(int i=0;i<defender.getCards().size();i++) {
 								this.getCards().add(defender.getCards().get(i));
 							}
-							listPlayer.remove(defender);
-							if(listPlayer.size()==1) {	//checking for game finish condition
+							pa.listOfPlayers.remove(defender);
+							if(pa.listOfPlayers.size()==1) {	//checking for game finish condition
 								return 1;
 							}
 						}
@@ -631,7 +631,7 @@ public class Player {
 			if(s[0].equals("attack")) {
 				String countryFrom=s[1];
 				String countryTo=s[2];
-				for(Country c:getAssigned_countries()) {
+				for(Country c:this.getAssigned_countries()) {
 					if(c.getName().equals(s[1])) {
 						countryFound=1;
 						if(c.getNoOfArmies()>1) {
@@ -688,4 +688,16 @@ public class Player {
 		}
 		return 0;
 	}
+	/**
+	 * 
+	 */
+		public Player getPlayerFromName(String name,ArrayList<Player> listPlayer) {
+			for(int i=0;i<listPlayer.size();i++) {
+				if(listPlayer.get(i).getName().equals(name)) {
+				return listPlayer.get(i);
+				}
+			}
+			return null;
+		}
 }
+

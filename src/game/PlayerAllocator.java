@@ -19,7 +19,17 @@ public class PlayerAllocator {
 	 * list of players
 	 */
 	public List<Player> listOfPlayers;
-
+/**
+ * 
+ */
+	public Player getPlayerFromName(String name) {
+		for(int i=0;i<listOfPlayers.size();i++) {
+			if(listOfPlayers.get(i).getName().equals(name)) {
+			return listOfPlayers.get(i);
+			}
+		}
+		return null;
+	}
 	/**
 	 * Constructor to initialize list of players
 	 */
