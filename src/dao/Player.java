@@ -346,7 +346,7 @@ public class Player {
 		do {
 
 			System.out.println(
-					"Type fortify <from country name> <to country name> <number of armies> or fortify none (choose to not do a move)\n Type showmap");
+					"Type fortify <from country name> <to country name> <number of armies> or fortify -none (choose to not do a move)\n Type showmap");
 			String in = sc.nextLine();
 			String input[] = in.split(" ");
 			if (in.equals("showmap")) {
@@ -434,7 +434,7 @@ public class Player {
 								"There's no path between the mentioned countries.(You can move any number of armies from one of the owned countries to the other, provided that there is a path between these two countries that is composed of countries owned by you)");
 					}
 				}
-			} else if (in.equals("fortify none")) {
+			} else if (in.equals("fortify -none")) {
 				System.out.println("Skipped fortification");
 				
 				return;
@@ -545,6 +545,8 @@ public class Player {
 				if(validCommand==1) {
 					Dice diceRoll=new Dice(attackerDice, defenderDice);
 					int result[][]=diceRoll.rollAll();
+					System.out.println("Dice Roll Output:");
+					diceRoll.print(result);
 					result=diceRoll.sort(result);
 					int min=Math.min(attackerDice, defenderDice);
 					for(int i=0;i<min;i++) {
@@ -552,11 +554,12 @@ public class Player {
 						{
 							defender.setNoOfArmies(defender.getNoOfArmies()-1);
 							toCountry.setNoOfArmies(toCountry.getNoOfArmies()-1);
+							System.out.println("Defender lost 1 army");
 						}
 						else {  		//defender wins
 							this.noOfArmies=this.noOfArmies-1;
 							fromCountry.setNoOfArmies(fromCountry.getNoOfArmies()-1);
-							System.out.println("Player :"+defender.getName()+" has won.");
+							System.out.println("Attacker lost 1 army");
 						}
 					}
 				}
@@ -611,6 +614,7 @@ public class Player {
 						else {
 						String card=this.randomCard();
 						this.cards.add(card);
+						System.out.println("You have received:"+card+" card");
 						}
 						//checking for continent 
 						Continent cont=map.getContinentFromName(toCountry.getContinentName());

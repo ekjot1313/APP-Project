@@ -91,15 +91,19 @@ public class Dice {
 	 */
 	String print(int[][] result) {
 		String str = "";
+		System.out.print("Attacker Dice: "+" ");
 		for (int i = 0; i < attackerDice; i++) {
 
 			str += result[0][i] + "\n";
+			System.out.print(result[0][i]+" ");
 		}
 
 		str += "\n\n";
+		System.out.print("\nDefender Dice: "+" ");
 		for (int i = 0; i < defenderDice; i++) {
 
 			str += result[1][i] + "\n";
+			System.out.print(result[1][i]+" ");
 		}
 
 		return str;
