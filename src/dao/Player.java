@@ -458,11 +458,12 @@ public class Player {
 			String input;
 			do {
 			input=sc.nextLine();
-			attackDeadlock=0;
+			
 			while(validate(input,map)==0) {
 				System.out.println("Kindly type again");
 				input=sc.nextLine();
 			}
+			attackDeadlock=0;
 			String s[]=input.split(" ");
 			if(!input.equals("-noattack")) {
 			Country fromCountry=map.getCountryFromName(s[1]);
@@ -668,8 +669,10 @@ public class Player {
 							}
 						}
 						}
-						else
+						else {
+							System.out.println("You only have 1 army left in the FromCountry");
 							return 0;
+						}
 						if(neighborFound==0) {
 							System.out.println("Sorry!To country is not an adjacent country of From country.");
 							return 0;
