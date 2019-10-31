@@ -244,13 +244,6 @@ public class Player {
 				}
 			}
 		 else if(inputArray.length == 4 && inputArray[0].equals("exchangecards")){
-			 ArrayList<String> sample = new ArrayList();
-			 sample.add("Infantry");
-			 sample.add("Infantry");
-			 sample.add("Infantry");
-			 sample.add("Cavalry");
-			 sample.add("Artillery ");
-			 this.setCards(sample);
 			 System.out.println(this.getCards());
 			 
 			 if(this.getCards().size() <3) {
