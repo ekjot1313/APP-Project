@@ -449,7 +449,7 @@ public class Player {
 	 * This method is used for attack phase.
 	 * @throws Exception 
 	 */
-	public int attack(Map map,PlayerAllocator pa) throws Exception {
+	public int attack(Map map,ArrayList<Player> listPlayer) throws Exception {
 			Scanner sc = new Scanner(System.in);
 			int attackDeadlock=0;
 			System.out.println("Type attack <countrynamefrom> <countynameto> <numdice> for a single attack");
@@ -474,7 +474,15 @@ public class Player {
 			Country toCountry=map.getCountryFromName(s[2]);
 			int validCommand=0;
 			String defend=toCountry.getOwner();
-			Player defender=pa.getPlayerFromName(defend);
+			int index=-1;
+			for(int i=0;i<listPlayer.size();i++) {
+				
+				if(listPlayer.get(i).getName().equals(toCountry.getOwner())) {
+					index=i;
+					break;
+				}
+			}
+			Player defender=listPlayer.get(index);
 			int isAllout=0;
 			if(s[3].equals("-allout")) {
 				while(toCountry.getNoOfArmies()!=0 && fromCountry.getNoOfArmies()!=1) {
@@ -559,8 +567,8 @@ public class Player {
 							for(int i=0;i<defender.getCards().size();i++) {
 								this.getCards().add(defender.getCards().get(i));
 							}
-							pa.listOfPlayers.remove(defender);
-							if(pa.listOfPlayers.size()==1) {	//checking for game finish condition
+							listPlayer.remove(defender);
+							if(listPlayer.size()==1) {	//checking for game finish condition
 								return 1;
 							}
 						}
@@ -670,7 +678,7 @@ public class Player {
 						}
 						}
 						else {
-							System.out.println("You only have 1 army left in the FromCountry");
+							System.out.println("You only have 1 army left in the FromCountry.Hence you cannot attack");
 							return 0;
 						}
 						if(neighborFound==0) {
