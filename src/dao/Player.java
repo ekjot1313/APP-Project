@@ -556,12 +556,37 @@ public class Player {
 			}
 			if(validCommand==1 || isAllout==1) {
 				if(toCountry.getNoOfArmies()==0) { //attacker has conquered the defending country.
+						Scanner in=new Scanner(System.in);
 						toCountry.setOwner(this.name);
 						this.getAssigned_countries().add(toCountry);
 						defender.getAssigned_countries().remove(toCountry);
 						toCountry.setNoOfArmies(1);
 						fromCountry.setNoOfArmies(fromCountry.getNoOfArmies()-1);
-						
+						System.out.println("You have conquered country:"+toCountry.getName());
+						System.out.println("Move armies from "+fromCountry.getName()+" to"+toCountry.getName());
+						System.out.println("Available armies you can move : 1-"+(fromCountry.getNoOfArmies()-1));
+						System.out.println("Type attackmove <number> to move");
+						int n,valid=0;
+						do {	
+							String command=sc.nextLine();
+							String str[]=command.split(" ");
+							if(str.length==2 && str[0].equals("attackmove")) {
+								n=Integer.parseInt(str[1]);
+								if(n>0 && n<=fromCountry.getNoOfArmies()-1) {
+									fromCountry.setNoOfArmies(fromCountry.getNoOfArmies()-n);
+									toCountry.setNoOfArmies(n+1);
+									valid=1;
+									break;
+								}
+								else {
+									if(n==0 || n>fromCountry.getNoOfArmies()-1)
+										System.out.println("Incorrect no of armies, Kindly type again.");
+								}
+							}
+							else {
+									System.out.println("Incorrect command, Kindly type again.");
+							}
+						}while(valid==0);
 						//card exchange logic
 						if(defender.getAssigned_countries().size()==0) {//defender is out of the game
 							for(int i=0;i<defender.getCards().size();i++) {
