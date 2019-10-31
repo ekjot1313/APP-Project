@@ -118,7 +118,7 @@ public class Main {
 	private static void gameplayer(MapReader mr) throws Exception {
 		PlayerAllocator pa = new PlayerAllocator();
 		ArmyAllocator aa = new ArmyAllocator();
-		
+		int gameOver=0;
 		pa.allocate(mr.map);
 		pa.populateCountries(mr.map);
 		
@@ -129,10 +129,16 @@ public class Main {
 				//gp.reinforcement((ArrayList<Player>) pa.listOfPlayers, mr.map, i);
 				//gp.fortification((ArrayList<Player>) pa.listOfPlayers, mr.map, i);
 				pa.listOfPlayers.get(i).reinforcement(mr.map,(ArrayList<Player>) pa.listOfPlayers);
-				pa.listOfPlayers.get(i).attack(mr.map,(ArrayList<Player>) pa.listOfPlayers);
+				gameOver=pa.listOfPlayers.get(i).attack(mr.map,(ArrayList<Player>) pa.listOfPlayers);
+				if(gameOver == 1)
+					break;
 				pa.listOfPlayers.get(i).fortification(mr.map,(ArrayList<Player>) pa.listOfPlayers);
 			}
+			if(gameOver == 1)
+				break;
 		}
+		System.out.println("Game is Over");
+		System.out.println("Winner is Player: "+pa.listOfPlayers.get(0).getName());
 	}
 	
 	/**

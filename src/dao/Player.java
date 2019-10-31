@@ -448,7 +448,7 @@ public class Player {
 	 * This method is used for attack phase.
 	 * @throws Exception 
 	 */
-	public void attack(Map map,ArrayList<Player> listPlayer) throws Exception {
+	public int attack(Map map,ArrayList<Player> listPlayer) throws Exception {
 			Scanner sc = new Scanner(System.in);
 			int attackDeadlock=0;
 			System.out.println("Type attack <countrynamefrom> <countynameto> <numdice> for a single attack");
@@ -462,24 +462,52 @@ public class Player {
 				System.out.println("Kindly type again");
 				input=sc.nextLine();
 			}
-			if(s[3].equals("-allout")) {
-				
-			}
-			else {
+			if(!input.equals("-noattack")) {
 			Country fromCountry=map.getCountryFromName(s[1]);
 			System.out.println("Valid command");
 			int attackerDice=Integer.parseInt(s[3]);
 			int defenderDice = 0;
-				Country toCountry=new Country();
-				toCountry=map.getCountryFromName(s[2]);
-				int validCommand=0;
-				String defend=toCountry.getOwner();
-				Player defender=new Player();
-				for(Player p:listPlayer) {
-					if(p.getName().equals(s[2])) {
-						defender=p;
+			Country toCountry=new Country();
+			toCountry=map.getCountryFromName(s[2]);
+			int validCommand=0;
+			String defend=toCountry.getOwner();
+			Player defender=new Player();
+			for(Player p:listPlayer) {
+				if(p.getName().equals(s[2])) {
+					defender=p;
+				}
+			}
+			int isAllout=0;
+			if(s[3].equals("-allout")) {
+				while(toCountry.getNoOfArmies()==0 || fromCountry.getNoOfArmies()==1) {
+					if(fromCountry.getNoOfArmies()>=3)
+						attackerDice=3;
+					else
+						attackerDice=fromCountry.getNoOfArmies();
+					if(toCountry.getNoOfArmies()>=2)
+						defenderDice=2;
+					else
+						defenderDice=1;
+					Dice diceRoll=new Dice(attackerDice, defenderDice);
+					int result[][]=diceRoll.rollAll();
+					result=diceRoll.sort(result);
+					int min=Math.min(attackerDice, defenderDice);
+					for(int i=0;i<min;i++) {
+						if(result[0][i]>result[1][i])//attacker wins
+						{
+							defender.setNoOfArmies(defender.getNoOfArmies()-1);
+							toCountry.setNoOfArmies(toCountry.getNoOfArmies()-1);
+						}
+						else {  		//defender wins
+							this.noOfArmies=this.noOfArmies-1;
+							fromCountry.setNoOfArmies(fromCountry.getNoOfArmies()-1);
+						}
 					}
 				}
+				isAllout=1;
+			}
+			else {
+				//int gameOver=0;
 				System.out.println("Player :"+defend+" has to defend country :"+s[2]+" \nType defend numdice to choose no of dices to defend your country.");
 				input=sc.nextLine();
 				String str[]=input.split(" ");
@@ -498,6 +526,7 @@ public class Player {
 						System.out.println("Invalid command,type again.");
 					}
 				}
+			
 				if(validCommand==1) {
 					Dice diceRoll=new Dice(attackerDice, defenderDice);
 					int result[][]=diceRoll.rollAll();
@@ -514,7 +543,10 @@ public class Player {
 							fromCountry.setNoOfArmies(fromCountry.getNoOfArmies()-1);
 						}
 					}
-					if(toCountry.getNoOfArmies()==0) { //attacker has conquered the defending country.
+				}
+			}
+			if(validCommand==1 || isAllout==1) {
+				if(toCountry.getNoOfArmies()==0) { //attacker has conquered the defending country.
 						toCountry.setOwner(this.name);
 						this.getAssigned_countries().add(toCountry);
 						defender.getAssigned_countries().remove(toCountry);
@@ -527,18 +559,61 @@ public class Player {
 								this.getCards().add(defender.getCards().get(i));
 							}
 							listPlayer.remove(defender);
+							if(listPlayer.size()==1) {	//checking for game finish condition
+								return 1;
+							}
 						}
 						else {
 						String card=this.randomCard();
 						this.cards.add(card);
 						}
-						
 						//checking for continent 
-						
+						Continent cont=map.getContinentFromName(toCountry.getContinentName());
+						int flag=0;
+						for(String country:cont.getCountries()) {
+							Country c=map.getCountryFromName(country);
+							if(this.name.equals(c.getOwner())) {
+								flag=1;
+								break;
+							}
+						}
+						if(flag==0) { //continent has been conquered
+							cont.setOwner(this.name);
+							cont.setAssignArmy(1);
+						}
 					}
 				}
 			}
+			//checking for deadlock
+			attackDeadlock= attackDeadlock(map);
 			}while(!input.equals("-noattack") && attackDeadlock==0);
+			return 0;
+	}
+	/**
+	 * This method checks for attack deadlock
+	 */
+	public int attackDeadlock(Map map) {
+		if(this.getNoOfArmies()==this.getAssigned_countries().size())
+			return 1;
+		else {
+			for(Country c:this.getAssigned_countries()) {
+				if(c.getNoOfArmies()!=1) {
+					for(String s:c.getNeighbors()) {
+						Country c1=map.getCountryFromName(s);
+						if(!(c1.getOwner().equals(this.name))) {
+							return 0;
+						}
+					}
+				}
+			}
+		}
+		return 1;
+	}
+	/**
+	 * This method is for a single attack
+	 */
+	public void singleAttack() {
+		
 	}
 	/**
 	 * This is the method to check the attack command.
