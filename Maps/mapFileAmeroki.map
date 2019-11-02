@@ -1,0 +1,21 @@
+null
+
+name null Map
+
+null
+
+[continents]
+Asia 10 00000
+Africa 14 00000
+
+[countries]
+1 India 1
+2 China 1
+3 Nepal 1
+4 Congo 2
+
+[borders]
+1 2
+2 1 3
+3 2 4
+4 3

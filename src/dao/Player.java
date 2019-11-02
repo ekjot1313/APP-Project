@@ -13,7 +13,18 @@ import mapWorks.MapReader;
  */
 
 
-public class Player {
+public class Player extends pattern.Observable{
+	
+	private String state;
+	
+	
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+		notify(this);
+	}
 	/**
 	 * The name of the player
 	 */
@@ -185,6 +196,7 @@ public class Player {
 	 */
 	public void reinforcement(Map map,ArrayList<Player> listPlayer) {
 
+		setState("Reinforcement");
 		Scanner sc = new Scanner(System.in);
 		// calculate reinforcement armies
 		int reinforcementArmies = calculateReinforceArmies(map,listPlayer);
@@ -341,6 +353,8 @@ public class Player {
 	 *                    from main function
 	 */
 	public void fortification(Map map,ArrayList<Player> listPlayer) {
+		
+		setState("Fortification");
 		Scanner sc = new Scanner(System.in);
 		int flag = 0;
 		do {
@@ -450,6 +464,8 @@ public class Player {
 	 * @throws Exception 
 	 */
 	public int attack(Map map,ArrayList<Player> listPlayer) throws Exception {
+		
+			setState("Attack");
 			Scanner sc = new Scanner(System.in);
 			int attackDeadlock=0;
 			System.out.println("Type attack <countrynamefrom> <countynameto> <numdice> for a single attack");

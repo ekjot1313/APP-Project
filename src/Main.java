@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import mapWorks.MapReader;
+import view.PhaseView;
 import dao.Player;
 import game.ArmyAllocator;
 import game.PlayerAllocator;
@@ -116,6 +117,10 @@ public class Main {
 	 * @throws Exception 
 	 */
 	private static void gameplayer(MapReader mr) throws Exception {
+		
+		//Player p =new Player();
+		
+		
 		PlayerAllocator pa = new PlayerAllocator();
 		ArmyAllocator aa = new ArmyAllocator();
 		int gameOver=0;
@@ -126,6 +131,8 @@ public class Main {
 		while (true) {
 			for (int i = 0; i < pa.listOfPlayers.size(); i++) {
 				System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " reinforcement phase begins");
+				PhaseView pv= new PhaseView();
+				pa.listOfPlayers.get(i).attach(pv);
 				pa.listOfPlayers.get(i).reinforcement(mr.map,(ArrayList<Player>) pa.listOfPlayers);
 				gameOver=pa.listOfPlayers.get(i).attack(mr.map,(ArrayList<Player>) pa.listOfPlayers);
 				if(gameOver == 1)
