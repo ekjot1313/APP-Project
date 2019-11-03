@@ -17,6 +17,11 @@ public class Player extends pattern.Observable{
 	
 	private String state;
 	
+	/**
+	 * deck of cards
+	 */
+	public static ArrayList<String> deck;
+	
 	
 	public String getState() {
 		return state;
@@ -91,13 +96,8 @@ public class Player extends pattern.Observable{
 	public String randomCard() {
 		String card;
 		Random number = new Random();
-		int no=number.nextInt(3) + 1;
-		if(no==1)
-			return "Infantry";
-		else if(no==2)
-			return "Artillery";
-		else
-			return "Cavalry";
+		int no=number.nextInt(deck.size());
+		return deck.get(no);
 	}
 	/**
 	 * This method returns the number of unassigned armies.
@@ -281,7 +281,7 @@ public class Player extends pattern.Observable{
 				String card3 = playerCards.get(num3);
 				if(!card1.isEmpty() && !card2.isEmpty()&& !card3.isEmpty() ){
 					//numbers are valid ,check if all same or all different
-					String concatCards =card1+card2+card3;
+					String concatCards =card1.split("")[1]+card2.split("")[1]+card3.split("")[1];
 					if(concatCards.equalsIgnoreCase("infantryinfantryinfantry") || concatCards.equalsIgnoreCase("cavalrycavalrycavalry") || concatCards.equalsIgnoreCase("artilleryartilleryartillery")){
 						//all same
 						IsExchangeCards = true;

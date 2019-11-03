@@ -123,8 +123,9 @@ public class Main {
 		
 		//Player p =new Player();
 		//Create Deck of cards
-		createDeck(mr.map);
-		
+		ArrayList<String> deck = createDeck(mr.map);
+		System.out.println(deck.toString());
+		Player.deck = deck;
 		PlayerAllocator pa = new PlayerAllocator();
 		ArmyAllocator aa = new ArmyAllocator();
 		int gameOver=0;
@@ -153,7 +154,7 @@ public class Main {
 	 * To create a deck of cards based on countries
 	 * @param map
 	 */
-	private static void createDeck(Map map) {
+	private static ArrayList<String> createDeck(Map map) {
 		// TODO Auto-generated method stub
 		List<String> typeOfCards = new ArrayList<String>();
 		typeOfCards.add("infantry");
@@ -195,6 +196,8 @@ public class Main {
 			cardList.add(map.getListOfCountries().get(equalDis*3).getName()+" "+"infantry");
 		if(remaining >1)
 			cardList.add(map.getListOfCountries().get(equalDis*3+1).getName()+" "+"cavalry");
+		
+		return cardList;
 	}
 
 	/**
