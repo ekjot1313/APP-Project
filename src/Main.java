@@ -134,8 +134,7 @@ public class Main {
 		pa.allocate(mr.map);
 		pa.populateCountries(mr.map);
 		
-		PWDView pwdView=new PWDView();
-		mr.map.attach(pwdView);
+		
 		
 		
 		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, mr.map, 0);
@@ -144,6 +143,10 @@ public class Main {
 				System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " reinforcement phase begins");
 				PhaseView pv= new PhaseView();
 				pa.listOfPlayers.get(i).attach(pv);
+				
+				PWDView pwdView=new PWDView();
+				mr.map.attach(pwdView);
+				
 				pa.listOfPlayers.get(i).reinforcement(mr.map,(ArrayList<Player>) pa.listOfPlayers);
 				gameOver=pa.listOfPlayers.get(i).attack(mr.map,(ArrayList<Player>) pa.listOfPlayers);
 				if(gameOver == 1)

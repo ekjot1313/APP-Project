@@ -201,7 +201,8 @@ public class PlayerAllocator {
 				Country c= map.getCountryFromName(countryList.get(index));
 				countryList.remove(index);
 				listOfPlayers.get(k).getAssigned_countries().add(c);
-				c.setOwner(listOfPlayers.get(k).getName());
+				//c.setOwner(listOfPlayers.get(k).getName());
+				map.setCountryOwner(c,listOfPlayers.get(k).getName());
 				count++;
 			}
 		}
