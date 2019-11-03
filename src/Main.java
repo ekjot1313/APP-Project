@@ -1,10 +1,13 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 import mapWorks.MapReader;
 import view.PhaseView;
+import dao.Map;
 import dao.Player;
 import game.ArmyAllocator;
 import game.PlayerAllocator;
@@ -119,7 +122,8 @@ public class Main {
 	private static void gameplayer(MapReader mr) throws Exception {
 		
 		//Player p =new Player();
-		
+		//Create Deck of cards
+		createDeck(mr.map);
 		
 		PlayerAllocator pa = new PlayerAllocator();
 		ArmyAllocator aa = new ArmyAllocator();
@@ -145,7 +149,54 @@ public class Main {
 		System.out.println("Game is Over");
 		System.out.println("Winner is Player: "+pa.listOfPlayers.get(0).getName());
 	}
-	
+	/**
+	 * To create a deck of cards based on countries
+	 * @param map
+	 */
+	private static void createDeck(Map map) {
+		// TODO Auto-generated method stub
+		List<String> typeOfCards = new ArrayList<String>();
+		typeOfCards.add("infantry");
+		typeOfCards.add("cavalry");
+		typeOfCards.add("artillery");
+		int numberofCountries = map.getListOfCountries().size();
+		int equalDis = numberofCountries/3;
+		int iCounter= equalDis;
+		int cCounter = equalDis;
+		int aCounter = equalDis;
+		ArrayList<String> cardList =  new ArrayList<String>();
+
+		Random r = new Random();
+		for(int i=0;i< equalDis*3;i++){
+			String card;
+			card = map.getListOfCountries().get(i).getName();
+			int j= r.nextInt(typeOfCards.size());
+			card += " "+typeOfCards.get(j);
+			cardList.add(card);
+			if(typeOfCards.get(j).equals("infantry") ) {
+				iCounter++;
+				if(iCounter == equalDis)
+					typeOfCards.remove("infantry");
+			}
+			if(typeOfCards.get(j).equals("cavalry") ) {
+				cCounter++;
+				if(cCounter == equalDis)
+					typeOfCards.remove("cavalry");
+			}
+			if(typeOfCards.get(j).equals("artillery") ) {
+				aCounter++;
+				if(aCounter == equalDis)
+					typeOfCards.remove("artillery");
+			}
+			
+		}
+		int remaining = numberofCountries - equalDis*3;
+		if(remaining ==1)
+			cardList.add(map.getListOfCountries().get(equalDis*3).getName()+" "+"infantry");
+		if(remaining >1)
+			cardList.add(map.getListOfCountries().get(equalDis*3+1).getName()+" "+"cavalry");
+	}
+
 	/**
 	 * This method contains the commands provided after editmap option is selected
 	 */
