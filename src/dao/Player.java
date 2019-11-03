@@ -310,7 +310,9 @@ public class Player extends pattern.Observable{
 					reinforcementArmies += this.getCardExchangeCounter();
 					System.out.println("Reinforcement armies added "+this.getCardExchangeCounter());
 					System.out.println("Remaining armies to be placed : "+reinforcementArmies);
-					
+					deck.add(card1);
+					deck.add(card2);
+					deck.add(card3);
 				}
 			}
 			catch (NumberFormatException e) {
@@ -631,6 +633,7 @@ public class Player extends pattern.Observable{
 						String card=this.randomCard();
 						this.cards.add(card);
 						System.out.println("You have received:"+card+" card");
+						deck.remove(card);
 						}
 						//checking for continent 
 						Continent cont=map.getContinentFromName(toCountry.getContinentName());
