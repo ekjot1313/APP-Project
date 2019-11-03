@@ -27,6 +27,7 @@ public class PhaseView implements Observer {
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			
 			txtrActions = new JTextArea();
+			txtrActions.setEditable(false);
 			txtrActions.setText("actions");
 			
 			scrollPane = new JScrollPane();
@@ -65,7 +66,7 @@ public class PhaseView implements Observer {
 	 */
 	public PhaseView() {
 		initialize();
-		txtrActions.setEditable(false);
+		
 	}
 
 	/**
