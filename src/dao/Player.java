@@ -535,9 +535,10 @@ public class Player extends pattern.Observable{
 						}
 						else {  		//defender wins
 							this.noOfArmies=this.noOfArmies-1;
-							fromCountry.setNoOfArmies(fromCountry.getNoOfArmies()-1);
+							fromCountry.setNoOfArmies((fromCountry.getNoOfArmies()-1));
 						}
-						
+						if(fromCountry.getNoOfArmies()==1)
+							break;
 					}
 				}
 				if(fromCountry.getNoOfArmies()==1) {
@@ -597,12 +598,14 @@ public class Player extends pattern.Observable{
 				if(toCountry.getNoOfArmies()==0) { //attacker has conquered the defending country.
 						Scanner in=new Scanner(System.in);
 						toCountry.setOwner(this.name);
+						map.setOwner(toCountry,this.name);
 						this.getAssigned_countries().add(toCountry);
 						defender.getAssigned_countries().remove(toCountry);
 						toCountry.setNoOfArmies(1);
 						fromCountry.setNoOfArmies(fromCountry.getNoOfArmies()-1);
 						System.out.println("You have conquered country:"+toCountry.getName());
 						//this.setActions("You have conquered country:"+toCountry.getName());
+						System.out.println(fromCountry.getNoOfArmies());
 						if(fromCountry.getNoOfArmies() != 1) {
 						System.out.println("Move armies from "+fromCountry.getName()+" to"+toCountry.getName());
 						System.out.println("Available armies you can move : 1-"+(fromCountry.getNoOfArmies()-1));
