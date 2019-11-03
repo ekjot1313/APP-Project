@@ -21,11 +21,12 @@ public class PhaseView implements Observer {
 	private String currentState ="";
 	public void update(Observable obj) {
 		// TODO Auto-generated method stub
+
 		if(frame==null) {
 			frame = new JFrame();
 			frame.setBounds(100, 100, 450, 300);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			
+			frame.setTitle("Phase View");
 			txtrActions = new JTextArea();
 			txtrActions.setEditable(false);
 			txtrActions.setText("actions");
@@ -50,6 +51,7 @@ public class PhaseView implements Observer {
 		if(!currentState.equals(((Player) obj).getState()))
 			count =0;
 		if(count==0) {
+			
 			txtrActions.setText("");
 			txtrActions.append("\nPlayer Name: "+((Player) obj).getName()+"\n");
 			txtrActions.append("Phase: "+((Player) obj).getState()+"\n");
