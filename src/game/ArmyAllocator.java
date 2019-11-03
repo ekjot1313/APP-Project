@@ -35,9 +35,18 @@ public class ArmyAllocator {
 		// Maximum number of players can be 9 only
 		// Logic for more than 9 players - TBD*
 		int assignedArmies = maxArmiesForEachPlayer - 5 * (listOfPLayers.size() - 2);
+		if(assignedArmies<=0) {
+			for (Player p : listOfPLayers) {
+				p.setNoOfArmies(5);
+				p.setUnassignedarmies(5);
+			}
+			assignedArmies=5;
+		}
+		else {
 		for (Player p : listOfPLayers) {
 			p.setNoOfArmies(assignedArmies);
 			p.setUnassignedarmies(assignedArmies);
+		}
 		}
 		if (test == 1)
 			placeArmy(assignedArmies, listOfPLayers, map, 1);

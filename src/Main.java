@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 import mapWorks.MapReader;
 import view.PhaseView;
-import view.phaseView1;
+import view.PhaseView;
 import dao.Map;
 import dao.Player;
 import game.ArmyAllocator;
@@ -137,7 +137,7 @@ public class Main {
 		while (true) {
 			for (int i = 0; i < pa.listOfPlayers.size(); i++) {
 				System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " reinforcement phase begins");
-				phaseView1 pv= new phaseView1();
+				PhaseView pv= new PhaseView();
 				pa.listOfPlayers.get(i).attach(pv);
 				pa.listOfPlayers.get(i).reinforcement(mr.map,(ArrayList<Player>) pa.listOfPlayers);
 				gameOver=pa.listOfPlayers.get(i).attack(mr.map,(ArrayList<Player>) pa.listOfPlayers);

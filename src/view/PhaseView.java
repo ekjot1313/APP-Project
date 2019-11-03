@@ -1,24 +1,79 @@
 package view;
 
+import java.awt.EventQueue;
 import pattern.Observable;
 import pattern.Observer;
 
-import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 import dao.Player;
 
-public class PhaseView implements Observer{
+import java.awt.BorderLayout;
+
+public class PhaseView implements Observer {
 	static int count=0;
-	@Override
+	private static JFrame frame=null;
+	private static JTextArea txtrActions;
+	static PhaseView window=null;
+	private static JScrollPane scrollPane;
+	private String currentState ="";
 	public void update(Observable obj) {
 		// TODO Auto-generated method stub
+		if(frame==null) {
+			frame = new JFrame();
+			frame.setBounds(100, 100, 450, 300);
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			
+			txtrActions = new JTextArea();
+			txtrActions.setEditable(false);
+			txtrActions.setText("actions");
+			
+			scrollPane = new JScrollPane();
+			scrollPane.setViewportView(txtrActions);
+			
+			frame.getContentPane().add(txtrActions, BorderLayout.CENTER);
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					
+					PhaseView window = new PhaseView();
+					window.frame.setVisible(true);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		}
+		if(!currentState.equals(((Player) obj).getState()))
+			count =0;
 		if(count==0) {
-		System.out.println("Phase: "+((Player) obj).getState());
-		System.out.println("Player Name: "+((Player) obj).getName());
+			txtrActions.setText("");
+			txtrActions.append("\nPlayer Name: "+((Player) obj).getName()+"\n");
+			txtrActions.append("Phase: "+((Player) obj).getState()+"\n");
+			currentState =((Player) obj).getState();
+		
 		count++;
 		}else {
-			System.out.println(((Player) obj).getActions());
+			if(((Player) obj).getActions()!=null)
+				txtrActions.append(((Player) obj).getActions()+"\n");
 		}
+	}
+	/**
+	 * Create the application.
+	 */
+	public PhaseView() {
+		initialize();
+		
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private static void initialize() {
+		
 	}
 
 }
