@@ -65,7 +65,7 @@ public class PhaseView implements Observer {
 	 */
 	public PhaseView() {
 		initialize();
-	
+		txtrActions.setEditable(false);
 	}
 
 	/**
