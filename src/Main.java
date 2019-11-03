@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import mapWorks.MapReader;
+import view.PWDView;
 import view.PhaseView;
 import view.PhaseView;
 import dao.Map;
@@ -132,6 +133,10 @@ public class Main {
 		int gameOver=0;
 		pa.allocate(mr.map);
 		pa.populateCountries(mr.map);
+		
+		PWDView pwdView=new PWDView();
+		mr.map.attach(pwdView);
+		
 		
 		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, mr.map, 0);
 		while (true) {
