@@ -15,7 +15,7 @@ import mapWorks.MapReader;
  * @author Ekjot
  *
  */
-public class Map {
+public class Map  extends pattern.Observable {
 	/**
 	 * To store a message
 	 */
@@ -25,7 +25,7 @@ public class Map {
 	 */
 	private String message2;
 	/**
-	 * To stroe the the map name
+	 * To store the the map name
 	 */
 	private String mapName;
 	/**
@@ -193,7 +193,7 @@ public class Map {
 	 */
 	public void display() {
 		// TODO Auto-generated method stub
-		
+
 		// display
 		if (this.getListOfContinent().size() > 0) {
 			for (Continent c : this.getListOfContinent()) {
@@ -243,9 +243,9 @@ public class Map {
 		MapReader mr = new MapReader();
 		Map newMap = new Map(map);
 		mpeNew.map = newMap;
-		
+
 		if (newMap.getListOfContinent().size() > 1) {// no need to check validation on continent if there is no or only
-														// one continent
+			// one continent
 			for (int i = 0; i < newMap.getListOfContinent().size(); i++) {
 				String remainingContinent = "editcontinent ";
 
@@ -276,7 +276,7 @@ public class Map {
 	 */
 	public void displayAll() {
 		// TODO Auto-generated method stub
-		
+
 		// display
 		if (this.getListOfContinent().size() > 0) {
 			for (Continent c : this.getListOfContinent()) {
@@ -409,5 +409,21 @@ public class Map {
 					}
 		return duplicate;
 	}
+
+	/**
+	 * This method set owner to given country and notify PWDView about the change. 
+	 * @param toCountry
+	 * @param name
+	 */
+	public void setCountryOwner(Country country, String owner) {
+		// TODO Auto-generated method stub
+
+		country.setOwner(owner);
+		notify(this);
+
+	}
+
+
+
 
 }

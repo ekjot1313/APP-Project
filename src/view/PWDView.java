@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
+import dao.Map;
 import pattern.Observable;
 import pattern.Observer;
 
@@ -19,6 +21,7 @@ public class PWDView implements Observer {
 	private static JFrame frame = null;
 	private static JTextArea txtrActions;
 	private static JScrollPane scrollPane;
+	private static Map map=null;
 
 	public static void main(String[] args) {
 		PWDView view = new PWDView();
@@ -27,8 +30,35 @@ public class PWDView implements Observer {
 	@Override
 	 public void update(Observable obj) {
 	// TODO Auto-generated method stub
+		
+		map=(Map)obj;
+		
+		calcPercentMap();
+		calcContinentControl();
+		calcTotalArmies();
 
 }
+
+	private void calcTotalArmies() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void calcContinentControl() {
+		// TODO Auto-generated method stub
+		
+	}
+/**
+ * This method calculates the percentage of map controlled by each player.
+ */
+	private void calcPercentMap() {
+		// TODO Auto-generated method stub
+		int totalCountryNum=map.getListOfCountries().size();
+		
+		
+		
+		
+	}
 
 	/**
 	 * Create the application.
