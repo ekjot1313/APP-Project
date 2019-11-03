@@ -22,7 +22,14 @@ public class Player extends pattern.Observable{
 	 */
 	public static ArrayList<String> deck;
 	
-	
+	private String actions;
+	public String getActions() {
+		return actions;
+	}
+	public void setActions(String actions) {
+		this.actions = actions;
+		notify(this);
+	}
 	public String getState() {
 		return state;
 	}
@@ -506,6 +513,7 @@ public class Player extends pattern.Observable{
 			Player defender=listPlayer.get(index);
 			int isAllout=0;
 		if(s[3].equals("-allout")) {
+			this.setActions("Attacking country :"+toCountry.getName()+" from country :"+fromCountry.getName());
 				while(toCountry.getNoOfArmies()!=0 && fromCountry.getNoOfArmies()!=1) {
 					if(fromCountry.getNoOfArmies()>=3)
 						attackerDice=3;
@@ -533,15 +541,16 @@ public class Player extends pattern.Observable{
 					}
 				}
 				if(fromCountry.getNoOfArmies()==1) {
-					System.out.println("Player :"+defender.getName()+" has won and attacking country :"+toCountry.getName()+" has only 1 army left");
+					//System.out.println("Player :"+defender.getName()+" has won and attacking country :"+toCountry.getName()+" has only 1 army left");
+					this.setActions("Player :"+defender.getName()+" has won and attacking country :"+toCountry.getName()+" has only 1 army left");
 				}
 				isAllout=1;
 			}
 			else {
 				//int gameOver=0;
 				attackerDice=Integer.parseInt(s[3]);
-				System.out.println("Player :"+defend+" has to defend country :"+s[2]+" \nType defend numdice to choose no of dices to defend your country.");
-				
+				//System.out.println("Player :"+defend+" has to defend country :"+s[2]+" \nType defend numdice to choose no of dices to defend your country.");
+				this.setActions("Player :"+defend+" has to defend country :"+s[2]);
 				while(validCommand==0) {
 					input=sc.nextLine();
 					String str[]=input.split(" ");
@@ -572,12 +581,14 @@ public class Player extends pattern.Observable{
 						{
 							defender.setNoOfArmies(defender.getNoOfArmies()-1);
 							toCountry.setNoOfArmies(toCountry.getNoOfArmies()-1);
-							System.out.println("Defender lost 1 army");
+							//System.out.println("Defender lost 1 army");
+							this.setActions("Defender lost 1 army");
 						}
 						else {  		//defender wins
 							this.noOfArmies=this.noOfArmies-1;
 							fromCountry.setNoOfArmies(fromCountry.getNoOfArmies()-1);
-							System.out.println("Attacker lost 1 army");
+							//System.out.println("Attacker lost 1 army");
+							this.setActions("Attacker lost 1 army");
 						}
 					}
 				}
@@ -591,6 +602,7 @@ public class Player extends pattern.Observable{
 						toCountry.setNoOfArmies(1);
 						fromCountry.setNoOfArmies(fromCountry.getNoOfArmies()-1);
 						System.out.println("You have conquered country:"+toCountry.getName());
+						//this.setActions("You have conquered country:"+toCountry.getName());
 						if(fromCountry.getNoOfArmies() != 1) {
 						System.out.println("Move armies from "+fromCountry.getName()+" to"+toCountry.getName());
 						System.out.println("Available armies you can move : 1-"+(fromCountry.getNoOfArmies()-1));
@@ -605,6 +617,7 @@ public class Player extends pattern.Observable{
 									fromCountry.setNoOfArmies(fromCountry.getNoOfArmies()-n);
 									toCountry.setNoOfArmies(n+1);
 									valid=1;
+									this.setActions("Moving :"+n+" armies from :"+fromCountry.getName()+" to"+toCountry.getName());
 									break;
 								}
 								else {
@@ -632,7 +645,8 @@ public class Player extends pattern.Observable{
 						else {
 						String card=this.randomCard();
 						this.cards.add(card);
-						System.out.println("You have received:"+card+" card");
+						//System.out.println("You have received:"+card+" card");
+						this.setActions("You have received:"+card+" card");
 						deck.remove(card);
 						}
 						//checking for continent 
