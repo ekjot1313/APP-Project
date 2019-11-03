@@ -36,6 +36,7 @@ public class Map  extends pattern.Observable {
 	 * To store the list of countries
 	 */
 	private List<Country> listOfCountries;
+	
 
 	/**
 	 * Constructor initializes list of countries and continents
