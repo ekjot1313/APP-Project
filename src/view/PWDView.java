@@ -1,11 +1,15 @@
 package view;
 
-import java.awt.BorderLayout;
+
+
+import java.awt.GridLayout;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.border.TitledBorder;
 
 import dao.Country;
 import dao.Map;
@@ -22,8 +26,12 @@ import pattern.Observer;
 public class PWDView implements Observer {
 
 	private static JFrame frame = null;
-	private static JTextArea txtrActions;
-	private static JScrollPane scrollPane;
+	private static JTextArea countryPercentageTA;
+	private static JTextArea continentOwnerTA;
+	private static JTextArea playerArmiesTA;
+	private static JScrollPane scrollPane1;
+	private static JScrollPane scrollPane2;
+	private static JScrollPane scrollPane3;
 	private static Map map = null;
 	
 	private static String percMap="";
@@ -82,7 +90,7 @@ public class PWDView implements Observer {
 			percMap+=players.get(i)+": "+num[i]*100/totalCountryNum+"%\n";
 		}
 		
-		txtrActions.setText(percMap);
+		countryPercentageTA.setText(percMap);
 		percMap="";
 
 	}
@@ -101,18 +109,49 @@ public class PWDView implements Observer {
 	private static void initialize() {
 		if (frame == null) {
 			frame = new JFrame("Player World Domination View");
-			frame.setBounds(100, 100, 450, 300);
+			frame.setBounds(100, 100, 650, 500);
+			//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 			
-			txtrActions = new JTextArea();
-			txtrActions.setEditable(false);
+			countryPercentageTA = new JTextArea();
+			
+			countryPercentageTA.setEditable(false);
+			
+			continentOwnerTA = new JTextArea();
+			continentOwnerTA.setEditable(false);
+			
+			playerArmiesTA = new JTextArea();
+			playerArmiesTA.setEditable(false);
+			
 
-			scrollPane = new JScrollPane();
-			scrollPane.setViewportView(txtrActions);
+			scrollPane1 = new JScrollPane();
+			scrollPane1.setViewportView(countryPercentageTA);
+			scrollPane1.setBorder((TitledBorder) BorderFactory.createTitledBorder("Map Percentage"));
+		
+			scrollPane2 = new JScrollPane();
+			scrollPane2.setViewportView(continentOwnerTA);
+			scrollPane2.setBorder((TitledBorder) BorderFactory.createTitledBorder("Continents Information"));
+			
+			scrollPane3 = new JScrollPane();
+			scrollPane3.setViewportView(playerArmiesTA);
+			scrollPane3.setBorder((TitledBorder) BorderFactory.createTitledBorder("Armies Owned"));
+			
+			frame.setLayout(new GridLayout(1,3));
 
-			frame.getContentPane().add(txtrActions, BorderLayout.CENTER);
+			frame.getContentPane().add(scrollPane1);
+			frame.getContentPane().add(scrollPane2);
+			frame.getContentPane().add(scrollPane3);
 			frame.setVisible(true);
 
 		}
 	}
+	/*
+	public static void main(String[] args) {
+		
+		PWDView pwdView=new PWDView();
+		countryPercentageTA.setText("1\n1\n1\n1\n1\n1\n1\n\1n\1\n1\n1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\1\n\n\n\n\n\n\n\n\n\n\1");
+		continentOwnerTA.setText("");
+		playerArmiesTA.setText("");
+	}*/
+	
 }
