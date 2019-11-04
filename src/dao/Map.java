@@ -461,8 +461,23 @@ public void addContinent(Continent continent) {
 	notify(this);
 }
 
-public void showDetails() {
+
+/*
+ * 
+ */
+public void addCountry(Country country) {
 	// TODO Auto-generated method stub
+	getListOfCountries().add(country);
+	notify(this);
+}
+/**
+ * 
+ * @param cont
+ * @param name
+ */
+public void setContinentOwner(Continent cont, String name) {
+	// TODO Auto-generated method stub
+	cont.setOwner(name);
 	notify(this);
 }
 	

@@ -48,7 +48,7 @@ public class MapReader {
 	 * @return 1 if successful else 0
 	 */
 	public int parseMapFile(File file) {
-		map = new Map();
+		
 
 		try {
 
@@ -142,7 +142,8 @@ public class MapReader {
 			Country country = new Country();
 			country.setName(countryDetails[1]);
 			country.setContinentName(map.getListOfContinent().get((Integer.parseInt(countryDetails[2])) - 1).getName());
-			map.getListOfCountries().add(country);
+			map.addCountry(country);
+			
 			map.getListOfContinent().get((Integer.parseInt(countryDetails[2])) - 1).getCountries()
 					.add(countryDetails[1]);
 		}

@@ -680,7 +680,8 @@ public class Player extends pattern.Observable{
 								}
 							}
 							if(flag==0) { //continent has been conquered
-								cont.setOwner(this.name);
+								map.setContinentOwner(cont,this.name);
+								
 								cont.setAssignArmy(1);
 								System.out.println("You have conquered continent: "+cont.getName());
 								setActions(this.name+" has conquered continent: "+cont.getName());

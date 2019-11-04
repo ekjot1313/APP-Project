@@ -104,17 +104,16 @@ public class Main {
 		File newFile = new File(currentPath);
 		if (newFile.exists()) {
 
-
+			pwdView=new PWDView();
+			mr.map=new Map(); //to clear buffer map
+			mr.map.attach(pwdView);
 			int mapParseStatus = mr.parseMapFile(newFile);
 
 
 			// to check whether map is parsed successfully
 			if (mapParseStatus == 1) {
 				System.out.println("Map is loaded successfully.");
-				pwdView=new PWDView();
-				mr.map.attach(pwdView);
-				//temporary solution to show first view
-				mr.map.showDetails();
+				
 				gameplayer(mr);
 			}
 
