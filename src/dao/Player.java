@@ -609,7 +609,7 @@ public class Player extends pattern.Observable{
 							System.out.println(fromCountry.getNoOfArmies());
 							if(fromCountry.getNoOfArmies() != 1) {
 								System.out.println("Move armies from "+fromCountry.getName()+" to "+toCountry.getName());
-								System.out.println("Available armies you can move : 1-"+(fromCountry.getNoOfArmies()-1));
+								System.out.println("Available armies you can move : 0-"+(fromCountry.getNoOfArmies()-1));
 								System.out.println("Type attackmove <number> to move");
 								int n,valid=0;
 								do {	
@@ -617,7 +617,12 @@ public class Player extends pattern.Observable{
 									String str[]=command.split(" ");
 									if(str.length==2 && str[0].equals("attackmove")) {
 										n=Integer.parseInt(str[1]);
-										if(n>0 && n<=fromCountry.getNoOfArmies()-1) {
+										if(n==0) {
+											valid=1;
+											this.setActions("Armies haven't been moved");
+											break;
+										}
+										else if(n>0 && n<=fromCountry.getNoOfArmies()-1) {
 											fromCountry.setNoOfArmies(fromCountry.getNoOfArmies()-n);
 											toCountry.setNoOfArmies(n+1);
 											valid=1;
@@ -658,7 +663,7 @@ public class Player extends pattern.Observable{
 							int flag=0;
 							for(String country:cont.getCountries()) {
 								Country c=map.getCountryFromName(country);
-								if(this.name.equals(c.getOwner())) {
+								if(!this.name.equals(c.getOwner())) {
 									flag=1;
 									break;
 								}
