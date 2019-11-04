@@ -8,7 +8,6 @@ import java.util.Scanner;
 import mapWorks.MapReader;
 import view.PWDView;
 import view.PhaseView;
-import view.PhaseView;
 import dao.Map;
 import dao.Player;
 import game.ArmyAllocator;
@@ -23,6 +22,9 @@ import mapWorks.MapEditor;
  *
  */
 public class Main {
+
+	static PWDView pwdView=null;
+
 	public static void main(String[] args) throws Exception {
 		System.out.println("Welcome to RISK GAME!");
 		Scanner sc = new Scanner(System.in);
@@ -68,7 +70,7 @@ public class Main {
 				editMapCommands();
 				System.out.println("Type savemap");
 				mr.map = mpe.mapEditorInit(mr.map);
-				
+
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -101,10 +103,18 @@ public class Main {
 		currentPath += filename + ".map";
 		File newFile = new File(currentPath);
 		if (newFile.exists()) {
+
+
 			int mapParseStatus = mr.parseMapFile(newFile);
+
+
 			// to check whether map is parsed successfully
 			if (mapParseStatus == 1) {
 				System.out.println("Map is loaded successfully.");
+				pwdView=new PWDView();
+				mr.map.attach(pwdView);
+				//temporary solution to show first view
+				mr.map.showDetails();
 				gameplayer(mr);
 			}
 
@@ -122,7 +132,7 @@ public class Main {
 	 * @throws Exception 
 	 */
 	private static void gameplayer(MapReader mr) throws Exception {
-		
+
 		//Player p =new Player();
 		//Create Deck of cards
 		ArrayList<String> deck = createDeck(mr.map);
@@ -131,35 +141,19 @@ public class Main {
 		PlayerAllocator pa = new PlayerAllocator();
 		ArmyAllocator aa = new ArmyAllocator();
 		int gameOver=0;
-		
-		PWDView pwdView=new PWDView();
-		mr.map.attach(pwdView);
-		
 		pa.allocate(mr.map);
-		
-		
-		
-		
 		pa.populateCountries(mr.map);
-		
-		
-		
-		
 		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, mr.map, 0);
-		
-		
-		
-		
+
+
+
+
 		while (true) {
 			for (int i = 0; i < pa.listOfPlayers.size(); i++) {
 				System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " reinforcement phase begins");
 				PhaseView pv= new PhaseView();
 				pa.listOfPlayers.get(i).attach(pv);
-				
-				
-				
-				
-				
+
 				pa.listOfPlayers.get(i).reinforcement(mr.map,(ArrayList<Player>) pa.listOfPlayers);
 				gameOver=pa.listOfPlayers.get(i).attack(mr.map,(ArrayList<Player>) pa.listOfPlayers);
 				if(gameOver == 1)
@@ -211,14 +205,14 @@ public class Main {
 				if(aCounter == equalDis)
 					typeOfCards.remove("artillery");
 			}
-			
+
 		}
 		int remaining = numberofCountries - equalDis*3;
 		if(remaining ==1)
 			cardList.add(map.getListOfCountries().get(equalDis*3).getName()+" "+"infantry");
 		if(remaining >1)
 			cardList.add(map.getListOfCountries().get(equalDis*3+1).getName()+" "+"cavalry");
-		
+
 		return cardList;
 	}
 
@@ -226,7 +220,7 @@ public class Main {
 	 * This method contains the commands provided after editmap option is selected
 	 */
 	private static void editMapCommands() {
-		
+
 		System.out.println("Type editcontinent -add <continentname> <continentvalue> -remove <continentname>");
 		System.out.println("Type editcountry -add <countryname> <continentname> -remove <countryname>");
 		System.out.println("Type editneighbor -add <countryname> <neighborcountryname> -remove <countryname> <neighborcountryname>");

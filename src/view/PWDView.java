@@ -2,6 +2,7 @@ package view;
 
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -15,6 +16,7 @@ import dao.Map;
 import pattern.Observable;
 import pattern.Observer;
 import java.text.DecimalFormat;
+
 /**
  * This is Player World Domination View class.
  * 
@@ -25,7 +27,7 @@ import java.text.DecimalFormat;
 public class PWDView implements Observer {
 
 	private static final DecimalFormat df2 = new DecimalFormat("#.##");
-	
+
 	private static JFrame frame = null;
 	private static JTextArea countryPercentageTA;
 	private static JTextArea continentOwnerTA;
@@ -44,20 +46,18 @@ public class PWDView implements Observer {
 
 		map = (Map) obj;
 
-		
-//		 for (Continent continent : map.getListOfContinent()) { String owner =
-//		 continent.getOwner();
-//		 System.out.println("continent:"+continent.getName()+"   owner+"+owner ); }
-		 
-//		for (Country country : map.getListOfCountries()) {
-//			String owner = country.getOwner();
-//System.out.println("country:"+country.getName()+"   owner+"+owner );
-//		}
-		
-		
+		// for (Continent continent : map.getListOfContinent()) { String owner =
+		// continent.getOwner();
+		// System.out.println("continent:"+continent.getName()+" owner+"+owner ); }
+
+		// for (Country country : map.getListOfCountries()) {
+		// String owner = country.getOwner();
+		// System.out.println("country:"+country.getName()+" owner+"+owner );
+		// }
+
 		calcPercentMap();
-		//calcContinentControl();
-		//calcTotalArmies();
+		calcContinentControl();
+		// calcTotalArmies();
 
 	}
 
@@ -72,67 +72,42 @@ public class PWDView implements Observer {
 	private void calcContinentControl() {
 		// TODO Auto-generated method stub
 
-		
-		ArrayList<String> players = new ArrayList<String>();
+		List<String> players = new ArrayList<String>();
 
-		for (Continent continent : map.getListOfContinent()) {
-			String owner = continent.getOwner();
+		players.add("FREE CONTINENTS");
 
-			if (!players.contains(owner)) {
-				players.add(owner);
-
-			}
+		// manually copying to avoid getting same memory address
+		for (String player : map.getListOfPlayersName()) {
+			players.add(player);
 		}
-		
-		
-		for (Continent continent : map.getListOfContinent()) {
-			String owner = continent.getOwner();
-System.out.println("continent:"+continent.getOwner()+"   owner+"+owner );
-		}
-System.exit(0);
+
 		ArrayList<ArrayList<String>> continentsOwned = new ArrayList<ArrayList<String>>();
-	
-		
+
 		for (String player : players) {
-			
+
 			ArrayList<String> myContinents = new ArrayList<String>();
 
 			for (Continent continent : map.getListOfContinent()) {
 				String owner = continent.getOwner();
-				
-				System.out.println("continent:"+continent.getName()+"    owner:"+owner+"   player:"+player);
 				if (owner.equals(player)) {
 					myContinents.add(continent.getName());
 				}
 
-			} 
-			
+			}
+
 			continentsOwned.add(myContinents);
-			
+
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		for (int i = 0; i < continentsOwned.size(); i++) {
 
-			/*
-			 * if (players.get(i) == null) { contOwn += "FREE CONTINENTS: "; } else {
-			 * contOwn += players.get(i) + ": "; }
-			 */
-
+			contOwn+=players.get(i)+": \n";
 			for (String cont : continentsOwned.get(i)) {
-				contOwn += cont + ", ";
+				contOwn += "   "+cont + ",\n";
 			}
 
 			contOwn += "\n";
 		}
-
 		continentOwnerTA.setText(contOwn);
 		contOwn = "";
 
@@ -144,15 +119,12 @@ System.exit(0);
 	private void calcPercentMap() {
 		// TODO Auto-generated method stub
 		int totalCountryNum = map.getListOfCountries().size();
-		ArrayList<String> players = new ArrayList<String>();
+		List<String> players = new ArrayList<String>();
+		players.add("FREE COUNTRIES");
 
-		for (Country country : map.getListOfCountries()) {
-			String owner = country.getOwner();
-
-			if (!players.contains(owner)) {
-				players.add(owner);
-
-			}
+		// manually copying to avoid getting same memory address
+		for (String player : map.getListOfPlayersName()) {
+			players.add(player);
 		}
 
 		double[] num = new double[players.size()];
@@ -164,7 +136,6 @@ System.exit(0);
 		}
 
 		for (int i = 0; i < num.length; i++) {
-			
 
 			percMap += players.get(i) + ": " + df2.format(num[i] * 100 / totalCountryNum) + "%\n";
 		}

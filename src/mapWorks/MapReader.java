@@ -4,13 +4,11 @@ import dao.Bridge;
 import dao.Continent;
 import dao.Country;
 import dao.Map;
-import mapWorks.MapEditor;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
 
 /**
  * This class reads the map file and displays it to user
@@ -168,7 +166,8 @@ public class MapReader {
 			Continent continent = new Continent();
 			continent.setName(continentDetails[0]);
 			continent.setContinentValue(Integer.parseInt(continentDetails[1]));
-			map.getListOfContinent().add(continent);
+			map.addContinent(continent);
+			
 
 		}
 

@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import mapWorks.MapEditor;
-import mapWorks.MapReader;
 
 /**
  * This class defines Map
@@ -260,7 +259,7 @@ public class Map  extends pattern.Observable {
 
 		MapEditor mpeNew = new MapEditor();
 		mpeNew.print = false;// no need to print background edits
-		MapReader mr = new MapReader();
+		//MapReader mr = new MapReader();
 		Map newMap = new Map(map);
 		mpeNew.map = newMap;
 
@@ -451,6 +450,21 @@ public class Map  extends pattern.Observable {
 		listOfPlayersName.add(name);
 		notify(this);
 	}
+	
+/**
+ * This method add one continent into listOfContinent
+ * @param continent
+ */
+public void addContinent(Continent continent) {
+	// TODO Auto-generated method stub
+	getListOfContinent().add(continent);
+	notify(this);
+}
+
+public void showDetails() {
+	// TODO Auto-generated method stub
+	notify(this);
+}
 	
 	
 
