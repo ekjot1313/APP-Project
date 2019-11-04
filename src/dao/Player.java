@@ -13,6 +13,14 @@ import mapWorks.MapReader;
  */
 public class Player extends pattern.Observable{
 
+	private int endOfActions=0;
+	public int getEndOfActions() {
+		return endOfActions;
+	}
+	public void setEndOfActions(int endOfActions) {
+		this.endOfActions = endOfActions;
+	
+	}
 	private String state;
 
 	/**
@@ -200,7 +208,7 @@ public class Player extends pattern.Observable{
 	 *                    from main function
 	 */
 	public void reinforcement(Map map,ArrayList<Player> listPlayer) {
-
+		endOfActions=0;
 		setState("Reinforcement");
 		Scanner sc = new Scanner(System.in);
 		// calculate reinforcement armies
@@ -253,6 +261,7 @@ public class Player extends pattern.Observable{
 						reinforcementArmies -= armiesTobeplaced;
 						System.out.println("Reinforcement armies placed successfully");
 						System.out.println("Remaining armies to be placed : "+reinforcementArmies);
+						
 						setActions("Reinforced "+armiesTobeplaced+" armies to "+map.getCountryFromName(inputArray[1]));
 						if(forceExchangeCards == 1 && reinforcementArmies == 0)
 							System.out.println("You have more than 5 exchange cards ,please exchange cards to proceed to attack phase");
@@ -348,7 +357,8 @@ public class Player extends pattern.Observable{
 			else
 				System.out.println("Invalid command .Type again");
 		}
-
+		endOfActions=1;
+		setActions("Reinforcement finished");
 	}
 
 	/**
@@ -361,7 +371,7 @@ public class Player extends pattern.Observable{
 	 *                    from main function
 	 */
 	public void fortification(Map map,ArrayList<Player> listPlayer) {
-
+		endOfActions=0;
 		setState("Fortification");
 		Scanner sc = new Scanner(System.in);
 		int flag = 0;
@@ -445,6 +455,7 @@ public class Player extends pattern.Observable{
 							.setNoOfArmies(this.getAssigned_countries().get(destination)
 									.getNoOfArmies() + Integer.parseInt(input[3]));
 							System.out.println("Fortification successful");
+							endOfActions=1;
 							setActions("Fortified "+input[2]+" with "+input[3]+" armies from "+input[1]);
 							return;
 						} else
@@ -464,7 +475,7 @@ public class Player extends pattern.Observable{
 				System.out.println("Invalid command,type again");
 		} while (flag == 0);
 
-
+		setActions("Fortification finished");
 	}
 
 	/**
@@ -472,7 +483,7 @@ public class Player extends pattern.Observable{
 	 * @throws Exception 
 	 */
 	public int attack(Map map,ArrayList<Player> listPlayer) throws Exception {
-
+		endOfActions=0;
 		setState("Attack");
 		Scanner sc = new Scanner(System.in);
 		int attackDeadlock=0;
@@ -721,6 +732,7 @@ public class Player extends pattern.Observable{
 			return 1;
 		if(s.length==2) {
 			if(command.equals("attack -noattack")) {
+				endOfActions=1;
 				setActions("Attack finished");
 				return 1;
 			}

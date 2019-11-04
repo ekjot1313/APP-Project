@@ -48,8 +48,6 @@ public class PhaseView implements Observer {
 			}
 		});
 		}
-		if(!currentState.equals(((Player) obj).getState()))
-			count =0;
 		if(count==0) {
 			
 			txtrActions.setText("");
@@ -61,6 +59,8 @@ public class PhaseView implements Observer {
 		}else {
 			if(((Player) obj).getActions()!=null)
 				txtrActions.append(((Player) obj).getActions()+"\n");
+			if(((Player) obj).getEndOfActions() ==1 )
+				count=0;
 		}
 	}
 	/**
