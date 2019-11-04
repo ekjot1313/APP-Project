@@ -1,7 +1,7 @@
 package game;
 
 import java.util.*;
-
+import dao.Continent;
 import dao.Country;
 import dao.Map;
 import dao.Player;
@@ -224,6 +224,20 @@ public class PlayerAllocator {
 			listOfPlayers.get(m).getAssigned_countries().add(c);
 			c.setOwner(listOfPlayers.get(m).getName());
 			count++;
+		}
+		
+		for(Continent c:map.getListOfContinent()) {
+			int flag=0;
+			String owner=map.getCountryFromName(c.getCountries().get(0)).getOwner();
+			for(String s: c.getCountries()) {
+				Country country=map.getCountryFromName(s); 
+				if(!owner.equals(country.getOwner())) {
+					flag=1;
+					break;
+				}
+			}
+			if(flag==0)
+				map.setContinentOwner(c, owner);
 		}
 	}
 

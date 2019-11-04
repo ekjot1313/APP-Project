@@ -262,7 +262,7 @@ public class Player extends pattern.Observable{
 						System.out.println("Reinforcement armies placed successfully");
 						System.out.println("Remaining armies to be placed : "+reinforcementArmies);
 						
-						setActions("Reinforced "+armiesTobeplaced+" armies to "+map.getCountryFromName(inputArray[1]));
+						setActions("Reinforced "+armiesTobeplaced+" armies to "+map.getCountryFromName(inputArray[1]).getName());
 						if(forceExchangeCards == 1 && reinforcementArmies == 0)
 							System.out.println("You have more than 5 exchange cards ,please exchange cards to proceed to attack phase");
 

@@ -18,14 +18,13 @@ public class PhaseView implements Observer {
 	private static JTextArea txtrActions;
 	static PhaseView window=null;
 	private static JScrollPane scrollPane;
-	private String currentState ="";
 	public void update(Observable obj) {
 		// TODO Auto-generated method stub
 
 		if(frame==null) {
 			frame = new JFrame();
 			frame.setBounds(100, 100, 450, 300);
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 			frame.setTitle("Phase View");
 			txtrActions = new JTextArea();
 			txtrActions.setEditable(false);
@@ -33,14 +32,14 @@ public class PhaseView implements Observer {
 			
 			scrollPane = new JScrollPane();
 			scrollPane.setViewportView(txtrActions);
+
 			
-			frame.getContentPane().add(txtrActions, BorderLayout.CENTER);
+			frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					
-					PhaseView window = new PhaseView();
-					window.frame.setVisible(true);
+					PhaseView.frame.setVisible(true);
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,7 +52,6 @@ public class PhaseView implements Observer {
 			txtrActions.setText("");
 			txtrActions.append("\nPlayer Name: "+((Player) obj).getName()+"\n");
 			txtrActions.append("Phase: "+((Player) obj).getState()+"\n");
-			currentState =((Player) obj).getState();
 		
 		count++;
 		}else {
