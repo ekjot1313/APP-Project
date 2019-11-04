@@ -14,7 +14,7 @@ import dao.Country;
 import dao.Map;
 import pattern.Observable;
 import pattern.Observer;
-
+import java.text.DecimalFormat;
 /**
  * This is Player World Domination View class.
  * 
@@ -24,6 +24,8 @@ import pattern.Observer;
 
 public class PWDView implements Observer {
 
+	private static final DecimalFormat df2 = new DecimalFormat("#.##");
+	
 	private static JFrame frame = null;
 	private static JTextArea countryPercentageTA;
 	private static JTextArea continentOwnerTA;
@@ -42,9 +44,20 @@ public class PWDView implements Observer {
 
 		map = (Map) obj;
 
+		
+//		 for (Continent continent : map.getListOfContinent()) { String owner =
+//		 continent.getOwner();
+//		 System.out.println("continent:"+continent.getName()+"   owner+"+owner ); }
+		 
+//		for (Country country : map.getListOfCountries()) {
+//			String owner = country.getOwner();
+//System.out.println("country:"+country.getName()+"   owner+"+owner );
+//		}
+		
+		
 		calcPercentMap();
 		//calcContinentControl();
-		calcTotalArmies();
+		//calcTotalArmies();
 
 	}
 
@@ -70,7 +83,13 @@ public class PWDView implements Observer {
 
 			}
 		}
-
+		
+		
+		for (Continent continent : map.getListOfContinent()) {
+			String owner = continent.getOwner();
+System.out.println("continent:"+continent.getOwner()+"   owner+"+owner );
+		}
+System.exit(0);
 		ArrayList<ArrayList<String>> continentsOwned = new ArrayList<ArrayList<String>>();
 	
 		
@@ -80,6 +99,8 @@ public class PWDView implements Observer {
 
 			for (Continent continent : map.getListOfContinent()) {
 				String owner = continent.getOwner();
+				
+				System.out.println("continent:"+continent.getName()+"    owner:"+owner+"   player:"+player);
 				if (owner.equals(player)) {
 					myContinents.add(continent.getName());
 				}
@@ -100,11 +121,10 @@ public class PWDView implements Observer {
 		
 		for (int i = 0; i < continentsOwned.size(); i++) {
 
-			if (players.get(i) == null) {
-				contOwn += "FREE CONTINENTS: ";
-			} else {
-				contOwn += players.get(i) + ": ";
-			}
+			/*
+			 * if (players.get(i) == null) { contOwn += "FREE CONTINENTS: "; } else {
+			 * contOwn += players.get(i) + ": "; }
+			 */
 
 			for (String cont : continentsOwned.get(i)) {
 				contOwn += cont + ", ";
@@ -144,8 +164,9 @@ public class PWDView implements Observer {
 		}
 
 		for (int i = 0; i < num.length; i++) {
+			
 
-			percMap += players.get(i) + ": " + num[i] * 100 / totalCountryNum + "%\n";
+			percMap += players.get(i) + ": " + df2.format(num[i] * 100 / totalCountryNum) + "%\n";
 		}
 
 		countryPercentageTA.setText(percMap);

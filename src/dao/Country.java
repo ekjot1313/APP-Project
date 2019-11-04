@@ -35,6 +35,7 @@ public class Country {
 	 */
 	public Country() {
 		this.neighbors = new ArrayList<String>();
+		this.owner="FREE COUNTRIES";
 	}
 
 	/**

@@ -77,7 +77,7 @@ public class Continent {
 		this.countries = new ArrayList<String>();
 		this.bridges = new ArrayList<Bridge>();
 		this.setAssignArmy(0);
-		this.setOwner(null);
+		this.setOwner("FREE CONTINENT");
 	}
 
 	/**

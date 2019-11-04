@@ -83,6 +83,7 @@ public class PlayerAllocator {
 							Player p = new Player();
 							p.setName(str[i + 1]);
 							listOfPlayers.add(p);
+							map.addPlayer(p.getName());
 							i++;
 							System.out.println("Player " + p.getName() + " has been added successfully.");
 						}

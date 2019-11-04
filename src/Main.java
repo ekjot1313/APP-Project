@@ -131,21 +131,34 @@ public class Main {
 		PlayerAllocator pa = new PlayerAllocator();
 		ArmyAllocator aa = new ArmyAllocator();
 		int gameOver=0;
+		
+		PWDView pwdView=new PWDView();
+		mr.map.attach(pwdView);
+		
 		pa.allocate(mr.map);
+		
+		
+		
+		
 		pa.populateCountries(mr.map);
 		
 		
 		
 		
 		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, mr.map, 0);
+		
+		
+		
+		
 		while (true) {
 			for (int i = 0; i < pa.listOfPlayers.size(); i++) {
 				System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " reinforcement phase begins");
 				PhaseView pv= new PhaseView();
 				pa.listOfPlayers.get(i).attach(pv);
 				
-				PWDView pwdView=new PWDView();
-				mr.map.attach(pwdView);
+				
+				
+				
 				
 				pa.listOfPlayers.get(i).reinforcement(mr.map,(ArrayList<Player>) pa.listOfPlayers);
 				gameOver=pa.listOfPlayers.get(i).attack(mr.map,(ArrayList<Player>) pa.listOfPlayers);

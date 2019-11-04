@@ -36,7 +36,25 @@ public class Map  extends pattern.Observable {
 	 * To store the list of countries
 	 */
 	private List<Country> listOfCountries;
+	/**
+	 * To store list of players name
+	 */
+	private List<String> listOfPlayersName;
 	
+
+	/**
+	 * @return the listOfPlayersName
+	 */
+	public List<String> getListOfPlayersName() {
+		return listOfPlayersName;
+	}
+
+	/**
+	 * @param listOfPlayersName the listOfPlayersName to set
+	 */
+	public void setListOfPlayersName(List<String> listOfPlayersName) {
+		this.listOfPlayersName = listOfPlayersName;
+	}
 
 	/**
 	 * Constructor initializes list of countries and continents
@@ -44,6 +62,7 @@ public class Map  extends pattern.Observable {
 	public Map() {
 		this.listOfContinent = new ArrayList<Continent>();
 		this.listOfCountries = new ArrayList<Country>();
+		this.listOfPlayersName=new ArrayList<String>();
 	}
 
 	/**
@@ -423,6 +442,17 @@ public class Map  extends pattern.Observable {
 		notify(this);
 
 	}
+/**
+ * This method add new player name to listOfPlayersName list
+ * @param name
+ */
+	public void addPlayer(String name) {
+		// TODO Auto-generated method stub
+		listOfPlayersName.add(name);
+		notify(this);
+	}
+	
+	
 
 
 
