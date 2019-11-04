@@ -13,6 +13,7 @@ import javax.swing.border.TitledBorder;
 import dao.Continent;
 import dao.Country;
 import dao.Map;
+import dao.Player;
 import pattern.Observable;
 import pattern.Observer;
 import java.text.DecimalFormat;
@@ -46,24 +47,25 @@ public class PWDView implements Observer {
 
 		map = (Map) obj;
 
-		// for (Continent continent : map.getListOfContinent()) { String owner =
-		// continent.getOwner();
-		// System.out.println("continent:"+continent.getName()+" owner+"+owner ); }
-
-		// for (Country country : map.getListOfCountries()) {
-		// String owner = country.getOwner();
-		// System.out.println("country:"+country.getName()+" owner+"+owner );
-		// }
-
 		calcPercentMap();
 		calcContinentControl();
-		// calcTotalArmies();
+		//calcTotalArmies();
 
 	}
 
 	private void calcTotalArmies() {
 		// TODO Auto-generated method stub
 
+		List<String> players = new ArrayList<String>();
+
+		// manually copying to avoid getting same memory address
+		for (Player player : map.getListOfPlayers()) {
+			players.add(player.getName());
+		}
+		
+		
+		
+		
 	}
 
 	/**
@@ -77,8 +79,8 @@ public class PWDView implements Observer {
 		players.add("FREE CONTINENTS");
 
 		// manually copying to avoid getting same memory address
-		for (String player : map.getListOfPlayersName()) {
-			players.add(player);
+		for (Player player : map.getListOfPlayers()) {
+			players.add(player.getName());
 		}
 
 		ArrayList<ArrayList<String>> continentsOwned = new ArrayList<ArrayList<String>>();
@@ -123,8 +125,8 @@ public class PWDView implements Observer {
 		players.add("FREE COUNTRIES");
 
 		// manually copying to avoid getting same memory address
-		for (String player : map.getListOfPlayersName()) {
-			players.add(player);
+		for (Player player : map.getListOfPlayers()) {
+			players.add(player.getName());
 		}
 
 		double[] num = new double[players.size()];

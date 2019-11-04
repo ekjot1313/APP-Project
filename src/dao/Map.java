@@ -36,23 +36,27 @@ public class Map  extends pattern.Observable {
 	 */
 	private List<Country> listOfCountries;
 	/**
-	 * To store list of players name
+	 * To store list of players
 	 */
-	private List<String> listOfPlayersName;
+	private List<Player> listOfPlayers;
+	
+
+	
+
 	
 
 	/**
-	 * @return the listOfPlayersName
+	 * @return the listOfPlayers
 	 */
-	public List<String> getListOfPlayersName() {
-		return listOfPlayersName;
+	public List<Player> getListOfPlayers() {
+		return listOfPlayers;
 	}
 
 	/**
-	 * @param listOfPlayersName the listOfPlayersName to set
+	 * @param listOfPlayers the listOfPlayers to set
 	 */
-	public void setListOfPlayersName(List<String> listOfPlayersName) {
-		this.listOfPlayersName = listOfPlayersName;
+	public void setListOfPlayers(List<Player> listOfPlayers) {
+		this.listOfPlayers = listOfPlayers;
 	}
 
 	/**
@@ -61,7 +65,7 @@ public class Map  extends pattern.Observable {
 	public Map() {
 		this.listOfContinent = new ArrayList<Continent>();
 		this.listOfCountries = new ArrayList<Country>();
-		this.listOfPlayersName=new ArrayList<String>();
+		this.listOfPlayers=new ArrayList<Player>();
 	}
 
 	/**
@@ -442,12 +446,12 @@ public class Map  extends pattern.Observable {
 
 	}
 /**
- * This method add new player name to listOfPlayersName list
- * @param name
+ * This method add new player  to listOfPlayers
+ * @param player
  */
-	public void addPlayer(String name) {
+	public void addPlayer(Player player) {
 		// TODO Auto-generated method stub
-		listOfPlayersName.add(name);
+		this.listOfPlayers.add(player);
 		notify(this);
 	}
 	
@@ -478,6 +482,15 @@ public void addCountry(Country country) {
 public void setContinentOwner(Continent cont, String name) {
 	// TODO Auto-generated method stub
 	cont.setOwner(name);
+	notify(this);
+}
+/**
+ * 
+ * @param player
+ */
+public void removePlayer(Player player) {
+	// TODO Auto-generated method stub
+	this.listOfPlayers.remove(player);
 	notify(this);
 }
 	

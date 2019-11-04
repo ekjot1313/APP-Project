@@ -23,7 +23,7 @@ import mapWorks.MapEditor;
  */
 public class Main {
 
-	static PWDView pwdView=null;
+	static PWDView pwdView = null;
 
 	public static void main(String[] args) throws Exception {
 		System.out.println("Welcome to RISK GAME!");
@@ -62,7 +62,7 @@ public class Main {
 		MapEditor mpe = new MapEditor();
 		System.out.println(System.getProperty("user.dir"));
 		String currentPath = System.getProperty("user.dir");
-		currentPath += "\\Maps\\" + filename+".map";
+		currentPath += "\\Maps\\" + filename + ".map";
 		File newFile = new File(currentPath);
 		if (newFile.exists()) {
 			mr.parseMapFile(newFile);
@@ -92,7 +92,7 @@ public class Main {
 	 * This method is called when user gives 'loadmap' command
 	 * 
 	 * @param filename Map file to be loaded
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	private static void loadmap(String filename) throws Exception {
 		// TODO Auto-generated method stub
@@ -104,16 +104,15 @@ public class Main {
 		File newFile = new File(currentPath);
 		if (newFile.exists()) {
 
-			pwdView=new PWDView();
-			mr.map=new Map(); //to clear buffer map
+			pwdView = new PWDView();
+			mr.map = new Map(); // to clear buffer map
 			mr.map.attach(pwdView);
 			int mapParseStatus = mr.parseMapFile(newFile);
-
 
 			// to check whether map is parsed successfully
 			if (mapParseStatus == 1) {
 				System.out.println("Map is loaded successfully.");
-				
+
 				gameplayer(mr);
 			}
 
@@ -124,49 +123,48 @@ public class Main {
 
 	/**
 	 * This method is called to add or remove a player, assign countries to players
-	 * and allow them to place armies
-	 * The game phases (reinforcement, attack and fortification) start from this function
+	 * and allow them to place armies The game phases (reinforcement, attack and
+	 * fortification) start from this function
 	 * 
 	 * @param mr MapReader Object
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	private static void gameplayer(MapReader mr) throws Exception {
 
-		//Player p =new Player();
-		//Create Deck of cards
+		// Player p =new Player();
+		// Create Deck of cards
 		ArrayList<String> deck = createDeck(mr.map);
 		System.out.println(deck.toString());
 		Player.deck = deck;
 		PlayerAllocator pa = new PlayerAllocator();
 		ArmyAllocator aa = new ArmyAllocator();
-		int gameOver=0;
+		int gameOver = 0;
 		pa.allocate(mr.map);
 		pa.populateCountries(mr.map);
 		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, mr.map, 0);
 
-
-
-
 		while (true) {
 			for (int i = 0; i < pa.listOfPlayers.size(); i++) {
 				System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " reinforcement phase begins");
-				PhaseView pv= new PhaseView();
+				PhaseView pv = new PhaseView();
 				pa.listOfPlayers.get(i).attach(pv);
 
-				pa.listOfPlayers.get(i).reinforcement(mr.map,(ArrayList<Player>) pa.listOfPlayers);
-				gameOver=pa.listOfPlayers.get(i).attack(mr.map,(ArrayList<Player>) pa.listOfPlayers);
-				if(gameOver == 1)
+				pa.listOfPlayers.get(i).reinforcement(mr.map, (ArrayList<Player>) pa.listOfPlayers);
+				gameOver = pa.listOfPlayers.get(i).attack(mr.map, (ArrayList<Player>) pa.listOfPlayers);
+				if (gameOver == 1)
 					break;
-				pa.listOfPlayers.get(i).fortification(mr.map,(ArrayList<Player>) pa.listOfPlayers);
+				pa.listOfPlayers.get(i).fortification(mr.map, (ArrayList<Player>) pa.listOfPlayers);
 			}
-			if(gameOver == 1)
+			if (gameOver == 1)
 				break;
 		}
 		System.out.println("Game is Over");
-		System.out.println("Winner is Player: "+pa.listOfPlayers.get(0).getName());
+		System.out.println("Winner is Player: " + pa.listOfPlayers.get(0).getName());
 	}
+
 	/**
 	 * To create a deck of cards based on countries
+	 * 
 	 * @param map
 	 */
 	private static ArrayList<String> createDeck(Map map) {
@@ -176,41 +174,41 @@ public class Main {
 		typeOfCards.add("cavalry");
 		typeOfCards.add("artillery");
 		int numberofCountries = map.getListOfCountries().size();
-		int equalDis = numberofCountries/3;
-		int iCounter= equalDis;
+		int equalDis = numberofCountries / 3;
+		int iCounter = equalDis;
 		int cCounter = equalDis;
 		int aCounter = equalDis;
-		ArrayList<String> cardList =  new ArrayList<String>();
+		ArrayList<String> cardList = new ArrayList<String>();
 
 		Random r = new Random();
-		for(int i=0;i< equalDis*3;i++){
+		for (int i = 0; i < equalDis * 3; i++) {
 			String card;
 			card = map.getListOfCountries().get(i).getName();
-			int j= r.nextInt(typeOfCards.size());
-			card += " "+typeOfCards.get(j);
+			int j = r.nextInt(typeOfCards.size());
+			card += " " + typeOfCards.get(j);
 			cardList.add(card);
-			if(typeOfCards.get(j).equals("infantry") ) {
+			if (typeOfCards.get(j).equals("infantry")) {
 				iCounter++;
-				if(iCounter == equalDis)
+				if (iCounter == equalDis)
 					typeOfCards.remove("infantry");
 			}
-			if(typeOfCards.get(j).equals("cavalry") ) {
+			if (typeOfCards.get(j).equals("cavalry")) {
 				cCounter++;
-				if(cCounter == equalDis)
+				if (cCounter == equalDis)
 					typeOfCards.remove("cavalry");
 			}
-			if(typeOfCards.get(j).equals("artillery") ) {
+			if (typeOfCards.get(j).equals("artillery")) {
 				aCounter++;
-				if(aCounter == equalDis)
+				if (aCounter == equalDis)
 					typeOfCards.remove("artillery");
 			}
 
 		}
-		int remaining = numberofCountries - equalDis*3;
-		if(remaining ==1)
-			cardList.add(map.getListOfCountries().get(equalDis*3).getName()+" "+"infantry");
-		if(remaining >1)
-			cardList.add(map.getListOfCountries().get(equalDis*3+1).getName()+" "+"cavalry");
+		int remaining = numberofCountries - equalDis * 3;
+		if (remaining == 1)
+			cardList.add(map.getListOfCountries().get(equalDis * 3).getName() + " " + "infantry");
+		if (remaining > 1)
+			cardList.add(map.getListOfCountries().get(equalDis * 3 + 1).getName() + " " + "cavalry");
 
 		return cardList;
 	}
@@ -222,10 +220,9 @@ public class Main {
 
 		System.out.println("Type editcontinent -add <continentname> <continentvalue> -remove <continentname>");
 		System.out.println("Type editcountry -add <countryname> <continentname> -remove <countryname>");
-		System.out.println("Type editneighbor -add <countryname> <neighborcountryname> -remove <countryname> <neighborcountryname>");
+		System.out.println(
+				"Type editneighbor -add <countryname> <neighborcountryname> -remove <countryname> <neighborcountryname>");
 		System.out.println("Type showmap");
 		System.out.println("Type validatemap");
 	}
 }
-
-
