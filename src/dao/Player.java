@@ -542,8 +542,8 @@ public class Player extends pattern.Observable{
 							}
 						}
 						if(fromCountry.getNoOfArmies()==1) {
-							System.out.println("Player :"+defender.getName()+" has won and attacking country :"+toCountry.getName()+" has only 1 army left");
-							this.setActions("Player :"+defender.getName()+" has won and attacking country :"+toCountry.getName()+" has only 1 army left");
+							System.out.println("Player :"+defender.getName()+" has won and attacking country :"+fromCountry.getName()+" has only 1 army left");
+							this.setActions("Player :"+defender.getName()+" has won and attacking country :"+fromCountry.getName()+" has only 1 army left");
 						}
 						isAllout=1;
 					}
@@ -671,8 +671,8 @@ public class Player extends pattern.Observable{
 							if(flag==0) { //continent has been conquered
 								cont.setOwner(this.name);
 								cont.setAssignArmy(1);
-								System.out.println("You have conquered continent: "+cont);
-								setActions(this.name+" has conquered continent: "+cont);
+								System.out.println("You have conquered continent: "+cont.getName());
+								setActions(this.name+" has conquered continent: "+cont.getName());
 							}
 						}
 					}
