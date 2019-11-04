@@ -38,8 +38,9 @@ public class PWDView implements Observer {
 	private static JScrollPane scrollPane3;
 	private static Map map = null;
 
-	private static String percMap = "";
+	private static String mapOwn = "";
 	private static String contOwn = "";
+	private static String armyOwn = "";
 
 	@Override
 	public void update(Observable obj) {
@@ -49,22 +50,19 @@ public class PWDView implements Observer {
 
 		calcPercentMap();
 		calcContinentControl();
-		//calcTotalArmies();
+		calcTotalArmies();
 
 	}
 
 	private void calcTotalArmies() {
 		// TODO Auto-generated method stub
 
-		List<String> players = new ArrayList<String>();
-
-		// manually copying to avoid getting same memory address
-		for (Player player : map.getListOfPlayers()) {
-			players.add(player.getName());
+		for(Player player:map.getListOfPlayers()) {
+			armyOwn+=player.getName()+": "+player.getNoOfArmies()+"\n";
 		}
 		
-		
-		
+		playerArmiesTA.setText(armyOwn);
+		armyOwn="";
 		
 	}
 
@@ -139,11 +137,11 @@ public class PWDView implements Observer {
 
 		for (int i = 0; i < num.length; i++) {
 
-			percMap += players.get(i) + ": " + df2.format(num[i] * 100 / totalCountryNum) + "%\n";
+			mapOwn += players.get(i) + ": " + df2.format(num[i] * 100 / totalCountryNum) + "%\n";
 		}
 
-		countryPercentageTA.setText(percMap);
-		percMap = "";
+		countryPercentageTA.setText(mapOwn);
+		mapOwn = "";
 
 	}
 

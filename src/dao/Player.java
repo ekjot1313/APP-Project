@@ -224,8 +224,9 @@ public class Player extends pattern.Observable{
 		System.out.println("Reinforcement armies to be assigned :" + reinforcementArmies);
 		System.out.println("Type reinforce <countryname> <num>  to assign armies\n Type showmap");
 		System.out.println("Type exchangecards <num> <num> <num> -none to exchange cards\n Type showmap");
-
+		map.setNoOfArmies(this, this.getNoOfArmies()+reinforcementArmies);
 		while (reinforcementArmies != 0 || forceExchangeCards == 1) {
+			
 			String input = sc.nextLine();
 			String[] inputArray = input.split(" ");
 
@@ -236,7 +237,7 @@ public class Player extends pattern.Observable{
 				forceExchangeCards =0;
 
 			if (input.equals("showmap")) {
-				MapReader mr = new MapReader();
+				
 
 				map.displayAll();
 			} else if (inputArray.length == 3 && inputArray[0].equals("reinforce")) {
@@ -255,7 +256,7 @@ public class Player extends pattern.Observable{
 						// and country is valid and
 						// assigned to player
 
-						this.setNoOfArmies(this.getNoOfArmies() + armiesTobeplaced);
+						//this.setNoOfArmies(this.getNoOfArmies() + armiesTobeplaced);
 						map.getCountryFromName(inputArray[1]).setNoOfArmies(
 								map.getCountryFromName(inputArray[1]).getNoOfArmies() + armiesTobeplaced);
 						reinforcementArmies -= armiesTobeplaced;
@@ -323,6 +324,7 @@ public class Player extends pattern.Observable{
 
 						this.setCardExchangeCounter(this.getCardExchangeCounter() + 5);
 						reinforcementArmies += this.getCardExchangeCounter();
+						map.setNoOfArmies(this, this.getNoOfArmies()+this.getCardExchangeCounter());
 						System.out.println("Reinforcement armies added "+this.getCardExchangeCounter());
 						System.out.println("Remaining armies to be placed : "+reinforcementArmies);
 						deck.add(card1);

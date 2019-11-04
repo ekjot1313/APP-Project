@@ -37,14 +37,16 @@ public class ArmyAllocator {
 		int assignedArmies = maxArmiesForEachPlayer - 5 * (listOfPLayers.size() - 2);
 		if(assignedArmies<=0) {
 			for (Player p : listOfPLayers) {
-				p.setNoOfArmies(5);
+				//p.setNoOfArmies(5);
+				map.setNoOfArmies(p,5);
 				p.setUnassignedarmies(5);
 			}
 			assignedArmies=5;
 		}
 		else {
 		for (Player p : listOfPLayers) {
-			p.setNoOfArmies(assignedArmies);
+			map.setNoOfArmies(p,assignedArmies);
+			//p.setNoOfArmies(assignedArmies);
 			p.setUnassignedarmies(assignedArmies);
 		}
 		}

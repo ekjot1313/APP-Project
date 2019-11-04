@@ -493,6 +493,16 @@ public void removePlayer(Player player) {
 	this.listOfPlayers.remove(player);
 	notify(this);
 }
+/**
+ * 
+ * @param p
+ * @param i
+ */
+public void setNoOfArmies(Player p, int i) {
+	// TODO Auto-generated method stub
+	p.setNoOfArmies(i);
+	notify(this);
+}
 	
 	
 
