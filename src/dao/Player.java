@@ -13,7 +13,7 @@ import mapWorks.MapReader;
  */
 public class Player extends pattern.Observable{
 
-	private int endOfActions=0;
+	private int endOfActions;
 	public int getEndOfActions() {
 		return endOfActions;
 	}
@@ -471,13 +471,12 @@ public class Player extends pattern.Observable{
 				}
 			} else if (in.equals("fortify -none")) {
 				System.out.println("Skipped fortification");
+				endOfActions=1;
 				setActions("Skipped fortification");
 				return;
 			} else
 				System.out.println("Invalid command,type again");
 		} while (flag == 0);
-
-		setActions("Fortification finished");
 	}
 
 	/**
