@@ -196,12 +196,11 @@ public class PWDView implements Observer {
 
 		}
 	}
-	/*
-	 * public static void main(String[] args) {
-	 * 
-	 * PWDView pwdView=new PWDView(); countryPercentageTA.setText(
-	 * "1\n1\n1\n1\n1\n1\n1\n\1n\1\n1\n1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\1\n\n\n\n\n\n\n\n\n\n\1"
-	 * ); continentOwnerTA.setText(""); playerArmiesTA.setText(""); }
-	 */
+
+
+	public void close() {
+		// TODO Auto-generated method stub
+		frame.dispose();
+	}
 
 }

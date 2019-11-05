@@ -154,12 +154,19 @@ public class Main {
 				if (gameOver == 1)
 					break;
 				pa.listOfPlayers.get(i).fortification(mr.map, (ArrayList<Player>) pa.listOfPlayers);
+				
 			}
 			if (gameOver == 1)
 				break;
 		}
 		System.out.println("Game is Over");
 		System.out.println("Winner is Player: " + pa.listOfPlayers.get(0).getName());
+		
+		//detach and close PWDView
+		mr.map.detach(pwdView);
+		pwdView.close();
+		
+		
 	}
 
 	/**
