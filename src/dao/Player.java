@@ -13,9 +13,6 @@ import mapWorks.MapReader;
  */
 public class Player extends pattern.Observable{
 
-	
-	private int contientOwnedValue=0;
-	
 	private int endOfActions;
 	public int getEndOfActions() {
 		return endOfActions;
@@ -89,11 +86,11 @@ public class Player extends pattern.Observable{
 	/**
 	 * Number of armies assigned ot the player
 	 */
-	private int noOfArmies;
+	private int noOfArmies=0;
 	/**
 	 * Number of unassigned armies
 	 */
-	private int unassignedarmies;
+	private int unassignedarmies=0;
 	/**
 	 * list of assigned countries
 	 */
@@ -202,7 +199,12 @@ public class Player extends pattern.Observable{
 		
 		//calculating on the basis of continents owned
 		
-		
+		for(Continent continent:map.getListOfContinent()) {
+			if(continent.getOwner().equals(this.getName())) {
+				reinforcementArmies+=continent.getAssignArmy()*continent.getContinentValue();
+				continent.setAssignArmy(0);
+			}
+		}
 		
 		
 		return reinforcementArmies;
@@ -689,6 +691,7 @@ public class Player extends pattern.Observable{
 								if(!this.name.equals(c.getOwner())) {
 									flag=1;
 									map.setContinentOwner(cont,"FREE CONTINENTS");
+									cont.setAssignArmy(0);
 									break;
 								}
 							}

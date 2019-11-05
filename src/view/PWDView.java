@@ -159,9 +159,11 @@ public class PWDView implements Observer {
 	private static void initialize() {
 		if (frame == null) {
 			frame = new JFrame("Player World Domination View");
-			frame.setBounds(100, 100, 650, 500);
+			frame.setBounds(100, 100, 550, 400);
 			// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+			frame.setAlwaysOnTop(true);
+			frame.setFocusableWindowState(false);
 
 			countryPercentageTA = new JTextArea();
 
