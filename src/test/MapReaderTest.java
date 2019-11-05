@@ -54,6 +54,7 @@ public class MapReaderTest {
 				("editneighbor -add india pakistan -add pakistan china -add india congo -add congo uganda").split(" "));
 		testMap = mapEditor.getMap();
 		mapReader = new MapReader();
+		
 		player = new PlayerAllocator();
 		Player A = new Player();
 		Player B = new Player();
@@ -61,11 +62,17 @@ public class MapReaderTest {
 		player.listOfPlayers.add(A);
 		player.listOfPlayers.add(B);
 		player.listOfPlayers.add(C);
+		player.listOfPlayers.get(0).setName("A");
+		player.listOfPlayers.get(1).setName("B");
+		player.listOfPlayers.get(2).setName("C");
+		
 		armyAlloc = new ArmyAllocator();
 		mapSaver = new MapSaver();
 		country = new Country();
 		continent = new Continent();
 		p=new Player();
+		
+		
 	}
 
 	/**
