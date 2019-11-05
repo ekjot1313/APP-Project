@@ -555,11 +555,11 @@ public class Player extends pattern.Observable{
 							for(int i=0;i<min;i++) {
 								if(result[0][i]>result[1][i])//attacker wins
 								{
-									defender.setNoOfArmies(defender.getNoOfArmies()-1);
+									map.setNoOfArmies(defender,defender.getNoOfArmies()-1);
 									toCountry.setNoOfArmies(toCountry.getNoOfArmies()-1);
 								}
 								else {  		//defender wins
-									this.noOfArmies=this.noOfArmies-1;
+									map.setNoOfArmies(this,this.noOfArmies-1);
 									fromCountry.setNoOfArmies((fromCountry.getNoOfArmies()-1));
 								}
 								if(fromCountry.getNoOfArmies()==1)
