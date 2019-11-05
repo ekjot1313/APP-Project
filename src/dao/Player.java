@@ -343,7 +343,7 @@ public class Player extends pattern.Observable{
 			}
 			else if(inputArray.length == 4 && inputArray[0].equals("exchangecards")){
 				System.out.println(this.getCards());
-
+				
 				if(this.getCards().size() <3) {
 					System.out.println("You don't have enough cards to exchange");
 					continue;
@@ -358,7 +358,7 @@ public class Player extends pattern.Observable{
 					num1 = Integer.parseInt(inputArray[1]) - 1;
 					num2 = Integer.parseInt(inputArray[2]) - 1;
 					num3 = Integer.parseInt(inputArray[3]) - 1;
-					System.out.println(num1 +""+num2 +""+num3);
+					//System.out.println(num1 +""+num2 +""+num3);
 					//check if three numbers are valid cards indexes in player's hand
 					ArrayList<String> playerCards = this.getCards();
 					String card1 = playerCards.get(num1);
@@ -366,15 +366,19 @@ public class Player extends pattern.Observable{
 					String card3 = playerCards.get(num3);
 					if(!card1.isEmpty() && !card2.isEmpty()&& !card3.isEmpty() ){
 						//numbers are valid ,check if all same or all different
-						String concatCards =card1.split(" ")[1]+card2.split(" ")[1]+card3.split(" ")[1];
+						String[] card1arr = card1.split(" ");
+						String[] card2arr = card2.split(" ");
+						String[] card3arr = card3.split(" ");
+						
+						String concatCards =card1arr[1]+card2arr[1]+card3arr[1];
 						if(concatCards.equalsIgnoreCase("infantryinfantryinfantry") || concatCards.equalsIgnoreCase("cavalrycavalrycavalry") || concatCards.equalsIgnoreCase("artilleryartilleryartillery")){
 							//all same
 							IsExchangeCards = true;
 						}else{
 							Set<String> diffChecker = new HashSet<String>();
-							diffChecker.add(card1);
-							diffChecker.add(card2);
-							diffChecker.add(card3);
+							diffChecker.add(card1arr[1]);
+							diffChecker.add(card2arr[1]);
+							diffChecker.add(card3arr[1]);
 							if(diffChecker.size() == 3){
 								//all different
 								IsExchangeCards = true;
