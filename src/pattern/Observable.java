@@ -2,6 +2,8 @@ package pattern;
 
 import java.util.ArrayList;
 
+import view.CardExchangeView;
+
 /**
  * This is the Observable class which will be extended by the subject.
  * @author divya_000
@@ -27,6 +29,11 @@ public class Observable {
 	 */
 	public void detach(Observer o) {
 		observers.remove(o);
+		if(CardExchangeView.window.frame !=null) {
+		CardExchangeView.window.frame.setVisible(false);
+		CardExchangeView.window.frame = null;
+		}
+		
 	}
 	
 	/**
