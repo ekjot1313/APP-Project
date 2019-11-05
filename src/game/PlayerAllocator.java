@@ -19,17 +19,19 @@ public class PlayerAllocator {
 	 * list of players
 	 */
 	public List<Player> listOfPlayers;
-/**
- * 
- */
+
+	/**
+	 * 
+	 */
 	public Player getPlayerFromName(String name) {
-		for(int i=0;i<listOfPlayers.size();i++) {
-			if(listOfPlayers.get(i).getName().equals(name)) {
-			return listOfPlayers.get(i);
+		for (int i = 0; i < listOfPlayers.size(); i++) {
+			if (listOfPlayers.get(i).getName().equals(name)) {
+				return listOfPlayers.get(i);
 			}
 		}
 		return null;
 	}
+
 	/**
 	 * Constructor to initialize list of players
 	 */
@@ -43,9 +45,9 @@ public class PlayerAllocator {
 	 * @param map Map Object
 	 */
 	public void allocate(Map map) {
-		
+
 		this.listOfPlayers = map.getListOfPlayers();
-		
+
 		Scanner in = new Scanner(System.in);
 		String cmd;
 
@@ -76,7 +78,7 @@ public class PlayerAllocator {
 								break;
 							}
 						}
-						if(listOfPlayers.size()==map.getListOfCountries().size()) {
+						if (listOfPlayers.size() == map.getListOfCountries().size()) {
 							System.out.println("Sorry! Cannot add more players than no of countries");
 							break;
 						}
@@ -85,7 +87,7 @@ public class PlayerAllocator {
 						else {
 							Player p = new Player();
 							p.setName(str[i + 1]);
-							//listOfPlayers.add(p);
+							// listOfPlayers.add(p);
 							map.addPlayer(p);
 							i++;
 							System.out.println("Player " + p.getName() + " has been added successfully.");
@@ -98,7 +100,7 @@ public class PlayerAllocator {
 							if (listOfPlayers.get(j).getName().contentEquals(str[i + 1])) {
 								System.out.println(
 										"Player " + listOfPlayers.get(j).getName() + " has been removed successfully.");
-								//listOfPlayers.remove(j);
+								// listOfPlayers.remove(j);
 								map.removePlayer(listOfPlayers.get(j));
 								flag = 1;
 								break;
@@ -190,58 +192,60 @@ public class PlayerAllocator {
 		int countryCount = map.getListOfCountries().size();
 		int playerCount = listOfPlayers.size();
 		int j = (countryCount / playerCount);
-		ArrayList<String> countryList= new ArrayList<String>();
-		for(int p=0;p<j*listOfPlayers.size();p++) {
+		ArrayList<String> countryList = new ArrayList<String>();
+		for (int p = 0; p < j * listOfPlayers.size(); p++) {
 			countryList.add(map.getListOfCountries().get(p).getName());
 		}
 		int count = 0;
 		for (int i = 0; i < j; i++) {
 			for (int k = 0; k < playerCount; k++) {
-				Random r=new Random();
+				Random r = new Random();
 				int index;
-				if(countryList.size()!=1)
-				index = r.nextInt(countryList.size()-1);
+				if (countryList.size() != 1)
+					index = r.nextInt(countryList.size() - 1);
 				else
-					index=0;
-				Country c= map.getCountryFromName(countryList.get(index));
+					index = 0;
+				Country c = map.getCountryFromName(countryList.get(index));
 				countryList.remove(index);
 				listOfPlayers.get(k).getAssigned_countries().add(c);
-				//c.setOwner(listOfPlayers.get(k).getName());
-				map.setCountryOwner(c,listOfPlayers.get(k).getName());
+				// c.setOwner(listOfPlayers.get(k).getName());
+				map.setCountryOwner(c, listOfPlayers.get(k).getName());
 				count++;
 			}
 		}
-		for(int p=j*listOfPlayers.size();p<map.getListOfCountries().size();p++) {
+		for (int p = j * listOfPlayers.size(); p < map.getListOfCountries().size(); p++) {
 			countryList.add(map.getListOfCountries().get(p).getName());
 		}
 		int leftCountries = countryCount - count;
 		for (int m = 0; m < leftCountries; m++) {
-			Random r=new Random();
+			Random r = new Random();
 			int index;
-			if(countryList.size()!=1)
-				index = r.nextInt(countryList.size()-1);
+			if (countryList.size() != 1)
+				index = r.nextInt(countryList.size() - 1);
 			else
-				index=0;
-			
-			Country c= map.getCountryFromName(countryList.get(index));
+				index = 0;
+
+			Country c = map.getCountryFromName(countryList.get(index));
 			countryList.remove(index);
 			listOfPlayers.get(m).getAssigned_countries().add(c);
 			c.setOwner(listOfPlayers.get(m).getName());
 			count++;
 		}
 
-		for(Continent c:map.getListOfContinent()) {
-			int flag=0;
-			String owner=map.getCountryFromName(c.getCountries().get(0)).getOwner();
-			for(String s: c.getCountries()) {
-				Country country=map.getCountryFromName(s); 
-				if(!owner.equals(country.getOwner())) {
-					flag=1;
+		for (Continent c : map.getListOfContinent()) {
+			int flag = 0;
+			String owner = map.getCountryFromName(c.getCountries().get(0)).getOwner();
+			for (String s : c.getCountries()) {
+				Country country = map.getCountryFromName(s);
+				if (!owner.equals(country.getOwner())) {
+					flag = 1;
 					break;
 				}
 			}
-			if(flag==0)
+			if (flag == 0) {
 				map.setContinentOwner(c, owner);
+				c.setAssignArmy(1);
+			}
 		}
 	}
 

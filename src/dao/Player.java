@@ -13,7 +13,10 @@ import mapWorks.MapReader;
  */
 public class Player extends pattern.Observable{
 
-	private int endOfActions=0;
+	
+	private int contientOwnedValue=0;
+	
+	private int endOfActions;
 	public int getEndOfActions() {
 		return endOfActions;
 	}
@@ -193,8 +196,15 @@ public class Player extends pattern.Observable{
 	 * @return Number of reinforcement armies
 	 */
 	public int calculateReinforceArmies(Map map,ArrayList<Player> listPlayer) {
+		//calculating on the basis of no of countries the player own
 		int noOfArmies =this.getAssigned_countries().size() / 3;
 		int reinforcementArmies = noOfArmies <= 3 ? 3 : noOfArmies;
+		
+		//calculating on the basis of continents owned
+		
+		
+		
+		
 		return reinforcementArmies;
 	}
 
@@ -471,13 +481,13 @@ public class Player extends pattern.Observable{
 				}
 			} else if (in.equals("fortify -none")) {
 				System.out.println("Skipped fortification");
+				endOfActions=1;
 				setActions("Skipped fortification");
 				return;
 			} else
 				System.out.println("Invalid command,type again");
 		} while (flag == 0);
 
-		setActions("Fortification finished");
 	}
 
 	/**
@@ -678,6 +688,7 @@ public class Player extends pattern.Observable{
 								Country c=map.getCountryFromName(country);
 								if(!this.name.equals(c.getOwner())) {
 									flag=1;
+									map.setContinentOwner(cont,"FREE CONTINENTS");
 									break;
 								}
 							}

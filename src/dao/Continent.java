@@ -33,7 +33,7 @@ public class Continent {
 	/**
 	 * This variable stores whether to assign no of armies(which is equal to the continent value) to the player in reinforcement phase .
 	 */
-	private int assignArmy;
+	private int assignArmy=0;
 	/**
 	 * This method is used to get the value of assignArmy
 	 * @return
