@@ -72,4 +72,10 @@ public class CardExchangeView implements Observer{
 	private static void initialize() {
 		
 	}
+	public void close() {
+		// TODO Auto-generated method stub
+		frame.setVisible(false);
+		frame = null;
+		
+	}
 }

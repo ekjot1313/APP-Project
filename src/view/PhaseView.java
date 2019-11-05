@@ -20,7 +20,8 @@ public class PhaseView implements Observer {
 	private static JScrollPane scrollPane;
 	public void update(Observable obj) {
 		// TODO Auto-generated method stub
-
+		if(((Player) obj).getView().contains("PhaseView")) {
+			
 		if(frame==null) {
 			frame = new JFrame();
 			frame.setBounds(100, 100, 450, 300);
@@ -60,20 +61,8 @@ public class PhaseView implements Observer {
 			if(((Player) obj).getEndOfActions() ==1 )
 				count=0;
 		}
-	}
-	/**
-	 * Create the application.
-	 */
-	public PhaseView() {
-		initialize();
-		
+		}
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private static void initialize() {
-		
-	}
 
 }

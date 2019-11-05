@@ -13,32 +13,87 @@ import mapWorks.MapReader;
  */
 public class Player extends pattern.Observable{
 
+	/**
+	 * To store the current view
+	 */
+	private String view;
+	
+	/**
+	 * To get the current view
+	 * @return view
+	 */
+	public String getView() {
+		return view;
+	}
+	/**
+	 * To set the current view
+	 * @param view
+	 */
+	public void setView(String view) {
+		this.view = view;
+	}
+	
+	/**
+	 * To stroe end of actions
+	 */
 	private int endOfActions;
+	/**
+	 * To get end of actions
+	 * @return endOfActions
+	 */
 	public int getEndOfActions() {
 		return endOfActions;
 	}
+	/**
+	 * TO set end of actions
+	 * @param endOfActions
+	 */
 	public void setEndOfActions(int endOfActions) {
 		this.endOfActions = endOfActions;
 	
 	}
+	
+	
+	/**
+	 * To store current state- Reinforcement ,attack, fortify
+	 */
 	private String state;
 
 	/**
 	 * deck of cards
 	 */
 	public static ArrayList<String> deck;
-
+	/**
+	 * TO store current actions
+	 */
 	private String actions;
+	/**
+	 * TO get current actions
+	 * @return actions
+	 */
 	public String getActions() {
 		return actions;
 	}
+	/**
+	 * To store current actions 
+	 * @param actions
+	 */
 	public void setActions(String actions) {
 		this.actions = actions;
 		notify(this);
+		this.actions ="";
 	}
+	/**
+	 * TO get current state
+	 * @return state
+	 */
 	public String getState() {
 		return state;
 	}
+	/**
+	 * To set current state
+	 * @param state
+	 */
 	public void setState(String state) {
 		this.state = state;
 		notify(this);
@@ -104,7 +159,8 @@ public class Player extends pattern.Observable{
 		cards= new ArrayList<String>();
 	}
 	/**
-	 * 
+	 * To get random card
+	 * @return card
 	 */
 	public String randomCard() {
 		String card;
@@ -221,6 +277,7 @@ public class Player extends pattern.Observable{
 	 */
 	public void reinforcement(Map map,ArrayList<Player> listPlayer) {
 		endOfActions=0;
+		setView("PhaseViewCardExchangeView");
 		setState("Reinforcement");
 		Scanner sc = new Scanner(System.in);
 		// calculate reinforcement armies
@@ -274,7 +331,7 @@ public class Player extends pattern.Observable{
 						reinforcementArmies -= armiesTobeplaced;
 						System.out.println("Reinforcement armies placed successfully");
 						System.out.println("Remaining armies to be placed : "+reinforcementArmies);
-						
+						setView("PhaseView");
 						setActions("Reinforced "+armiesTobeplaced+" armies to "+map.getCountryFromName(inputArray[1]).getName());
 						if(forceExchangeCards == 1 && reinforcementArmies == 0)
 							System.out.println("You have more than 5 exchange cards ,please exchange cards to proceed to attack phase");
@@ -309,7 +366,7 @@ public class Player extends pattern.Observable{
 					String card3 = playerCards.get(num3);
 					if(!card1.isEmpty() && !card2.isEmpty()&& !card3.isEmpty() ){
 						//numbers are valid ,check if all same or all different
-						String concatCards =card1.split("")[1]+card2.split("")[1]+card3.split("")[1];
+						String concatCards =card1.split(" ")[1]+card2.split(" ")[1]+card3.split(" ")[1];
 						if(concatCards.equalsIgnoreCase("infantryinfantryinfantry") || concatCards.equalsIgnoreCase("cavalrycavalrycavalry") || concatCards.equalsIgnoreCase("artilleryartilleryartillery")){
 							//all same
 							IsExchangeCards = true;
@@ -333,6 +390,8 @@ public class Player extends pattern.Observable{
 						playerCards.remove(card1);
 						playerCards.remove(card2);
 						playerCards.remove(card3);
+						setView("CardExchangeView");
+                        setActions("Player has exchanged "+card1 +", "+card2 +", "+card3);
 
 						this.setCardExchangeCounter(this.getCardExchangeCounter() + 5);
 						reinforcementArmies += this.getCardExchangeCounter();
@@ -386,6 +445,7 @@ public class Player extends pattern.Observable{
 	 */
 	public void fortification(Map map,ArrayList<Player> listPlayer) {
 		endOfActions=0;
+		setView("PhaseView");
 		setState("Fortification");
 		Scanner sc = new Scanner(System.in);
 		int flag = 0;
@@ -470,6 +530,7 @@ public class Player extends pattern.Observable{
 									.getNoOfArmies() + Integer.parseInt(input[3]));
 							System.out.println("Fortification successful");
 							endOfActions=1;
+							setView("PhaseView");
 							setActions("Fortified "+input[2]+" with "+input[3]+" armies from "+input[1]);
 							return;
 						} else
@@ -484,6 +545,7 @@ public class Player extends pattern.Observable{
 			} else if (in.equals("fortify -none")) {
 				System.out.println("Skipped fortification");
 				endOfActions=1;
+				setView("PhaseView");
 				setActions("Skipped fortification");
 				return;
 			} else
@@ -498,6 +560,7 @@ public class Player extends pattern.Observable{
 	 */
 	public int attack(Map map,ArrayList<Player> listPlayer) throws Exception {
 		endOfActions=0;
+		setView("PhaseView");
 		setState("Attack");
 		Scanner sc = new Scanner(System.in);
 		int attackDeadlock=0;
@@ -538,7 +601,7 @@ public class Player extends pattern.Observable{
 					Player defender=listPlayer.get(index);
 					int isAllout=0;
 					if(s[3].equals("-allout")) {
-						this.setActions("Attacking country: "+toCountry.getName()+" from country :"+fromCountry.getName());
+						//this.setActions("Attacking country: "+toCountry.getName()+" from country :"+fromCountry.getName());
 						while(toCountry.getNoOfArmies()!=0 && fromCountry.getNoOfArmies()!=1) {
 							if(fromCountry.getNoOfArmies()>=3)
 								attackerDice=3;

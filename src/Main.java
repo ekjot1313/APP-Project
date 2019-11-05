@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import mapWorks.MapReader;
+import view.CardExchangeView;
 import view.PWDView;
 import view.PhaseView;
 import dao.Map;
@@ -144,12 +145,18 @@ public class Main {
 		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, mr.map, 0);
 
 		while (true) {
+			PhaseView pv= new PhaseView();
+			CardExchangeView cev = new CardExchangeView();
+			
 			for (int i = 0; i < pa.listOfPlayers.size(); i++) {
 				System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " reinforcement phase begins");
-				PhaseView pv = new PhaseView();
 				pa.listOfPlayers.get(i).attach(pv);
-
+				
+				pa.listOfPlayers.get(i).attach(cev);
 				pa.listOfPlayers.get(i).reinforcement(mr.map, (ArrayList<Player>) pa.listOfPlayers);
+				pa.listOfPlayers.get(i).detach(cev);
+				cev.close();
+				
 				gameOver = pa.listOfPlayers.get(i).attack(mr.map, (ArrayList<Player>) pa.listOfPlayers);
 				if (gameOver == 1)
 					break;
@@ -166,6 +173,7 @@ public class Main {
 		//detach and close PWDView
 		mr.map.detach(pwdView);
 		pwdView.close();
+		
 		
 		
 	}

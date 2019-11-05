@@ -29,10 +29,7 @@ public class Observable {
 	 */
 	public void detach(Observer o) {
 		observers.remove(o);
-		if(CardExchangeView.window.frame !=null) {
-		CardExchangeView.window.frame.setVisible(false);
-		CardExchangeView.window.frame = null;
-		}
+		
 		
 	}
 	
