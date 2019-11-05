@@ -154,6 +154,7 @@ public class Main {
 				if (gameOver == 1)
 					break;
 				pa.listOfPlayers.get(i).fortification(mr.map, (ArrayList<Player>) pa.listOfPlayers);
+				pa.listOfPlayers.get(i).detach(pv);
 				
 			}
 			if (gameOver == 1)
