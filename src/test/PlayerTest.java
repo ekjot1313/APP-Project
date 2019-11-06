@@ -143,6 +143,16 @@ public class PlayerTest {
 	@Test
 	public void testAttackDeadlock() {
 		
+		int result=A.attackDeadlock(testMap);
+		assertEquals(0,result);
+		
+		india.setNoOfArmies(1);
+		result=A.attackDeadlock(testMap);
+		assertEquals(1,result);
+		
+		china.setNoOfArmies(1);
+		result=B.attackDeadlock(testMap);
+		assertEquals(1,result);
 	}
 	
 	
