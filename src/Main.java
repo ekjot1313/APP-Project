@@ -165,7 +165,7 @@ public class Main {
 				Thread.sleep(1500);
 				if (gameOver == 1)
 					break;
-				pa.listOfPlayers.get(i).fortification(mr.map, (ArrayList<Player>) pa.listOfPlayers);
+				pa.listOfPlayers.get(i).fortification(mr.map, (ArrayList<Player>) pa.listOfPlayers,null);
 				Thread.sleep(1500);
 				pa.listOfPlayers.get(i).detach(pv);
 				
@@ -173,7 +173,7 @@ public class Main {
 			if (gameOver == 1)
 				break;
 		}
-		System.out.println("Game is Over");
+		System.out.println("Game Over");
 		System.out.println("Winner is Player: " + pa.listOfPlayers.get(0).getName());
 		
 		//detach and close PWDView

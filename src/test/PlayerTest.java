@@ -1,24 +1,14 @@
 package test;
 
 import static org.junit.Assert.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-
-import mapWorks.MapEditor;
-import mapWorks.MapSaver;
 import dao.Continent;
 import dao.Country;
 import dao.Map;
-import mapWorks.MapReader;
 import dao.Player;
-import game.ArmyAllocator;
-import game.PlayerAllocator;
+
 
 public class PlayerTest {
 	static Map testMap=new Map();
@@ -28,8 +18,8 @@ public class PlayerTest {
 	static Player A = new Player();
 	static Player B = new Player();
 	static ArrayList<Player> listOfPlayers;
-	@BeforeClass 
-	public static void beforeClass() {
+	@Before 
+	public void before() {
 		
 		india.setName("india");
 		india.setContinentName("asia");
@@ -151,10 +141,52 @@ public class PlayerTest {
 		assertEquals(1,result);
 		
 		china.setNoOfArmies(1);
+		B.setNoOfArmies(1);
 		result=B.attackDeadlock(testMap);
 		assertEquals(1,result);
 	}
+	@Test
+	public void testFortification() {
+		
+		System.out.println("\nFor Player A-> fortify pakistan china 10");
+		A.fortification(testMap, listOfPlayers, "fortify pakistan china 10");
+		assertEquals(20,pakistan.getNoOfArmies());
+		assertEquals(40,china.getNoOfArmies());
+		
+		System.out.println("\nFor Player A-> fortify -none");
+		A.fortification(testMap, listOfPlayers, "fortify -none");
+		assertEquals(20,pakistan.getNoOfArmies());
+		assertEquals(20,india.getNoOfArmies());
+		
+		System.out.println("\nFor Player A-> fortify china india 5");
+		A.fortification(testMap, listOfPlayers, "fortify china india 5");
+		assertEquals(20,pakistan.getNoOfArmies());
+		assertEquals(20,india.getNoOfArmies());
+		assertEquals(40,china.getNoOfArmies());
+		
+		System.out.println("\nFor Player A-> fortify pakistan india 30");
+		A.fortification(testMap, listOfPlayers, "fortify pakistan india 30");
+		assertEquals(20,india.getNoOfArmies());
+		assertEquals(20,pakistan.getNoOfArmies());
 	
+		System.out.println("\nFor Player A-> fortify pakistan india 10");
+		A.fortification(testMap, listOfPlayers, "fortify pakistan india 10");
+		assertEquals(30,india.getNoOfArmies());
+		assertEquals(10,pakistan.getNoOfArmies());
+		
+		System.out.println("\nFor Player A-> fortify pakistan india 10");
+		pakistan.setNoOfArmies(1);
+		A.fortification(testMap, listOfPlayers, "fortify pakistan india 10");
+		assertEquals(30,india.getNoOfArmies());
+		assertEquals(1,pakistan.getNoOfArmies());
+		
+		System.out.println("\nFor Player A-> fortify pakistan india 10 5");
+		pakistan.setNoOfArmies(1);
+		A.fortification(testMap, listOfPlayers, "fortify pakistan india 10 5");
+		assertEquals(30,india.getNoOfArmies());
+		assertEquals(1,pakistan.getNoOfArmies());
+		
+	}
 	
 	
 }

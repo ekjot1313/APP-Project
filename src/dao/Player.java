@@ -447,17 +447,21 @@ public class Player extends pattern.Observable{
 	 * @param playerIndex Index of a particular player in the List of player passed
 	 *                    from main function
 	 */
-	public void fortification(Map map,ArrayList<Player> listPlayer) {
+	public void fortification(Map map,ArrayList<Player> listPlayer,String command) {
 		endOfActions=0;
 		setView("PhaseView");
 		setState("Fortification");
 		Scanner sc = new Scanner(System.in);
+		String in;
 		int flag = 0;
 		do {
 
 			System.out.println(
 					"Type fortify <from country name> <to country name> <number of armies> or fortify -none (choose to not do a move)\n Type showmap");
-			String in = sc.nextLine();
+			if(command!=null)
+				in=command;
+			else
+				in = sc.nextLine();
 			String input[] = in.split(" ");
 			if (in.equals("showmap")) {
 				MapReader mr = new MapReader();
@@ -491,13 +495,22 @@ public class Player extends pattern.Observable{
 					}
 				}
 				if (source == -1 || destination == -1) {
-					if (source == -1 && destination == -1)
+					if (source == -1 && destination == -1) {
 						System.out.println("Sorry!From Country:" + input[1] + " and To Country :" + input[2]
 								+ " doesn't belong to you");
-					else if (source == -1)
+						if(command!=null)
+							return;
+					}
+					else if (source == -1) {
 						System.out.println("Sorry!From Country :" + input[1] + " doesn't belong to you");
-					else
+						if(command!=null)
+							return;
+					}
+					else {
 						System.out.println("Sorry!To Country :" + input[2] + " doesn't belong to you");
+						if(command!=null)
+							return;
+					}
 				} else {
 					Boolean[] visited = new Boolean[mapOfAssignedCountries.keySet().size()];
 					for (int i = 0; i < visited.length; i++) {
@@ -527,6 +540,8 @@ public class Player extends pattern.Observable{
 					if (validPath == 1) {
 						if(this.getAssigned_countries().get(source).getNoOfArmies()==1) {
 							System.out.println("Sorry! You cannot fortify for this combination as the from country has only 1 army");
+							if(command!=null)
+								return;
 						}
 						else if (Integer.parseInt(input[3]) > 0 && (Integer.parseInt(input[3]) < this.getAssigned_countries().get(source).getNoOfArmies())) {
 							
@@ -542,13 +557,18 @@ public class Player extends pattern.Observable{
 							setActions("Fortified "+input[2]+" with "+input[3]+" armies from "+input[1]);
 							return;
 							
-						} else
+						} else {
 							System.out.println("Invalid no of armies specified, for these two countries it can be 1-"
 									+ (this.getAssigned_countries().get(source).getNoOfArmies()
 											- 1));
+							if(command!=null)
+								return;
+						}
 					} else {
 						System.out.println(
 								"There's no path between the mentioned countries.(You can move any number of armies from one of the owned countries to the other, provided that there is a path between these two countries that is composed of countries owned by you)");
+						if(command!=null)
+							return;
 					}
 				}
 			} else if (in.equals("fortify -none")) {
@@ -557,8 +577,11 @@ public class Player extends pattern.Observable{
 				setView("PhaseView");
 				setActions("Skipped fortification");
 				return;
-			} else
+			} else {
 				System.out.println("Invalid command,type again");
+				if(command!=null)
+					return;
+			}
 		} while (flag == 0);
 
 	}
@@ -599,7 +622,7 @@ public class Player extends pattern.Observable{
 			}
 			input=sc.nextLine();
 			while(validate(input,map)==0) {
-				System.out.println("Kindly type again");
+				System.out.println("Invalid command, Kindly type again");
 				input=sc.nextLine();
 			}
 			if(input.equals("showmap")) {
@@ -742,6 +765,7 @@ public class Player extends pattern.Observable{
 							//System.out.println(fromCountry.getNoOfArmies());
 							if(fromCountry.getNoOfArmies() != 1) {
 								System.out.println("Move armies from "+fromCountry.getName()+" to "+toCountry.getName());
+								System.out.println("Available armies you can move : 0-"+(fromCountry.getNoOfArmies()-1));
 								System.out.println("Type attackmove <number> to move");
 								int n,valid=0;
 								do {	
@@ -751,25 +775,6 @@ public class Player extends pattern.Observable{
 							}
 							else
 								System.out.println("You cannot move armies to the conquered country as you have only 1 army left in the attacking country.");
-							//card exchange logic
-							/*if(defender.getAssigned_countries().size()==0) {//defender is out of the game
-								for(int i=0;i<defender.getCards().size();i++) {
-									this.getCards().add(defender.getCards().get(i));
-								}
-								listPlayer.remove(defender);
-								if(listPlayer.size()==1) {
-									//checking for game finish condition
-									return 1;
-								}
-							}
-							else {
-								String card=this.randomCard();
-								this.cards.add(card);
-								System.out.println("You have received: "+card+" card");
-								this.setActions(this.name+" has received: "+card+" card");
-								deck.remove(card);
-							}*/
-							//checking for continent 
 							Continent cont=map.getContinentFromName(toCountry.getContinentName());
 							int flag=0;
 							for(String country:cont.getCountries()) {
@@ -803,7 +808,7 @@ public class Player extends pattern.Observable{
 	 * 
 	 */
 	public int attackMove(String command,Country fromCountry,Country toCountry)
-	{	System.out.println("Available armies you can move : 0-"+(fromCountry.getNoOfArmies()-1));
+	{	
 		String str[]=command.split(" ");
 		
 		if(str.length==2 && str[0].equals("attackmove")) {
