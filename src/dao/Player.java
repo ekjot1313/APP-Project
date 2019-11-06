@@ -742,7 +742,6 @@ public class Player extends pattern.Observable{
 							//System.out.println(fromCountry.getNoOfArmies());
 							if(fromCountry.getNoOfArmies() != 1) {
 								System.out.println("Move armies from "+fromCountry.getName()+" to "+toCountry.getName());
-								System.out.println("Available armies you can move : 0-"+(fromCountry.getNoOfArmies()-1));
 								System.out.println("Type attackmove <number> to move");
 								int n,valid=0;
 								do {	
@@ -804,7 +803,7 @@ public class Player extends pattern.Observable{
 	 * 
 	 */
 	public int attackMove(String command,Country fromCountry,Country toCountry)
-	{
+	{	System.out.println("Available armies you can move : 0-"+(fromCountry.getNoOfArmies()-1));
 		String str[]=command.split(" ");
 		
 		if(str.length==2 && str[0].equals("attackmove")) {
@@ -821,7 +820,7 @@ public class Player extends pattern.Observable{
 				return 1;
 			}
 			else {
-				if(n==0 || n>fromCountry.getNoOfArmies()-1)
+				if(n<0 || n>fromCountry.getNoOfArmies()-1)
 					System.out.println("Incorrect no of armies, Kindly type again.");
 				return 0;
 			}
@@ -858,12 +857,6 @@ public class Player extends pattern.Observable{
 	if(listPlayer.size()==1) 
 		return 1;
 	return 0;
-	}
-	/**
-	 * This method is for a single attack
-	 */
-	public void singleAttack() {
-
 	}
 	/**
 	 * This is the method to check the attack command.
@@ -912,6 +905,10 @@ public class Player extends pattern.Observable{
 												System.out.println("Number of dices cannot be 0");
 												return 0;
 											}
+											if(numdice < 0) {
+												System.out.println("Incorrect number of dices");
+												return 0;
+											}
 											return 1;
 										}
 									}
@@ -944,17 +941,6 @@ public class Player extends pattern.Observable{
 				return 0;		
 		}
 		return 0;
-	}
-	/**
-	 * 
-	 */
-	public Player getPlayerFromName(String name,ArrayList<Player> listPlayer) {
-		for(int i=0;i<listPlayer.size();i++) {
-			if(listPlayer.get(i).getName().equals(name)) {
-				return listPlayer.get(i);
-			}
-		}
-		return null;
 	}
 }
 
