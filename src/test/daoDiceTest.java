@@ -10,8 +10,7 @@ import org.junit.Test;
 import dao.Dice;
 
 /**
- * @author Hartaj
- *
+ * @author Hartaj, Ekjot
  */
 public class daoDiceTest {
 
