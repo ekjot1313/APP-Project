@@ -16,6 +16,11 @@ import mapWorks.MapEditor;
 import mapWorks.MapReader;
 import mapWorks.MapSaver;
 
+/**
+ * This class tests the functions in MapSaver.java class
+ * @author divya_000
+ *
+ */
 public class MapSaverTest {
 	
 	static Map testMap;

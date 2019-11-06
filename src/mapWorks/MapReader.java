@@ -156,7 +156,7 @@ public class MapReader {
 	 * @throws NumberFormatException for Buffered Reader
 	 * @throws IOException           for Buffered Reader
 	 */
-	private void loadContinents() throws NumberFormatException, IOException {
+	public void loadContinents() throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
 
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
