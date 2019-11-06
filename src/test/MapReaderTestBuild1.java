@@ -28,7 +28,7 @@ import game.PlayerAllocator;
  * @author Ekjot
  * 
  */
-public class MapReaderTest {
+public class MapReaderTestBuild1 {
 
 	static Map testMap;
 	static MapEditor mapEditor;

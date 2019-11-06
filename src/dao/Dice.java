@@ -11,11 +11,25 @@ import java.util.Random;
  */
 public class Dice {
 
-	// Random object to get random number.
+	static // Random object to get random number.
 	Random number = new Random();
 	private int attackerDice = 0;
+
+	/**
+	 * @return the attackerDice
+	 */
+	public int getAttackerDice() {
+		return attackerDice;
+	}
+
+	/**
+	 * @return the defenderDice
+	 */
+	public int getDefenderDice() {
+		return defenderDice;
+	}
+
 	private int defenderDice = 0;
-	
 
 	/**
 	 * Constructor sets attackerDice and defenderDice
@@ -38,7 +52,7 @@ public class Dice {
 	 * 
 	 * @return rolledNumber Rolled number from dice.
 	 */
-	int roll() {
+	public int roll() {
 		int rolledNumber = number.nextInt(6) + 1;
 		return rolledNumber;
 	}
@@ -49,7 +63,7 @@ public class Dice {
 	 * 
 	 * @return result 2D array of rolled numbers
 	 */
-	int[][] rollAll() {
+	public int[][] rollAll() {
 
 		int[][] result = new int[2][3];
 
@@ -72,7 +86,7 @@ public class Dice {
 	 * @param arr Unsorted 2D array of 2*3.
 	 * @return result Sorted 2D array of 2*3.
 	 */
-	static int[][] sort(int[][] arr) {
+	public int[][] sort(int[][] arr) {
 
 		Arrays.sort(arr[0]);
 		Arrays.sort(arr[1]);
@@ -94,23 +108,24 @@ public class Dice {
 	 * @param result
 	 * @return
 	 */
-	String print(int[][] result) {
+	public String print(int[][] result) {
 		String str = "";
-		System.out.print("Attacker Dice: "+" ");
+		System.out.print("Attacker Dice: " + " ");
 		for (int i = 0; i < attackerDice; i++) {
 
 			str += result[0][i] + "\n";
-			System.out.print(result[0][i]+" ");
+			System.out.print(result[0][i] + " ");
 		}
 
 		str += "\n\n";
-		System.out.print("\nDefender Dice: "+" ");
+		System.out.print("\nDefender Dice: " + " ");
 		for (int i = 0; i < defenderDice; i++) {
 
 			str += result[1][i] + "\n";
-			System.out.print(result[1][i]+" ");
+			System.out.print(result[1][i] + " ");
 		}
-
+		System.out.println();
+		System.out.println(str);
 		return str;
 	}
 
@@ -118,7 +133,7 @@ public class Dice {
 	 * @param attackerDice the attackerDice to set
 	 * 
 	 */
-	public boolean setAttackerDice(int attackerDice)  {
+	public boolean setAttackerDice(int attackerDice) {
 
 		if (attackerDice <= 3 && attackerDice > 0)
 			this.attackerDice = attackerDice;
@@ -133,7 +148,7 @@ public class Dice {
 	 * @param defenderDice the defenderDice to set
 	 * 
 	 */
-	public boolean setDefenderDice(int defenderDice)  {
+	public boolean setDefenderDice(int defenderDice) {
 		if (defenderDice <= 2 && defenderDice > 0)
 			this.defenderDice = defenderDice;
 		else {
