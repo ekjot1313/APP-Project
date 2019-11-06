@@ -21,7 +21,7 @@ import mapWorks.MapEditor;
  * @author ekjot
  *
  */
-public class MapTest {
+public class DaoMapTest {
 
 	/**
 	 * @throws java.lang.Exception
@@ -45,7 +45,6 @@ public class MapTest {
 	@Before
 	public void setUp() throws Exception {
 
-		
 		mapEditor = new MapEditor();
 		mapEditor.print = false;
 		mapEditor.editContinent(("editcontinent -add asia 10 -add africa 14").split(" "));
@@ -56,7 +55,7 @@ public class MapTest {
 				("editneighbor -add india pakistan -add pakistan china -add india congo -add congo uganda").split(" "));
 		testMap = mapEditor.getMap();
 		testMap.printFlag = false;
-		
+
 		playerAllocator = new PlayerAllocator();
 		Player A = new Player();
 		Player B = new Player();
@@ -100,7 +99,7 @@ public class MapTest {
 		testMap.display();
 
 		Map emptyMap = new Map();
-		emptyMap.printFlag=false;
+		emptyMap.printFlag = false;
 		emptyMap.display();
 
 	}
@@ -110,12 +109,12 @@ public class MapTest {
 	 */
 	@Test
 	public final void testValidateContinent() {
-		
+
 		assertEquals(0, testMap.validateContinent(testMap));
 		mapEditor.editNeighbor(("editneighbor -remove india pakistan").split(" "));
 
 		testMap = mapEditor.getMap();
-testMap.printFlag=false;
+		testMap.printFlag = false;
 		assertEquals(1, testMap.validateContinent(testMap));
 	}
 
@@ -124,11 +123,11 @@ testMap.printFlag=false;
 	 */
 	@Test
 	public final void testDisplayAll() {
-		
+
 		testMap.displayAll();
 
 		Map emptyMap = new Map();
-		emptyMap.printFlag=false;
+		emptyMap.printFlag = false;
 		emptyMap.displayAll();
 	}
 
@@ -143,7 +142,7 @@ testMap.printFlag=false;
 		mapEditor.editNeighbor(("editneighbor -remove india pakistan").split(" "));
 
 		testMap = mapEditor.getMap();
-testMap.printFlag=false;
+		testMap.printFlag = false;
 		assertEquals(1, testMap.validateMap());
 
 		Continent copyContinent = new Continent();
@@ -163,11 +162,11 @@ testMap.printFlag=false;
 		mapEditor.editNeighbor(("editneighbor -remove india pakistan").split(" "));
 
 		testMap = mapEditor.getMap();
-testMap.printFlag=false;
+		testMap.printFlag = false;
 		assertFalse(testMap.isValid(testMap));
 
 		Map emptyMap = new Map();
-		emptyMap.printFlag=false;
+		emptyMap.printFlag = false;
 		assertFalse(emptyMap.isValid(emptyMap));
 	}
 

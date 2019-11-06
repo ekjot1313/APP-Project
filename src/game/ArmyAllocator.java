@@ -6,8 +6,6 @@ import java.util.Scanner;
 import dao.Country;
 import dao.Map;
 import dao.Player;
-import mapWorks.MapReader;
-
 import java.util.Random;
 
 /**
@@ -19,6 +17,8 @@ import java.util.Random;
  *
  */
 public class ArmyAllocator {
+
+	private Scanner sc1;
 
 	/**
 	 * This method calculates the total number of armies based on the number of
@@ -35,20 +35,19 @@ public class ArmyAllocator {
 		// Maximum number of players can be 9 only
 		// Logic for more than 9 players - TBD*
 		int assignedArmies = maxArmiesForEachPlayer - 5 * (listOfPLayers.size() - 2);
-		if(assignedArmies<=0) {
+		if (assignedArmies <= 0) {
 			for (Player p : listOfPLayers) {
-				//p.setNoOfArmies(5);
-				map.setNoOfArmies(p,5);
+				// p.setNoOfArmies(5);
+				map.setNoOfArmies(p, 5);
 				p.setUnassignedarmies(5);
 			}
-			assignedArmies=5;
-		}
-		else {
-		for (Player p : listOfPLayers) {
-			map.setNoOfArmies(p,assignedArmies);
-			//p.setNoOfArmies(assignedArmies);
-			p.setUnassignedarmies(assignedArmies);
-		}
+			assignedArmies = 5;
+		} else {
+			for (Player p : listOfPLayers) {
+				map.setNoOfArmies(p, assignedArmies);
+				// p.setNoOfArmies(assignedArmies);
+				p.setUnassignedarmies(assignedArmies);
+			}
 		}
 		if (test == 1)
 			placeArmy(assignedArmies, listOfPLayers, map, 1);
@@ -67,7 +66,7 @@ public class ArmyAllocator {
 	 */
 	public void placeArmy(int assignedArmies, ArrayList<Player> listOfPLayers, Map map, int test) {
 
-		Scanner sc1 = new Scanner(System.in);
+		sc1 = new Scanner(System.in);
 		boolean isPlaceAll = false;
 		if (test == 1) {
 			placeAll(listOfPLayers, map);
@@ -76,12 +75,12 @@ public class ArmyAllocator {
 				for (Player p : listOfPLayers) {
 					Boolean armyNotAllocated = true;
 					while (armyNotAllocated) {
-						System.out.println("Player " + p.getName()+ " to place armies :\n Type placearmy <countryname> or placeall to randomly allocate armies.\n Type showmap");
-						
+						System.out.println("Player " + p.getName()
+						+ " to place armies :\n Type placearmy <countryname> or placeall to randomly allocate armies.\n Type showmap");
+
 						String input = sc1.nextLine();
 						String[] commands = input.split(" ");
 						if (input.equals("showmap")) {
-							MapReader mr = new MapReader();
 							map.displayAll();
 						} else if (commands.length == 2 && commands[0].equals("placearmy")) {
 							// check if country is valid and assigned to the current player
@@ -158,7 +157,7 @@ public class ArmyAllocator {
 			for (int i = 0; i < p.getAssigned_countries().size() && p.getUnassignedarmies() > 0; i++) {
 				if (p.getAssigned_countries().get(i).getNoOfArmies() == 0) {
 					p.getAssigned_countries().get(i)
-							.setNoOfArmies(p.getAssigned_countries().get(i).getNoOfArmies() + 1);
+					.setNoOfArmies(p.getAssigned_countries().get(i).getNoOfArmies() + 1);
 					p.setUnassignedarmies(p.getUnassignedarmies() - 1);
 				}
 			}
