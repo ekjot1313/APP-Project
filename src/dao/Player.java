@@ -727,10 +727,10 @@ public class Player extends pattern.Observable{
 									this.getCards().add(defender.getCards().get(i));
 								}
 								listPlayer.remove(defender);
-								if(listPlayer.size()==1) {
-									//checking for game finish condition
+								//checking for game finish condition
+								if(endGame(listPlayer)==1)
 									return 1;
-								}
+								
 							}
 							else {
 								String card=this.randomCard();
@@ -747,29 +747,7 @@ public class Player extends pattern.Observable{
 								int n,valid=0;
 								do {	
 									String command=sc.nextLine();
-									String str[]=command.split(" ");
-									if(str.length==2 && str[0].equals("attackmove")) {
-										n=Integer.parseInt(str[1]);
-										if(n==0) {
-											valid=1;
-											this.setActions("Armies haven't been moved");
-											break;
-										}
-										else if(n>0 && n<=fromCountry.getNoOfArmies()-1) {
-											fromCountry.setNoOfArmies(fromCountry.getNoOfArmies()-n);
-											toCountry.setNoOfArmies(n+1);
-											valid=1;
-											this.setActions("Moving :"+n+" armies from :"+fromCountry.getName()+" to"+toCountry.getName());
-											break;
-										}
-										else {
-											if(n==0 || n>fromCountry.getNoOfArmies()-1)
-												System.out.println("Incorrect no of armies, Kindly type again.");
-										}
-									}
-									else {
-										System.out.println("Incorrect command, Kindly type again.");
-									}
+									valid=attackMove(command,fromCountry,toCountry);
 								}while(valid==0);
 							}
 							else
@@ -823,6 +801,37 @@ public class Player extends pattern.Observable{
 		return 0;
 	}
 	/**
+	 * 
+	 */
+	public int attackMove(String command,Country fromCountry,Country toCountry)
+	{
+		String str[]=command.split(" ");
+		
+		if(str.length==2 && str[0].equals("attackmove")) {
+			int n=Integer.parseInt(str[1]);
+			if(n==0) {
+				
+				this.setActions("Armies haven't been moved");
+				return 1;
+			}
+			else if(n>0 && n<=fromCountry.getNoOfArmies()-1) {
+				fromCountry.setNoOfArmies(fromCountry.getNoOfArmies()-n);
+				toCountry.setNoOfArmies(n+1);
+				this.setActions("Moving :"+n+" armies from :"+fromCountry.getName()+" to"+toCountry.getName());
+				return 1;
+			}
+			else {
+				if(n==0 || n>fromCountry.getNoOfArmies()-1)
+					System.out.println("Incorrect no of armies, Kindly type again.");
+				return 0;
+			}
+		}
+		else {
+			System.out.println("Incorrect command, Kindly type again.");
+			return 0;
+		}
+	}
+	/**
 	 * This method checks for attack deadlock
 	 */
 	public int attackDeadlock(Map map) {
@@ -841,6 +850,14 @@ public class Player extends pattern.Observable{
 			}
 		}
 		return 1;
+	}
+	/**
+	 * 
+	 */
+	public int endGame(ArrayList<Player> listPlayer){
+	if(listPlayer.size()==1) 
+		return 1;
+	return 0;
 	}
 	/**
 	 * This method is for a single attack
