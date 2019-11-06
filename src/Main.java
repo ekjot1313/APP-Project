@@ -39,7 +39,8 @@ public class Main {
 				switch (commands[0]) {
 				case "loadmap":
 					loadmap(commands[1]);
-					break;
+					System.exit(0);
+		
 				case "editmap":
 					editmap(commands[1]);
 					break;
@@ -154,13 +155,16 @@ public class Main {
 				
 				pa.listOfPlayers.get(i).attach(cev);
 				pa.listOfPlayers.get(i).reinforcement(mr.map, (ArrayList<Player>) pa.listOfPlayers);
+				Thread.sleep(1500);
 				pa.listOfPlayers.get(i).detach(cev);
 				cev.close();
 				
 				gameOver = pa.listOfPlayers.get(i).attack(mr.map, (ArrayList<Player>) pa.listOfPlayers);
+				Thread.sleep(1500);
 				if (gameOver == 1)
 					break;
 				pa.listOfPlayers.get(i).fortification(mr.map, (ArrayList<Player>) pa.listOfPlayers);
+				Thread.sleep(1500);
 				pa.listOfPlayers.get(i).detach(pv);
 				
 			}
