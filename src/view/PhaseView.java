@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.EventQueue;
+import java.awt.Insets;
+
 import pattern.Observable;
 import pattern.Observer;
 
@@ -11,6 +13,7 @@ import javax.swing.JScrollPane;
 import dao.Player;
 
 import java.awt.BorderLayout;
+
 
 public class PhaseView implements Observer {
 	static int count=0;
@@ -24,15 +27,18 @@ public class PhaseView implements Observer {
 			
 		if(frame==null) {
 			frame = new JFrame();
-			frame.setBounds(100, 100, 450, 300);
+			frame.setBounds(1300, 370, 600, 350);
 			frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 			frame.setTitle("Phase View");
+			frame.setAlwaysOnTop(true);
 			txtrActions = new JTextArea();
 			txtrActions.setEditable(false);
 			txtrActions.setText("actions");
+			txtrActions.setMargin( new Insets(5,10,10,5) );
 			
 			scrollPane = new JScrollPane();
 			scrollPane.setViewportView(txtrActions);
+			
 
 			
 			frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
@@ -63,6 +69,4 @@ public class PhaseView implements Observer {
 		}
 		}
 	}
-
-
 }

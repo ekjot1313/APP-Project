@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Insets;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -22,23 +23,24 @@ public class CardExchangeView implements Observer{
 		// TODO Auto-generated method stub
 		if(frame==null) {
 			frame = new JFrame();
-			frame.setBounds(100, 100, 450, 300);
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setBounds(1300, 730, 600, 350);
+			frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 			frame.setTitle("Card Exchange View");
+			frame.setAlwaysOnTop(true);
 			txtrActions = new JTextArea();
 			txtrActions.setEditable(false);
+			txtrActions.setMargin( new Insets(5,10,10,5) );
 			//txtrActions.setText("");
 			
 			scrollPane = new JScrollPane();
 			scrollPane.setViewportView(txtrActions);
 			
-			frame.getContentPane().add(txtrActions, BorderLayout.CENTER);
+			frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					
-					CardExchangeView window = new CardExchangeView();
-					window.frame.setVisible(true);
+					CardExchangeView.frame.setVisible(true);
 					
 				} catch (Exception e) {
 					e.printStackTrace();
