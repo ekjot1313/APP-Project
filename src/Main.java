@@ -143,7 +143,7 @@ public class Main {
 		PlayerAllocator pa = new PlayerAllocator();
 		ArmyAllocator aa = new ArmyAllocator();
 		int gameOver = 0;
-		pa.allocate(mr.map);
+		pa.allocate(mr.map,null);
 		pa.populateCountries(mr.map);
 		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, mr.map, 0);
 

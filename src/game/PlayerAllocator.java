@@ -44,18 +44,24 @@ public class PlayerAllocator {
 	 * 
 	 * @param map Map Object
 	 */
-	public void allocate(Map map) {
+	public void allocate(Map map,String command) {
 
 		this.listOfPlayers = map.getListOfPlayers();
 
 		Scanner in = new Scanner(System.in);
 		String cmd;
+		int testing =0;
 
 		do {
 			System.out.println(
 					"Type \ngameplayer -add<PlayerName> or -remove <PlayerName> \npopulatecountries - assign countries to players");
 			System.out.println("Type showmap");
-			cmd = in.nextLine();
+			if(command!= null ) {
+				cmd =command;
+				testing =1;
+			}
+			else
+				cmd = in.nextLine();
 			while (cmd.equals("populatecountries") && listOfPlayers.size() == 0) {
 				System.out.println("Player list is empty, add players first.");
 				System.out.println(
@@ -119,6 +125,9 @@ public class PlayerAllocator {
 			if (cmd.equals("populatecountries") && listOfPlayers.size() == 1) {
 				System.out.println("Single player cannot play the game, please add more players");
 				continue;
+			}
+			if(testing ==1) {
+				break;
 			}
 		} while (!cmd.equals("populatecountries") || listOfPlayers.size() <= 1);
 	}
