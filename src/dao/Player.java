@@ -773,6 +773,7 @@ public class Player extends pattern.Observable{
 									valid=attackMove(command,fromCountry,toCountry);
 								}while(valid==0);
 							}
+							
 							else
 								System.out.println("You cannot move armies to the conquered country as you have only 1 army left in the attacking country.");
 							Continent cont=map.getContinentFromName(toCountry.getContinentName());
