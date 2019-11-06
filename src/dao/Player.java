@@ -739,7 +739,8 @@ public class Player extends pattern.Observable{
 									this.getCards().add(defender.getCards().get(i));
 								}
 								listPlayer.remove(defender);
-								if(listPlayer.size()==1) {	//checking for game finish condition
+								if(listPlayer.size()==1) {
+									//checking for game finish condition
 									return 1;
 								}
 							}
