@@ -525,7 +525,11 @@ public class Player extends pattern.Observable{
 							break;
 					}
 					if (validPath == 1) {
-						if (Integer.parseInt(input[3]) > 0 && (Integer.parseInt(input[3]) < this.getAssigned_countries().get(source).getNoOfArmies())) {
+						if(this.getAssigned_countries().get(source).getNoOfArmies()==1) {
+							System.out.println("Sorry! You cannot fortify for this combination as the from country has only 1 army");
+						}
+						else if (Integer.parseInt(input[3]) > 0 && (Integer.parseInt(input[3]) < this.getAssigned_countries().get(source).getNoOfArmies())) {
+							
 							this.getAssigned_countries().get(source).setNoOfArmies(
 									(this.getAssigned_countries().get(source).getNoOfArmies())
 									- Integer.parseInt(input[3]));
@@ -537,6 +541,7 @@ public class Player extends pattern.Observable{
 							setView("PhaseView");
 							setActions("Fortified "+input[2]+" with "+input[3]+" armies from "+input[1]);
 							return;
+							
 						} else
 							System.out.println("Invalid no of armies specified, for these two countries it can be 1-"
 									+ (this.getAssigned_countries().get(source).getNoOfArmies()
@@ -568,12 +573,30 @@ public class Player extends pattern.Observable{
 		setState("Attack");
 		Scanner sc = new Scanner(System.in);
 		int attackDeadlock=0;
+		attackDeadlock=0;
+		//checking for deadlock
+		attackDeadlock= attackDeadlock(map);
+		if(attackDeadlock == 1) {
+			endOfActions=1;
+			System.out.println("You cannot attack now because of the attack deadlock.");
+			setActions("You cannot attack now because of the attack deadlock."+"\n Attack Finished.");
+			return 0;
+		}
 		System.out.println("Type attack <countrynamefrom> <countynameto> <numdice> for a single attack");
 		System.out.println("attack <countrynamefrom> <countynameto> -allout for an attack until no attack is possible");
 		System.out.println("attack –noattack to end attack phase");
 		System.out.println("Type showmap");
 		String input;
 		do {
+			attackDeadlock=0;
+			//checking for deadlock
+			attackDeadlock= attackDeadlock(map);
+			if(attackDeadlock == 1) {
+				endOfActions=1;
+				System.out.println("You cannot attack now because of the attack deadlock.");
+				setActions("You cannot attack now because of the attack deadlock."+"\n Attack Finished.");
+				return 0;
+			}
 			input=sc.nextLine();
 			while(validate(input,map)==0) {
 				System.out.println("Kindly type again");
@@ -582,7 +605,8 @@ public class Player extends pattern.Observable{
 			if(input.equals("showmap")) {
 				map.displayAll();
 			}else {
-				attackDeadlock=0;
+				
+				
 				String s[]=input.split(" ");
 				if(!input.equals("attack -noattack")) {
 					Country fromCountry=map.getCountryFromName(s[1]);
@@ -698,7 +722,24 @@ public class Player extends pattern.Observable{
 							fromCountry.setNoOfArmies(fromCountry.getNoOfArmies()-1);
 							System.out.println("You have conquered country: "+toCountry.getName());
 							setActions(this.name+" has conquered country: "+toCountry.getName());
-							System.out.println(fromCountry.getNoOfArmies());
+							if(defender.getAssigned_countries().size()==0) {//defender is out of the game
+								for(int i=0;i<defender.getCards().size();i++) {
+									this.getCards().add(defender.getCards().get(i));
+								}
+								listPlayer.remove(defender);
+								if(listPlayer.size()==1) {
+									//checking for game finish condition
+									return 1;
+								}
+							}
+							else {
+								String card=this.randomCard();
+								this.cards.add(card);
+								System.out.println("You have received: "+card+" card");
+								this.setActions(this.name+" has received: "+card+" card");
+								deck.remove(card);
+							}
+							//System.out.println(fromCountry.getNoOfArmies());
 							if(fromCountry.getNoOfArmies() != 1) {
 								System.out.println("Move armies from "+fromCountry.getName()+" to "+toCountry.getName());
 								System.out.println("Available armies you can move : 0-"+(fromCountry.getNoOfArmies()-1));
@@ -734,7 +775,7 @@ public class Player extends pattern.Observable{
 							else
 								System.out.println("You cannot move armies to the conquered country as you have only 1 army left in the attacking country.");
 							//card exchange logic
-							if(defender.getAssigned_countries().size()==0) {//defender is out of the game
+							/*if(defender.getAssigned_countries().size()==0) {//defender is out of the game
 								for(int i=0;i<defender.getCards().size();i++) {
 									this.getCards().add(defender.getCards().get(i));
 								}
@@ -750,7 +791,7 @@ public class Player extends pattern.Observable{
 								System.out.println("You have received: "+card+" card");
 								this.setActions(this.name+" has received: "+card+" card");
 								deck.remove(card);
-							}
+							}*/
 							//checking for continent 
 							Continent cont=map.getContinentFromName(toCountry.getContinentName());
 							int flag=0;
@@ -774,9 +815,11 @@ public class Player extends pattern.Observable{
 					}
 				}
 			}
-			//checking for deadlock
-			attackDeadlock= attackDeadlock(map);
+			
 		}while(!input.equals("attack -noattack") && attackDeadlock==0);
+		if(attackDeadlock==1) {
+			
+		}
 		return 0;
 	}
 	/**
