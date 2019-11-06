@@ -14,7 +14,7 @@ import mapWorks.MapEditor;
  * @author Ekjot
  *
  */
-public class Map  extends pattern.Observable {
+public class Map extends pattern.Observable {
 	/**
 	 * To store a message
 	 */
@@ -39,11 +39,11 @@ public class Map  extends pattern.Observable {
 	 * To store list of players
 	 */
 	private List<Player> listOfPlayers;
-	
 
-	
-
-	
+	/*
+	 * flag to print or not
+	 */
+	public boolean printFlag = true;
 
 	/**
 	 * @return the listOfPlayers
@@ -65,7 +65,7 @@ public class Map  extends pattern.Observable {
 	public Map() {
 		this.listOfContinent = new ArrayList<Continent>();
 		this.listOfCountries = new ArrayList<Country>();
-		this.listOfPlayers=new ArrayList<Player>();
+		this.listOfPlayers = new ArrayList<Player>();
 	}
 
 	/**
@@ -210,6 +210,21 @@ public class Map  extends pattern.Observable {
 	}
 
 	/**
+	 * This method returns the object of a player using the given player name
+	 * 
+	 * @param givenPlayerName Player Name
+	 * @return Player Object
+	 */
+	public Player getPlayerFromName(String givenPlayerName) {
+		for (Player player : this.listOfPlayers) {
+			if (player.getName().equals(givenPlayerName)) {
+				return player;
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * This method displays the map
 	 * 
 	 * @param map2 Map object of the map to be displayed
@@ -220,28 +235,28 @@ public class Map  extends pattern.Observable {
 		// display
 		if (this.getListOfContinent().size() > 0) {
 			for (Continent c : this.getListOfContinent()) {
-				System.out.println();
-				System.out.println("Continent :" + c.getName());
+				println("");
+				println("Continent :" + c.getName());
 
 				if (c.getBridges().size() > 0) {
-					System.out.println("Bridges");
+					println("Bridges");
 					for (Bridge bridge : c.getBridges()) {
-						System.out.println("To Continent: " + bridge.getNeigContinent() + "|| From Country: "
+						println("To Continent: " + bridge.getNeigContinent() + "|| From Country: "
 								+ bridge.getCountry1() + " To country: " + bridge.getCountry2());
 					}
 
 				}
 				for (String c1 : c.getCountries()) {
-					System.out.print("Country :" + c1 + ": Neighbours -> ");
+					print("Country :" + c1 + ": Neighbours -> ");
 
 					for (Country country : this.getListOfCountries()) {
 						if (c1.equals(country.getName())) {
 
 							for (String c2 : country.getNeighbors()) {
-								System.out.print(c2 + " || ");
+								print(c2 + " || ");
 							}
 
-							System.out.println();
+							println("");
 						}
 					}
 
@@ -249,10 +264,11 @@ public class Map  extends pattern.Observable {
 
 			}
 		} else {
-			System.out.println("Map Empty.");
+			println("Map Empty.");
 		}
 
 	}
+
 	/**
 	 * This method checks if every subgraph is valid
 	 * 
@@ -263,7 +279,7 @@ public class Map  extends pattern.Observable {
 
 		MapEditor mpeNew = new MapEditor();
 		mpeNew.print = false;// no need to print background edits
-		//MapReader mr = new MapReader();
+		// MapReader mr = new MapReader();
 		Map newMap = new Map(map);
 		mpeNew.map = newMap;
 
@@ -303,32 +319,32 @@ public class Map  extends pattern.Observable {
 		// display
 		if (this.getListOfContinent().size() > 0) {
 			for (Continent c : this.getListOfContinent()) {
-				System.out.println();
-				System.out.println("------------------------------------------------------------------------------------");
-				System.out.println("Continent :" + c.getName());
+				println("");
+				println("------------------------------------------------------------------------------------");
+				println("Continent :" + c.getName());
 
 				if (c.getBridges().size() > 0) {
-					System.out.println(" Bridges");
+					println(" Bridges");
 					for (Bridge bridge : c.getBridges()) {
-						System.out.println("  To Continent: " + bridge.getNeigContinent() + "|| From Country: "
+						println("  To Continent: " + bridge.getNeigContinent() + "|| From Country: "
 								+ bridge.getCountry1() + " To country: " + bridge.getCountry2());
 					}
 
 				}
-				System.out.println();
+				println("");
 				for (String c1 : c.getCountries()) {
-					System.out.println(" Country :" + c1);
-					System.out.print("\tNo of Armies :" + this.getCountryFromName(c1).getNoOfArmies());
-					System.out.println(" Owner :" + this.getCountryFromName(c1).getOwner());
-					System.out.print("\tNeighbors :");
+					println(" Country :" + c1);
+					print("\tNo of Armies :" + this.getCountryFromName(c1).getNoOfArmies());
+					println(" Owner :" + this.getCountryFromName(c1).getOwner());
+					print("\tNeighbors :");
 					for (Country country : this.getListOfCountries()) {
 						if (c1.equals(country.getName())) {
 
 							for (String c2 : country.getNeighbors()) {
-								System.out.print(c2 + " || ");
+								print(c2 + " || ");
 							}
 
-							System.out.println();
+							println("");
 						}
 					}
 
@@ -336,7 +352,7 @@ public class Map  extends pattern.Observable {
 
 			}
 		} else {
-			System.out.println("Map Empty.");
+			println("Map Empty.");
 		}
 
 	}
@@ -353,8 +369,8 @@ public class Map  extends pattern.Observable {
 		 * Map to store the Index of countries
 		 */
 		HashMap<Integer, List<Integer>> mapOfWorld;
-		if(this.getListOfContinent().size() ==0 || this.getListOfCountries().size() == 0) {
-			System.out.println("Map is empty");
+		if (this.getListOfContinent().size() == 0 || this.getListOfCountries().size() == 0) {
+			println("Map is empty");
 			return 1;
 		}
 		int notConnected = 0;
@@ -405,6 +421,7 @@ public class Map  extends pattern.Observable {
 			notConnected = 1;
 		return notConnected;
 	}
+
 	/**
 	 * This method checks if duplicate continents or countries exist
 	 * 
@@ -418,7 +435,7 @@ public class Map  extends pattern.Observable {
 				if ((this.getListOfContinent().get(i).getName())
 						.equalsIgnoreCase(this.getListOfContinent().get(j).getName())) {
 					duplicate = 1;
-					System.out.println("Duplicate Continent :" + this.getListOfContinent().get(i).getName());
+					println("Duplicate Continent :" + this.getListOfContinent().get(i).getName());
 					break;
 				}
 		if (duplicate == 0)
@@ -427,14 +444,15 @@ public class Map  extends pattern.Observable {
 					if ((this.getListOfCountries().get(i).getName())
 							.equalsIgnoreCase(this.getListOfCountries().get(j).getName())) {
 						duplicate = 1;
-						System.out.println("Duplicate Country :" + this.getListOfCountries().get(i).getName());
+						println("Duplicate Country :" + this.getListOfCountries().get(i).getName());
 						break;
 					}
 		return duplicate;
 	}
 
 	/**
-	 * This method set owner to given country and notify PWDView about the change. 
+	 * This method set owner to given country and notify PWDView about the change.
+	 * 
 	 * @param toCountry
 	 * @param name
 	 */
@@ -445,68 +463,93 @@ public class Map  extends pattern.Observable {
 		notify(this);
 
 	}
-/**
- * This method add new player  to listOfPlayers
- * @param player
- */
+
+	/**
+	 * This method add new player to listOfPlayers
+	 * 
+	 * @param player
+	 */
 	public void addPlayer(Player player) {
 		// TODO Auto-generated method stub
 		this.listOfPlayers.add(player);
 		notify(this);
 	}
-	
-/**
- * This method add one continent into listOfContinent
- * @param continent
- */
-public void addContinent(Continent continent) {
-	// TODO Auto-generated method stub
-	getListOfContinent().add(continent);
-	notify(this);
-}
 
+	/**
+	 * This method add one continent into listOfContinent
+	 * 
+	 * @param continent
+	 */
+	public void addContinent(Continent continent) {
+		// TODO Auto-generated method stub
+		getListOfContinent().add(continent);
+		notify(this);
+	}
 
-/*
- * 
- */
-public void addCountry(Country country) {
-	// TODO Auto-generated method stub
-	getListOfCountries().add(country);
-	notify(this);
-}
-/**
- * 
- * @param cont
- * @param name
- */
-public void setContinentOwner(Continent cont, String name) {
-	// TODO Auto-generated method stub
-	cont.setOwner(name);
-	notify(this);
-}
-/**
- * 
- * @param player
- */
-public void removePlayer(Player player) {
-	// TODO Auto-generated method stub
-	this.listOfPlayers.remove(player);
-	notify(this);
-}
-/**
- * 
- * @param p
- * @param i
- */
-public void setNoOfArmies(Player p, int i) {
-	// TODO Auto-generated method stub
-	p.setNoOfArmies(i);
-	notify(this);
-}
-	
-	
+	/*
+	 * 
+	 */
+	public void addCountry(Country country) {
+		// TODO Auto-generated method stub
+		getListOfCountries().add(country);
+		notify(this);
+	}
 
+	/**
+	 * 
+	 * @param cont
+	 * @param name
+	 */
+	public void setContinentOwner(Continent cont, String name) {
+		// TODO Auto-generated method stub
+		cont.setOwner(name);
+		notify(this);
+	}
 
+	/**
+	 * 
+	 * @param player
+	 */
+	public void removePlayer(Player player) {
+		// TODO Auto-generated method stub
+		this.listOfPlayers.remove(player);
+		notify(this);
+	}
 
+	/**
+	 * 
+	 * @param p
+	 * @param i
+	 */
+	public void setNoOfArmies(Player p, int i) {
+		// TODO Auto-generated method stub
+		p.setNoOfArmies(i);
+		notify(this);
+	}
+
+	/**
+	 * This method checks if map is completely valid or not.
+	 * 
+	 * @param map
+	 * @return true: if map is valid. false: if map is invalid
+	 */
+	public boolean isValid(Map map) {
+		// TODO Auto-generated method stub
+		int notConnected = validateMap();
+		int notConnectedSubGraph = validateContinent(map);
+		if (notConnected == 0 && notConnectedSubGraph == 0)
+			return true;
+		return false;
+	}
+
+	public void print(String msg) {
+		if (printFlag)
+			System.out.print(msg);
+	}
+
+	public void println(String msg) {
+		if (printFlag)
+			System.out.println(msg);
+	}
 
 }

@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import mapWorks.MapReader;
 
 /**
  * This class is used to edit the map. This will be called when user will enter
@@ -42,6 +41,7 @@ public class MapEditor {
 		this.print = true;
 		this.map = new Map();
 	}
+
 	/**
 	 * This method initializes map editor
 	 * 
@@ -89,8 +89,8 @@ public class MapEditor {
 				if (command.length == 2) {
 
 					// validate and save map; if map is invalid, prompt user to edit map
-					//MapReader mr = new MapReader();
-					//mr.map = this.map;
+					// MapReader mr = new MapReader();
+					// mr.map = this.map;
 					if (this.map.validateMap() == 0 && this.map.validateContinent(this.map) == 0) {
 						(new MapSaver()).saveMap(this.map, command[1]);
 
@@ -535,14 +535,12 @@ public class MapEditor {
 						subqueue.add(new ArrayList<>(Arrays.asList("remove", countryName)));
 					}
 
-					
 					// executing all sub-commands
-					MapEditor me=new MapEditor();
-					me.map=this.map;
-					me.print=false; // not to print sub edits
+					MapEditor me = new MapEditor();
+					me.map = this.map;
+					me.print = false; // not to print sub edits
 					me.executeQueue("editcountry", subqueue);
-					
-					
+
 					// removing empty continent from map
 					map.getListOfContinent().remove(continent);
 
@@ -603,13 +601,11 @@ public class MapEditor {
 						subqueue.add(new ArrayList<>(Arrays.asList("remove", country.getName(), neighborName)));
 					}
 
-					
 					// executing all sub-commands
-					MapEditor me=new MapEditor();
-					me.map=this.map;
-					me.print=false; // not to print sub edits
+					MapEditor me = new MapEditor();
+					me.map = this.map;
+					me.print = false; // not to print sub edits
 					me.executeQueue("editneighbor", subqueue);
-					
 
 					// removing empty country from map
 					map.getListOfCountries().remove(country);
@@ -760,9 +756,8 @@ public class MapEditor {
 	 */
 	private void validateMap(Map map) {
 		// TODO Auto-generated method stub
-		int notConnected = map.validateMap();
-		int notConnectedSubGraph = map.validateContinent(map);
-		if (notConnected == 0 && notConnectedSubGraph == 0) {
+
+		if (map.isValid(map)) {
 			print("Map is valid");
 		} else {
 			print("Map is invalid");
