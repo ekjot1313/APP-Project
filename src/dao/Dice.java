@@ -15,17 +15,22 @@ public class Dice {
 	Random number = new Random();
 	private int attackerDice = 0;
 	private int defenderDice = 0;
+	
 
 	/**
 	 * Constructor sets attackerDice and defenderDice
 	 * 
 	 * @param attackerDice
 	 * @param defenderDice
-	 * @throws Exception
+	 *
 	 */
-	Dice(int attackerDice, int defenderDice) throws Exception {
+	public Dice(int attackerDice, int defenderDice) {
 		setAttackerDice(attackerDice);
 		setDefenderDice(defenderDice);
+	}
+
+	public Dice() {
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -111,29 +116,31 @@ public class Dice {
 
 	/**
 	 * @param attackerDice the attackerDice to set
-	 * @throws Exception
+	 * 
 	 */
-	private void setAttackerDice(int attackerDice) throws Exception {
+	public boolean setAttackerDice(int attackerDice)  {
 
 		if (attackerDice <= 3 && attackerDice > 0)
 			this.attackerDice = attackerDice;
 		else {
 
-			throw new Exception("Attacker can select dice from 1 to 3(max) only.");
+			return false;
 		}
+		return true;
 	}
 
 	/**
 	 * @param defenderDice the defenderDice to set
-	 * @throws Exception
+	 * 
 	 */
-	private void setDefenderDice(int defenderDice) throws Exception {
+	public boolean setDefenderDice(int defenderDice)  {
 		if (defenderDice <= 2 && defenderDice > 0)
 			this.defenderDice = defenderDice;
 		else {
 
-			throw new Exception("Defender can select dice from 1 to 2(max) only.");
+			return false;
 		}
+		return true;
 	}
 
 }
