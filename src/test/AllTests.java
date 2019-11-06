@@ -5,6 +5,6 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ MapReaderTest.class })
+@SuiteClasses({ MapReaderTestBuild1.class })
 public class AllTests {
 }
