@@ -26,13 +26,37 @@ import mapWorks.MapSaver;
  */
 public class MapReaderTest {
 
+	/**
+	 * Object of Map
+	 */
 	static Map testMap;
+	/**
+	 * Object of MapEditor
+	 */
 	static MapEditor mapEditor;
+	/**
+	 * Object of MapReader
+	 */
 	static MapReader mapReader;
+	/**
+	 * Object of MapSaver
+	 */
 	static MapSaver mapSaver;
+	/**
+	 * List of objects of Countries
+	 */
 	static List<Country> testlistofCountries;
+	/**
+	 * List of objects of Neighbors of countries
+	 */
 	static List<String> testListofNeighbors1;
+	/**
+	 * List of objects of Neighbors of countries
+	 */
 	static List<String> testListofNeighbors2;
+	/**
+	 * List of objects of Neighbors of countries
+	 */
 	static List<String> testListofNeighbors3;
 
 	/**
@@ -81,7 +105,7 @@ public class MapReaderTest {
 	}
 
 	/**
-	 * Method to check parsing of the input file
+	 * Method to test {@link mapWorks.MapReader#parseMapFile(File)}
 	 */
 	@Test
 	public void testParseMap() {
@@ -95,7 +119,7 @@ public class MapReaderTest {
 	}
 
 	/**
-	 * Method to check the loadContinent()
+	 * Method to test {@link mapWorks.MapReader#loadContinents()}
 	 */
 	@Test
 	public void testLoadContinent() {
@@ -135,7 +159,7 @@ public class MapReaderTest {
 	}
 
 	/**
-	 * This method tests the loadCountries()
+	 * Method to test {@link mapWorks.MapReader#loadCountries()}
 	 */
 	@Test
 	public void testLoadCountries() {
@@ -168,7 +192,7 @@ public class MapReaderTest {
 	}
 
 	/**
-	 * This method tests the loadBorders()
+	 * Method to test {@link mapWorks.MapReader#loadBorders()}
 	 */
 	@Test
 	public void testLoadBorders() {

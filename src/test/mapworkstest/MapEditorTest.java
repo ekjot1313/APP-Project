@@ -18,12 +18,29 @@ import dao.Map;
 import mapWorks.MapEditor;
 import mapWorks.MapReader;
 
+/**
+ * TestClass to check the MapEditor class
+ * @author divya_000
+ *
+ */
 public class MapEditorTest {
 
+	/**
+	 * Object of Map
+	 */
 	static Map testMap;
+	/**
+	 * Object of MapEditor
+	 */
 	static MapEditor mapEditor;
+	/**
+	 * Object of MapReader
+	 */
 	static MapReader mapReader;
 	
+	/**
+	 * Method to initialize the objects
+	 */
 	@BeforeClass
 	public static void beforeClass() {
 		mapEditor = new MapEditor();
@@ -38,7 +55,7 @@ public class MapEditorTest {
 	}
 	
 	/**
-	 * Method to test editContinent()
+	 * Method to test {@link mapWorks.MapEditor#editContinent(String[])}
 	 */
 	@Test
 	public void testEditContinent() {
@@ -52,7 +69,7 @@ public class MapEditorTest {
 	}
 	
 	/**
-	 * Method to test the editCountry()
+	 * Method to test {@link mapWorks.MapEditor#editCountry(String[])}
 	 */
 	@Test
 	public void testEditCountry() {
@@ -68,7 +85,7 @@ public class MapEditorTest {
 	}
 	
 	/**
-	 * Method to test the editNeighbor()
+	 * Method to test Method to test {@link mapWorks.MapEditor#editNeighbor(String[])}
 	 */
 	@Test
 	public void testEditNeighbor() {
@@ -84,7 +101,7 @@ public class MapEditorTest {
 	}
 	
 	/**
-	 * Method to test addContinentToQueue(String continentName, String continentValue, ArrayList<ArrayList<String>> queue)
+	 * Method to test {@link mapWorks.MapEditor#addContinentToQueue(String, String, ArrayList)}
 	 */
 	@Test
 	public void testAddContinentToQueue() {
@@ -107,7 +124,7 @@ public class MapEditorTest {
 	}
 	
 	/**
-	 * Method to test removeContinentToQueue(String continentName, ArrayList<ArrayList<String>> queue)
+	 * Method to test {@link mapWorks.MapEditor#removeContinentToQueue(String, ArrayList)}
 	 */
 	@Test
 	public void testremoveContinentToQueue(){
@@ -128,7 +145,7 @@ public class MapEditorTest {
 	}
 	
 	/**
-	 * Method to test addCountryToQueue(String countryName, String continentName, ArrayList<ArrayList<String>> queue)
+	 * Method to test {@link mapWorks.MapEditor#addCountryToQueue(String, String, ArrayList)}
 	 */
 	@Test
 	public void testAddCountryToQueue() {
@@ -151,7 +168,7 @@ public class MapEditorTest {
 	}
 	
 	/**
-	 * Method to test removeCountryToQueue(String countryName, ArrayList<ArrayList<String>> queue)
+	 * Method to test {@link mapWorks.MapEditor#removeCountryToQueue(String, ArrayList)}
 	 */
 	@Test
 	public void testremoveCountryToQueue(){
@@ -172,7 +189,7 @@ public class MapEditorTest {
 	}
 	
 	/**
-	 * Method to test addNeighborToQueue(String countryName, String neighborCountryName,ArrayList<ArrayList<String>> queue)
+	 * Method to test {@link mapWorks.MapEditor#addNeighborToQueue(String, String, ArrayList)}
 	 */
 	@Test
 	public void testAddNeighborToQueue() {
@@ -195,7 +212,7 @@ public class MapEditorTest {
 	}
 	
 	/**
-	 * Method to test removeNeighborToQueue(String countryName, String neighborCountryName,ArrayList<ArrayList<String>> queue)
+	 * Method to test {@link mapWorks.MapEditor#removeNeighborToQueue(String, String, ArrayList)}
 	 */
 	@Test
 	public void testRemoveNeighborToQueue(){
@@ -216,11 +233,9 @@ public class MapEditorTest {
 		assertNull(mapEditorRemoveNeighbor.removeNeighborToQueue(wrongCountryName, neighborCountryName, queue));
 		
 	}
-	
-	
-	
+		
 	/**
-	 * Method to test whether the bridge between two continents is removed
+	 * Method to test {@link mapWorks.MapEditor#removeBridge(String, String, String, String)}
 	 */
 	@Test
 	public void testRemoveBridges() {

@@ -13,6 +13,11 @@ import dao.Map;
 import dao.Player;
 import game.PlayerAllocator;
 
+/**
+ * Test class to check the PlayerAllocator class
+ * @author Mitalee Naik
+ *
+ */
 public class PlayerAllocatorTest {
 	/**
 	 * Object of Map

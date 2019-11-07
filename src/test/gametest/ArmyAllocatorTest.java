@@ -14,6 +14,11 @@ import dao.Player;
 import game.ArmyAllocator;
 import game.PlayerAllocator;
 
+/**
+ * Test class to check the ArmyAllocator class
+ * @author Mitalee Naik
+ *
+ */
 public class ArmyAllocatorTest {
 	/**
 	 * Object of Map

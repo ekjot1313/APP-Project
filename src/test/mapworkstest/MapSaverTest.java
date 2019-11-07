@@ -23,11 +23,29 @@ import mapWorks.MapSaver;
  */
 public class MapSaverTest {
 
+	/**
+	 * Object of Map
+	 */
 	static Map testMap;
+	/**
+	 * Object of MapEditor
+	 */
 	static MapEditor mapEditor;
+	/**
+	 * Object of MapReader
+	 */
 	static MapReader mapReader;
+	/**
+	 * Object of MapSaver
+	 */
 	static MapSaver mapSaver;
+	/**
+	 * Object of Country
+	 */
 	static Country country;
+	/**
+	 * Object of Continent
+	 */
 	static Continent continent;
 
 	/**
@@ -50,7 +68,7 @@ public class MapSaverTest {
 	}
 
 	/**
-	 * Method to test whether the map is saved
+	 * Method to test {@link mapWorks.MapSaver#MapSaver()}
 	 */
 	@Test
 	public void testMapSaver() {
