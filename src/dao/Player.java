@@ -606,7 +606,9 @@ public class Player extends pattern.Observable {
 
 	/**
 	 * This method is used for attack phase.
-	 * 
+	 * @param map Object of Map
+	 * @param listPlayer list of Players
+	 * @return 1 if attack is successful otherwise 0.
 	 * @throws Exception
 	 */
 	public int attack(Map map, ArrayList<Player> listPlayer) throws Exception {
@@ -823,7 +825,11 @@ public class Player extends pattern.Observable {
 	}
 
 	/**
-	 * 
+	 * Function to move the armies after conquering country
+	 * @param command entered command
+	 * @param fromCountry name of country from which armies are moved
+	 * @param toCountry name of country to which armies should be moved
+	 * @return 1 if armies are successfully moved otherwise 0.
 	 */
 	public int attackMove(String command, Country fromCountry, Country toCountry) {
 		String str[] = command.split(" ");
@@ -853,6 +859,8 @@ public class Player extends pattern.Observable {
 
 	/**
 	 * This method checks for attack deadlock
+	 * @param map Object of Map
+	 * @return 1 if deadlock occurred otherwise 0.
 	 */
 	public int attackDeadlock(Map map) {
 		if (this.getNoOfArmies() == this.getAssigned_countries().size())
@@ -873,7 +881,9 @@ public class Player extends pattern.Observable {
 	}
 
 	/**
-	 * 
+	 * Function to check the end of game
+	 * @param listPlayer list of players
+	 * @return 1 if end of game otherwise 0.
 	 */
 	public int endGame(ArrayList<Player> listPlayer) {
 		if (listPlayer.size() == 1)

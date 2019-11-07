@@ -14,13 +14,38 @@ import dao.Player;
 import game.PlayerAllocator;
 
 public class PlayerAllocatorTest {
+	/**
+	 * Object of Map
+	 */
 	static Map testMap=new Map();
+	/**
+	 * Object of Country india
+	 */
 	static Country india =new Country();
+	/**
+	 * Object of Country pakistan
+	 */
 	static Country pakistan =new Country();
+	/**
+	 * Object of Country china
+	 */
 	static Country china =new Country();
+	/**
+	 * Object of Player A
+	 */
 	static Player A = new Player();
+	/**
+	 * Object of Player B
+	 */
 	static Player B = new Player();
+	/**
+	 * ArrayList of player objects
+	 */
 	static ArrayList<Player> listOfPlayers;
+	
+	/**
+	 * Set up method to initialize objects
+	 */
 	@Before 
 	public void before() {
 		
@@ -57,6 +82,9 @@ public class PlayerAllocatorTest {
 		testMap.setListOfPlayers(listOfPlayers);
 	}
 	
+	/**
+	 * Test method for {@link game.PlayerAllocator#allocate(Map, String)}
+	 */
 	@Test
 	public void testAllocate() {
 		PlayerAllocator pa = new PlayerAllocator();
@@ -78,6 +106,9 @@ public class PlayerAllocatorTest {
 		
 	}
 	
+	/**
+	 * Test method for {@link game.PlayerAllocator#populateCountries(Map)}
+	 */
 	@Test
 	public void testPopulateCountries() {
 		PlayerAllocator pa = new PlayerAllocator();
