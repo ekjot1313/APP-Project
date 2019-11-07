@@ -30,24 +30,25 @@ public class Continent {
 	public String getOwner() {
 		return owner;
 	}
+	
 	/**
 	 * This variable stores whether to assign no of armies(which is equal to the continent value) to the player in reinforcement phase .
 	 */
-	private int assignArmy=0;
+	//private int assignArmy=0;
 	/**
 	 * This method is used to get the value of assignArmy
 	 * @return
 	 */
-	public int getAssignArmy() {
-		return assignArmy;
-	}
+	//public int getAssignArmy() {
+		//return assignArmy;
+	//}
 	/**
 	 * This method is used to set the value of assignArmy
 	 * @param assignArmy
 	 */
-	public void setAssignArmy(int assignArmy) {
-		this.assignArmy = assignArmy;
-	}
+	//public void setAssignArmy(int assignArmy) {
+		//this.assignArmy = assignArmy;
+	//}
 
 	/**
 	 *  This method sets the owner
@@ -76,7 +77,7 @@ public class Continent {
 	public Continent() {
 		this.countries = new ArrayList<String>();
 		this.bridges = new ArrayList<Bridge>();
-		this.setAssignArmy(0);
+		//this.setAssignArmy(0);
 		this.setOwner("FREE CONTINENTS");
 	}
 

@@ -231,6 +231,22 @@ public class DaoPlayerTest {
 		assertEquals(1,pakistan.getNoOfArmies());
 		
 	}
-	
+	/**
+	 * Method to check calculation of number of reinforcement armies for a player
+	 */
+	@Test
+	public void testcalculateReinforceArmies() {
+		int result = A.calculateReinforceArmies(testMap,(ArrayList<Player>) listOfPlayers);
+		assertEquals(3, result);
+		
+		china.setOwner("A");
+		Continent asia=new Continent();
+		asia.setContinentValue(10);
+		asia.setOwner("A");
+		testMap.getListOfContinent().add(asia);
+		result = A.calculateReinforceArmies(testMap,(ArrayList<Player>) listOfPlayers);
+		//System.out.println(result);
+		assertEquals(13, result);
+	}
 	
 }

@@ -283,8 +283,8 @@ public class Player extends pattern.Observable {
 
 		for (Continent continent : map.getListOfContinent()) {
 			if (continent.getOwner().equals(this.getName())) {
-				reinforcementArmies += continent.getAssignArmy() * continent.getContinentValue();
-				continent.setAssignArmy(0);
+				reinforcementArmies += continent.getContinentValue();
+				//continent.setAssignArmy(0);
 				
 			}
 		}
@@ -801,14 +801,14 @@ public class Player extends pattern.Observable {
 								if (!this.name.equals(c.getOwner())) {
 									flag = 1;
 									map.setContinentOwner(cont, "FREE CONTINENTS");
-									cont.setAssignArmy(0);
+									//cont.setAssignArmy(0);
 									break;
 								}
 							}
 							if (flag == 0) { // continent has been conquered
 								map.setContinentOwner(cont, this.name);
 
-								cont.setAssignArmy(1);
+								//cont.setAssignArmy(1);
 								System.out.println("You have conquered continent: " + cont.getName());
 								setActions(this.name + " has conquered continent: " + cont.getName());
 							}
