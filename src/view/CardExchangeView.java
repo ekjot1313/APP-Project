@@ -53,8 +53,6 @@ public class CardExchangeView implements Observer{
 		});
 		}
 		if(((Player) obj).getView().contains("CardExchangeView")) {
-			System.out.println("Im here");
-		//txtrActions.setText("Card Exchange");
 		txtrActions.append("Player Name : "+((Player) obj).getName()+"\n");
 		txtrActions.append("CardList :\n");
 		for(int i=0;i<((Player) obj).getCards().size();i++) {
