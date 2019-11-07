@@ -108,7 +108,7 @@ public class Main {
 		File newFile = new File(currentPath);
 		if (newFile.exists()) {
 
-			pwdView = new PWDView();
+			pwdView = new PWDView(true);
 			mr.map = new Map(); // to clear buffer map
 			mr.map.attach(pwdView);
 			int mapParseStatus = mr.parseMapFile(newFile);

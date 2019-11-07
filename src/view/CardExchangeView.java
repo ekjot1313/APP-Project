@@ -1,8 +1,10 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Insets;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -22,8 +24,10 @@ public class CardExchangeView implements Observer{
 	public void update(Observable obj) {
 		// TODO Auto-generated method stub
 		if(frame==null) {
+			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+			
 			frame = new JFrame();
-			frame.setBounds(1300, 730, 600, 350);
+			frame.setBounds(screenSize.width*2/3, screenSize.height*2/3, screenSize.width/2, screenSize.height/3);
 			frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 			frame.setTitle("Card Exchange View");
 			frame.setAlwaysOnTop(true);

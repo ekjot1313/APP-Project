@@ -1,6 +1,8 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,42 +38,43 @@ public class PWDView implements Observer {
 	private static JScrollPane scrollPane1;
 	private static JScrollPane scrollPane2;
 	private static JScrollPane scrollPane3;
-	private static Map map = null;
-
-	private static String mapOwn = "";
-	private static String contOwn = "";
-	private static String armyOwn = "";
+	private static boolean visible=true;
+	
+	
+	
 
 	@Override
 	public void update(Observable obj) {
 		// TODO Auto-generated method stub
 
-		map = (Map) obj;
+		Map map = (Map) obj;
 
-		calcPercentMap();
-		calcContinentControl();
-		calcTotalArmies();
+		calcPercentMap(map);
+		calcContinentControl(map);
+		calcTotalArmies(map);
 
 	}
 
-	private void calcTotalArmies() {
+	public String calcTotalArmies(Map map) {
 		// TODO Auto-generated method stub
-
+		String armyOwn = "";
 		for(Player player:map.getListOfPlayers()) {
 			armyOwn+=player.getName()+": "+player.getNoOfArmies()+"\n";
 		}
 		
 		playerArmiesTA.setText(armyOwn);
-		armyOwn="";
+		return armyOwn;
+		
 		
 	}
 
 	/**
 	 * This method gives continents owned by every player
+	 * @param map 
 	 */
-	private void calcContinentControl() {
+	public String calcContinentControl(Map map) {
 		// TODO Auto-generated method stub
-
+		String contOwn = "";
 		List<String> players = new ArrayList<String>();
 
 		players.add("FREE CONTINENTS");
@@ -109,15 +112,17 @@ public class PWDView implements Observer {
 			contOwn += "\n";
 		}
 		continentOwnerTA.setText(contOwn);
-		contOwn = "";
+		return contOwn;
 
 	}
 
 	/**
 	 * This method calculates the percentage of map controlled by each player.
+	 * @param map2 
 	 */
-	private void calcPercentMap() {
+	public String calcPercentMap(Map map) {
 		// TODO Auto-generated method stub
+		String mapOwn = "";
 		int totalCountryNum = map.getListOfCountries().size();
 		List<String> players = new ArrayList<String>();
 		players.add("FREE COUNTRIES");
@@ -141,14 +146,15 @@ public class PWDView implements Observer {
 		}
 
 		countryPercentageTA.setText(mapOwn);
-		mapOwn = "";
+		return mapOwn;
 
 	}
 
 	/**
 	 * Create the application.
 	 */
-	public PWDView() {
+	public PWDView(Boolean visible1) {
+		visible=visible1;
 		initialize();
 
 	}
@@ -158,8 +164,10 @@ public class PWDView implements Observer {
 	 */
 	private static void initialize() {
 		if (frame == null) {
+			
+			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 			frame = new JFrame("Player World Domination View");
-			frame.setBounds(1300, 10, 600, 350);
+			frame.setBounds(screenSize.width*2/3, 0, screenSize.width/3, screenSize.height/3);
 			// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 			frame.setAlwaysOnTop(true);
@@ -192,8 +200,8 @@ public class PWDView implements Observer {
 			frame.getContentPane().add(scrollPane1);
 			frame.getContentPane().add(scrollPane2);
 			frame.getContentPane().add(scrollPane3);
-			frame.setVisible(true);
-
+			setVisible(visible);
+			
 		}
 	}
 
@@ -201,6 +209,15 @@ public class PWDView implements Observer {
 	public void close() {
 		// TODO Auto-generated method stub
 		frame.dispose();
+	}
+
+	public static boolean isVisible() {
+		return visible;
+	}
+
+	public static void setVisible(boolean visible1) {
+		visible=visible1;
+		frame.setVisible(visible1);
 	}
 
 }

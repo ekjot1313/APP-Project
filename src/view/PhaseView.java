@@ -2,6 +2,7 @@ package view;
 
 import java.awt.EventQueue;
 import java.awt.Insets;
+import java.awt.Toolkit;
 
 import pattern.Observable;
 import pattern.Observer;
@@ -13,6 +14,7 @@ import javax.swing.JScrollPane;
 import dao.Player;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 
 public class PhaseView implements Observer {
@@ -26,8 +28,11 @@ public class PhaseView implements Observer {
 		if(((Player) obj).getView().contains("PhaseView")) {
 			
 		if(frame==null) {
+			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		      
+			
 			frame = new JFrame();
-			frame.setBounds(1300, 370, 600, 350);
+			frame.setBounds(screenSize.width*2/3, screenSize.height/3, screenSize.width/2, screenSize.height/3);
 			frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 			frame.setTitle("Phase View");
 			frame.setAlwaysOnTop(true);
