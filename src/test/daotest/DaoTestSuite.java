@@ -1,11 +1,11 @@
-package test;
+package test.daotest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({PlayerAllocatorTest.class})
-public class GameTestSuite {
+@SuiteClasses({ DaoDiceTest.class, DaoMapTest.class, DaoPlayerTest.class })
+public class DaoTestSuite {
 
 }

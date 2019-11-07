@@ -1,6 +1,6 @@
-package test;
+package test.gametest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
@@ -11,9 +11,10 @@ import dao.Continent;
 import dao.Country;
 import dao.Map;
 import dao.Player;
+import game.ArmyAllocator;
 import game.PlayerAllocator;
 
-public class PlayerAllocatorTest {
+public class ArmyAllocatorTest {
 	static Map testMap=new Map();
 	static Country india =new Country();
 	static Country pakistan =new Country();
@@ -58,35 +59,13 @@ public class PlayerAllocatorTest {
 	}
 	
 	@Test
-	public void testAllocate() {
-		PlayerAllocator pa = new PlayerAllocator();
-		pa.allocate(testMap,"gameplayer -add C");
-		int playeradded =0;
-		for(Player p :testMap.getListOfPlayers()) {
-		if(p.getName().equals("C"))
-			playeradded=1;
-		}
-		assertEquals(1,playeradded);
-		
-		int playerremoved =1;
-		pa.allocate(testMap,"gameplayer -remove C");
-		for(Player p :testMap.getListOfPlayers()) {
-			if(p.getName().equals("C"))
-				playerremoved=0;
-		}
-		assertEquals(1,playerremoved);
-		
-	}
-	
-	@Test
-	public void testPopulateCountries() {
+	public void testCalculateTotalArmies() {
 		PlayerAllocator pa = new PlayerAllocator();
 		pa.allocate(testMap,"populatecountries");
 		pa.populateCountries(testMap);
-		boolean isPopulated = false;
-		if(china.getOwner()!= null && india.getOwner()!= null && pakistan.getOwner() !=null)
-			isPopulated =true;
-		assertTrue(isPopulated);
+		ArmyAllocator aa = new ArmyAllocator();
+		int total =aa.calculateTotalArmies(listOfPlayers,testMap,1);
+		assertEquals(40, total);
 	}
 	
 }
