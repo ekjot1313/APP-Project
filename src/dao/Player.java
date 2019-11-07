@@ -290,8 +290,10 @@ public class Player extends pattern.Observable {
 
 		for (Continent continent : map.getListOfContinent()) {
 			if (continent.getOwner().equals(this.getName())) {
+				if(continent.getAssignArmy() == 1) {
 				reinforcementArmies += continent.getAssignArmy() * continent.getContinentValue();
 				continent.setAssignArmy(0);
+				}
 			}
 		}
 
