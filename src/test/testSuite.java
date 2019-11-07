@@ -10,7 +10,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({daoDiceTest.class,  
             MapReaderTest.class,
-            PlayerTest.class})
+            DaoPlayerTest.class})
 public class testSuite {   
 } 
 */

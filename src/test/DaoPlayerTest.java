@@ -10,7 +10,7 @@ import dao.Map;
 import dao.Player;
 
 
-public class PlayerTest {
+public class DaoPlayerTest {
 	static Map testMap=new Map();
 	static Country india =new Country();
 	static Country pakistan =new Country();

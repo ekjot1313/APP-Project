@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.IOException;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,11 +17,12 @@ import mapWorks.MapSaver;
 
 /**
  * This class tests the functions in MapSaver.java class
+ * 
  * @author divya_000
  *
  */
 public class MapSaverTest {
-	
+
 	static Map testMap;
 	static MapEditor mapEditor;
 	static MapReader mapReader;
@@ -39,7 +39,7 @@ public class MapSaverTest {
 		mapEditor.editContinent(("editcontinent -add asia 10 -add africa 14").split(" "));
 		mapEditor.editCountry(
 				("editcountry -add india asia -add pakistan asia -add china asia -add congo africa -add uganda africa")
-						.split(" "));
+				.split(" "));
 		mapEditor.editNeighbor(
 				("editneighbor -add india pakistan -add pakistan china -add india congo -add congo uganda").split(" "));
 		testMap = mapEditor.getMap();
@@ -48,8 +48,7 @@ public class MapSaverTest {
 		country = new Country();
 		continent = new Continent();
 	}
-	
-	
+
 	/**
 	 * Method to test whether the map is saved
 	 */
