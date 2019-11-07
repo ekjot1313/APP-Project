@@ -6,7 +6,6 @@ package test.viewtest;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import dao.Continent;
@@ -16,6 +15,7 @@ import dao.Player;
 import view.PWDView;
 
 /**
+ * Class to test the PWDView class
  * @author ekjot
  *
  */
@@ -32,6 +32,7 @@ public class ViewPWDViewTests {
 	Country congo;
 
 	/**
+	 * Method to setup parameters before running tests
 	 * @throws java.lang.Exception
 	 */
 	@Before

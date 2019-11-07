@@ -16,13 +16,21 @@ import dao.Player;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
-
+/**
+ * Class to implement the phase view
+ *
+ */
 public class PhaseView implements Observer {
 	static int count=0;
 	private static JFrame frame=null;
 	private static JTextArea txtrActions;
 	static PhaseView window=null;
 	private static JScrollPane scrollPane;
+	
+	/**
+	 * This method updates the phase view after receiving the notification
+	 * @param obj Object of observable class
+	 */
 	public void update(Observable obj) {
 		// TODO Auto-generated method stub
 		if(((Player) obj).getView().contains("PhaseView")) {

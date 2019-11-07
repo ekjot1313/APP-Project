@@ -21,12 +21,11 @@ import pattern.Observer;
 import java.text.DecimalFormat;
 
 /**
- * This is Player World Domination View class.
+ * Class to implement the Player World Domination View.
  * 
  * @author Hartaj, Ekjot
  *
  */
-
 public class PWDView implements Observer {
 
 	private static final DecimalFormat df2 = new DecimalFormat("#.##");
@@ -42,8 +41,10 @@ public class PWDView implements Observer {
 	
 	
 	
-
-	@Override
+	/**
+	 * This method updates the player world domination view after receiving the notification
+	 * @param obj Object of observable class
+	 */
 	public void update(Observable obj) {
 		// TODO Auto-generated method stub
 
@@ -55,6 +56,11 @@ public class PWDView implements Observer {
 
 	}
 
+	/**
+	 * Method to calculate total number of armies owned by each player
+	 * @param map Map object
+	 * @return Player name along with number of armies owned
+	 */
 	public String calcTotalArmies(Map map) {
 		// TODO Auto-generated method stub
 		String armyOwn = "";
@@ -69,8 +75,9 @@ public class PWDView implements Observer {
 	}
 
 	/**
-	 * This method gives continents owned by every player
-	 * @param map 
+	 * Method to calculate continents owned by every player
+	 * @param map Map object
+	 * @return Player name along with continent owned
 	 */
 	public String calcContinentControl(Map map) {
 		// TODO Auto-generated method stub
@@ -117,8 +124,9 @@ public class PWDView implements Observer {
 	}
 
 	/**
-	 * This method calculates the percentage of map controlled by each player.
-	 * @param map2 
+	 * Method to calculate the percentage of map controlled by each player.
+	 * @param map Map Object
+	 * @return PLayer name along with percentage of map controlled
 	 */
 	public String calcPercentMap(Map map) {
 		// TODO Auto-generated method stub
@@ -151,7 +159,8 @@ public class PWDView implements Observer {
 	}
 
 	/**
-	 * Create the application.
+	 * Constructor to create the application.
+	 * @param visible1 value of visible
 	 */
 	public PWDView(Boolean visible1) {
 		visible=visible1;
@@ -205,16 +214,26 @@ public class PWDView implements Observer {
 		}
 	}
 
-
+	/**
+	 * Method to close the frame
+	 */
 	public void close() {
 		// TODO Auto-generated method stub
 		frame.dispose();
 	}
 
+	/**
+	 * Method to check if the frame is visible
+	 * @return value of visible
+	 */
 	public static boolean isVisible() {
 		return visible;
 	}
 
+	/**
+	 * Method to make the frame visible
+	 * @param visible1 value of visible
+	 */
 	public static void setVisible(boolean visible1) {
 		visible=visible1;
 		frame.setVisible(visible1);
