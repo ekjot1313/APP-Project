@@ -1,7 +1,7 @@
 /**
  * 
  */
-package test;
+package test.daotest;
 
 import static org.junit.Assert.*;
 

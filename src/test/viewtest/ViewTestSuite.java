@@ -1,11 +1,11 @@
-package test;
+package test.viewtest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({PlayerAllocatorTest.class})
-public class GameTestSuite {
+@SuiteClasses({ViewPWDViewTests.class})
+public class ViewTestSuite {
 
 }
