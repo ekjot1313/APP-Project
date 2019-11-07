@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import mapWorks.MapReader;
 
 /**
  * This class is used to edit the map. This will be called when user will enter
@@ -41,7 +42,6 @@ public class MapEditor {
 		this.print = true;
 		this.map = new Map();
 	}
-
 	/**
 	 * This method initializes map editor
 	 * 
@@ -89,8 +89,8 @@ public class MapEditor {
 				if (command.length == 2) {
 
 					// validate and save map; if map is invalid, prompt user to edit map
-					// MapReader mr = new MapReader();
-					// mr.map = this.map;
+					//MapReader mr = new MapReader();
+					//mr.map = this.map;
 					if (this.map.validateMap() == 0 && this.map.validateContinent(this.map) == 0) {
 						(new MapSaver()).saveMap(this.map, command[1]);
 
@@ -356,18 +356,20 @@ public class MapEditor {
 	 * @param continentName  Continent to be added
 	 * @param continentValue Continent Value
 	 * @param queue          queue
+	 * @return queue
 	 */
-	private void addContinentToQueue(String continentName, String continentValue, ArrayList<ArrayList<String>> queue) {
+	public ArrayList<ArrayList<String>> addContinentToQueue(String continentName, String continentValue, ArrayList<ArrayList<String>> queue) {
 
 		// if country name is actually a tag
 		if (continentName.charAt(0) == '-' || continentValue.charAt(0) == '-') {
 			print("Invalid Command. Type Again.");
 			good = false;
-			return;
+			return null;
 		}
 
 		// add valid sub-command to queue
 		queue.add(new ArrayList<>(Arrays.asList("add", continentName, continentValue)));
+		return queue;
 	}
 
 	/**
@@ -376,17 +378,18 @@ public class MapEditor {
 	 * @param continentName Continent to be removed
 	 * @param queue         queue
 	 */
-	private void removeContinentToQueue(String continentName, ArrayList<ArrayList<String>> queue) {
+	public ArrayList<ArrayList<String>> removeContinentToQueue(String continentName, ArrayList<ArrayList<String>> queue) {
 
 		// if country name is actually a tag
 		if (continentName.charAt(0) == '-') {
 			print("Invalid Command. Type Again.");
 			good = false;
-			return;
+			return null;
 		}
 
 		// add valid sub-command to queue
 		queue.add(new ArrayList<>(Arrays.asList("remove", continentName)));
+		return queue;
 	}
 
 	/**
@@ -395,18 +398,20 @@ public class MapEditor {
 	 * @param countryName   Country to be added
 	 * @param continentName Continent in which the country is to be added
 	 * @param queue         queue
+	 * @return 				queue
 	 */
-	private void addCountryToQueue(String countryName, String continentName, ArrayList<ArrayList<String>> queue) {
+	public ArrayList<ArrayList<String>> addCountryToQueue(String countryName, String continentName, ArrayList<ArrayList<String>> queue) {
 
 		// if country name is actually a tag
 		if (countryName.charAt(0) == '-' || continentName.charAt(0) == '-') {
 			print("Invalid Command. Type Again.");
 			good = false;
-			return;
+			return null;
 		}
 
 		// add valid sub-command to queue
 		queue.add(new ArrayList<>(Arrays.asList("add", countryName, continentName)));
+		return queue;
 	}
 
 	/**
@@ -414,18 +419,20 @@ public class MapEditor {
 	 * 
 	 * @param countryName Country to be removed
 	 * @param queue       queue
+	 * @return 			  queue
 	 */
-	private void removeCountryToQueue(String countryName, ArrayList<ArrayList<String>> queue) {
+	public ArrayList<ArrayList<String>> removeCountryToQueue(String countryName, ArrayList<ArrayList<String>> queue) {
 
 		// if country name is actually a tag
 		if (countryName.charAt(0) == '-') {
 			print("Invalid Command. Type Again.");
 			good = false;
-			return;
+			return null;
 		}
 
 		// add valid sub-command to queue
 		queue.add(new ArrayList<>(Arrays.asList("remove", countryName)));
+		return queue;
 	}
 
 	/**
@@ -434,19 +441,21 @@ public class MapEditor {
 	 * @param countryName         Country Name
 	 * @param neighborCountryName Neighboring country to be added
 	 * @param queue               queue
+	 * @return 					  queue
 	 */
-	private void addNeighborToQueue(String countryName, String neighborCountryName,
+	public ArrayList<ArrayList<String>> addNeighborToQueue(String countryName, String neighborCountryName,
 			ArrayList<ArrayList<String>> queue) {
 
 		// if country name is actually a tag
 		if (countryName.charAt(0) == '-' || neighborCountryName.charAt(0) == '-') {
 			print("Invalid Command. Type Again.");
 			good = false;
-			return;
+			return null;
 		}
 
 		// add valid sub-command to queue
 		queue.add(new ArrayList<>(Arrays.asList("add", countryName, neighborCountryName)));
+		return queue;
 	}
 
 	/**
@@ -455,19 +464,21 @@ public class MapEditor {
 	 * @param countryName         Country Name
 	 * @param neighborCountryName Neighboring country to be removed
 	 * @param queue               queue
+	 * @return 					  queue
 	 */
-	private void removeNeighborToQueue(String countryName, String neighborCountryName,
+	public ArrayList<ArrayList<String>> removeNeighborToQueue(String countryName, String neighborCountryName,
 			ArrayList<ArrayList<String>> queue) {
 
 		// if country name is actually a tag
 		if (countryName.charAt(0) == '-' || neighborCountryName.charAt(0) == '-') {
 			print("Invalid Command. Type Again.");
 			good = false;
-			return;
+			return null;
 		}
 
 		// add valid sub-command to queue
 		queue.add(new ArrayList<>(Arrays.asList("remove", countryName, neighborCountryName)));
+		return queue;
 	}
 
 	/**
@@ -535,12 +546,14 @@ public class MapEditor {
 						subqueue.add(new ArrayList<>(Arrays.asList("remove", countryName)));
 					}
 
+					
 					// executing all sub-commands
-					MapEditor me = new MapEditor();
-					me.map = this.map;
-					me.print = false; // not to print sub edits
+					MapEditor me=new MapEditor();
+					me.map=this.map;
+					me.print=false; // not to print sub edits
 					me.executeQueue("editcountry", subqueue);
-
+					
+					
 					// removing empty continent from map
 					map.getListOfContinent().remove(continent);
 
@@ -601,11 +614,13 @@ public class MapEditor {
 						subqueue.add(new ArrayList<>(Arrays.asList("remove", country.getName(), neighborName)));
 					}
 
+					
 					// executing all sub-commands
-					MapEditor me = new MapEditor();
-					me.map = this.map;
-					me.print = false; // not to print sub edits
+					MapEditor me=new MapEditor();
+					me.map=this.map;
+					me.print=false; // not to print sub edits
 					me.executeQueue("editneighbor", subqueue);
+					
 
 					// removing empty country from map
 					map.getListOfCountries().remove(country);
@@ -702,12 +717,13 @@ public class MapEditor {
 	 * @param country1Name   Name of first country
 	 * @param country2Name   Name of second country
 	 */
-	private void createBridge(String continent1Name, String continent2Name, String country1Name, String country2Name) {
+	public void createBridge(String continent1Name, String continent2Name, String country1Name, String country2Name) {
 		// TODO Auto-generated method stub
 		Bridge bridgeA2B = new Bridge(continent2Name, country1Name, country2Name);
 		Bridge bridgeB2A = new Bridge(continent1Name, country2Name, country1Name);
 		map.getContinentFromName(continent1Name).getBridges().add(bridgeA2B);
 		map.getContinentFromName(continent2Name).getBridges().add(bridgeB2A);
+		
 	}
 
 	/**
@@ -756,8 +772,9 @@ public class MapEditor {
 	 */
 	private void validateMap(Map map) {
 		// TODO Auto-generated method stub
-
-		if (map.isValid(map)) {
+		int notConnected = map.validateMap();
+		int notConnectedSubGraph = map.validateContinent(map);
+		if (notConnected == 0 && notConnectedSubGraph == 0) {
 			print("Map is valid");
 		} else {
 			print("Map is invalid");
