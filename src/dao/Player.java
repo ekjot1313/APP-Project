@@ -17,46 +17,9 @@ public class Player extends pattern.Observable {
 	private String view;
 
 	/**
-	 * To get the current view
-	 * 
-	 * @return view
-	 */
-	public String getView() {
-		return view;
-	}
-
-	/**
-	 * To set the current view
-	 * 
-	 * @param view
-	 */
-	public void setView(String view) {
-		this.view = view;
-	}
-
-	/**
-	 * To stroe end of actions
+	 * To store end of actions
 	 */
 	private int endOfActions;
-
-	/**
-	 * To get end of actions
-	 * 
-	 * @return endOfActions
-	 */
-	public int getEndOfActions() {
-		return endOfActions;
-	}
-
-	/**
-	 * TO set end of actions
-	 * 
-	 * @param endOfActions
-	 */
-	public void setEndOfActions(int endOfActions) {
-		this.endOfActions = endOfActions;
-
-	}
 
 	/**
 	 * To store current state- Reinforcement ,attack, fortify
@@ -73,45 +36,6 @@ public class Player extends pattern.Observable {
 	private String actions;
 
 	/**
-	 * TO get current actions
-	 * 
-	 * @return actions
-	 */
-	public String getActions() {
-		return actions;
-	}
-
-	/**
-	 * To store current actions
-	 * 
-	 * @param actions
-	 */
-	public void setActions(String actions) {
-		this.actions = actions;
-		notify(this);
-		this.actions = "";
-	}
-
-	/**
-	 * TO get current state
-	 * 
-	 * @return state
-	 */
-	public String getState() {
-		return state;
-	}
-
-	/**
-	 * To set current state
-	 * 
-	 * @param state
-	 */
-	public void setState(String state) {
-		this.state = state;
-		notify(this);
-	}
-
-	/**
 	 * The name of the player
 	 */
 	private String name;
@@ -124,6 +48,190 @@ public class Player extends pattern.Observable {
 	 */
 	private int cardExchangeCounter;
 
+	/**
+	 * ArrayList of cards
+	 */
+	private ArrayList<String> cards;
+
+	/**
+	 * Number of armies assigned ot the player
+	 */
+	private int noOfArmies = 0;
+	/**
+	 * Number of unassigned armies
+	 */
+	private int unassignedarmies = 0;
+	/**
+	 * list of assigned countries
+	 */
+	private List<Country> assigned_countries;
+
+	/**
+	 * Object of scanner class
+	 */
+	private Scanner sc;
+
+	/**
+	 * Object of scanner class
+	 */
+	private Scanner sc2;
+
+	/**
+	 * Object of scanner class
+	 */
+	private Scanner sc3;
+
+	/**
+	 * Constructor initializes the list of assigned countries
+	 */
+	public Player() {
+		assigned_countries = new ArrayList<Country>();
+		cards = new ArrayList<String>();
+	}
+
+	/**
+	 * To get random card
+	 * @return card
+	 */
+	public String randomCard() {
+		Random number = new Random();
+		int no = number.nextInt(deck.size());
+		return deck.get(no);
+	}
+
+	/**
+	 * This method returns the number of unassigned armies
+	 * @return Number of Unassigned Armies
+	 */
+	public int getUnassignedarmies() {
+		return unassignedarmies;
+	}
+
+	/**
+	 * This method sets the number of unassigned armies
+	 * @param unassignedarmies Number of unassigned armies
+	 */
+
+	public void setUnassignedarmies(int unassignedarmies) {
+		this.unassignedarmies = unassignedarmies;
+	}
+
+	/**
+	 * This method returns the name of the player.
+	 * @return Player Name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * This method sets the name of the player.
+	 * @param name Player Name
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * This method returns the number of armies for a player.
+	 * @return Number of armies for a player
+	 */
+	public int getNoOfArmies() {
+		return noOfArmies;
+	}
+
+	/**
+	 * This method sets the number of armies for a player.
+	 * @param noOfArmies Number of armies of a particular player
+	 */
+	public void setNoOfArmies(int noOfArmies) {
+		this.noOfArmies = noOfArmies;
+	}
+
+	/**
+	 * This method returns the list of countries belonging to a player.
+	 * @return List of countries belonging to a player
+	 */
+	public List<Country> getAssigned_countries() {
+		return assigned_countries;
+	}
+	
+	/**
+	 * To get the current view
+	 * @return view
+	 */
+	public String getView() {
+		return view;
+	}
+
+	/**
+	 * To set the current view
+	 * @param view
+	 */
+	public void setView(String view) {
+		this.view = view;
+	}
+
+	/**
+	 * This method sets the list of countries belonging to a player.
+	 * 
+	 * @param assigned_countries Countries assigned to a player
+	 */
+	public void setAssigned_countries(List<Country> assigned_countries) {
+		this.assigned_countries = assigned_countries;
+	}
+
+	/**
+	 * To get end of actions
+	 * @return endOfActions
+	 */
+	public int getEndOfActions() {
+		return endOfActions;
+	}
+
+	/**
+	 * TO set end of actions
+	 * @param endOfActions
+	 */
+	public void setEndOfActions(int endOfActions) {
+		this.endOfActions = endOfActions;
+
+	}
+	/**
+	 * TO get current actions
+	 * @return actions
+	 */
+	public String getActions() {
+		return actions;
+	}
+
+	/**
+	 * To store current action
+	 * @param actions
+	 */
+	public void setActions(String actions) {
+		this.actions = actions;
+		notify(this);
+		this.actions = "";
+	}
+
+	/**
+	 * TO get current state
+	 * @return state
+	 */
+	public String getState() {
+		return state;
+	}
+
+	/**
+	 * To set current state
+	 * @param state
+	 */
+	public void setState(String state) {
+		this.state = state;
+		notify(this);
+	}
+	
 	/**
 	 * This method returns the cardExchangeCounter.
 	 * 
@@ -141,12 +249,9 @@ public class Player extends pattern.Observable {
 	public void setCardExchangeCounter(int cardExchangeCounter) {
 		this.cardExchangeCounter = cardExchangeCounter;
 	}
-
-	private ArrayList<String> cards;
-
+	
 	/**
 	 * This method returns the card list.
-	 * 
 	 * @return
 	 */
 	public ArrayList<String> getCards() {
@@ -155,122 +260,10 @@ public class Player extends pattern.Observable {
 
 	/**
 	 * This method sets the card list.
-	 * 
 	 * @param cards
 	 */
 	public void setCards(ArrayList<String> cards) {
 		this.cards = cards;
-	}
-
-	/**
-	 * Number of armies assigned ot the player
-	 */
-	private int noOfArmies = 0;
-	/**
-	 * Number of unassigned armies
-	 */
-	private int unassignedarmies = 0;
-	/**
-	 * list of assigned countries
-	 */
-	private List<Country> assigned_countries;
-
-	private Scanner sc;
-
-	private Scanner sc2;
-
-	private Scanner sc3;
-
-	/**
-	 * Constructor initializes the list of assigned countries
-	 */
-	public Player() {
-		assigned_countries = new ArrayList<Country>();
-		cards = new ArrayList<String>();
-	}
-
-	/**
-	 * To get random card
-	 * 
-	 * @return card
-	 */
-	public String randomCard() {
-		Random number = new Random();
-		int no = number.nextInt(deck.size());
-		return deck.get(no);
-	}
-
-	/**
-	 * This method returns the number of unassigned armies.
-	 * 
-	 * @return Number of Unassigned Armies
-	 */
-	public int getUnassignedarmies() {
-		return unassignedarmies;
-	}
-
-	/**
-	 * This method sets the number of unassigned armies
-	 * 
-	 * @param unassignedarmies Number of unassigned armies
-	 */
-
-	public void setUnassignedarmies(int unassignedarmies) {
-		this.unassignedarmies = unassignedarmies;
-	}
-
-	/**
-	 * This method returns the name of the player.
-	 * 
-	 * @return Player Name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * This method sets the name of the player.
-	 * 
-	 * @param name Player Name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * This method returns the number of armies for a player.
-	 * 
-	 * @return Number of armies for a player
-	 */
-	public int getNoOfArmies() {
-		return noOfArmies;
-	}
-
-	/**
-	 * This method sets the number of armies for a player.
-	 * 
-	 * @param noOfArmies Number of armies of a particular player
-	 */
-	public void setNoOfArmies(int noOfArmies) {
-		this.noOfArmies = noOfArmies;
-	}
-
-	/**
-	 * This method returns the list of countries belonging to a player.
-	 * 
-	 * @return List of countries belonging to a player
-	 */
-	public List<Country> getAssigned_countries() {
-		return assigned_countries;
-	}
-
-	/**
-	 * This method sets the list of countries belonging to a player.
-	 * 
-	 * @param assigned_countries Countries assigned to a player
-	 */
-	public void setAssigned_countries(List<Country> assigned_countries) {
-		this.assigned_countries = assigned_countries;
 	}
 
 	/**
@@ -300,7 +293,7 @@ public class Player extends pattern.Observable {
 	}
 
 	/**
-	 * This method is used for reinforcement phase.
+	 * This method is used for reinforcement phase and exchange of cards.
 	 * 
 	 * @param listPlayer  List of players
 	 * @param map         Map object which contains the map details like continents
