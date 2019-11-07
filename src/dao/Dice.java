@@ -125,7 +125,7 @@ public class Dice {
 			System.out.print(result[1][i] + " ");
 		}
 		System.out.println();
-		System.out.println(str);
+		//System.out.println(str);
 		return str;
 	}
 
