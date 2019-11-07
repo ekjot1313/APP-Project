@@ -23,11 +23,13 @@ import mapWorks.MapEditor;
  *
  */
 public class Main {
-/**
- * 
- */
+	/**
+	 * @param pwdView static object of PWDView class 
+	 */
 	static PWDView pwdView = null;
-
+	/**
+	 *The execution of game begins from this function 
+	 */
 	public static void main(String[] args) throws Exception {
 		System.out.println("Welcome to RISK GAME!");
 		Scanner sc = new Scanner(System.in);
@@ -188,6 +190,7 @@ public class Main {
 	 * To create a deck of cards based on countries
 	 * 
 	 * @param map
+	 * @return cardlist
 	 */
 	private static ArrayList<String> createDeck(Map map) {
 		// TODO Auto-generated method stub
