@@ -11,8 +11,14 @@ import java.util.Random;
  */
 public class Dice {
 
-	static // Random object to get random number.
+	/**
+	 * Random object to get random number.
+	 */
+	static 
 	Random number = new Random();
+	/**
+	 * To store the attackerDice
+	 */
 	private int attackerDice = 0;
 
 	/**
@@ -29,6 +35,9 @@ public class Dice {
 		return defenderDice;
 	}
 
+	/**
+	 * To store the defenderDice
+	 */
 	private int defenderDice = 0;
 
 	/**

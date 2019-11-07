@@ -18,6 +18,7 @@ import game.PlayerAllocator;
 import mapWorks.MapEditor;
 
 /**
+ * Test class to check the Map class
  * @author ekjot
  *
  */
@@ -31,15 +32,33 @@ public class DaoMapTest {
 
 	}
 
-	private Map testMap;
-	private MapEditor mapEditor;
-	private PlayerAllocator playerAllocator;
-
-	private Country country;
-	private Continent continent;
-	private Player player;
-
 	/**
+	 * Object of Map 
+	 */
+	private Map testMap;
+	/**
+	 * Object of MapEditor 
+	 */
+	private MapEditor mapEditor;
+	/**
+	 * Object of PlayerAllocator
+	 */
+	private PlayerAllocator playerAllocator;
+	/**
+	 * Object of Country
+	 */
+	private Country country;
+	/**
+	 * Object of Continent
+	 */
+	private Continent continent;
+	/**
+	 * Object of Player
+	 */
+	private Player player;
+	
+	/**
+	 * Set up method for initializing the objects 
 	 * @throws java.lang.Exception
 	 */
 	@Before

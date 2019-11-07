@@ -9,15 +9,44 @@ import dao.Country;
 import dao.Map;
 import dao.Player;
 
-
+/**
+ * Class to test the Player Class 
+ * @author Piyush
+ *
+ */
 public class DaoPlayerTest {
+	/**
+	 * Object of Map 
+	 */
 	static Map testMap=new Map();
+	/**
+	 * Object of Country india 
+	 */
 	static Country india =new Country();
+	/**
+	 * Object of Country pakistan
+	 */
 	static Country pakistan =new Country();
+	/**
+	 * Object of Country china
+	 */
 	static Country china =new Country();
+	/**
+	 * Object of Player A
+	 */
 	static Player A = new Player();
+	/**
+	 * Object of Player B
+	 */
 	static Player B = new Player();
+	/**
+	 * ArrayList to store the list of players
+	 */
 	static ArrayList<Player> listOfPlayers;
+	
+	/**
+	 * Set up method to initialize the objects
+	 */
 	@Before 
 	public void before() {
 		
@@ -57,7 +86,9 @@ public class DaoPlayerTest {
 		listOfPlayers.add(B);
 	}
 	
-	
+	/**
+	 * Test method for {@link dao.Player#validate()}.
+	 */
 	@Test
 	public void testValidate() {
 		String command="attack india china -allout";
@@ -99,6 +130,10 @@ public class DaoPlayerTest {
 		result=B.validate(command, testMap);
 		assertEquals(0, result);
 	}
+	
+	/**
+	 * Test method for {@link dao.Player#attackMove(String, Country, Country)}.
+	 */
 	@Test
 	public void testAttackMove() {
 		//if china wins india-
@@ -121,6 +156,9 @@ public class DaoPlayerTest {
 		assertEquals(4, india.getNoOfArmies());
 		assertEquals(17, china.getNoOfArmies());
 	}
+	/**
+	 * Test method for {@link dao.Player#endGame(ArrayList)}.
+	 */
 	@Test
 	public void testEndGame() {
 		int result=A.endGame(listOfPlayers);
@@ -130,6 +168,9 @@ public class DaoPlayerTest {
 		result=A.endGame(listOfPlayers);
 		assertEquals(1,result);
 	}
+	/**
+	 * Test method for {@link dao.Player#attackDeadlock(Map)}.
+	 */
 	@Test
 	public void testAttackDeadlock() {
 		
@@ -145,6 +186,9 @@ public class DaoPlayerTest {
 		result=B.attackDeadlock(testMap);
 		assertEquals(1,result);
 	}
+	/**
+	 * Test method for {@link dao.Player#fortification(Map, ArrayList, String)}.
+	 */
 	@Test
 	public void testFortification() {
 		

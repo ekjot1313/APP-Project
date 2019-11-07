@@ -9,10 +9,14 @@ import org.junit.Test;
 import dao.Dice;
 
 /**
+ * Test class to check the Dice class
  * @author Hartaj, Ekjot
  */
 public class DaoDiceTest {
 
+	/**
+	 * Object of dice class
+	 */
 	Dice dice;
 
 	/**

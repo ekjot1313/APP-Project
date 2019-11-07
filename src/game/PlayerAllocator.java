@@ -21,7 +21,9 @@ public class PlayerAllocator {
 	public List<Player> listOfPlayers;
 
 	/**
-	 * 
+	 * Gets the player name form list of players
+	 * @param name name of player to retrieve
+	 * @return listOfPlayers 
 	 */
 	public Player getPlayerFromName(String name) {
 		for (int i = 0; i < listOfPlayers.size(); i++) {
@@ -43,6 +45,7 @@ public class PlayerAllocator {
 	 * This method adds or removes the player
 	 * 
 	 * @param map Map Object
+	 * @param command given command 
 	 */
 	public void allocate(Map map,String command) {
 

@@ -17,12 +17,34 @@ import dao.Map;
  *
  */
 public class MapSaver {
+	
+	/**
+	 * Object of Map
+	 */
 	public Map map;
+	/**
+	 * Stores the filename of file
+	 */
 	public String fileName;
+	/**
+	 * Stores the message 
+	 */
 	public String message1;
+	/**
+	 * Stores the message 
+	 */
 	public String message2;
+	/**
+	 * Stores the name of map
+	 */
 	public String mapName;
+	/**
+	 * Stores the list of continents
+	 */
 	public List<Continent> listOfContinent;
+	/**
+	 * Stores the list of countries
+	 */
 	public List<Country> listOfCountries;
 
 	/**

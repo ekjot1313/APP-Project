@@ -486,8 +486,9 @@ public class Map extends pattern.Observable {
 		notify(this);
 	}
 
-	/*
-	 * 
+	/**
+	 * Adds the country to list of countries
+	 * @param country object of country class 
 	 */
 	public void addCountry(Country country) {
 		// TODO Auto-generated method stub
@@ -496,9 +497,9 @@ public class Map extends pattern.Observable {
 	}
 
 	/**
-	 * 
-	 * @param cont
-	 * @param name
+	 * Set the owner of the continent
+	 * @param cont name of continent
+	 * @param name name of player
 	 */
 	public void setContinentOwner(Continent cont, String name) {
 		// TODO Auto-generated method stub
@@ -507,7 +508,7 @@ public class Map extends pattern.Observable {
 	}
 
 	/**
-	 * 
+	 * Removes the player from list of players
 	 * @param player
 	 */
 	public void removePlayer(Player player) {
@@ -517,9 +518,9 @@ public class Map extends pattern.Observable {
 	}
 
 	/**
-	 * 
-	 * @param p
-	 * @param i
+	 * Sets the number of armies for a player
+	 * @param p player 
+	 * @param i number of armies to be assigned
 	 */
 	public void setNoOfArmies(Player p, int i) {
 		// TODO Auto-generated method stub
@@ -542,11 +543,19 @@ public class Map extends pattern.Observable {
 		return false;
 	}
 
+	/**
+	 * Prints the message
+	 * @param msg
+	 */
 	public void print(String msg) {
 		if (printFlag)
 			System.out.print(msg);
 	}
 
+	/**
+	 * Prints the message on next line
+	 * @param msg
+	 */
 	public void println(String msg) {
 		if (printFlag)
 			System.out.println(msg);
