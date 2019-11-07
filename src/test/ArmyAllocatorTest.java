@@ -1,5 +1,7 @@
 package test;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 
 import org.junit.Before;
@@ -9,6 +11,8 @@ import dao.Continent;
 import dao.Country;
 import dao.Map;
 import dao.Player;
+import game.ArmyAllocator;
+import game.PlayerAllocator;
 
 public class ArmyAllocatorTest {
 	static Map testMap=new Map();
@@ -37,10 +41,12 @@ public class ArmyAllocatorTest {
 		testMap.getListOfCountries().add(india);
 		testMap.getListOfCountries().add(pakistan);
 		testMap.getListOfCountries().add(china);
+		
 		Continent asia=new Continent();
 		asia.getCountries().add("india");
 		asia.getCountries().add("pakistan");
 		asia.getCountries().add("china");
+		
 		testMap.getListOfContinent().add(asia);
 		
 		A.setName("A");
@@ -49,10 +55,17 @@ public class ArmyAllocatorTest {
 		listOfPlayers=new ArrayList<Player>();
 		listOfPlayers.add(A);
 		listOfPlayers.add(B);
+		testMap.setListOfPlayers(listOfPlayers);
 	}
 	
 	@Test
-	public void testAllocate() {
+	public void testCalculateTotalArmies() {
+		PlayerAllocator pa = new PlayerAllocator();
+		pa.allocate(testMap,"populatecountries");
+		pa.populateCountries(testMap);
+		ArmyAllocator aa = new ArmyAllocator();
+		int total =aa.calculateTotalArmies(listOfPlayers,testMap,1);
+		assertEquals(40, total);
 	}
 	
 }
