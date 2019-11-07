@@ -27,7 +27,7 @@ public class CardExchangeView implements Observer{
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 			
 			frame = new JFrame();
-			frame.setBounds(screenSize.width*2/3, screenSize.height*2/3, screenSize.width/2, screenSize.height/3);
+			frame.setBounds(screenSize.width*2/3, screenSize.height*2/3, screenSize.width/3, screenSize.height/3);
 			frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 			frame.setTitle("Card Exchange View");
 			frame.setAlwaysOnTop(true);
