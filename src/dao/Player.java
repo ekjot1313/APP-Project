@@ -330,7 +330,13 @@ public class Player extends pattern.Observable {
 
 				map.displayAll();
 			} else if (inputArray.length == 3 && inputArray[0].equals("reinforce")) {
-				int armiesTobeplaced = Integer.parseInt(inputArray[2]);
+				int armiesTobeplaced =0;
+				try {
+				armiesTobeplaced = Integer.parseInt(inputArray[2]);
+				}catch(Exception e) {
+					System.out.println("Invalid command");
+					continue;
+				}
 				int countryFound = 0;
 
 				ArrayList<Country> countryTempList = (ArrayList<Country>) this.getAssigned_countries();
@@ -819,7 +825,13 @@ public class Player extends pattern.Observable {
 		String str[] = command.split(" ");
 
 		if (str.length == 2 && str[0].equals("attackmove")) {
-			int n = Integer.parseInt(str[1]);
+			int n;
+			try {
+			n = Integer.parseInt(str[1]);
+			}catch(Exception e) {
+				System.out.println("Invalid command");
+				return 0;
+			}
 			if (n >= attackerDice && n <= fromCountry.getNoOfArmies() - 1) {
 				fromCountry.setNoOfArmies(fromCountry.getNoOfArmies() - n);
 				toCountry.setNoOfArmies(n + 1);
@@ -903,7 +915,13 @@ public class Player extends pattern.Observable {
 										if (s[3].equals("-allout"))
 											return 1;
 										else {
-											int numdice = Integer.parseInt(s[3]);
+											int numdice=0;
+											try {
+											numdice = Integer.parseInt(s[3]);
+											}catch(Exception e) {
+												//System.out.println("Invalid command.");
+												continue;
+											}
 											int noOfArmies = c.getNoOfArmies();
 											if (numdice > 3) {
 												System.out.println("Number of dices cannot be more than 3");
