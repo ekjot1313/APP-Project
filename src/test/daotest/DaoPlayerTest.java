@@ -143,18 +143,23 @@ public class DaoPlayerTest {
 		india.setOwner("B");
 		String command="attackmove 45";
 		System.out.println("\nFor-> attackmove 45");
-		int result=B.attackMove(command, china, india);
+		int result=B.attackMove(command, china, india,3);
 		assertEquals(0, result);
 		System.out.println("\nFor-> attackmove -1");
 		command="attackmove -1";
-		result=B.attackMove(command, china, india);
+		result=B.attackMove(command, china, india,2);
 		assertEquals(0, result);
-		System.out.println("\nFor-> attackmove 3");
-		command="attackmove 3";
-		result=B.attackMove(command, china, india);
+		System.out.println("\nFor-> attackmove 2");
+		command="attackmove 2";
+		result=B.attackMove(command, china, india,3);
+		assertEquals(0, result);
+		
+		System.out.println("\nFor-> attackmove 5");
+		command="attackmove 19";
+		result=B.attackMove(command, china, india,3);
 		assertEquals(1, result);
-		assertEquals(4, india.getNoOfArmies());
-		assertEquals(17, china.getNoOfArmies());
+		assertEquals(20, india.getNoOfArmies());
+		assertEquals(1, china.getNoOfArmies());
 	}
 	/**
 	 * Test method for {@link dao.Player#endGame(ArrayList)}.

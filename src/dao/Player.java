@@ -775,16 +775,17 @@ public class Player extends pattern.Observable {
 								deck.remove(card);
 							}
 							// System.out.println(fromCountry.getNoOfArmies());
-							if (fromCountry.getNoOfArmies() != 1) {
+							if (fromCountry.getNoOfArmies()>= attackerDice) {
 								System.out.println(
 										"Move armies from " + fromCountry.getName() + " to " + toCountry.getName());
+								System.out.println("Number of dices used by the attacker in the last attack:"+attackerDice);
 								System.out.println(
-										"Available armies you can move : 0-" + (fromCountry.getNoOfArmies() - 1));
+										"Available armies you can move : " + attackerDice+"-"+ (fromCountry.getNoOfArmies() - 1));
 								System.out.println("Type attackmove <number> to move");
 								int valid = 0;
 								do {
 									String command = sc3.nextLine();
-									valid = attackMove(command, fromCountry, toCountry);
+									valid = attackMove(command, fromCountry, toCountry,attackerDice);
 								} while (valid == 0);
 							}
 
@@ -828,23 +829,19 @@ public class Player extends pattern.Observable {
 	 * @param toCountry name of country to which armies should be moved
 	 * @return 1 if armies are successfully moved otherwise 0.
 	 */
-	public int attackMove(String command, Country fromCountry, Country toCountry) {
+	public int attackMove(String command, Country fromCountry, Country toCountry,int attackerDice) {
 		String str[] = command.split(" ");
 
 		if (str.length == 2 && str[0].equals("attackmove")) {
 			int n = Integer.parseInt(str[1]);
-			if (n == 0) {
-
-				this.setActions("Armies haven't been moved");
-				return 1;
-			} else if (n > 0 && n <= fromCountry.getNoOfArmies() - 1) {
+			if (n >= attackerDice && n <= fromCountry.getNoOfArmies() - 1) {
 				fromCountry.setNoOfArmies(fromCountry.getNoOfArmies() - n);
 				toCountry.setNoOfArmies(n + 1);
 				this.setActions(
 						"Moving :" + n + " armies from :" + fromCountry.getName() + " to " + toCountry.getName());
 				return 1;
 			} else {
-				if (n < 0 || n > fromCountry.getNoOfArmies() - 1)
+				if (n < attackerDice || n > fromCountry.getNoOfArmies() - 1)
 					System.out.println("Incorrect no of armies, Kindly type again.");
 				return 0;
 			}
