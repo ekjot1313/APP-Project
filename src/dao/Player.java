@@ -271,7 +271,6 @@ public class Player extends pattern.Observable {
 	 * 
 	 * @param listPlayer  List of Players
 	 * @param map         Map Object
-	 * @param playerIndex Index of the player in the list
 	 * @return Number of reinforcement armies
 	 */
 	public int calculateReinforceArmies(Map map, ArrayList<Player> listPlayer) {
@@ -298,8 +297,7 @@ public class Player extends pattern.Observable {
 	 * @param listPlayer  List of players
 	 * @param map         Map object which contains the map details like continents
 	 *                    and countries.
-	 * @param playerIndex Index of a particular player in the List of player passed
-	 *                    from main function
+	 *                    
 	 */
 	public void reinforcement(Map map, ArrayList<Player> listPlayer) {
 		endOfActions = 0;
@@ -467,8 +465,7 @@ public class Player extends pattern.Observable {
 	 * @param listPlayer  List of players
 	 * @param map         Map object which contains the map details like continents
 	 *                    and countries.
-	 * @param playerIndex Index of a particular player in the List of player passed
-	 *                    from main function
+	 * @param command	For testing
 	 */
 	public void fortification(Map map, ArrayList<Player> listPlayer, String command) {
 		endOfActions = 0;

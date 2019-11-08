@@ -82,7 +82,7 @@ public class ViewPWDViewTests {
 	}
 
 	/**
-	 * Test method for {@link view.PWDView#calcTotalArmies()}.
+	 * Test method for {@link view.PWDView#calcTotalArmies(Map)}.
 	 */
 	@Test
 	public final void testCalcTotalArmies() {
@@ -91,7 +91,7 @@ public class ViewPWDViewTests {
 	}
 
 	/**
-	 * Test method for {@link view.PWDView#calcContinentControl()}.
+	 * Test method for {@link view.PWDView#calcContinentControl(Map)}
 	 */
 	@Test
 	public final void testCalcContinentControl() {
@@ -100,7 +100,7 @@ public class ViewPWDViewTests {
 	}
 
 	/**
-	 * Test method for {@link view.PWDView#calcPercentMap()}.
+	 * Test method for {@link view.PWDView#calcPercentMap(Map)}.
 	 */
 	@Test
 	public final void testCalcPercentMap() {

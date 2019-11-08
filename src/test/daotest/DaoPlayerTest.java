@@ -87,7 +87,7 @@ public class DaoPlayerTest {
 	}
 	
 	/**
-	 * Test method for {@link dao.Player#validate()}.
+	 * Test method for {@link dao.Player#validate(String, Map)}
 	 */
 	@Test
 	public void testValidate() {

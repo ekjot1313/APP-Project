@@ -227,7 +227,6 @@ public class Map extends pattern.Observable {
 	/**
 	 * This method displays the map
 	 * 
-	 * @param map2 Map object of the map to be displayed
 	 */
 	public void display() {
 		// TODO Auto-generated method stub
@@ -311,7 +310,7 @@ public class Map extends pattern.Observable {
 	/**
 	 * This method displays the map
 	 * 
-	 * @param map2 Map object of the map to be displayed
+	 * 
 	 */
 	public void displayAll() {
 		// TODO Auto-generated method stub
@@ -360,7 +359,6 @@ public class Map extends pattern.Observable {
 	/**
 	 * This method checks whether the map is valid or not
 	 * 
-	 * @param map2 Map to be validated
 	 * @return 0 if valid else 1
 	 */
 	public int validateMap() {
@@ -425,7 +423,6 @@ public class Map extends pattern.Observable {
 	/**
 	 * This method checks if duplicate continents or countries exist
 	 * 
-	 * @param map3 Map Object
 	 * @return 0 if no duplicates else 1
 	 */
 	public int checkDuplicates() {
@@ -453,8 +450,8 @@ public class Map extends pattern.Observable {
 	/**
 	 * This method set owner to given country and notify PWDView about the change.
 	 * 
-	 * @param toCountry
-	 * @param name
+	 * @param country
+	 * @param owner
 	 */
 	public void setCountryOwner(Country country, String owner) {
 		// TODO Auto-generated method stub

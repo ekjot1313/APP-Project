@@ -24,10 +24,12 @@ import mapWorks.MapEditor;
  */
 public class Main {
 	/**
-	 * @param pwdView static object of PWDView class 
+	 * To store phase domination view
 	 */
 	static PWDView pwdView = null;
 	/**
+	 * @param args
+	 * @throws Exception
 	 *The execution of game begins from this function 
 	 */
 	public static void main(String[] args) throws Exception {
@@ -98,7 +100,7 @@ public class Main {
 	 * This method is called when user gives 'loadmap' command
 	 * 
 	 * @param filename Map file to be loaded
-	 * @throws Exception
+	 * @throws Exception 
 	 */
 	private static void loadmap(String filename) throws Exception {
 		// TODO Auto-generated method stub

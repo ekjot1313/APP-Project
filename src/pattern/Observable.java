@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Observable {
 
 	/**
-	 * @param observers arraylist of observer objects
+	 * arraylist of observer objects
 	 */
 	ArrayList<Observer> observers = new ArrayList<Observer>();
 
