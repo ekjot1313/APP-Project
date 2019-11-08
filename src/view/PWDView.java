@@ -177,7 +177,6 @@ public class PWDView implements Observer {
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 			frame = new JFrame("Player World Domination View");
 			frame.setBounds(screenSize.width*2/3, 0, screenSize.width/3, screenSize.height/3);
-			// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 			frame.setAlwaysOnTop(true);
 			frame.setFocusableWindowState(false);

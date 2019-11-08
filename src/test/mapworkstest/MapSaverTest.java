@@ -74,7 +74,6 @@ public class MapSaverTest {
 	public void testMapSaver() {
 		try {
 			mapSaver.saveMap(testMap, "testMap1");
-			// String filename= "ameroki.map";
 			String currentPath = System.getProperty("user.dir");
 			currentPath += "\\Maps\\" + "testMap1.map";
 			File newFile = new File(currentPath);

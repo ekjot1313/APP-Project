@@ -142,7 +142,6 @@ public class Main {
 		// Player p =new Player();
 		// Create Deck of cards
 		ArrayList<String> deck = createDeck(mr.map);
-		//System.out.println(deck.toString());
 		Player.deck = deck;
 		PlayerAllocator pa = new PlayerAllocator();
 		ArmyAllocator aa = new ArmyAllocator();

@@ -89,8 +89,6 @@ public class MapEditor {
 				if (command.length == 2) {
 
 					// validate and save map; if map is invalid, prompt user to edit map
-					//MapReader mr = new MapReader();
-					//mr.map = this.map;
 					if (this.map.validateMap() == 0 && this.map.validateContinent(this.map) == 0) {
 						(new MapSaver()).saveMap(this.map, command[1]);
 

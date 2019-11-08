@@ -283,8 +283,7 @@ public class Player extends pattern.Observable {
 		for (Continent continent : map.getListOfContinent()) {
 			if (continent.getOwner().equals(this.getName())) {
 				reinforcementArmies += continent.getContinentValue();
-				//continent.setAssignArmy(0);
-				
+		
 			}
 		}
 
@@ -345,8 +344,6 @@ public class Player extends pattern.Observable {
 					if (armiesTobeplaced <= reinforcementArmies && armiesTobeplaced > 0) { // check reinforce command
 						// and country is valid and
 						// assigned to player
-
-						// this.setNoOfArmies(this.getNoOfArmies() + armiesTobeplaced);
 						map.getCountryFromName(inputArray[1]).setNoOfArmies(
 								map.getCountryFromName(inputArray[1]).getNoOfArmies() + armiesTobeplaced);
 						reinforcementArmies -= armiesTobeplaced;
@@ -364,8 +361,6 @@ public class Player extends pattern.Observable {
 								"Number of armies to be assigned should be in the range : 1 -" + reinforcementArmies);
 				}
 			} else if (inputArray.length == 4 && inputArray[0].equals("exchangecards")) {
-				//System.out.println(this.getCards());
-
 				if (this.getCards().size() < 3) {
 					System.out.println("You don't have enough cards to exchange");
 					continue;
@@ -380,7 +375,6 @@ public class Player extends pattern.Observable {
 					num1 = Integer.parseInt(inputArray[1]) - 1;
 					num2 = Integer.parseInt(inputArray[2]) - 1;
 					num3 = Integer.parseInt(inputArray[3]) - 1;
-					// System.out.println(num1 +""+num2 +""+num3);
 					// check if three numbers are valid cards indexes in player's hand
 					ArrayList<String> playerCards = this.getCards();
 					String card1 = playerCards.get(num1);
@@ -436,7 +430,6 @@ public class Player extends pattern.Observable {
 					System.out.println("Invalid Command. 'num' should be a number.");
 					continue;
 				} catch (IndexOutOfBoundsException e) {
-					//e.printStackTrace();
 					System.out.println("Invalid card number.");
 					continue;
 				}
@@ -669,8 +662,6 @@ public class Player extends pattern.Observable {
 					Player defender = listPlayer.get(index);
 					int isAllout = 0;
 					if (s[3].equals("-allout")) {
-						// this.setActions("Attacking country: "+toCountry.getName()+" from country
-						// :"+fromCountry.getName());
 						while (toCountry.getNoOfArmies() != 0 && fromCountry.getNoOfArmies() != 1) {
 							if (fromCountry.getNoOfArmies() >= 3)
 								attackerDice = 3;
@@ -774,7 +765,7 @@ public class Player extends pattern.Observable {
 								deck.remove(card);
 							}
 							// System.out.println(fromCountry.getNoOfArmies());
-							if (fromCountry.getNoOfArmies()>= attackerDice) {
+							if (fromCountry.getNoOfArmies()> attackerDice) {
 								System.out.println(
 										"Move armies from " + fromCountry.getName() + " to " + toCountry.getName());
 								System.out.println("Number of dices used by the attacker in the last attack:"+attackerDice);
@@ -787,10 +778,9 @@ public class Player extends pattern.Observable {
 									valid = attackMove(command, fromCountry, toCountry,attackerDice);
 								} while (valid == 0);
 							}
-
 							else
 								System.out.println(
-										"You cannot move armies to the conquered country as you have only 1 army left in the attacking country.");
+										"You cannot move more armies to the conquered country as you have less or equal number of armies left in the attacking country as compared to the no of dices rolled for the last attack.");
 							Continent cont = map.getContinentFromName(toCountry.getContinentName());
 							int flag = 0;
 							for (String country : cont.getCountries()) {
@@ -798,14 +788,11 @@ public class Player extends pattern.Observable {
 								if (!this.name.equals(c.getOwner())) {
 									flag = 1;
 									map.setContinentOwner(cont, "FREE CONTINENTS");
-									//cont.setAssignArmy(0);
 									break;
 								}
 							}
 							if (flag == 0) { // continent has been conquered
 								map.setContinentOwner(cont, this.name);
-
-								//cont.setAssignArmy(1);
 								System.out.println("You have conquered continent: " + cont.getName());
 								setActions(this.name + " has conquered continent: " + cont.getName());
 							}

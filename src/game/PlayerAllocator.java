@@ -256,7 +256,6 @@ public class PlayerAllocator {
 			}
 			if (flag == 0) {
 				map.setContinentOwner(c, owner);
-				//c.setAssignArmy(1);
 			}
 		}
 	}
