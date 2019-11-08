@@ -436,7 +436,7 @@ public class Player extends pattern.Observable {
 					System.out.println("Invalid Command. 'num' should be a number.");
 					continue;
 				} catch (IndexOutOfBoundsException e) {
-					e.printStackTrace();
+					//e.printStackTrace();
 					System.out.println("Invalid card number.");
 					continue;
 				}
