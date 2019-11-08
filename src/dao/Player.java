@@ -314,7 +314,7 @@ public class Player extends pattern.Observable {
 			forceExchangeCards = 0;
 		// loop over playerlist and assign reinforcement armies
 		System.out.println("Reinforcement armies to be assigned :" + reinforcementArmies);
-		System.out.println("Type reinforce <countryname> <num>  to assign armies\n Type showmap");
+		System.out.println("Type reinforce <countryname> <num>  to assign armies ");
 		System.out.println("Type exchangecards <num> <num> <num> -none to exchange cards\n Type showmap");
 		map.setNoOfArmies(this, this.getNoOfArmies() + reinforcementArmies);
 		while (reinforcementArmies != 0 || forceExchangeCards == 1) {
@@ -364,7 +364,7 @@ public class Player extends pattern.Observable {
 								"Number of armies to be assigned should be in the range : 1 -" + reinforcementArmies);
 				}
 			} else if (inputArray.length == 4 && inputArray[0].equals("exchangecards")) {
-				System.out.println(this.getCards());
+				//System.out.println(this.getCards());
 
 				if (this.getCards().size() < 3) {
 					System.out.println("You don't have enough cards to exchange");
@@ -698,9 +698,9 @@ public class Player extends pattern.Observable {
 							}
 						}
 						if (fromCountry.getNoOfArmies() == 1) {
-							System.out.println("Player :" + defender.getName() + " has won and attacking country :"
+							System.out.println("Player :" + defender.getName() + " has defended successfully and attacking country :"
 									+ fromCountry.getName() + " has only 1 army left");
-							this.setActions("Player :" + defender.getName() + " has won and attacking country :"
+							this.setActions("Player :" + defender.getName() + " has defended successfully and attacking country :"
 									+ fromCountry.getName() + " has only 1 army left");
 						}
 						isAllout = 1;
@@ -841,7 +841,7 @@ public class Player extends pattern.Observable {
 				fromCountry.setNoOfArmies(fromCountry.getNoOfArmies() - n);
 				toCountry.setNoOfArmies(n + 1);
 				this.setActions(
-						"Moving :" + n + " armies from :" + fromCountry.getName() + " to" + toCountry.getName());
+						"Moving :" + n + " armies from :" + fromCountry.getName() + " to " + toCountry.getName());
 				return 1;
 			} else {
 				if (n < 0 || n > fromCountry.getNoOfArmies() - 1)
