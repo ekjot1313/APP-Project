@@ -705,7 +705,6 @@ public class Player extends pattern.Observable {
 						}
 						isAllout = 1;
 					} else {
-						// int gameOver=0;
 						attackerDice = Integer.parseInt(s[3]);
 						System.out.println("Player :" + defend + " has to defend country :" + s[2]
 								+ " \nType defend numdice to choose no of dices to defend your country.");
