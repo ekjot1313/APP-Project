@@ -623,8 +623,7 @@ public class Player extends pattern.Observable {
 			return 0;
 		}
 		System.out.println("Type attack <countrynamefrom> <countynameto> <numdice> for a single attack");
-		System.out.println("attack <countrynamefrom> <countynameto> -allout for an attack until no attack is possible");
-		System.out.println("attack –noattack to end attack phase");
+		System.out.println("attack <countrynamefrom> <countynameto> -allout for an attack until no attack is possible\nattack –noattack to end attack phase");
 		System.out.println("Type showmap");
 		String input;
 		do {
