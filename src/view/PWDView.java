@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
@@ -174,9 +175,11 @@ public class PWDView implements Observer {
 	private static void initialize() {
 		if (frame == null) {
 			
-			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+			
 			frame = new JFrame("Player World Domination View");
-			frame.setBounds(screenSize.width*2/3, 0, screenSize.width/3, screenSize.height/3);
+			
+			
+			
 			frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 			frame.setAlwaysOnTop(true);
 			frame.setFocusableWindowState(false);
@@ -184,30 +187,51 @@ public class PWDView implements Observer {
 			countryPercentageTA = new JTextArea();
 
 			countryPercentageTA.setEditable(false);
+			countryPercentageTA.setForeground(Color.white);
+			countryPercentageTA.setBackground(Color.BLACK);
+			
 
 			continentOwnerTA = new JTextArea();
 			continentOwnerTA.setEditable(false);
+			continentOwnerTA.setForeground(Color.white);
+			continentOwnerTA.setBackground(Color.BLACK);
 
 			playerArmiesTA = new JTextArea();
 			playerArmiesTA.setEditable(false);
+			playerArmiesTA.setForeground(Color.white);
+			playerArmiesTA.setBackground(Color.BLACK);
 
 			scrollPane1 = new JScrollPane();
 			scrollPane1.setViewportView(countryPercentageTA);
-			scrollPane1.setBorder((TitledBorder) BorderFactory.createTitledBorder("Map Percentage"));
+			
+			TitledBorder border=(TitledBorder) BorderFactory.createTitledBorder("Map Percentage");
+			border.setTitleColor(Color.white);
+			scrollPane1.setBorder(border);
+			scrollPane1.setBackground(Color.BLACK);
 
 			scrollPane2 = new JScrollPane();
 			scrollPane2.setViewportView(continentOwnerTA);
-			scrollPane2.setBorder((TitledBorder) BorderFactory.createTitledBorder("Continents Information"));
+			border=(TitledBorder) BorderFactory.createTitledBorder("Continents Information");
+			border.setTitleColor(Color.white);
+			scrollPane2.setBorder(border);
+			scrollPane2.setBackground(Color.BLACK);
 
 			scrollPane3 = new JScrollPane();
 			scrollPane3.setViewportView(playerArmiesTA);
-			scrollPane3.setBorder((TitledBorder) BorderFactory.createTitledBorder("Armies Owned"));
+			border=(TitledBorder) BorderFactory.createTitledBorder("Armies Owned");
+			border.setTitleColor(Color.white);
+			scrollPane3.setBorder(border);
+			scrollPane3.setBackground(Color.BLACK);
 
 			frame.setLayout(new GridLayout(1, 3));
 
 			frame.getContentPane().add(scrollPane1);
 			frame.getContentPane().add(scrollPane2);
 			frame.getContentPane().add(scrollPane3);
+			
+			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+			frame.setBounds((screenSize.width*2)/3, 0, (screenSize.width)/3, (screenSize.height)/3);
+			frame.setBackground(Color.BLACK);
 			setVisible(visible);
 			
 		}

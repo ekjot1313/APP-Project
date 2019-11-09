@@ -14,6 +14,7 @@ import javax.swing.JScrollPane;
 import dao.Player;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 
 /**
@@ -49,8 +50,14 @@ public class PhaseView implements Observer {
 			txtrActions.setText("actions");
 			txtrActions.setMargin( new Insets(5,10,10,5) );
 			
+			txtrActions.setForeground(Color.white);
+			txtrActions.setBackground(Color.BLACK);
+			
 			scrollPane = new JScrollPane();
 			scrollPane.setViewportView(txtrActions);
+			
+			scrollPane.setForeground(Color.white);
+			scrollPane.setBackground(Color.BLACK);
 			
 
 			

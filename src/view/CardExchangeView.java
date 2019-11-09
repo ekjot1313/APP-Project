@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Insets;
@@ -44,11 +45,17 @@ public class CardExchangeView implements Observer {
 			txtrActions = new JTextArea();
 			txtrActions.setEditable(false);
 			txtrActions.setMargin(new Insets(5, 10, 10, 5));
+			
+			txtrActions.setForeground(Color.white);
+			txtrActions.setBackground(Color.BLACK);
 			// txtrActions.setText("");
 
 			scrollPane = new JScrollPane();
 			scrollPane.setViewportView(txtrActions);
 
+			scrollPane.setForeground(Color.white);
+			scrollPane.setBackground(Color.BLACK);
+			
 			frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
