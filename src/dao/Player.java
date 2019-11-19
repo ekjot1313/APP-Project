@@ -668,16 +668,20 @@ public class Player extends pattern.Observable {
 					int isAllout = 0;
 					if (s[3].equals("-allout")) {
 						while (toCountry.getNoOfArmies() != 0 && fromCountry.getNoOfArmies() != 1) {
-							if (fromCountry.getNoOfArmies() >= 3)
+							if (fromCountry.getNoOfArmies() > 3)
 								attackerDice = 3;
-							else
+							else if(fromCountry.getNoOfArmies() == 3)
 								attackerDice = 2;
+							else
+								attackerDice = 1;
 							if (toCountry.getNoOfArmies() >= 2)
 								defenderDice = 2;
 							else
 								defenderDice = 1;
 							Dice diceRoll = new Dice(attackerDice, defenderDice);
 							int result[][] = diceRoll.rollAll();
+							System.out.println("Dice Roll Output:");
+							diceRoll.print(result);
 							result = diceRoll.sort(result);
 							int min = Math.min(attackerDice, defenderDice);
 							for (int i = 0; i < min; i++) {
@@ -749,8 +753,8 @@ public class Player extends pattern.Observable {
 							map.setCountryOwner(toCountry, this.name);
 							this.getAssigned_countries().add(toCountry);
 							defender.getAssigned_countries().remove(toCountry);
-							toCountry.setNoOfArmies(1);
-							fromCountry.setNoOfArmies(fromCountry.getNoOfArmies() - 1);
+							/*toCountry.setNoOfArmies(1);
+							fromCountry.setNoOfArmies(fromCountry.getNoOfArmies() - 1);*/
 							System.out.println("You have conquered country: " + toCountry.getName());
 							setActions(this.name + " has conquered country: " + toCountry.getName());
 							if (defender.getAssigned_countries().size() == 0) {// defender is out of the game
@@ -770,7 +774,7 @@ public class Player extends pattern.Observable {
 								deck.remove(card);
 							}
 							// System.out.println(fromCountry.getNoOfArmies());
-							if (fromCountry.getNoOfArmies()> attackerDice) {
+							
 								System.out.println(
 										"Move armies from " + fromCountry.getName() + " to " + toCountry.getName());
 								System.out.println("Number of dices used by the attacker in the last attack:"+attackerDice);
@@ -782,10 +786,7 @@ public class Player extends pattern.Observable {
 									String command = sc3.nextLine();
 									valid = attackMove(command, fromCountry, toCountry,attackerDice);
 								} while (valid == 0);
-							}
-							else
-								System.out.println(
-										"You cannot move more armies to the conquered country as you have less or equal number of armies left in the attacking country as compared to the no of dices rolled for the last attack.");
+							
 							Continent cont = map.getContinentFromName(toCountry.getContinentName());
 							int flag = 0;
 							for (String country : cont.getCountries()) {
@@ -833,7 +834,7 @@ public class Player extends pattern.Observable {
 			}
 			if (n >= attackerDice && n <= fromCountry.getNoOfArmies() - 1) {
 				fromCountry.setNoOfArmies(fromCountry.getNoOfArmies() - n);
-				toCountry.setNoOfArmies(n + 1);
+				toCountry.setNoOfArmies(n);
 				this.setActions(
 						"Moving :" + n + " armies from :" + fromCountry.getName() + " to " + toCountry.getName());
 				return 1;
@@ -926,9 +927,9 @@ public class Player extends pattern.Observable {
 												System.out.println("Number of dices cannot be more than 3");
 												return 0;
 											}
-											if (numdice > noOfArmies) {
+											if (numdice >= noOfArmies) {
 												System.out.println(
-														"Number of dices can be less than or equal to the no of armies in that country.");
+														"Number of dices should be less than the no of armies in that country.");
 												return 0;
 											}
 											if (numdice == 0) {
