@@ -78,8 +78,9 @@ public class PlayerAllocator {
 			} else if (validate(cmd) == 1) {
 				String str[] = cmd.split(" ");
 				int checkDuplicate = 0;
-				for (int i = 1; i < str.length; i++) {
+				for (int i = 1; i < str.length; i+=2) {
 					if (str[i].equals("-add")) {
+						checkDuplicate = 0;
 						for (int h = 0; h < listOfPlayers.size(); h++) {
 							if (str[i + 1].equals(listOfPlayers.get(h).getName())) {
 								System.out.println("This player is already added, kindly add a new player.");
@@ -91,14 +92,12 @@ public class PlayerAllocator {
 							System.out.println("Sorry! Cannot add more players than no of countries");
 							break;
 						}
-						if (checkDuplicate == 1)
-							break;
-						else {
+						if (checkDuplicate != 1){
 							Player p = new Player();
 							p.setName(str[i + 1]);
 							// listOfPlayers.add(p);
 							map.addPlayer(p);
-							i++;
+							
 							System.out.println("Player " + p.getName() + " has been added successfully.");
 						}
 					}
@@ -117,7 +116,6 @@ public class PlayerAllocator {
 						}
 						if (flag == 0) {
 							System.out.println("Player Not found");
-							break;
 						}
 
 					}
