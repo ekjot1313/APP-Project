@@ -71,7 +71,9 @@ public class ArmyAllocator {
 		if (test == 1) {
 			placeAll(listOfPLayers, map);
 		} else {
+			
 			for (int i = 0; i < assignedArmies; i++) {
+				try {
 				for (Player p : listOfPLayers) {
 					Boolean armyNotAllocated = true;
 					while (armyNotAllocated) {
@@ -85,11 +87,11 @@ public class ArmyAllocator {
 						} else if (commands.length == 2 && commands[0].equals("placearmy")) {
 							// check if country is valid and assigned to the current player
 							if (map.getCountryFromName(commands[1]) == null) {
-								System.out.println("Invalid country");
+								throw new AllocatorException("Invalid country");
 							} else {
 								Country tempCountry = map.getCountryFromName(commands[1]);
 								if (tempCountry.getOwner() != p.getName())
-									System.out.println("Country is not assigned to current player");
+									throw new AllocatorException("Country is not assigned to current player");
 								else {
 									// main logic
 									if (tempCountry.getNoOfArmies() == 0) {
@@ -108,7 +110,7 @@ public class ArmyAllocator {
 
 										}
 										if (!isValid)
-											System.out.println("Cannot place army to this country");
+											throw new AllocatorException("Cannot place army to this country");
 										else {
 											tempCountry.setNoOfArmies(tempCountry.getNoOfArmies() + 1);
 											p.setUnassignedarmies(p.getUnassignedarmies() - 1);
@@ -122,12 +124,12 @@ public class ArmyAllocator {
 								System.out.println("Army placed successfully");
 
 						} else if (commands.length == 1 && commands[0].equals("placearmy")) {
-							System.out.println("Invalid command.");
+							throw new AllocatorException("Invalid command.");
 						} else if (commands[0].equals("placeall")) {
 							isPlaceAll = true;
 							break;
 						} else {
-							System.out.println("Invalid command");
+							throw new AllocatorException("Invalid command");
 						}
 
 					}
@@ -136,11 +138,16 @@ public class ArmyAllocator {
 				}
 				if (isPlaceAll)
 					break;
-			}
+			
 
 			// logic for placeall
 			if (isPlaceAll)
 				placeAll(listOfPLayers, map);
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		}
 		}
 	}
 

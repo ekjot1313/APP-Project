@@ -85,11 +85,11 @@ public class PlayerAllocator {
 						checkDuplicate = 0;
 						for (int h = 0; h < listOfPlayers.size(); h++) {
 							if (str[i + 1].equals(listOfPlayers.get(h).getName())) {
-								throw new PlayerAllocatorException("This player is already added, kindly add a new player.");
+								throw new AllocatorException("This player is already added, kindly add a new player.");
 							}
 						}
 						if (listOfPlayers.size() == map.getListOfCountries().size()) {
-							throw new PlayerAllocatorException("Sorry! Cannot add more players than no of countries");
+							throw new AllocatorException("Sorry! Cannot add more players than no of countries");
 						}
 				
 						Player p = new Player();
@@ -114,7 +114,7 @@ public class PlayerAllocator {
 							}
 						}
 						if (flag == 0) {
-							throw new PlayerAllocatorException("Player Not found");
+							throw new AllocatorException("Player Not found");
 						}
 
 					}
@@ -124,9 +124,9 @@ public class PlayerAllocator {
 				}
 
 			} else
-				throw new PlayerAllocatorException("Invalid command,Type again");
+				throw new AllocatorException("Invalid command,Type again");
 			if (cmd.equals("populatecountries") && listOfPlayers.size() == 1) {
-				throw new PlayerAllocatorException("Single player cannot play the game, please add more players");
+				throw new AllocatorException("Single player cannot play the game, please add more players");
 			}
 			if(testing ==1) {
 				break;
