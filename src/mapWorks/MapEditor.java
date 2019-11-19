@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import mapWorks.MapReader;
 
 /**
  * This class is used to edit the map. This will be called when user will enter
@@ -35,13 +34,14 @@ public class MapEditor {
 	public Map map;
 
 	/**
-	 * Default Constructor
+	 * Constructor
 	 */
 	public MapEditor() {
 		this.good = true;
 		this.print = true;
 		this.map = new Map();
 	}
+
 	/**
 	 * This method initializes map editor
 	 * 
@@ -356,7 +356,8 @@ public class MapEditor {
 	 * @param queue          queue
 	 * @return queue
 	 */
-	public ArrayList<ArrayList<String>> addContinentToQueue(String continentName, String continentValue, ArrayList<ArrayList<String>> queue) {
+	public ArrayList<ArrayList<String>> addContinentToQueue(String continentName, String continentValue,
+			ArrayList<ArrayList<String>> queue) {
 
 		// if country name is actually a tag
 		if (continentName.charAt(0) == '-' || continentValue.charAt(0) == '-') {
@@ -376,7 +377,8 @@ public class MapEditor {
 	 * @param continentName Continent to be removed
 	 * @param queue         queue
 	 */
-	public ArrayList<ArrayList<String>> removeContinentToQueue(String continentName, ArrayList<ArrayList<String>> queue) {
+	public ArrayList<ArrayList<String>> removeContinentToQueue(String continentName,
+			ArrayList<ArrayList<String>> queue) {
 
 		// if country name is actually a tag
 		if (continentName.charAt(0) == '-') {
@@ -396,9 +398,10 @@ public class MapEditor {
 	 * @param countryName   Country to be added
 	 * @param continentName Continent in which the country is to be added
 	 * @param queue         queue
-	 * @return 				queue
+	 * @return queue
 	 */
-	public ArrayList<ArrayList<String>> addCountryToQueue(String countryName, String continentName, ArrayList<ArrayList<String>> queue) {
+	public ArrayList<ArrayList<String>> addCountryToQueue(String countryName, String continentName,
+			ArrayList<ArrayList<String>> queue) {
 
 		// if country name is actually a tag
 		if (countryName.charAt(0) == '-' || continentName.charAt(0) == '-') {
@@ -417,7 +420,7 @@ public class MapEditor {
 	 * 
 	 * @param countryName Country to be removed
 	 * @param queue       queue
-	 * @return 			  queue
+	 * @return queue
 	 */
 	public ArrayList<ArrayList<String>> removeCountryToQueue(String countryName, ArrayList<ArrayList<String>> queue) {
 
@@ -439,7 +442,7 @@ public class MapEditor {
 	 * @param countryName         Country Name
 	 * @param neighborCountryName Neighboring country to be added
 	 * @param queue               queue
-	 * @return 					  queue
+	 * @return queue
 	 */
 	public ArrayList<ArrayList<String>> addNeighborToQueue(String countryName, String neighborCountryName,
 			ArrayList<ArrayList<String>> queue) {
@@ -462,7 +465,7 @@ public class MapEditor {
 	 * @param countryName         Country Name
 	 * @param neighborCountryName Neighboring country to be removed
 	 * @param queue               queue
-	 * @return 					  queue
+	 * @return queue
 	 */
 	public ArrayList<ArrayList<String>> removeNeighborToQueue(String countryName, String neighborCountryName,
 			ArrayList<ArrayList<String>> queue) {
@@ -510,10 +513,11 @@ public class MapEditor {
 						return;
 					}
 					if (map.getContinentFromName(s.get(1)) != null) {
-						print("Continent Already Exists.");
-						return;
+						print("Continent: " + s.get(1) + ", Already Exists.");
+						// return; Commented after build 2, because now corrupt sub-command will not
+						// affect whole command
+						continue; // jump to next sub-command
 					}
-
 					// creating new continent object and adding properties
 					Continent continent = new Continent();
 					continent.setName(s.get(1));
@@ -533,8 +537,10 @@ public class MapEditor {
 					Continent continent = map.getContinentFromName(s.get(1));
 
 					if (continent == null) {
-						print("Continent Not Found.");
-						return;
+						print("Continent: " + s.get(1) + ", Not Found.");
+						// return; Commented after build 2, because now corrupt sub-command will not
+						// affect whole command
+						continue; // jump to next sub-command
 					}
 
 					// creating sub-commands to remove all countries in continent, and storing in
@@ -544,18 +550,17 @@ public class MapEditor {
 						subqueue.add(new ArrayList<>(Arrays.asList("remove", countryName)));
 					}
 
-					
 					// executing all sub-commands
-					MapEditor me=new MapEditor();
-					me.map=this.map;
-					me.print=false; // not to print sub edits
+					MapEditor me = new MapEditor();
+					me.map = this.map;
+					me.print = false; // not to print sub edits
 					me.executeQueue("editcountry", subqueue);
-					
-					
+
 					// removing empty continent from map
 					map.getListOfContinent().remove(continent);
 
 					print("Removed Continent: " + continent.getName());
+
 				}
 			}
 			break;
@@ -573,11 +578,12 @@ public class MapEditor {
 					Continent parentContinent;
 
 					if (map.getCountryFromName(s.get(1)) != null) {
-						print("Country Already Exists.");
-						return;
+						print("Country: " + s.get(1) + ", Already Exists.");
+						// return;
+						continue; // jump to next sub-command
 					} else if ((parentContinent = map.getContinentFromName(s.get(2))) == null) {
-						print("Continent Not Found.");
-						return;
+						print("Continent: " + s.get(2) + ", Not Found.");
+						continue; // jump to next sub-command
 					}
 
 					// creating new country object and adding properties
@@ -601,8 +607,9 @@ public class MapEditor {
 					Country country = map.getCountryFromName(s.get(1));
 
 					if (country == null) {
-						print("Country Not Found.");
-						return;
+						print("Country: " + s.get(1) + ", Not Found.");
+						// return;
+						continue; // jump to next sub-command
 					}
 
 					// creating sub-commands to remove all neighbors of country, and
@@ -612,13 +619,11 @@ public class MapEditor {
 						subqueue.add(new ArrayList<>(Arrays.asList("remove", country.getName(), neighborName)));
 					}
 
-					
 					// executing all sub-commands
-					MapEditor me=new MapEditor();
-					me.map=this.map;
-					me.print=false; // not to print sub edits
+					MapEditor me = new MapEditor();
+					me.map = this.map;
+					me.print = false; // not to print sub edits
 					me.executeQueue("editneighbor", subqueue);
-					
 
 					// removing empty country from map
 					map.getListOfCountries().remove(country);
@@ -640,11 +645,13 @@ public class MapEditor {
 				// checking countries existence
 				Country count, neig;
 				if ((count = map.getCountryFromName(s.get(1))) == null) {
-					print("Country Not Found.");
-					return;
+					print("Country: " + s.get(1) + ", Not Found.");
+					// return;
+					continue; // jump to next sub-command
 				} else if ((neig = map.getCountryFromName(s.get(2))) == null) {
-					print("Neighbor Country Not Found.");
-					return;
+					print("Neighbor: " + s.get(2) + ", Not Found.");
+					// return;
+					continue; // jump to next sub-command
 				}
 
 				// find if there is link between them
@@ -658,9 +665,11 @@ public class MapEditor {
 
 					// link already exists
 					if (link) {
-						print("Given Countries Are Already Neighbors.");
-						good = false;
-						return;
+						print("Given Countries: " + count.getName() + " and " + neig.getName()
+								+ ", Are Already Neighbors.");
+						// good = false; Commented during refactoring in build 3; not required
+						// return;
+						continue; // jump to next sub-command
 					}
 
 					// if not neighbors, creating link
@@ -680,8 +689,11 @@ public class MapEditor {
 
 					// if link not found
 					if (!link) {
-						print("Given Countries Are Not Neighbors.");
-						good = false;
+						print("Given Countries: " + count.getName() + " and " + neig.getName()
+								+ ", Are Not Neighbors.");
+						// good = false; Commented during refactoring in build 3; not required
+						// return;
+						continue; // jump to next sub-command
 					}
 
 					// removing link
@@ -701,7 +713,7 @@ public class MapEditor {
 			break;
 		}
 		default: {
-			print("Error!!!");
+			print("Invalid Command.");
 		}
 		}
 
@@ -721,7 +733,7 @@ public class MapEditor {
 		Bridge bridgeB2A = new Bridge(continent1Name, country2Name, country1Name);
 		map.getContinentFromName(continent1Name).getBridges().add(bridgeA2B);
 		map.getContinentFromName(continent2Name).getBridges().add(bridgeB2A);
-		
+
 	}
 
 	/**
