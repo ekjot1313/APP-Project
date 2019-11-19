@@ -211,7 +211,6 @@ public class PlayerAllocator {
 		for (int p = 0; p < j * listOfPlayers.size(); p++) {
 			countryList.add(map.getListOfCountries().get(p).getName());
 		}
-		int count = 0;
 		for (int i = 0; i < j; i++) {
 			for (int k = 0; k < playerCount; k++) {
 				Random r = new Random();
@@ -223,15 +222,13 @@ public class PlayerAllocator {
 				Country c = map.getCountryFromName(countryList.get(index));
 				countryList.remove(index);
 				listOfPlayers.get(k).getAssigned_countries().add(c);
-				// c.setOwner(listOfPlayers.get(k).getName());
 				map.setCountryOwner(c, listOfPlayers.get(k).getName());
-				count++;
 			}
 		}
 		for (int p = j * listOfPlayers.size(); p < map.getListOfCountries().size(); p++) {
 			countryList.add(map.getListOfCountries().get(p).getName());
 		}
-		int leftCountries = countryCount - count;
+		int leftCountries = countryCount - (j * listOfPlayers.size());
 		for (int m = 0; m < leftCountries; m++) {
 			Random r = new Random();
 			int index;
@@ -244,7 +241,6 @@ public class PlayerAllocator {
 			countryList.remove(index);
 			listOfPlayers.get(m).getAssigned_countries().add(c);
 			map.setCountryOwner(c,listOfPlayers.get(m).getName());
-			count++;
 		}
 
 		for (Continent c : map.getListOfContinent()) {
