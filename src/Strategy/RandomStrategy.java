@@ -10,6 +10,7 @@ import dao.Player;
 import dao.Strategy;
 
 public class RandomStrategy implements Strategy {
+	
 
 	Random random = new Random();
 
