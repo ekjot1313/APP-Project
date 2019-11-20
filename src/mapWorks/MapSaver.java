@@ -19,35 +19,6 @@ import dao.Map;
 public class MapSaver {
 	
 	/**
-	 * Object of Map
-	 */
-	public Map map;
-	/**
-	 * Stores the filename of file
-	 */
-	public String fileName;
-	/**
-	 * Stores the message 
-	 */
-	public String message1;
-	/**
-	 * Stores the message 
-	 */
-	public String message2;
-	/**
-	 * Stores the name of map
-	 */
-	public String mapName;
-	/**
-	 * Stores the list of continents
-	 */
-	public List<Continent> listOfContinent;
-	/**
-	 * Stores the list of countries
-	 */
-	public List<Country> listOfCountries;
-
-	/**
 	 * This method saves the map to .map file
 	 * 
 	 * @param map      Map Object
@@ -55,12 +26,13 @@ public class MapSaver {
 	 * @throws IOException for Buffered Reader
 	 */
 	public void saveMap(Map map, String fileName) throws IOException {
-
-		this.message1 = map.getMessage1();
-		this.message2 = map.getMessage2();
-		this.mapName = map.getMapName();
-		this.listOfContinent = map.getListOfContinent();
-		this.listOfCountries = map.getListOfCountries();
+		
+		String message1;
+		String message2;
+		String mapName;
+		message1 = map.getMessage1();
+		message2 = map.getMessage2();
+		mapName = map.getMapName();
 		String currentPath = System.getProperty("user.dir") + "\\Maps\\";
 		String mapPath = currentPath + fileName + ".map";
 		BufferedWriter bwFile = new BufferedWriter(new FileWriter(mapPath));
@@ -93,39 +65,4 @@ public class MapSaver {
 		System.out.println("Map file saved as: " + fileName + ".map");
 	}
 
-	/**
-	 * This method returns the name of the file
-	 * 
-	 * @return File Name
-	 */
-	public String getFileName() {
-		return fileName;
-	}
-
-	/**
-	 * This method sets the name of the file
-	 * 
-	 * @param fileName File Name to set
-	 */
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
-	/**
-	 * This method returns the map object
-	 * 
-	 * @return Map Object
-	 */
-	public Map getMap() {
-		return map;
-	}
-
-	/**
-	 * This method sets the map object
-	 * 
-	 * @param map Map Object
-	 */
-	public void setMap(Map map) {
-		this.map = map;
-	}
 }
