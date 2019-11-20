@@ -16,7 +16,7 @@ public class DominationReaderWriter {
 	/**
 	 * Map to store the current map object
 	 */
-	public Map map;
+	//public Map map;
 	/**
 	 * BufferedReader to process map file
 	 */
@@ -33,7 +33,7 @@ public class DominationReaderWriter {
 	 * @param file Map file to be parsed
 	 * @return 1 if successful else 0
 	 */
-	public int parseMapFile(File file) {
+	public int parseMapFile(Map map,File file) {
 		
 
 		try {
@@ -42,14 +42,14 @@ public class DominationReaderWriter {
 
 			while ((currentLine = bufferReaderForFile.readLine()) != null) {
 				if (currentLine.contains("[continents]")) {
-					loadContinents();
+					loadContinents(map);
 				}
 
 				if (currentLine.contains("[countries]")) {
-					loadCountries();
+					loadCountries(map);
 				}
 				if (currentLine.contains("[borders]")) {
-					loadBorders();
+					loadBorders(map);
 				}
 
 			}
@@ -79,7 +79,7 @@ public class DominationReaderWriter {
 	 * @throws NumberFormatException for Buffered Reader
 	 * @throws IOException           for Buffered Reader
 	 */
-	private void loadBorders() throws NumberFormatException, IOException {
+	private void loadBorders(Map map) throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
 
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
@@ -117,7 +117,7 @@ public class DominationReaderWriter {
 	 * @throws NumberFormatException for Buffered Reader
 	 * @throws IOException           for Buffered Reader
 	 */
-	private void loadCountries() throws NumberFormatException, IOException {
+	private void loadCountries(Map map) throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
 
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
@@ -142,7 +142,7 @@ public class DominationReaderWriter {
 	 * @throws NumberFormatException for Buffered Reader
 	 * @throws IOException           for Buffered Reader
 	 */
-	private void loadContinents() throws NumberFormatException, IOException {
+	private void loadContinents(Map map) throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
 
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
@@ -164,9 +164,9 @@ public class DominationReaderWriter {
 	 * 
 	 * @return Map Object
 	 */
-	public Map getMap() {
+	/*public Map getMap() {
 		return this.map;
-	}
+	}*/
 
 
 

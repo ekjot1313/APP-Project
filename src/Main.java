@@ -1,4 +1,6 @@
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,9 @@ import dao.Map;
 import dao.Player;
 import game.ArmyAllocator;
 import game.PlayerAllocator;
+import mapWorks.ConquestReaderWriter;
+import mapWorks.DominationReaderWriter;
+import mapWorks.MapReaderWriterAdapter;
 import mapWorks.MapEditor;
 
 /**
@@ -28,6 +33,9 @@ public class Main {
 	 * To store phase domination view
 	 */
 	static PWDView pwdView = null;
+	
+	static Map map;
+	
 	/**
 	 * @param args
 	 * @throws Exception
@@ -78,7 +86,7 @@ public class Main {
 			try {
 				editMapCommands();
 				System.out.println("Type savemap");
-				mr.map = mpe.mapEditorInit(mr.map);
+				map = mpe.mapEditorInit(map);
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -88,7 +96,7 @@ public class Main {
 			System.out.println("Map file does not exist .New File created .");
 			editMapCommands();
 			try {
-				mr.map = mpe.mapEditorInit(null);
+				map = mpe.mapEditorInit(null);
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -112,17 +120,32 @@ public class Main {
 		currentPath += filename + ".map";
 		File newFile = new File(currentPath);
 		if (newFile.exists()) {
-
+			
 			pwdView = new PWDView(true);
-			mr.map = new Map(); // to clear buffer map
-			mr.map.attach(pwdView);
-			int mapParseStatus = mr.parseMapFile(newFile);
+			map = new Map(); // to clear buffer map
+			map.attach(pwdView);
+			
+			//check if file if Domination or Conquest
+			BufferedReader bufferReaderForFile = new BufferedReader(new FileReader(newFile));
+			String firstLine = bufferReaderForFile.readLine();
+			
+			DominationReaderWriter drw =  new DominationReaderWriter();
+			ConquestReaderWriter crw =  new ConquestReaderWriter();
+			
+			if(!firstLine.startsWith(";")) {
+				drw = new MapReaderWriterAdapter(crw);
+			}
+			
+			int mapParseStatus = drw.parseMapFile(map,newFile);
+			
+			//int mapParseStatus = mr.parseMapFile(newFile);
+			
 
 			// to check whether map is parsed successfully
 			if (mapParseStatus == 1) {
 				System.out.println("Map is loaded successfully.");
 
-				gameplayer(mr);
+				gameplayer();
 			}
 
 		} else {
@@ -138,18 +161,18 @@ public class Main {
 	 * @param mr MapReader Object
 	 * @throws Exception
 	 */
-	private static void gameplayer(MapReader mr) throws Exception {
+	private static void gameplayer() throws Exception {
 
 		// Player p =new Player();
 		// Create Deck of cards
-		ArrayList<String> deck = createDeck(mr.map);
+		ArrayList<String> deck = createDeck(map);
 		Player.deck = deck;
 		PlayerAllocator pa = new PlayerAllocator();
 		ArmyAllocator aa = new ArmyAllocator();
 		int gameOver = 0;
-		pa.allocate(mr.map,null);
-		pa.populateCountries(mr.map);
-		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, mr.map, 0);
+		pa.allocate(map,null);
+		pa.populateCountries(map);
+		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, map, 0);
 		for (int j = 0; j < pa.listOfPlayers.size(); j++) {
 			pa.listOfPlayers.get(j).setStrategy(new HumanStrategy());
 		}
@@ -162,16 +185,16 @@ public class Main {
 				pa.listOfPlayers.get(i).attach(pv);
 				
 				pa.listOfPlayers.get(i).attach(cev);
-				pa.listOfPlayers.get(i).executereinforcement(mr.map, (ArrayList<Player>) pa.listOfPlayers);
+				pa.listOfPlayers.get(i).executereinforcement(map, (ArrayList<Player>) pa.listOfPlayers);
 				Thread.sleep(1500);
 				pa.listOfPlayers.get(i).detach(cev);
 				cev.close();
 				
-				gameOver = pa.listOfPlayers.get(i).executeattack(mr.map, (ArrayList<Player>) pa.listOfPlayers);
+				gameOver = pa.listOfPlayers.get(i).executeattack(map, (ArrayList<Player>) pa.listOfPlayers);
 				Thread.sleep(1500);
 				if (gameOver == 1)
 					break;
-				pa.listOfPlayers.get(i).executefortification(mr.map, (ArrayList<Player>) pa.listOfPlayers,null);
+				pa.listOfPlayers.get(i).executefortification(map, (ArrayList<Player>) pa.listOfPlayers,null);
 				Thread.sleep(1500);
 				pa.listOfPlayers.get(i).detach(pv);
 				
@@ -183,7 +206,7 @@ public class Main {
 		System.out.println("Winner is Player: " + pa.listOfPlayers.get(0).getName());
 		
 		//detach and close PWDView
-		mr.map.detach(pwdView);
+		map.detach(pwdView);
 		pwdView.close();
 		
 		

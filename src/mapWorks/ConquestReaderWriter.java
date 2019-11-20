@@ -15,10 +15,7 @@ import dao.Country;
 import dao.Map;
 
 public class ConquestReaderWriter {
-	/**
-	 * Map to store the current map object
-	 */
-	public Map map;
+	
 	/**
 	 * BufferedReader to process map file
 	 */
@@ -28,15 +25,7 @@ public class ConquestReaderWriter {
 	 */
 	private String currentLine;
 	
-	/**
-	 * This method returns the currently loaded map
-	 * 
-	 * @return Map Object
-	 */
-	public Map getMap() {
-		return this.map;
-	}
-
+	
 	/**
 	 * This method parses the map file
 	 * 
@@ -44,7 +33,7 @@ public class ConquestReaderWriter {
 	 * @return 1 if successful else 0
 	 */
 
-	public int parseMapFile(File file) {
+	public int parseMapFile(Map map,File file) {
 		
 
 		try {
@@ -53,17 +42,17 @@ public class ConquestReaderWriter {
 
 			while ((currentLine = bufferReaderForFile.readLine()) != null) {
 				if (currentLine.contains("[Continents]")) {
-					loadContinents();
+					loadContinents(map);
 				}
 
 				if (currentLine.contains("[Territories]")) {
-					loadTerritories();
+					loadTerritories(map);
 				}
 				
 
 			}
 			
-			loadBridges();
+			loadBridges(map);
 			
 			// validate map call
 			int notConnected = map.validateMap();
@@ -89,7 +78,7 @@ public class ConquestReaderWriter {
 	 * This method loads the bridges to the continents
 	 * 
 	 */
-	private void loadBridges() {
+	private void loadBridges(Map map) {
 		// TODO Auto-generated method stub
 		for(Country c: map.getListOfCountries()) {
 			for(String neighborCountry :c.getNeighbors() ) {
@@ -107,7 +96,7 @@ public class ConquestReaderWriter {
 	 * @throws NumberFormatException for Buffered Reader
 	 * @throws IOException           for Buffered Reader
 	 */
-	private void loadTerritories() throws NumberFormatException, IOException {
+	private void loadTerritories(Map map) throws NumberFormatException, IOException {
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
 			
 			if (currentLine.length() == 0) {
@@ -135,7 +124,7 @@ public class ConquestReaderWriter {
 	 * @throws NumberFormatException for Buffered Reader
 	 * @throws IOException           for Buffered Reader
 	 */
-	private void loadContinents() throws NumberFormatException, IOException {
+	private void loadContinents(Map map) throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
 
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {

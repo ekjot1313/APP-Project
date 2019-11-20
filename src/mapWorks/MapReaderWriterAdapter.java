@@ -5,13 +5,17 @@ import java.io.IOException;
 
 import dao.Map;
 
-public class MapReaderWriterAdaper extends DominationReaderWriter {
+public class MapReaderWriterAdapter extends DominationReaderWriter {
 	ConquestReaderWriter crw = new ConquestReaderWriter();
+	
+	public MapReaderWriterAdapter(ConquestReaderWriter crw){
+		this.crw =  crw;
+	}
 
 	@Override
-	public int parseMapFile(File file) {
+	public int parseMapFile(Map map,File file) {
 		// TODO Auto-generated method stub
-		return crw.parseMapFile(file);
+		return crw.parseMapFile(map,file);
 	}
 
 	@Override
