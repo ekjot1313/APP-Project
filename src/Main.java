@@ -170,7 +170,6 @@ public class Main {
 	 * @throws Exception
 	 */
 	private static void gameplayer() throws Exception {
-
 		// Player p =new Player();
 		// Create Deck of cards
 		ArrayList<String> deck = createDeck(map);
