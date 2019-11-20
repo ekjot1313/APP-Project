@@ -10,13 +10,193 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class HumanStrategy implements Strategy {
+	/**
+	 * This method calculates the number of reinforcement armies
+	 * 
+	 
+	 * @param map         Map Object
+	 * @param P			  Player
+	 * @return Number of reinforcement armies
+	 */
+	public int calculateReinforceArmies(Map map,Player P) {
+		// calculating on the basis of no of countries the player own
+		int noOfArmies = P.getAssigned_countries().size() / 3;
+		int reinforcementArmies = noOfArmies <= 3 ? 3 : noOfArmies;
+
+		// calculating on the basis of continents owned
+
+		for (Continent continent : map.getListOfContinent()) {
+			if (continent.getOwner().equals(P.getName())) {
+				reinforcementArmies += continent.getContinentValue();
+		
+			}
+		}
+
+		return reinforcementArmies;
+	}
+	/**
+	 * Function to move the armies after conquering country
+	 * @param command entered command
+	 * @param fromCountry name of country from which armies are moved
+	 * @param toCountry name of country to which armies should be moved
+	 * @return 1 if armies are successfully moved otherwise 0.
+	 */
+	public int attackMove(String command, Country fromCountry, Country toCountry,int attackerDice,Player P) {
+		String str[] = command.split(" ");
+
+		if (str.length == 2 && str[0].equals("attackmove")) {
+			int n;
+			try {
+			n = Integer.parseInt(str[1]);
+			}catch(Exception e) {
+				System.out.println("Invalid command");
+				return 0;
+			}
+			if (n >= attackerDice && n <= fromCountry.getNoOfArmies() - 1) {
+				fromCountry.setNoOfArmies(fromCountry.getNoOfArmies() - n);
+				toCountry.setNoOfArmies(n);
+				P.setActions(
+						"Moving :" + n + " armies from :" + fromCountry.getName() + " to " + toCountry.getName());
+				return 1;
+			} else {
+				if (n < attackerDice || n > fromCountry.getNoOfArmies() - 1)
+					System.out.println("Incorrect no of armies, Kindly type again.");
+				return 0;
+			}
+		} else {
+			System.out.println("Incorrect command, Kindly type again.");
+			return 0;
+		}
+	}
+	/**
+	 * This method checks for attack deadlock
+	 * @param map Object of Map
+	 * @return 1 if deadlock occurred otherwise 0.
+	 */
+	public int attackDeadlock(Map map,Player P) {
+		if (P.getNoOfArmies() == P.getAssigned_countries().size())
+			return 1;
+		else {
+			for (Country c : P.getAssigned_countries()) {
+				if (c.getNoOfArmies() != 1) {
+					for (String s : c.getNeighbors()) {
+						Country c1 = map.getCountryFromName(s);
+						if (!(c1.getOwner().equals(P.getName()))) {
+							return 0;
+						}
+					}
+				}
+			}
+		}
+		return 1;
+	}
+
+	/**
+	 * Function to check the end of game
+	 * @param listPlayer list of players
+	 * @return 1 if end of game otherwise 0.
+	 */
+	public int endGame(ArrayList<Player> listPlayer) {
+		if (listPlayer.size() == 1)
+			return 1;
+		return 0;
+	}
+
+
+	/**
+	 * This is the method to check the attack command.
+	 * 
+	 * @return 1 if the command is valid otherwise 0.
+	 */
+	public int validate(String command, Map map,Player P) {
+		String s[] = command.split(" ");
+		int countryFound = 0;
+		int neighborFound = 0;
+		if (command.equals("showmap"))
+			return 1;
+		if (s.length == 2) {
+			if (command.equals("attack -noattack")) {
+				P.setEndOfActions(1);
+				P.setActions("Attack finished");
+				return 1;
+			}
+		}
+		if (s.length == 4) {
+			if (s[0].equals("attack")) {
+				for (Country c : P.getAssigned_countries()) {
+					if (c.getName().equals(s[1])) {
+						countryFound = 1;
+						if (c.getNoOfArmies() > 1) {
+							for (int i = 0; i < c.getNeighbors().size(); i++) {
+								if (c.getNeighbors().get(i).equals(s[2])) {
+									neighborFound = 1;
+									Country c2 = map.getCountryFromName(s[2]);
+									if (!P.getName().equals(c2.getOwner())) {
+										if (s[3].equals("-allout"))
+											return 1;
+										else {
+											int numdice=0;
+											try {
+											numdice = Integer.parseInt(s[3]);
+											}catch(Exception e) {
+												//System.out.println("Invalid command.");
+												continue;
+											}
+											int noOfArmies = c.getNoOfArmies();
+											if (numdice > 3) {
+												System.out.println("Number of dices cannot be more than 3");
+												return 0;
+											}
+											if (numdice >= noOfArmies) {
+												System.out.println(
+														"Number of dices should be less than the no of armies in that country.");
+												return 0;
+											}
+											if (numdice == 0) {
+												System.out.println("Number of dices cannot be 0");
+												return 0;
+											}
+											if (numdice < 0) {
+												System.out.println("Incorrect number of dices");
+												return 0;
+											}
+											return 1;
+										}
+									} else {
+										System.out.println("Sorry!You cannot attack your own country.");
+										return 0;
+									}
+
+								}
+							}
+						} else {
+							System.out.println("You only have 1 army left in the FromCountry.Hence you cannot attack");
+							return 0;
+						}
+						if (neighborFound == 0) {
+							System.out.println("Sorry!To country is not an adjacent country of From country.");
+							return 0;
+						}
+
+					}
+
+				}
+				if (countryFound == 0) {
+					System.out.println("Sorry!From country is not assigned to you.");
+					return 0;
+				}
+			} else
+				return 0;
+		}
+		return 0;
+	}
 	public void reinforcement(Map map, ArrayList<Player> listPlayer,Player P) {
 		P.setEndOfActions(0);
 		P.setView("PhaseViewCardExchangeView");
 		P.setState("Reinforcement");
 		Scanner sc = new Scanner(System.in);
 		// calculate reinforcement armies
-		int reinforcementArmies = P.calculateReinforceArmies(map, listPlayer);
+		int reinforcementArmies=calculateReinforceArmies(map,P);
 		int forceExchangeCards = 0;
 
 		if (P.getCards().size() >= 5) {
@@ -309,7 +489,7 @@ public class HumanStrategy implements Strategy {
 		int attackDeadlock = 0;
 		attackDeadlock = 0;
 		// checking for deadlock
-		attackDeadlock = P.attackDeadlock(map);
+		attackDeadlock = attackDeadlock(map,P);
 		if (attackDeadlock == 1) {
 			P.setEndOfActions(1);
 			System.out.println("You cannot attack now because of the attack deadlock.");
@@ -323,7 +503,7 @@ public class HumanStrategy implements Strategy {
 		do {
 			attackDeadlock = 0;
 			// checking for deadlock
-			attackDeadlock = P.attackDeadlock(map);
+			attackDeadlock = attackDeadlock(map,P);
 			if (attackDeadlock == 1) {
 				P.setEndOfActions(1);
 				System.out.println("You cannot attack now because of the attack deadlock.");
@@ -331,7 +511,7 @@ public class HumanStrategy implements Strategy {
 				return 0;
 			}
 			input = sc3.nextLine();
-			while (P.validate(input, map) == 0) {
+			while (validate(input, map,P) == 0) {
 				System.out.println("Invalid command, Kindly type again");
 				input = sc3.nextLine();
 			}
@@ -457,7 +637,7 @@ public class HumanStrategy implements Strategy {
 								}
 								listPlayer.remove(defender);
 								// checking for game finish condition
-								if (P.endGame(listPlayer) == 1)
+								if (endGame(listPlayer) == 1)
 									return 1;
 
 							} else {
@@ -479,7 +659,7 @@ public class HumanStrategy implements Strategy {
 								int valid = 0;
 								do {
 									String command = sc3.nextLine();
-									valid = P.attackMove(command, fromCountry, toCountry,attackerDice);
+									valid = attackMove(command, fromCountry, toCountry,attackerDice,P);
 								} while (valid == 0);
 							
 							Continent cont = map.getContinentFromName(toCountry.getContinentName());
