@@ -164,28 +164,22 @@ public class ConquestReaderWriter {
 		content += (message1 + "\r\n");
 		content += ("\r\nname " + mapName + " Map\r\n");
 		content += ("\r\n" + message2 + "\r\n");
-		content += ("\r\n[continents]\r\n");
+		content += ("\r\n[Continents]\r\n");
 		for (Continent continent : map.getListOfContinent()) {
-			content += (continent.getName() + " " + continent.getContinentValue() + " 00000\r\n");
+			content += (continent.getName() + "=" + continent.getContinentValue()+"\n");
 		}
-		content += ("\r\n[countries]\r\n");
+		content += ("\r\n[Territories]\r\n");
 		String borders = "";
 		for (Country country : map.getListOfCountries()) {
-			int countryIndex = map.getListOfCountries().indexOf(country) + 1;
-			int continentIndex = map.getListOfContinent().indexOf(map.getContinentFromName(country.getContinentName()))
-					+ 1;
-
-			content += (countryIndex + " " + country.getName() + " " + continentIndex + "\r\n");
-			borders += (countryIndex + "");
-			for (String neighborName : country.getNeighbors()) {
-				int neighborIndex = map.getListOfCountries().indexOf(map.getCountryFromName(neighborName)) + 1;
-				borders += (" " + neighborIndex);
+			content += (country.getName()+ ",0,0," + country.getContinentName()+ ",");
+			for(String neighbor: country.getNeighbors()) {
+				content +=(neighbor+",");
 			}
-			borders += ("\r\n");
+			content += "\n";
 		}
-		content += ("\r\n[borders]\r\n" + borders);
 		bwFile.write(content);
 		bwFile.close();
 		System.out.println("Map file saved as: " + fileName + ".map");
 	}
+
 }

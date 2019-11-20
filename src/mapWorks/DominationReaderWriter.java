@@ -178,7 +178,7 @@ public class DominationReaderWriter {
 	 * @param fileName Name of the file
 	 * @throws IOException for Buffered Reader
 	 */
-	public void saveMap(Map map, String fileName) throws IOException {
+public void saveMap(Map map, String fileName) throws IOException {
 		
 		String message1;
 		String message2;
@@ -217,5 +217,4 @@ public class DominationReaderWriter {
 		bwFile.close();
 		System.out.println("Map file saved as: " + fileName + ".map");
 	}
-
 }
