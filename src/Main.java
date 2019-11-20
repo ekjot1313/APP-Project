@@ -9,6 +9,7 @@ import mapWorks.MapReader;
 import view.CardExchangeView;
 import view.PWDView;
 import view.PhaseView;
+import dao.HumanStrategy;
 import dao.Map;
 import dao.Player;
 import game.ArmyAllocator;
@@ -149,7 +150,9 @@ public class Main {
 		pa.allocate(mr.map,null);
 		pa.populateCountries(mr.map);
 		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, mr.map, 0);
-
+		for (int j = 0; j < pa.listOfPlayers.size(); j++) {
+			pa.listOfPlayers.get(j).setStrategy(new HumanStrategy());
+		}
 		while (true) {
 			PhaseView pv= new PhaseView();
 			CardExchangeView cev = new CardExchangeView();
@@ -159,16 +162,16 @@ public class Main {
 				pa.listOfPlayers.get(i).attach(pv);
 				
 				pa.listOfPlayers.get(i).attach(cev);
-				pa.listOfPlayers.get(i).reinforcement(mr.map, (ArrayList<Player>) pa.listOfPlayers);
+				pa.listOfPlayers.get(i).executereinforcement(mr.map, (ArrayList<Player>) pa.listOfPlayers);
 				Thread.sleep(1500);
 				pa.listOfPlayers.get(i).detach(cev);
 				cev.close();
 				
-				gameOver = pa.listOfPlayers.get(i).attack(mr.map, (ArrayList<Player>) pa.listOfPlayers);
+				gameOver = pa.listOfPlayers.get(i).executeattack(mr.map, (ArrayList<Player>) pa.listOfPlayers);
 				Thread.sleep(1500);
 				if (gameOver == 1)
 					break;
-				pa.listOfPlayers.get(i).fortification(mr.map, (ArrayList<Player>) pa.listOfPlayers,null);
+				pa.listOfPlayers.get(i).executefortification(mr.map, (ArrayList<Player>) pa.listOfPlayers,null);
 				Thread.sleep(1500);
 				pa.listOfPlayers.get(i).detach(pv);
 				

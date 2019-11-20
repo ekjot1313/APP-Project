@@ -140,14 +140,15 @@ public class ArmyAllocator {
 					break;
 			
 
-			// logic for placeall
-			if (isPlaceAll)
-				placeAll(listOfPLayers, map);
+			
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		}
+		// logic for placeall
+		if (isPlaceAll)
+			placeAll(listOfPLayers, map);
 		}
 	}
 
