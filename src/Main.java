@@ -142,6 +142,7 @@ public class Main {
 			
 
 			// to check whether map is parsed successfully
+			
 			if (mapParseStatus == 1) {
 				System.out.println("Map is loaded successfully.");
 
@@ -185,16 +186,16 @@ public class Main {
 				pa.listOfPlayers.get(i).attach(pv);
 				
 				pa.listOfPlayers.get(i).attach(cev);
-				pa.listOfPlayers.get(i).executereinforcement(map, (ArrayList<Player>) pa.listOfPlayers);
+				pa.listOfPlayers.get(i).executeReinforcement(map, (ArrayList<Player>) pa.listOfPlayers);
 				Thread.sleep(1500);
 				pa.listOfPlayers.get(i).detach(cev);
 				cev.close();
 				
-				gameOver = pa.listOfPlayers.get(i).executeattack(map, (ArrayList<Player>) pa.listOfPlayers);
+				gameOver = pa.listOfPlayers.get(i).executeAttack(map, (ArrayList<Player>) pa.listOfPlayers);
 				Thread.sleep(1500);
 				if (gameOver == 1)
 					break;
-				pa.listOfPlayers.get(i).executefortification(map, (ArrayList<Player>) pa.listOfPlayers,null);
+				pa.listOfPlayers.get(i).executeFortification(map, (ArrayList<Player>) pa.listOfPlayers,null);
 				Thread.sleep(1500);
 				pa.listOfPlayers.get(i).detach(pv);
 				
