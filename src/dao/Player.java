@@ -306,7 +306,7 @@ public class Player extends pattern.Observable {
 	 *                    and countries.
 	 *                    
 	 */
-	public void executereinforcement(Map map, ArrayList<Player> listPlayer) {
+	public void executeReinforcement(Map map, ArrayList<Player> listPlayer) {
 		this.strategy.reinforcement(map, listPlayer, this);
 	}
 
@@ -318,7 +318,7 @@ public class Player extends pattern.Observable {
 	 *                    and countries.
 	 * @param command	For testing
 	 */
-	public void executefortification(Map map, ArrayList<Player> listPlayer, String command) {
+	public void executeFortification(Map map, ArrayList<Player> listPlayer, String command) {
 			this.strategy.fortification(map, listPlayer, command, this);
 
 	}
@@ -330,7 +330,7 @@ public class Player extends pattern.Observable {
 	 * @return 1 if attack is successful otherwise 0.
 	 * @throws Exception
 	 */
-	public int executeattack(Map map, ArrayList<Player> listPlayer) throws Exception {
+	public int executeAttack(Map map, ArrayList<Player> listPlayer) throws Exception {
 		int result=this.strategy.attack(map, listPlayer, this);
 		return result;
 	}
