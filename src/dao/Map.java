@@ -44,7 +44,11 @@ public class Map extends pattern.Observable {
 	 * flag to print or not
 	 */
 	public boolean printFlag = true;
-
+	
+	/**
+	 * Type of map
+	 */
+	public String type;
 	/**
 	 * @return the listOfPlayers
 	 */

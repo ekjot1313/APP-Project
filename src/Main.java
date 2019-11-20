@@ -74,19 +74,30 @@ public class Main {
 	 * 
 	 * @param filename Map file to be edited
 	 */
-	private static void editmap(String filename) {
-		MapReader mr = new MapReader();
+	private static void editmap(String filename)  throws Exception {
 		MapEditor mpe = new MapEditor();
 		System.out.println(System.getProperty("user.dir"));
 		String currentPath = System.getProperty("user.dir");
 		currentPath += "\\Maps\\" + filename + ".map";
 		File newFile = new File(currentPath);
+		map = new Map(); // to clear buffer map
+		DominationReaderWriter drw =  new DominationReaderWriter();
 		if (newFile.exists()) {
-			mr.parseMapFile(newFile);
+			//check if file if Domination or Conquest
+			BufferedReader bufferReaderForFile = new BufferedReader(new FileReader(newFile));
+			String firstLine = bufferReaderForFile.readLine();
+			
+			ConquestReaderWriter crw =  new ConquestReaderWriter();
+			
+			if(!firstLine.startsWith(";")) {
+				drw = new MapReaderWriterAdapter(crw);
+			}
+			
+			int mapParseStatus = drw.parseMapFile(map,newFile);
 			try {
 				editMapCommands();
 				System.out.println("Type savemap");
-				map = mpe.mapEditorInit(map);
+				map = mpe.mapEditorInit(map , drw);
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -96,7 +107,7 @@ public class Main {
 			System.out.println("Map file does not exist .New File created .");
 			editMapCommands();
 			try {
-				map = mpe.mapEditorInit(null);
+				map = mpe.mapEditorInit(null , drw);
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -138,11 +149,7 @@ public class Main {
 			
 			int mapParseStatus = drw.parseMapFile(map,newFile);
 			
-			//int mapParseStatus = mr.parseMapFile(newFile);
-			
-
 			// to check whether map is parsed successfully
-			
 			if (mapParseStatus == 1) {
 				System.out.println("Map is loaded successfully.");
 

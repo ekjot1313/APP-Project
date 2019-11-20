@@ -49,7 +49,7 @@ public class MapEditor {
 	 * @return Map object
 	 * @throws IOException BufferedReader used for user input
 	 */
-	public Map mapEditorInit(Map map) throws IOException {
+	public Map mapEditorInit(Map map ,DominationReaderWriter drw) throws IOException {
 		BufferedReader brConsole = new BufferedReader(new InputStreamReader(System.in));
 
 		// if passed map is null then create new map otherwise copy map
@@ -90,7 +90,8 @@ public class MapEditor {
 
 					// validate and save map; if map is invalid, prompt user to edit map
 					if (this.map.validateMap() == 0 && this.map.validateContinent(this.map) == 0) {
-						(new MapSaver()).saveMap(this.map, command[1]);
+						//(new MapSaver()).saveMap(this.map, command[1]);
+						drw.saveMap(map, command[1]);
 
 						// map successfully edited and saved
 						return this.map;

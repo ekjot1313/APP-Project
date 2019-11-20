@@ -1,0 +1,59 @@
+null
+
+name null Map
+
+null
+
+[Continents]
+Berga=4
+Centre Metro=7
+Craterland=5
+Great Horn Island=2
+Greenwood Island=3
+Polar Island=1
+Queensbasin=5
+Republic of Cranberra=4
+
+[Territories]
+Barron,0,0,Berga,Grand Bank,Metroville,Banyan,Bella,Byland,
+Banyan,0,0,Berga,Barron,Bella,Metroville,Mastic,Riviera,
+Bella,0,0,Berga,Barron,Banyan,Bordon,Bot,Byland,Riviera,
+Bordon,0,0,Berga,Bella,Bot,Byland,
+Bot,0,0,Berga,Bella,Bordon,Byland,Riviera,Rand,
+Byland,0,0,Berga,Barron,Bella,Bordon,Bot,Rand,
+Martello,0,0,Centre Metro,Coron,Cannon,Cill,Menthyl,Metroville,Gray,
+Menthyl,0,0,Centre Metro,Cill,Ceed,Martello,Metroville,Metron,Mastic,
+Metroville,0,0,Centre Metro,Martello,Menthyl,Mastic,Barron,Banyan,Gray,
+Metron,0,0,Centre Metro,Ceed,Menthyl,Mastic,Mylon,Moonbay,Marrian,
+Mastic,0,0,Centre Metro,Menthyl,Metroville,Metron,Marrian,Banyan,Rhone,Riviera,
+Mylon,0,0,Centre Metro,Quell,Quandry,Ceed,Metron,Moonbay,Gras,
+Moonbay,0,0,Centre Metro,Metron,Mylon,Marrian,Polaris,
+Marrian,0,0,Centre Metro,Metron,Mastic,Moonbay,Relish,Rhone,
+Cyan,0,0,Craterland,Coron,Cannon,Cylac,
+Coron,0,0,Craterland,Cyan,Cannon,Cylac,Cirius,Cill,Martello,
+Cannon,0,0,Craterland,Cyan,Coron,Martello,
+Cylac,0,0,Craterland,Cyan,Coron,Cirius,Queensryche,
+Cirius,0,0,Craterland,Coron,Cylac,Cill,Ceed,Queensryche,Quell,
+Cill,0,0,Craterland,Coron,Cirius,Ceed,Martello,Menthyl,
+Ceed,0,0,Craterland,Cirius,Cill,Quell,Menthyl,Metron,Mylon,
+Gray,0,0,Great Horn Island,Grand Bank,Martello,Metroville,
+Grand Bank,0,0,Great Horn Island,Gray,Barron,
+Gras,0,0,Greenwood Island,Galyn,Gilead,Quag,Mylon,
+Galyn,0,0,Greenwood Island,Gras,Gilead,Gorshen,
+Gilead,0,0,Greenwood Island,Gras,Galyn,Gorshen,Queew,
+Gorshen,0,0,Greenwood Island,Galyn,Gilead,Polaris,Rufus,
+Polaris,0,0,Polar Island,Moonbay,Gorshen,Rand,
+Queensryche,0,0,Queensbasin,Cylac,Cirius,Quell,Quay,Quandry,
+Quell,0,0,Queensbasin,Cirius,Ceed,Queensryche,Quandry,Mylon,
+Quay,0,0,Queensbasin,Queensryche,Quandry,Quintess,
+Quandry,0,0,Queensbasin,Queensryche,Quell,Quay,Quintess,Mylon,
+Quail,0,0,Queensbasin,Quintess,Quot,
+Quintess,0,0,Queensbasin,Quay,Quandry,Quail,Quot,Quag,
+Quot,0,0,Queensbasin,Quail,Quintess,Quag,Queew,
+Quag,0,0,Queensbasin,Quintess,Quot,Queew,Gras,
+Queew,0,0,Queensbasin,Quot,Quag,Gilead,
+Relish,0,0,Republic of Cranberra,Rhone,Rand,Marrian,
+Rhone,0,0,Republic of Cranberra,Relish,Riviera,Rand,Mastic,Marrian,
+Riviera,0,0,Republic of Cranberra,Rhone,Rand,Mastic,Banyan,Bella,Bot,
+Rand,0,0,Republic of Cranberra,Relish,Rhone,Riviera,Rufus,Bot,Byland,Polaris,
+Rufus,0,0,Republic of Cranberra,Rand,Gorshen,
