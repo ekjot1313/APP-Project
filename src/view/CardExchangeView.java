@@ -29,47 +29,49 @@ public class CardExchangeView implements Observer {
 	/**
 	 * This method updates the card exchange view after receiving the notification
 	 * 
-	 * @param obj Object of observable class
+	 * @param obj
+	 *            Object of observable class
 	 */
 	public void update(Observable obj) {
 		// TODO Auto-generated method stub
-		if (frame == null) {
-			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
-			frame = new JFrame();
-			frame.setBounds(screenSize.width * 2 / 3, screenSize.height * 2 / 3, screenSize.width / 3,
-					screenSize.height / 3);
-			frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-			frame.setTitle("Card Exchange View");
-			frame.setAlwaysOnTop(true);
-			txtrActions = new JTextArea();
-			txtrActions.setEditable(false);
-			txtrActions.setMargin(new Insets(5, 10, 10, 5));
-			
-			txtrActions.setForeground(Color.white);
-			txtrActions.setBackground(Color.BLACK);
-			// txtrActions.setText("");
-
-			scrollPane = new JScrollPane();
-			scrollPane.setViewportView(txtrActions);
-
-			scrollPane.setForeground(Color.white);
-			scrollPane.setBackground(Color.BLACK);
-			
-			frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
-			EventQueue.invokeLater(new Runnable() {
-				public void run() {
-					try {
-
-						CardExchangeView.frame.setVisible(true);
-
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			});
-		}
 		if (((Player) obj).getView().contains("CardExchangeView")) {
+			if (frame == null) {
+				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+				frame = new JFrame();
+				frame.setBounds(screenSize.width * 2 / 3, screenSize.height * 2 / 3, screenSize.width / 3,
+						screenSize.height / 3);
+				frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+				frame.setTitle("Card Exchange View");
+				frame.setAlwaysOnTop(true);
+				txtrActions = new JTextArea();
+				txtrActions.setEditable(false);
+				txtrActions.setMargin(new Insets(5, 10, 10, 5));
+
+				txtrActions.setForeground(Color.white);
+				txtrActions.setBackground(Color.BLACK);
+				// txtrActions.setText("");
+
+				scrollPane = new JScrollPane();
+				scrollPane.setViewportView(txtrActions);
+
+				scrollPane.setForeground(Color.white);
+				scrollPane.setBackground(Color.BLACK);
+
+				frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+
+							CardExchangeView.frame.setVisible(true);
+
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+
 			txtrActions.append("Player Name : " + ((Player) obj).getName() + "\n");
 			txtrActions.append("CardList :\n");
 			for (int i = 0; i < ((Player) obj).getCards().size(); i++) {
@@ -84,8 +86,10 @@ public class CardExchangeView implements Observer {
 	 */
 	public void close() {
 		// TODO Auto-generated method stub
-		frame.setVisible(false);
-		frame = null;
+		if (frame != null) {
+			frame.setVisible(false);
+			frame = null;
+		}
 
 	}
 }
