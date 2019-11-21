@@ -11,6 +11,8 @@ import mapWorks.MapReader;
 import view.CardExchangeView;
 import view.PWDView;
 import view.PhaseView;
+import dao.AggresiveStrategy;
+import dao.BenevolentStrategy;
 import dao.HumanStrategy;
 import dao.Map;
 import dao.Player;
@@ -181,7 +183,7 @@ public class Main {
 		pa.populateCountries(map);
 		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, map, 0);
 		for (int j = 0; j < pa.listOfPlayers.size(); j++) {
-			pa.listOfPlayers.get(j).setStrategy(new HumanStrategy());
+			pa.listOfPlayers.get(j).setStrategy(new AggresiveStrategy());
 		}
 		while (true) {
 			PhaseView pv= new PhaseView();
