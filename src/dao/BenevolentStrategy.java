@@ -65,8 +65,39 @@ public class BenevolentStrategy implements Strategy  {
 		P.setEndOfActions(0);
 		P.setView("PhaseView");
 		P.setState("Fortification");
+		Country weak=new Country();
+		int min =0;
+		for(int i=0;i<P.getAssigned_countries().size();i++) {
+			if(i==0) {
+				min=P.getAssigned_countries().get(i).getNoOfArmies();
+				weak=P.getAssigned_countries().get(i);
+			}
+			if(P.getAssigned_countries().get(i).getNoOfArmies()<min) {
+				min=P.getAssigned_countries().get(i).getNoOfArmies();
+				weak=P.getAssigned_countries().get(i);
+			}
+		}
+		Country c=new Country();
+		int max=1;
+		for(int i=0;i<weak.getNeighbors().size();i++) {
+			Country neighbor=map.getCountryFromName(weak.getNeighbors().get(i));
+			if(weak.getOwner().equals(neighbor.getOwner())) {
+				if(neighbor.getNoOfArmies()>max) {
+					max=neighbor.getNoOfArmies();
+					c=neighbor;
+				}
+			}
+		}
+		if(max>1) {
+			int army=c.getNoOfArmies()-1;
+			weak.setNoOfArmies(weak.getNoOfArmies()+army);
+			c.setNoOfArmies(1);
+			System.out.println("Fortification successful");
+			P.setActions("Fortified " + weak.getName() + " with " + army + " armies from " + c.getName());
+		}
+		else
+			System.out.println("Cannot fortify as all the neighboring countries of weakest country have only 1 army left");
 		P.setEndOfActions(1); 
-		System.out.println("Fortification skipped");
 		P.setActions("Fortification finished");
 	}
 

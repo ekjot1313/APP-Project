@@ -198,11 +198,12 @@ public class Main {
 				Thread.sleep(1500);
 				pa.listOfPlayers.get(i).detach(cev);
 				cev.close();
-				
+				System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " Attack phase begins");
 				gameOver = pa.listOfPlayers.get(i).executeAttack(map, (ArrayList<Player>) pa.listOfPlayers);
 				Thread.sleep(1500);
 				if (gameOver == 1)
 					break;
+				System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " Fortification phase begins");
 				pa.listOfPlayers.get(i).executeFortification(map, (ArrayList<Player>) pa.listOfPlayers,null);
 				Thread.sleep(1500);
 				pa.listOfPlayers.get(i).detach(pv);

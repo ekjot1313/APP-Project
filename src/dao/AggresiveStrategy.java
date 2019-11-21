@@ -1,6 +1,10 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class AggresiveStrategy implements Strategy {
@@ -59,7 +63,6 @@ public class AggresiveStrategy implements Strategy {
 		P.setEndOfActions(0);
 		P.setView("PhaseView");
 		P.setState("Attack");
-		System.out.println(strong.getName());
 		if(strong.getNoOfArmies()==1) {
 			System.out.println("Sorry!You cannot attack with 1 army in your strongest country");
 			P.setEndOfActions(1); 
@@ -179,8 +182,39 @@ public class AggresiveStrategy implements Strategy {
 		P.setEndOfActions(0);
 		P.setView("PhaseView");
 		P.setState("Fortification");
+		Country strong=new Country();
+		int max =0;
+		for(int i=0;i<P.getAssigned_countries().size();i++) {
+			if(i==0) {
+				max=P.getAssigned_countries().get(i).getNoOfArmies();
+				strong=P.getAssigned_countries().get(i);
+			}
+			if(P.getAssigned_countries().get(i).getNoOfArmies()<max) {
+				max=P.getAssigned_countries().get(i).getNoOfArmies();
+				strong=P.getAssigned_countries().get(i);
+			}
+		}
+		Country c=new Country();
+		max=1;
+		for(int i=0;i<strong.getNeighbors().size();i++) {
+			Country neighbor=map.getCountryFromName(strong.getNeighbors().get(i));
+			if(strong.getOwner().equals(neighbor.getOwner())) {
+				if(neighbor.getNoOfArmies()>max) {
+					max=neighbor.getNoOfArmies();
+					c=neighbor;
+				}
+			}
+		}
+		if(max>1) {
+			int army=c.getNoOfArmies()-1;
+			strong.setNoOfArmies(strong.getNoOfArmies()+army);
+			c.setNoOfArmies(1);
+			System.out.println("Fortification successful");
+			P.setActions("Fortified " + strong.getName() + " with " + army + " armies from " + c.getName());
+		}
+		else
+			System.out.println("Cannot fortify as all the neighboring countries of strongest country have only 1 army left");
 		P.setEndOfActions(1); 
-		System.out.println("Fortification skipped");
 		P.setActions("Fortification finished");
 	}
 	/**
