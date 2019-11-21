@@ -103,8 +103,10 @@ public class Player extends pattern.Observable {
 	 */
 	public String randomCard() {
 		Random number = new Random();
+		if(deck.size()>0) {
 		int no = number.nextInt(deck.size());
-		return deck.get(no);
+		return deck.get(no);}
+		return "JOKER";
 	}
 
 	/**
