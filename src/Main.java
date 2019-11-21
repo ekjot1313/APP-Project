@@ -184,7 +184,7 @@ public class Main {
 		pa.populateCountries(map);
 		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, map, 0);
 		for (int j = 0; j < pa.listOfPlayers.size(); j++) {
-			pa.listOfPlayers.get(j).setStrategy(new CheaterStrategy());
+			pa.listOfPlayers.get(j).setStrategy(new BenevolentStrategy());
 		}
 		while (true) {
 			PhaseView pv= new PhaseView();
