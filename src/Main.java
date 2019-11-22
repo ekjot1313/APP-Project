@@ -129,23 +129,22 @@ public class Main {
 		
 		
 		for(String filename :listOfMapFiles) {
-			//For each map
-			map = new Map();
-			ArrayList<Player> listOfPlayers = new ArrayList<Player>();
-			map.setListOfPlayers(listOfPlayers);
-			int isSuccess = loadmap(filename);
-			if(isSuccess == 1) {
-				for(String playerType : listOfPlayerStrategies) {
-					Player p =  new Player();
-					p.deck = new ArrayList<String>();
-					p.setName(playerType);
-					p.setStrategy(getStrategyByName(playerType));
-					map.addPlayer(p);
-					listOfPlayers.add(p);
-				}
-				
+			//For each map	
 				//Gameplayer logic
 				for(int j=0;j<numberOfGames;j++) {
+					map = new Map();
+					ArrayList<Player> listOfPlayers = new ArrayList<Player>();
+					map.setListOfPlayers(listOfPlayers);
+					int isSuccess = loadmap(filename);
+					if(isSuccess == 1) {
+						for(String playerType : listOfPlayerStrategies) {
+							Player p =  new Player();
+							p.deck = new ArrayList<String>();
+							p.setName(playerType);
+							p.setStrategy(getStrategyByName(playerType));
+							map.addPlayer(p);
+							listOfPlayers.add(p);
+						}
 					PlayerAllocator pa = new PlayerAllocator();
 					ArmyAllocator aa = new ArmyAllocator();
 					pa.listOfPlayers = listOfPlayers;
@@ -159,20 +158,23 @@ public class Main {
 						int gameOver = 0;
 						for (int i = 0; i < pa.listOfPlayers.size(); i++) {
 							
-							System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " reinforcement phase begins");
+							//System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " reinforcement phase begins");
 							pa.listOfPlayers.get(i).attach(pv);
 							
 							//pa.listOfPlayers.get(i).attach(cev);
 							pa.listOfPlayers.get(i).executeReinforcement(map, (ArrayList<Player>) pa.listOfPlayers);
 							Thread.sleep(1500);
+							Player current= pa.listOfPlayers.get(i);
 							//pa.listOfPlayers.get(i).detach(cev);
 							//cev.close();
-							System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " Attack phase begins");
+							//System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " Attack phase begins");
 							gameOver = pa.listOfPlayers.get(i).executeAttack(map, (ArrayList<Player>) pa.listOfPlayers);
 							Thread.sleep(1500);
 							if (gameOver == 1)
 								break;
-							System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " Fortification phase begins");
+							int index=pa.listOfPlayers.indexOf(current);
+							i=index;
+							//System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " Fortification phase begins");
 							pa.listOfPlayers.get(i).executeFortification(map, (ArrayList<Player>) pa.listOfPlayers,null);
 							Thread.sleep(1500);
 							pa.listOfPlayers.get(i).detach(pv);
@@ -343,10 +345,13 @@ public class Main {
 				pa.listOfPlayers.get(i).detach(cev);
 				cev.close();
 				System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " Attack phase begins");
+				Player current= pa.listOfPlayers.get(i);
 				gameOver = pa.listOfPlayers.get(i).executeAttack(map, (ArrayList<Player>) pa.listOfPlayers);
 				Thread.sleep(1500);
 				if (gameOver == 1)
 					break;
+				int index=pa.listOfPlayers.indexOf(current);
+				i=index;
 				System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " Fortification phase begins");
 				pa.listOfPlayers.get(i).executeFortification(map, (ArrayList<Player>) pa.listOfPlayers,null);
 				Thread.sleep(1500);

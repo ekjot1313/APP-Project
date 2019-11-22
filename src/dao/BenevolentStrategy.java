@@ -35,6 +35,7 @@ public class BenevolentStrategy implements Strategy  {
 		Scanner sc = new Scanner(System.in);
 		// calculate reinforcement armies
 		int reinforcementArmies=calculateReinforceArmies(map,P);
+		map.setNoOfArmies(P, (P.getNoOfArmies() + reinforcementArmies));
 		Country weak=new Country();
 		int min =0;
 		for(int i=0;i<P.getAssigned_countries().size();i++) {
