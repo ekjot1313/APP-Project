@@ -145,7 +145,9 @@ public class PWDView implements Observer {
 
 		for (Country country : map.getListOfCountries()) {
 			String owner = country.getOwner();
+			
 			int ind = players.indexOf(owner);
+			if(ind != -1)
 			num[ind]++;
 		}
 

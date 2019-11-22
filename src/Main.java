@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -17,6 +18,8 @@ import dao.CheaterStrategy;
 import dao.HumanStrategy;
 import dao.Map;
 import dao.Player;
+import dao.RandomStrategy;
+import dao.Strategy;
 import game.ArmyAllocator;
 import game.PlayerAllocator;
 import mapWorks.ConquestReaderWriter;
@@ -48,28 +51,164 @@ public class Main {
 		System.out.println("Welcome to RISK GAME!");
 		Scanner sc = new Scanner(System.in);
 		while (true) {
-			System.out.println(
-					"Type \nloadmap <filename> -load an existing map \neditmap <filename> -edit an existing map or create a new map");
-			String[] commands = sc.nextLine().split(" ");
-			if (commands.length == 1 && !commands[0].equals("exit")) {
-				System.out.println("Invalid command .Type exit to end game");
-			} else {
-				switch (commands[0]) {
-				case "loadmap":
-					loadmap(commands[1]);
-					System.exit(0);
-		
-				case "editmap":
-					editmap(commands[1]);
-					break;
-				case "exit":
-					sc.close();
-					return;
-				default:
-					System.out.println("Invalid command . Type exit to end game");
+			System.out.println("Select game mode :Tournament or Single Game ");
+			String gameMode = sc.nextLine();
+			
+			if(gameMode.equalsIgnoreCase("Single Game")) {
+				System.out.println(
+						"Type \nloadmap <filename> -load an existing map \neditmap <filename> -edit an existing map or create a new map");
+				String[] commands = sc.nextLine().split(" ");
+				if (commands.length == 1 && !commands[0].equals("exit")) {
+					System.out.println("Invalid command .Type exit to end game");
+				} else {
+					switch (commands[0]) {
+					case "loadmap":
+						int isSuccess =loadmap(commands[1]);
+						if(isSuccess == 1)
+							gameplayer();
+						else
+							continue;
+						System.exit(0);
+			
+					case "editmap":
+						editmap(commands[1]);
+						break;
+					case "exit":
+						sc.close();
+						return;
+					default:
+						System.out.println("Invalid command . Type exit to end game");
+					}
 				}
+			}else if(gameMode.equalsIgnoreCase("Tournament")) {				
+				tournamentMode();
+				
+			}else {
+				System.out.println("Invalid Command");
 			}
 		}
+	}
+
+	private static void tournamentMode() throws Exception {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		String[] listOfMapFiles ;
+		String[] listOfPlayerStrategies;
+		int numberOfGames = 0;
+		int maxTurns = 0;
+		//Initial setup
+		while(true) {
+		System.out.println("Type tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns");
+		String tournamentCommand  = sc.nextLine();
+		
+		String[] tournamentCommandArray = tournamentCommand.split(" ");
+		
+			if(tournamentCommandArray[0].equals("tournament") && tournamentCommandArray.length == 9){
+				if(tournamentCommandArray[1].equals("-M") && tournamentCommandArray[3].equals("-P") && tournamentCommandArray[5].equals("-G") && tournamentCommandArray[7].equals("-D")) {
+					listOfMapFiles = tournamentCommandArray[2].split(",");
+					listOfPlayerStrategies = tournamentCommandArray[4].split(",");
+					try {
+					numberOfGames = Integer.parseInt(tournamentCommandArray[6]);
+					maxTurns = Integer.parseInt(tournamentCommandArray[8]);
+					}catch(Exception e) {
+						System.out.println("Invalid command .Type again");
+					}
+					break;
+					
+				}else {
+					System.out.println("Invalid command .Type again");
+				}
+					
+			}else {
+				System.out.println("Invalid command .Type again");
+			}
+		}
+		
+		
+		//TournamentMode Begins
+		
+		
+		for(String filename :listOfMapFiles) {
+			//For each map
+			map = new Map();
+			ArrayList<Player> listOfPlayers = new ArrayList<Player>();
+			map.setListOfPlayers(listOfPlayers);
+			int isSuccess = loadmap(filename);
+			if(isSuccess == 1) {
+				for(String playerType : listOfPlayerStrategies) {
+					Player p =  new Player();
+					p.deck = new ArrayList<String>();
+					p.setName(playerType);
+					p.setStrategy(getStrategyByName(playerType));
+					map.addPlayer(p);
+					listOfPlayers.add(p);
+				}
+				
+				//Gameplayer logic
+				for(int j=0;j<numberOfGames;j++) {
+					PlayerAllocator pa = new PlayerAllocator();
+					ArmyAllocator aa = new ArmyAllocator();
+					pa.listOfPlayers = listOfPlayers;
+					pa.populateCountries(map);
+					aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, map, -1);
+					aa.placeAll((ArrayList<Player>) pa.listOfPlayers, map);
+					boolean isDraw = true;
+					for(int k =0;k<maxTurns;k++) {
+						PhaseView pv= new PhaseView();
+						//CardExchangeView cev = new CardExchangeView();
+						int gameOver = 0;
+						for (int i = 0; i < pa.listOfPlayers.size(); i++) {
+							
+							System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " reinforcement phase begins");
+							pa.listOfPlayers.get(i).attach(pv);
+							
+							//pa.listOfPlayers.get(i).attach(cev);
+							pa.listOfPlayers.get(i).executeReinforcement(map, (ArrayList<Player>) pa.listOfPlayers);
+							Thread.sleep(1500);
+							//pa.listOfPlayers.get(i).detach(cev);
+							//cev.close();
+							System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " Attack phase begins");
+							gameOver = pa.listOfPlayers.get(i).executeAttack(map, (ArrayList<Player>) pa.listOfPlayers);
+							Thread.sleep(1500);
+							if (gameOver == 1)
+								break;
+							System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " Fortification phase begins");
+							pa.listOfPlayers.get(i).executeFortification(map, (ArrayList<Player>) pa.listOfPlayers,null);
+							Thread.sleep(1500);
+							pa.listOfPlayers.get(i).detach(pv);
+							
+						}
+						if (gameOver == 1) {
+						System.out.println("Game Over");
+						System.out.println("Winner is Player: " + pa.listOfPlayers.get(0).getName());
+						isDraw = false;
+						break;
+						}
+					}
+					
+					if(isDraw)
+						System.out.println("Draw");
+				}
+				
+				
+			}
+		}
+		
+		
+		
+	}
+
+	private static Strategy getStrategyByName(String playerType) {
+		// TODO Auto-generated method stub
+		if(playerType.equalsIgnoreCase("Aggressive"))
+			return new AggresiveStrategy();
+		if(playerType.equalsIgnoreCase("Random"))
+			return new RandomStrategy();
+		if(playerType.equalsIgnoreCase("Cheater"))
+			return new CheaterStrategy();
+		if(playerType.equalsIgnoreCase("Benevolent"))
+			return new BenevolentStrategy();
+		return null;
 	}
 
 	/**
@@ -125,7 +264,7 @@ public class Main {
 	 * @param filename Map file to be loaded
 	 * @throws Exception 
 	 */
-	private static void loadmap(String filename) throws Exception {
+	private static int  loadmap(String filename) throws Exception {
 		// TODO Auto-generated method stub
 		MapReader mr = new MapReader();
 		String currentPath = System.getProperty("user.dir");
@@ -155,12 +294,18 @@ public class Main {
 			// to check whether map is parsed successfully
 			if (mapParseStatus == 1) {
 				System.out.println("Map is loaded successfully.");
-
-				gameplayer();
+				return 1;
+				
 			}
+			else {
+				System.out.println("Error while loading map");
+				return 0;
+			}
+				
 
 		} else {
 			System.out.println("File Not found .");
+			return 0;
 		}
 	}
 
@@ -183,9 +328,7 @@ public class Main {
 		pa.allocate(map,null);
 		pa.populateCountries(map);
 		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, map, 0);
-		for (int j = 0; j < pa.listOfPlayers.size(); j++) {
-			pa.listOfPlayers.get(j).setStrategy(new BenevolentStrategy());
-		}
+		
 		while (true) {
 			PhaseView pv= new PhaseView();
 			CardExchangeView cev = new CardExchangeView();

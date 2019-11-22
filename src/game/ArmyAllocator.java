@@ -49,6 +49,8 @@ public class ArmyAllocator {
 				p.setUnassignedarmies(assignedArmies);
 			}
 		}
+		if(test == -1)
+			return assignedArmies;
 		if (test == 1)
 			placeArmy(assignedArmies, listOfPLayers, map, 1);
 		else
