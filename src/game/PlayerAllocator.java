@@ -2,7 +2,7 @@ package game;
 
 import java.util.*;
 
-import Strategy.RandomStrategy;
+import dao.RandomStrategy;
 import dao.AggresiveStrategy;
 import dao.BenevolentStrategy;
 import dao.CheaterStrategy;

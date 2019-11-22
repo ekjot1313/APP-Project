@@ -1,13 +1,9 @@
 package dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 
 public class RandomStrategy implements Strategy {
 
@@ -344,10 +340,7 @@ public class RandomStrategy implements Strategy {
 		}
 	}
 
-	private String getRandomFortifyCommand(Player p) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	/**
 	 * This method calculates the number of reinforcement armies
