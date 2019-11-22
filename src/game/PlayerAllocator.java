@@ -1,8 +1,14 @@
 package game;
 
 import java.util.*;
+
+import Strategy.RandomStrategy;
+import dao.AggresiveStrategy;
+import dao.BenevolentStrategy;
+import dao.CheaterStrategy;
 import dao.Continent;
 import dao.Country;
+import dao.HumanStrategy;
 import dao.Map;
 import dao.Player;
 import mapWorks.MapReader;
@@ -69,7 +75,7 @@ public class PlayerAllocator {
 			while (cmd.equals("populatecountries") && listOfPlayers.size() == 0) {
 				System.out.println("Player list is empty, add players first.");
 				System.out.println(
-						"Type \ngameplayer -add<PlayerName> or -remove <PlayerName> \npopulatecountries - assign countries to players");
+						"Type \ngameplayer -add<PlayerName> <Strategy> or -remove <PlayerName> \npopulatecountries - assign countries to players");
 				System.out.println("Type showmap");
 				cmd = in.nextLine();
 			}
@@ -79,7 +85,7 @@ public class PlayerAllocator {
 			} else if (validate(cmd) == 1) {
 				String str[] = cmd.split(" ");
 				int checkDuplicate = 0;
-				for (int i = 1; i < str.length; i+=2) {
+				for (int i = 1; i < str.length; i++) {
 					try {
 					if (str[i].equals("-add")) {
 						checkDuplicate = 0;
@@ -94,10 +100,21 @@ public class PlayerAllocator {
 				
 						Player p = new Player();
 						p.setName(str[i + 1]);
+						if(str[i+2].equalsIgnoreCase("human"))
+							p.setStrategy(new HumanStrategy());
+						else if(str[i+2].equalsIgnoreCase("aggresive"))
+							p.setStrategy(new AggresiveStrategy());
+						else if(str[i+2].equalsIgnoreCase("benevolent"))
+							p.setStrategy(new BenevolentStrategy());
+						else if(str[i+2].equalsIgnoreCase("random"))
+							p.setStrategy(new RandomStrategy());
+						else if(str[i+2].equalsIgnoreCase("cheater"))
+							p.setStrategy(new CheaterStrategy());
 						// listOfPlayers.add(p);
 						map.addPlayer(p);
 						
 						System.out.println("Player " + p.getName() + " has been added successfully.");
+						i=i+2;
 					
 					}
 					if (str[i].equals("-remove")) {
@@ -116,6 +133,7 @@ public class PlayerAllocator {
 						if (flag == 0) {
 							throw new AllocatorException("Player Not found");
 						}
+						i++;
 
 					}
 					}catch(Exception e) {
@@ -169,7 +187,7 @@ public class PlayerAllocator {
 	 * @param command Command given by the user
 	 * @return 1 if valid else 0
 	 */
-	public int validate(String command) {
+	/*public int validate(String command) {
 		String str[] = command.split(" ");
 		int count;
 		if ((str.length % 2) != 0) {
@@ -196,6 +214,68 @@ public class PlayerAllocator {
 		}
 		return 0;
 
+	}
+	*/
+	public int validate(String command) {
+		String str[] = command.split(" ");
+		int count;
+			if (str[0].equals("populatecountries"))
+				return 1;
+			if (str[0].contentEquals("gameplayer") && str.length == 1)
+				return 0;
+			if (str[0].equals("gameplayer") && (str[1].equals("-add") || str[1].equals("-remove"))) {
+				for (int i = 1; i < str.length; i++) {
+					count = 0;
+					if (str[i].equals("-add") || str[i].equals("-remove")) {
+						if(str[i].equals("-add")) {
+							if(i+1 == str.length)
+								return 0;
+							if (str[i + 1].contains("-"))
+								return 0;
+							else {
+								i++;
+								if(i+1 == str.length)
+									return 0;
+								if (str[i + 1].contains("-"))
+									return 0;
+								else {
+									if(i+1 == str.length)
+										return 0;
+									if(str[i+1].equalsIgnoreCase("human"))
+										i++;
+									else if(str[i+1].equalsIgnoreCase("aggresive"))
+										i++;
+									else if(str[i+1].equalsIgnoreCase("benevolent"))
+										i++;
+									else if(str[i+1].equalsIgnoreCase("random"))
+										i++;
+									else if(str[i+1].equalsIgnoreCase("cheater"))
+										i++;
+									else 
+										return 0;
+									
+								}
+							}
+						}
+						else if(str[i].equals("-remove")) {
+							if(i+1 == str.length)
+								return 0;
+						if (str[i + 1].contains("-"))
+							return 0;
+						else {
+							i++;
+							count++;
+						}
+						if (count != 1)
+							return 0;
+						}
+					}
+					else
+						return 0;
+				}
+				return 1;
+			}
+			return 0;
 	}
 
 	/**
