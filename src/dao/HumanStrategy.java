@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -580,6 +581,7 @@ public class HumanStrategy implements Strategy {
 						isAllout = 1;
 					} else {
 						attackerDice = Integer.parseInt(s[3]);
+						if(defender.getStrategy() instanceof HumanStrategy) {
 						System.out.println("Player :" + defend + " has to defend country :" + s[2]
 								+ " \nType defend numdice to choose no of dices to defend your country.");
 						P.setActions("Player :" + defend + " has to defend country :" + s[2]);
@@ -598,8 +600,26 @@ public class HumanStrategy implements Strategy {
 								System.out.println("Invalid command,type again.");
 							}
 						}
-
-						if (validCommand == 1) {
+						}
+						else if(defender.getStrategy() instanceof AggresiveStrategy || defender.getStrategy() instanceof CheaterStrategy) {
+							int noOfArmies = toCountry.getNoOfArmies();
+							if(noOfArmies>=2)
+								defenderDice = 2;
+							else
+								defenderDice = 1;
+						}
+						else if(defender.getStrategy() instanceof RandomStrategy) {
+							int noOfArmies = toCountry.getNoOfArmies();
+							if(noOfArmies==1)
+								defenderDice = 1;
+							else {
+								Random r=new Random();
+								defenderDice=r.nextInt()+1;
+							}
+						}
+						else if(defender.getStrategy() instanceof BenevolentStrategy) {
+							defenderDice = 1;
+					}
 							Dice diceRoll = new Dice(attackerDice, defenderDice);
 							int result[][] = diceRoll.rollAll();
 							System.out.println("Dice Roll Output:");
@@ -620,7 +640,8 @@ public class HumanStrategy implements Strategy {
 									P.setActions("Attacker lost 1 army");
 								}
 							}
-						}
+						
+						
 					}
 					if (validCommand == 1 || isAllout == 1) {
 						if (toCountry.getNoOfArmies() == 0) { // attacker has conquered the defending country.
@@ -631,6 +652,20 @@ public class HumanStrategy implements Strategy {
 							fromCountry.setNoOfArmies(fromCountry.getNoOfArmies() - 1);*/
 							System.out.println("You have conquered country: " + toCountry.getName());
 							P.setActions(P.getName() + " has conquered country: " + toCountry.getName());
+							
+							// System.out.println(fromCountry.getNoOfArmies());
+							//Class cls=defender.getClass();
+							System.out.println(
+									"Move armies from " + fromCountry.getName() + " to " + toCountry.getName());
+							System.out.println("Number of dices used by the attacker in the last attack:"+attackerDice);
+							System.out.println(
+									"Available armies you can move : " + attackerDice+"-"+ (fromCountry.getNoOfArmies() - 1));
+							System.out.println("Type attackmove <number> to move");
+							int valid = 0;
+							do {
+								String command = sc3.nextLine();
+								valid = attackMove(command, fromCountry, toCountry,attackerDice,P);
+							} while (valid == 0);
 							if (defender.getAssigned_countries().size() == 0) {// defender is out of the game
 								for (int i = 0; i < defender.getCards().size(); i++) {
 									P.getCards().add(defender.getCards().get(i));
@@ -648,19 +683,6 @@ public class HumanStrategy implements Strategy {
 								P.setActions(P.getName() + " has received: " + card + " card");
 								P.deck.remove(card);
 							}
-							// System.out.println(fromCountry.getNoOfArmies());
-							
-								System.out.println(
-										"Move armies from " + fromCountry.getName() + " to " + toCountry.getName());
-								System.out.println("Number of dices used by the attacker in the last attack:"+attackerDice);
-								System.out.println(
-										"Available armies you can move : " + attackerDice+"-"+ (fromCountry.getNoOfArmies() - 1));
-								System.out.println("Type attackmove <number> to move");
-								int valid = 0;
-								do {
-									String command = sc3.nextLine();
-									valid = attackMove(command, fromCountry, toCountry,attackerDice,P);
-								} while (valid == 0);
 							
 							Continent cont = map.getContinentFromName(toCountry.getContinentName());
 							int flag = 0;
