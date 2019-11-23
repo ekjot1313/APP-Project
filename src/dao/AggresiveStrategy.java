@@ -201,7 +201,9 @@ public class AggresiveStrategy implements Strategy {
 					}
 					int flag=strongestCountry(map,listPlayer,P);
 					if(flag==0) {
-						simpleStrongestCountry(map,listPlayer,P);
+						P.setEndOfActions(1); 
+						P.setActions("Attack finished");
+						return 0;
 					}
 			}
 			if(strong.getNoOfArmies()==1) {
@@ -220,9 +222,9 @@ public class AggresiveStrategy implements Strategy {
 		P.setEndOfActions(0);
 		P.setView("PhaseView");
 		P.setState("Fortification");
-		Country strong=new Country();
+		//Country strong=new Country();
 		int max =0;
-		for(int i=0;i<P.getAssigned_countries().size();i++) {
+		/*for(int i=0;i<P.getAssigned_countries().size();i++) {
 			if(i==0) {
 				max=P.getAssigned_countries().get(i).getNoOfArmies();
 				strong=P.getAssigned_countries().get(i);
@@ -231,9 +233,12 @@ public class AggresiveStrategy implements Strategy {
 				max=P.getAssigned_countries().get(i).getNoOfArmies();
 				strong=P.getAssigned_countries().get(i);
 			}
-		}
+		}*/
 		Country c=new Country();
 		max=1;
+		int flag=strongestCountry(map,listPlayer,P);
+		
+		if(flag==1) {
 		for(int i=0;i<strong.getNeighbors().size();i++) {
 			Country neighbor=map.getCountryFromName(strong.getNeighbors().get(i));
 			if(strong.getOwner().equals(neighbor.getOwner())) {
@@ -249,11 +254,66 @@ public class AggresiveStrategy implements Strategy {
 			c.setNoOfArmies(1);
 			System.out.println("Fortification successful");
 			P.setActions("Fortified " + strong.getName() + " with " + army + " armies from " + c.getName());
+			return;
 		}
-		else
-			System.out.println("Cannot fortify as all the neighboring countries of strongest country have only 1 army left");
+		else {
+			simpleStrongestCountry(map,listPlayer,P);
+			max=1;
+			for(int i=0;i<strong.getNeighbors().size();i++) {
+				Country neighbor=map.getCountryFromName(strong.getNeighbors().get(i));
+				if(strong.getOwner().equals(neighbor.getOwner())) {
+					if(neighbor.getNoOfArmies()>max) {
+						max=neighbor.getNoOfArmies();
+						c=neighbor;
+					}
+				}
+			}
+			if(max>1) {
+				int army=c.getNoOfArmies()-1;
+				strong.setNoOfArmies(strong.getNoOfArmies()+army);
+				c.setNoOfArmies(1);
+				System.out.println("Fortification successful");
+				P.setActions("Fortified " + strong.getName() + " with " + army + " armies from " + c.getName());
+				P.setEndOfActions(1); 
+				P.setActions("Fortification finished");
+				return;
+			}
+			else {
+				System.out.println("Cannot fortify as all the neighboring countries of strongest country have only 1 army left");
+				P.setEndOfActions(1); 
+				P.setActions("Fortification finished");
+				return;
+			}
+		}
+	}else {simpleStrongestCountry(map,listPlayer,P);
+	max=1;
+	for(int i=0;i<strong.getNeighbors().size();i++) {
+		Country neighbor=map.getCountryFromName(strong.getNeighbors().get(i));
+		if(strong.getOwner().equals(neighbor.getOwner())) {
+			if(neighbor.getNoOfArmies()>max) {
+				max=neighbor.getNoOfArmies();
+				c=neighbor;
+			}
+		}
+	}
+	if(max>1) {
+		int army=c.getNoOfArmies()-1;
+		strong.setNoOfArmies(strong.getNoOfArmies()+army);
+		c.setNoOfArmies(1);
+		System.out.println("Fortification successful");
+		P.setActions("Fortified " + strong.getName() + " with " + army + " armies from " + c.getName());
 		P.setEndOfActions(1); 
 		P.setActions("Fortification finished");
+		return;
+	}
+	else
+		System.out.println("Cannot fortify as all the neighboring countries of strongest country have only 1 army left");
+	P.setEndOfActions(1); 
+	P.setActions("Fortification finished");
+		return;
+		
+	}
+		
 	}
 	/**
 	 * Function to check the end of game
