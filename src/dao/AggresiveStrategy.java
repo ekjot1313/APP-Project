@@ -36,6 +36,43 @@ public class AggresiveStrategy implements Strategy {
 
 		return reinforcementArmies;
 	}
+	public int strongestCountry(Map map, ArrayList<Player> listPlayer,Player P) {
+		int max =0,flag=0;
+		for(int i=0;i<P.getAssigned_countries().size();i++) {
+			if(P.getAssigned_countries().get(i).getNoOfArmies()>max) {
+				//if can attack-
+				if(attackPossible(map,listPlayer,P,P.getAssigned_countries().get(i))==1) {
+				max=P.getAssigned_countries().get(i).getNoOfArmies();
+				strong=P.getAssigned_countries().get(i);
+				flag=1;
+				}
+			}
+		}
+		if(flag==1) {
+			return 1;
+		}
+		if(flag==0)
+			return 0;
+		return 0;
+	}
+	public void simpleStrongestCountry(Map map, ArrayList<Player> listPlayer,Player P) {
+		int max =0,flag=0;
+		for(int i=0;i<P.getAssigned_countries().size();i++) {
+			if(P.getAssigned_countries().get(i).getNoOfArmies()>max) {
+				max=P.getAssigned_countries().get(i).getNoOfArmies();
+				strong=P.getAssigned_countries().get(i);
+				flag=1;
+				}
+			}
+	}
+	public int attackPossible(Map map, ArrayList<Player> listPlayer,Player P,Country c) {
+		for(String s:c.getNeighbors()) {
+			Country neighbor=map.getCountryFromName(s);
+			if(!c.getOwner().equals(neighbor.getOwner()))
+					return 1;
+		}
+		return 0;
+	}
 	public void reinforcement(Map map, ArrayList<Player> listPlayer,Player P) {
 		P.setEndOfActions(0);
 		P.setView("PhaseView");
@@ -44,16 +81,9 @@ public class AggresiveStrategy implements Strategy {
 		// calculate reinforcement armies
 		int reinforcementArmies=calculateReinforceArmies(map,P);
 		map.setNoOfArmies(P, (P.getNoOfArmies() + reinforcementArmies));
-		int max =0;
-		for(int i=0;i<P.getAssigned_countries().size();i++) {
-			if(i==0) {
-				max=P.getAssigned_countries().get(i).getNoOfArmies();
-				strong=P.getAssigned_countries().get(i);
-			}
-			if(P.getAssigned_countries().get(i).getNoOfArmies()>max) {
-				max=P.getAssigned_countries().get(i).getNoOfArmies();
-				strong=P.getAssigned_countries().get(i);
-			}
+		int flag=strongestCountry(map,listPlayer,P);
+		if(flag==0) {
+			simpleStrongestCountry(map,listPlayer,P);
 		}
 		P.setActions("Reinforced " + reinforcementArmies + " armies to "+ strong.getName());
 		strong.setNoOfArmies(strong.getNoOfArmies()+reinforcementArmies);
@@ -70,14 +100,15 @@ public class AggresiveStrategy implements Strategy {
 			P.setActions("Attack finished");
 			return 0;
 		}else {
+			while(true) {
 		for(int i=0;i<strong.getNeighbors().size();i++) {
 			Country neighbor=map.getCountryFromName(strong.getNeighbors().get(i));
 			if(!strong.getOwner().equals(neighbor.getOwner())) {
 				//attack
 				Country toCountry=neighbor;
 				Country fromCountry=strong;
-				int attackerDice;
-				int defenderDice,index = -1;
+				int attackerDice = 0;
+				int defenderDice=0,index = -1;
 				for (int k = 0; k < listPlayer.size(); k++) {
 
 					if (listPlayer.get(k).getName().equals(toCountry.getOwner())) {
@@ -122,19 +153,21 @@ public class AggresiveStrategy implements Strategy {
 							+ fromCountry.getName() + " has only 1 army left");
 					P.setActions("Player :" + defender.getName() + " has defended successfully and attacking country :"
 							+ fromCountry.getName() + " has only 1 army left");
-					P.setEndOfActions(1); 
+					/*P.setEndOfActions(1); 
 					System.out.println("Attack skipped");
 					P.setActions("Attack finished");
-					return 0;
+					return 0;*/
 				}
 					if (toCountry.getNoOfArmies() == 0) { // attacker has conquered the defending country.
 						map.setCountryOwner(toCountry, P.getName());
 						P.getAssigned_countries().add(toCountry);
-						defender.getAssigned_countries().remove(toCountry);
-						toCountry.setNoOfArmies(1);
-						fromCountry.setNoOfArmies(fromCountry.getNoOfArmies() - 1);
-						System.out.println("You have conquered country: " + toCountry.getName());
 						P.setActions(P.getName() + " has conquered country: " + toCountry.getName());
+						P.setActions("Moving armies"+(fromCountry.getNoOfArmies() -1)+ " to country: " + toCountry.getName());
+						defender.getAssigned_countries().remove(toCountry);
+						toCountry.setNoOfArmies(fromCountry.getNoOfArmies() -1);
+						fromCountry.setNoOfArmies(1);
+						System.out.println("You have conquered country: " + toCountry.getName());
+						
 						if (defender.getAssigned_countries().size() == 0) {// defender is out of the game
 							listPlayer.remove(defender);
 							// checking for game finish condition
@@ -166,7 +199,10 @@ public class AggresiveStrategy implements Strategy {
 							P.setActions(P.getName()+ " has conquered continent: " + cont.getName());
 						}
 					}
-				
+					int flag=strongestCountry(map,listPlayer,P);
+					if(flag==0) {
+						simpleStrongestCountry(map,listPlayer,P);
+					}
 			}
 			if(strong.getNoOfArmies()==1) {
 				P.setEndOfActions(1); 
@@ -175,9 +211,10 @@ public class AggresiveStrategy implements Strategy {
 			}
 		}
 		}
-		P.setEndOfActions(1); 
+		}
+		/*P.setEndOfActions(1); 
 		P.setActions("Attack finished");
-		return 0;
+		return 0;*/
 	}
 	public void fortification(Map map, ArrayList<Player> listPlayer, String command,Player P) {
 		P.setEndOfActions(0);
