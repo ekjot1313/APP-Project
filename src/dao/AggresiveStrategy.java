@@ -36,6 +36,7 @@ public class AggresiveStrategy implements Strategy {
 
 		return reinforcementArmies;
 	}
+	
 	public int strongestCountry(Map map, ArrayList<Player> listPlayer,Player P) {
 		int max =0,flag=0;
 		for(int i=0;i<P.getAssigned_countries().size();i++) {
@@ -253,6 +254,7 @@ public class AggresiveStrategy implements Strategy {
 			strong.setNoOfArmies(strong.getNoOfArmies()+army);
 			c.setNoOfArmies(1);
 			System.out.println("Fortification successful");
+			P.setEndOfActions(1); 
 			P.setActions("Fortified " + strong.getName() + " with " + army + " armies from " + c.getName());
 			return;
 		}

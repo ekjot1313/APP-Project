@@ -22,10 +22,7 @@ public class CheaterStrategy implements Strategy {
 
 		for (Country country : P.getAssigned_countries()) {
 
-			String input = "reinforce " + country.getName() + " " + country.getNoOfArmies();
-			String[] inputArray = input.split(" ");
-
-			int armiesTobeplaced = Integer.parseInt(inputArray[2]);
+			int armiesTobeplaced = country.getNoOfArmies();
 
 			if (armiesTobeplaced <= reinforcementArmies && armiesTobeplaced > 0) { // check reinforce command
 				// and country is valid and
