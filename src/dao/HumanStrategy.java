@@ -607,6 +607,7 @@ public class HumanStrategy implements Strategy {
 								defenderDice = 2;
 							else
 								defenderDice = 1;
+							validCommand = 1;
 						}
 						else if(defender.getStrategy() instanceof RandomStrategy) {
 							int noOfArmies = toCountry.getNoOfArmies();
@@ -614,11 +615,13 @@ public class HumanStrategy implements Strategy {
 								defenderDice = 1;
 							else {
 								Random r=new Random();
-								defenderDice=r.nextInt()+1;
+								defenderDice=r.nextInt(2)+1;
 							}
+							validCommand = 1;
 						}
 						else if(defender.getStrategy() instanceof BenevolentStrategy) {
 							defenderDice = 1;
+							validCommand = 1;
 					}
 							Dice diceRoll = new Dice(attackerDice, defenderDice);
 							int result[][] = diceRoll.rollAll();
