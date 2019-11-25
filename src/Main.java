@@ -126,11 +126,11 @@ public class Main {
 		
 		
 		//TournamentMode Begins
-		
-		
+		String[][] winnerArray = new String[listOfMapFiles.length][numberOfGames];
+		int m= 0;
 		for(String filename :listOfMapFiles) {
 			//For each map	
-				//Gameplayer logic
+				//Gameplayer logic			
 				for(int j=0;j<numberOfGames;j++) {
 					map = new Map();
 					ArrayList<Player> listOfPlayers = new ArrayList<Player>();
@@ -163,13 +163,13 @@ public class Main {
 							
 							//pa.listOfPlayers.get(i).attach(cev);
 							pa.listOfPlayers.get(i).executeReinforcement(map, (ArrayList<Player>) pa.listOfPlayers);
-							Thread.sleep(1500);
+							Thread.sleep(2500);
 							Player current= pa.listOfPlayers.get(i);
 							//pa.listOfPlayers.get(i).detach(cev);
 							//cev.close();
 							//System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " Attack phase begins");
 							gameOver = pa.listOfPlayers.get(i).executeAttack(map, (ArrayList<Player>) pa.listOfPlayers);
-							Thread.sleep(1500);
+							Thread.sleep(2500);
 							if (gameOver == 1)
 								break;
 							int index=pa.listOfPlayers.indexOf(current);
@@ -183,17 +183,36 @@ public class Main {
 						if (gameOver == 1) {
 						System.out.println("Game Over");
 						System.out.println("Winner is Player: " + pa.listOfPlayers.get(0).getName());
+						winnerArray[m][j] = pa.listOfPlayers.get(0).getName();
 						isDraw = false;
 						break;
 						}
+						
 					}
 					
-					if(isDraw)
+					if(isDraw) {
 						System.out.println("Draw");
+						winnerArray[m][j] = "Draw";
+					}
 				}
 				
 				
 			}
+				m++;
+		}
+		
+		System.out.print("\t");
+		for(int i=0;i<numberOfGames;i++) {
+		System.out.print("Game "+(i+1) +"\t");
+		}
+
+		System.out.println();
+		for(int i=0;i<winnerArray.length;i++) {
+			System.out.print("Map "+(i+1) +"\t");
+			for(int j=0;j<winnerArray[i].length;j++) {
+				System.out.print(winnerArray[i][j]+"\t");
+			}
+			System.out.println();
 		}
 		
 		
