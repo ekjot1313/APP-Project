@@ -9,7 +9,6 @@ public class BenevolentStrategy implements Strategy  {
 	/**
 	 * This method calculates the number of reinforcement armies
 	 * 
-	 
 	 * @param map         Map Object
 	 * @param P			  Player
 	 * @return Number of reinforcement armies

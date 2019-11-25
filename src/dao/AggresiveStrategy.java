@@ -6,16 +6,24 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-
+/**
+ * This class is for Aggresive Strategy, implements the Strategy interface.
+ * @author Piyush
+ *
+ */
 public class AggresiveStrategy implements Strategy {
+	/**
+	 * Constructor to initialize country object.
+	 */
 	public AggresiveStrategy(){
 		strong=new Country();
 	}
+	/**
+	 * This country object stores the strongest country.
+	 */
 	public Country strong;
 	/**
 	 * This method calculates the number of reinforcement armies
-	 * 
-	 
 	 * @param map         Map Object
 	 * @param P			  Player
 	 * @return Number of reinforcement armies
@@ -36,7 +44,13 @@ public class AggresiveStrategy implements Strategy {
 
 		return reinforcementArmies;
 	}
-	
+	/**
+	 * This function finds the strongest country of a player which is the country with highest no. of armies out of all the countries which can be attacked by the other players.
+	 * @param map			Map Object
+	 * @param listPlayer	List of Players
+	 * @param P				Current Player
+	 * @return		1 for success,0 for failure
+	 */
 	public int strongestCountry(Map map, ArrayList<Player> listPlayer,Player P) {
 		int max =0,flag=0;
 		for(int i=0;i<P.getAssigned_countries().size();i++) {
@@ -56,6 +70,12 @@ public class AggresiveStrategy implements Strategy {
 			return 0;
 		return 0;
 	}
+	/**
+	 * This function finds the strongest country of a player which is the country with highest no. of armies.
+	 * @param map			Map Object
+	 * @param listPlayer	List of Players
+	 * @param P				Current Player
+	 */
 	public void simpleStrongestCountry(Map map, ArrayList<Player> listPlayer,Player P) {
 		int max =0,flag=0;
 		for(int i=0;i<P.getAssigned_countries().size();i++) {
@@ -66,14 +86,29 @@ public class AggresiveStrategy implements Strategy {
 				}
 			}
 	}
+	/**
+	 * This function informs whether an attack is possible on a country or not.
+	 * @param map	Map Object
+	 * @param listPlayer	List of Players
+	 * @param P			Current Player
+	 * @param c			Current country
+	 * @return			1 for success,0 for failure
+	 */
 	public int attackPossible(Map map, ArrayList<Player> listPlayer,Player P,Country c) {
 		for(String s:c.getNeighbors()) {
 			Country neighbor=map.getCountryFromName(s);
-			if(!c.getOwner().equals(neighbor.getOwner()))
+			if(!c.getOwner().equals(neighbor.getOwner()) && neighbor.getNoOfArmies()>1) {
 					return 1;
+			}
 		}
 		return 0;
 	}
+	/**
+	 * This is the function for reinforcement phase
+	 * @param map	Map Object
+	 * @param listPlayer	List of Players
+	 * @param P			Current Player
+	 */
 	public void reinforcement(Map map, ArrayList<Player> listPlayer,Player P) {
 		P.setEndOfActions(0);
 		P.setView("PhaseView");
@@ -91,6 +126,13 @@ public class AggresiveStrategy implements Strategy {
 		P.setEndOfActions(1); 
 		P.setActions("Reinforcement finished");
 	}
+	/**
+	 * This is the function for attack phase
+	 * @param map	Map Object
+	 * @param listPlayer	List of Players
+	 * @param P			Current Player
+	 * @return 1 if the game is over otherwise 0.
+	 */
 	public int attack(Map map, ArrayList<Player> listPlayer,Player P) {
 		P.setEndOfActions(0);
 		P.setView("PhaseView");
@@ -154,10 +196,6 @@ public class AggresiveStrategy implements Strategy {
 							+ fromCountry.getName() + " has only 1 army left");
 					P.setActions("Player :" + defender.getName() + " has defended successfully and attacking country :"
 							+ fromCountry.getName() + " has only 1 army left");
-					/*P.setEndOfActions(1); 
-					System.out.println("Attack skipped");
-					P.setActions("Attack finished");
-					return 0;*/
 				}
 					if (toCountry.getNoOfArmies() == 0) { // attacker has conquered the defending country.
 						map.setCountryOwner(toCountry, P.getName());
@@ -178,7 +216,6 @@ public class AggresiveStrategy implements Strategy {
 						}
 						else {
 							String card = P.randomCard();
-							//P.cards.add(card);
 							P.getCards().add(card);
 							System.out.println("You have received: " + card + " card");
 							P.setActions(P.getName() + " has received: " + card + " card");
@@ -215,26 +252,19 @@ public class AggresiveStrategy implements Strategy {
 		}
 		}
 		}
-		/*P.setEndOfActions(1); 
-		P.setActions("Attack finished");
-		return 0;*/
 	}
+	/**
+	 * This is the function for fortification phase
+	 * @param map	Map Object
+	 * @param listPlayer	List of Players
+	 * @param command	command used for testing
+	 * @param P			Current Player
+	 */
 	public void fortification(Map map, ArrayList<Player> listPlayer, String command,Player P) {
 		P.setEndOfActions(0);
 		P.setView("PhaseView");
 		P.setState("Fortification");
-		//Country strong=new Country();
 		int max =0;
-		/*for(int i=0;i<P.getAssigned_countries().size();i++) {
-			if(i==0) {
-				max=P.getAssigned_countries().get(i).getNoOfArmies();
-				strong=P.getAssigned_countries().get(i);
-			}
-			if(P.getAssigned_countries().get(i).getNoOfArmies()<max) {
-				max=P.getAssigned_countries().get(i).getNoOfArmies();
-				strong=P.getAssigned_countries().get(i);
-			}
-		}*/
 		Country c=new Country();
 		max=1;
 		int flag=strongestCountry(map,listPlayer,P);
