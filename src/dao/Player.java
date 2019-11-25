@@ -1,7 +1,9 @@
 package dao;
 
-import java.util.*;
-import dao.Map;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 /**
  * This class represents the Player details
@@ -340,16 +342,16 @@ public class Player extends pattern.Observable {
 	public boolean cardExchangePossible() {
 		// TODO Auto-generated method stub
 
-		int infantryNum = Collections.frequency(cards, "infantry");
-		int cavalryNum = Collections.frequency(cards, "cavalry");
-		int artilleryNum = Collections.frequency(cards, "artillery");
+		int infantryNum = (int) cards.stream().filter(card -> card.contains("infantry")).count();
+		int cavalryNum = (int) cards.stream().filter(card -> card.contains("cavalry")).count();
+		int artilleryNum = (int) cards.stream().filter(card -> card.contains("artillery")).count();
 		if (infantryNum >= 3) {
 			return true;
 		} else if (cavalryNum >= 3) {
 			return true;
 		} else if (artilleryNum >= 3) {
 			return true;
-		} else if (infantryNum + cavalryNum + artilleryNum >= 3) {
+		} else if (infantryNum >= 1 && cavalryNum >= 1 && artilleryNum >= 1) {
 			return true;
 		}
 		return false;
