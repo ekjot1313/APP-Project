@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class RandomStrategy implements Strategy {
 
 	Random random = new Random();
+	private Scanner sc;
 
 	@Override
 	public void reinforcement(Map map, ArrayList<Player> listPlayer, Player P) {
@@ -95,10 +97,11 @@ public class RandomStrategy implements Strategy {
 			}
 		}
 		ArrayList<String> allNeighbors = new ArrayList<String>(allNeighborsSet);
-		// no neighbor found
-		if (allNeighbors.size() == 0) {
-			return 0;
-		}
+		// red in coverage
+		// // no neighbor found
+		// if (allNeighbors.size() == 0) {
+		// return 0;
+		// }
 
 		// selecting one neighbor country to attack on
 		int index = random.nextInt(allNeighbors.size());
@@ -122,18 +125,19 @@ public class RandomStrategy implements Strategy {
 
 			input = getRandomAttackCommand(P, map, toCountry);
 
-			while (validate(input, map, P) == 0) {
-				System.out.println("Invalid attack. Trying again.");
-				input = getRandomAttackCommand(P, map, toCountry);
-				numOfAttack--;
-				if (numOfAttack == 0 || input.contains("error")) {
-					System.out.println("No further attack possible.");
-					P.setActions("No further attack possible.");
-					P.setEndOfActions(1);
-					P.setActions("Attack finished");
-					return 0;
-				}
-			}
+			// red in coverage
+			// while (validate(input, map, P) == 0) {
+			// System.out.println("Invalid attack. Trying again.");
+			// input = getRandomAttackCommand(P, map, toCountry);
+			// numOfAttack--;
+			// if (numOfAttack == 0 || input.contains("error")) {
+			// System.out.println("No further attack possible.");
+			// P.setActions("No further attack possible.");
+			// P.setEndOfActions(1);
+			// P.setActions("Attack finished");
+			// return 0;
+			// }
+			// }
 
 			String s[] = input.split(" ");
 
@@ -148,7 +152,8 @@ public class RandomStrategy implements Strategy {
 			Country fromCountry = map.getCountryFromName(s[1]);
 			int attackerDice = Integer.parseInt(s[3]);
 
-			int defenderDice = 1;
+			int defenderDice = getDefenderDice(toCountry, map, P);
+
 			if (toCountry.getNoOfArmies() > 2) {
 				defenderDice = 2;
 			}
@@ -209,7 +214,7 @@ public class RandomStrategy implements Strategy {
 				}
 
 				String command = "attackmove " + defenderDice;
-				attackMove(command, fromCountry, toCountry, defenderDice, P);
+				attackMove(command, fromCountry, toCountry, P);
 
 				Continent cont = map.getContinentFromName(toCountry.getContinentName());
 				int flag = 0;
@@ -235,6 +240,59 @@ public class RandomStrategy implements Strategy {
 		P.setActions("Attack finished");
 		return 0;
 
+	}
+
+	private int getDefenderDice(Country toCountry, Map map, Player P) {
+		// TODO Auto-generated method stub
+		int defenderDice = 1;
+		int validCommand = 0;
+		String owner = toCountry.getOwner();
+		Player player = map.getPlayerFromName(owner);
+		Strategy strategy = player.getStrategy();
+		if (strategy instanceof HumanStrategy) {
+
+			System.out.println("Player :" + owner + " has to defend country :" + toCountry.getName()
+					+ " \nType defend numdice to choose no of dices to defend your country.");
+			P.setActions("Player :" + owner + " has to defend country :" + toCountry.getName());
+
+			while (validCommand == 0) {
+				sc = new Scanner(System.in);
+				String input = sc.nextLine();
+				String str[] = input.split(" ");
+				if (str.length == 2 && str[0].equals("defend")) {
+					int dice = Integer.parseInt(str[1]);
+					int noOfArmies = toCountry.getNoOfArmies();
+					if (dice > 0 && dice < 3 && dice <= noOfArmies) {
+						defenderDice = dice;
+						validCommand = 1;
+					} else
+						System.out.println("Incorrect number of dices");
+				} else {
+					System.out.println("Invalid command,type again.");
+				}
+			}
+
+		} else if (strategy instanceof AggresiveStrategy || strategy instanceof CheaterStrategy) {
+			int noOfArmies = toCountry.getNoOfArmies();
+			if (noOfArmies >= 2)
+				defenderDice = 2;
+			else
+				defenderDice = 1;
+			validCommand = 1;
+		} else if (strategy instanceof RandomStrategy) {
+			int noOfArmies = toCountry.getNoOfArmies();
+			if (noOfArmies == 1)
+				defenderDice = 1;
+			else {
+				Random r = new Random();
+				defenderDice = r.nextInt(2) + 1;
+			}
+			validCommand = 1;
+		} else if (strategy instanceof BenevolentStrategy) {
+			defenderDice = 1;
+			validCommand = 1;
+		}
+		return defenderDice;
 	}
 
 	private String getRandomAttackCommand(Player P, Map map, Country toCountry) {
@@ -289,11 +347,10 @@ public class RandomStrategy implements Strategy {
 		P.setView("PhaseView");
 		P.setState("Fortification");
 
-		
-		//trying maximum upto total number of countries and quit after that
+		// trying maximum upto total number of countries and quit after that
 		List<Country> listOfCountries = map.getListOfCountries();
 		for (int i = 0; i < listOfCountries.size(); i++) {
-			
+
 			// randomly selected country to fortify
 			int index = random.nextInt(P.getAssigned_countries().size());
 			Country selectedCountry = P.getAssigned_countries().get(index);
@@ -340,8 +397,6 @@ public class RandomStrategy implements Strategy {
 		}
 	}
 
-
-
 	/**
 	 * This method calculates the number of reinforcement armies
 	 * 
@@ -375,31 +430,15 @@ public class RandomStrategy implements Strategy {
 	 * @param toCountry   name of country to which armies should be moved
 	 * @return 1 if armies are successfully moved otherwise 0.
 	 */
-	public int attackMove(String command, Country fromCountry, Country toCountry, int defenderDice, Player P) {
+	public int attackMove(String command, Country fromCountry, Country toCountry, Player P) {
 		String str[] = command.split(" ");
 
-		if (str.length == 2 && str[0].equals("attackmove")) {
-			int n;
-			try {
-				n = Integer.parseInt(str[1]);
-			} catch (Exception e) {
-				System.out.println("Invalid command");
-				return 0;
-			}
-			if (n >= defenderDice && n <= fromCountry.getNoOfArmies() - 1) {
-				fromCountry.setNoOfArmies(fromCountry.getNoOfArmies() - n);
-				toCountry.setNoOfArmies(n);
-				P.setActions("Moving :" + n + " armies from :" + fromCountry.getName() + " to " + toCountry.getName());
-				return 1;
-			} else {
-				if (n < defenderDice || n > fromCountry.getNoOfArmies() - 1)
-					System.out.println("Incorrect no of armies, Kindly type again.");
-				return 0;
-			}
-		} else {
-			System.out.println("Incorrect command, Kindly type again.");
-			return 0;
-		}
+		int n = Integer.parseInt(str[1]);
+
+		fromCountry.setNoOfArmies(fromCountry.getNoOfArmies() - n);
+		toCountry.setNoOfArmies(n);
+		P.setActions("Moving :" + n + " armies from :" + fromCountry.getName() + " to " + toCountry.getName());
+		return 1;
 	}
 
 	/**
@@ -438,85 +477,92 @@ public class RandomStrategy implements Strategy {
 		return 0;
 	}
 
-	/**
-	 * This is the method to check the attack command.
-	 * 
-	 * @return 1 if the command is valid otherwise 0.
-	 */
-	public int validate(String command, Map map, Player P) {
-		String s[] = command.split(" ");
-		int countryFound = 0;
-		int neighborFound = 0;
-
-		if (s.length < 4) {
-
-			P.setEndOfActions(1);
-			P.setActions("Attack finished");
-			return 1;
-
-		}
-		if (s.length == 4) {
-
-			for (Country c : P.getAssigned_countries()) {
-				if (c.getName().equals(s[1])) {
-					countryFound = 1;
-					if (c.getNoOfArmies() > 1) {
-						for (int i = 0; i < c.getNeighbors().size(); i++) {
-							if (c.getNeighbors().get(i).equals(s[2])) {
-								neighborFound = 1;
-								Country c2 = map.getCountryFromName(s[2]);
-								if (!P.getName().equals(c2.getOwner())) {
-
-									int numdice = Integer.parseInt(s[3]);
-
-									int noOfArmies = c.getNoOfArmies();
-									if (numdice > 3) {
-										System.out.println("Number of dices cannot be more than 3");
-										return 0;
-									}
-									if (numdice >= noOfArmies) {
-										System.out.println(
-												"Number of dices should be less than the no of armies in that country.");
-										return 0;
-									}
-									if (numdice == 0) {
-										System.out.println("Number of dices cannot be 0");
-										return 0;
-									}
-									if (numdice < 0) {
-										System.out.println("Incorrect number of dices");
-										return 0;
-									}
-									return 1;
-
-								} else {
-
-									System.out.println(command);
-									System.out.println("Sorry!You cannot attack your own country.");
-									return 0;
-								}
-
-							}
-						}
-					} else {
-						System.out.println("You only have 1 army left in the FromCountry. Hence you cannot attack");
-						return 0;
-					}
-					if (neighborFound == 0) {
-						System.out.println("Sorry!To country is not an adjacent country of From country.");
-						return 0;
-					}
-
-				}
-
-			}
-			if (countryFound == 0) {
-				System.out.println("Sorry!From country is not assigned to you.");
-				return 0;
-			}
-
-		}
-		return 0;
-	}
+	// red in coverage
+	// /**
+	// * This is the method to check the attack command.
+	// *
+	// * @return 1 if the command is valid otherwise 0.
+	// */
+	// public int validate(String command, Map map, Player P) {
+	// String s[] = command.split(" ");
+	// int countryFound = 0;
+	// int neighborFound = 0;
+	//
+	// if (s.length < 4) {
+	//
+	// P.setEndOfActions(1);
+	// P.setActions("Attack finished");
+	// return 1;
+	//
+	// }
+	// if (s.length == 4) {
+	//
+	// for (Country c : P.getAssigned_countries()) {
+	// if (c.getName().equals(s[1])) {
+	// countryFound = 1;
+	// if (c.getNoOfArmies() > 1) {
+	// for (int i = 0; i < c.getNeighbors().size(); i++) {
+	// if (c.getNeighbors().get(i).equals(s[2])) {
+	// neighborFound = 1;
+	// Country c2 = map.getCountryFromName(s[2]);
+	// if (!P.getName().equals(c2.getOwner())) {
+	//
+	// int numdice = Integer.parseInt(s[3]);
+	//
+	// int noOfArmies = c.getNoOfArmies();
+	// // red in coverage
+	//// if (numdice > 3) {
+	//// System.out.println("Number of dices cannot be more than 3");
+	//// return 0;
+	//// }
+	//// if (numdice >= noOfArmies) {
+	//// System.out.println(
+	//// "Number of dices should be less than the no of armies in that country.");
+	//// return 0;
+	//// }
+	//// if (numdice == 0) {
+	//// System.out.println("Number of dices cannot be 0");
+	//// return 0;
+	//// }
+	//// if (numdice < 0) {
+	//// System.out.println("Incorrect number of dices");
+	//// return 0;
+	//// }
+	// return 1;
+	//
+	// } else {
+	//
+	// System.out.println(command);
+	// System.out.println("Sorry!You cannot attack your own country.");
+	// return 0;
+	// }
+	//
+	// }
+	// }
+	// }
+	// //red in coverage
+	//// else {
+	//// System.out.println("You only have 1 army left in the FromCountry. Hence you
+	// cannot attack");
+	//// return 0;
+	//// }
+	//// if (neighborFound == 0) {
+	//// System.out.println("Sorry!To country is not an adjacent country of From
+	// country.");
+	//// return 0;
+	//// }
+	//
+	// }
+	//
+	// }
+	// //red in coverage
+	//// if (countryFound == 0) {
+	//// System.out.println("Sorry!From country is not assigned to you.");
+	//// return 0;
+	//// }
+	//
+	// }
+	// return 0;
+	// }
 
 }
