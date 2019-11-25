@@ -3,7 +3,7 @@ package game;
 import java.util.*;
 
 import dao.RandomStrategy;
-import dao.AggresiveStrategy;
+import dao.AggressiveStrategy;
 import dao.BenevolentStrategy;
 import dao.CheaterStrategy;
 import dao.Continent;
@@ -103,7 +103,7 @@ public class PlayerAllocator {
 						if(str[i+2].equalsIgnoreCase("human"))
 							p.setStrategy(new HumanStrategy());
 						else if(str[i+2].equalsIgnoreCase("aggresive"))
-							p.setStrategy(new AggresiveStrategy());
+							p.setStrategy(new AggressiveStrategy());
 						else if(str[i+2].equalsIgnoreCase("benevolent"))
 							p.setStrategy(new BenevolentStrategy());
 						else if(str[i+2].equalsIgnoreCase("random"))

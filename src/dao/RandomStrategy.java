@@ -284,7 +284,7 @@ public class RandomStrategy implements Strategy {
 				}
 			}
 
-		} else if (strategy instanceof AggresiveStrategy || strategy instanceof CheaterStrategy) {
+		} else if (strategy instanceof AggressiveStrategy || strategy instanceof CheaterStrategy) {
 			int noOfArmies = toCountry.getNoOfArmies();
 			if (noOfArmies >= 2)
 				defenderDice = 2;

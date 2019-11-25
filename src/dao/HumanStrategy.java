@@ -621,7 +621,7 @@ public class HumanStrategy implements Strategy {
 							}
 						}
 						}
-						else if(defender.getStrategy() instanceof AggresiveStrategy || defender.getStrategy() instanceof CheaterStrategy) {
+						else if(defender.getStrategy() instanceof AggressiveStrategy || defender.getStrategy() instanceof CheaterStrategy) {
 							int noOfArmies = toCountry.getNoOfArmies();
 							if(noOfArmies>=2)
 								defenderDice = 2;
