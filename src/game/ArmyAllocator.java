@@ -29,7 +29,7 @@ public class ArmyAllocator {
 	 * @param test          flag for testing
 	 * @return Number of assigned armies
 	 */
-	public int calculateTotalArmies(ArrayList<Player> listOfPLayers, Map map, int test) {
+	public int calculateTotalArmies(ArrayList<Player> listOfPLayers, Map map) {
 		// 2 -40 armies ,3 -35 armies , 4- 30 armies ,5 -25 armies ...
 		int maxArmiesForEachPlayer = 40;
 		// Maximum number of players can be 9 only
@@ -49,12 +49,7 @@ public class ArmyAllocator {
 				p.setUnassignedarmies(assignedArmies);
 			}
 		}
-		if(test == -1)
-			return assignedArmies;
-		if (test == 1)
-			placeArmy(assignedArmies, listOfPLayers, map, 1);
-		else
-			placeArmy(assignedArmies, listOfPLayers, map, 0);
+		
 		return assignedArmies;
 	}
 
@@ -77,6 +72,10 @@ public class ArmyAllocator {
 			for (int i = 0; i < assignedArmies; i++) {
 				try {
 				for (Player p : listOfPLayers) {
+					if(!p.getStrategy().getClass().getName().equals("dao.HumanStrategy")) {
+						isPlaceAll = true;
+						break;
+					}
 					Boolean armyNotAllocated = true;
 					while (armyNotAllocated) {
 						System.out.println("Player " + p.getName()

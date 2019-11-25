@@ -149,7 +149,7 @@ public class Main {
 					ArmyAllocator aa = new ArmyAllocator();
 					pa.listOfPlayers = listOfPlayers;
 					pa.populateCountries(map);
-					aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, map, -1);
+					aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, map);
 					aa.placeAll((ArrayList<Player>) pa.listOfPlayers, map);
 					boolean isDraw = true;
 					for(int k =0;k<maxTurns;k++) {
@@ -348,8 +348,8 @@ public class Main {
 		int gameOver = 0;
 		pa.allocate(map,null);
 		pa.populateCountries(map);
-		aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, map, 0);
-		
+		int assignedArmies =aa.calculateTotalArmies((ArrayList<Player>) pa.listOfPlayers, map);
+		aa.placeArmy(assignedArmies, (ArrayList<Player>) pa.listOfPlayers, map, 0);
 		while (true) {
 			PhaseView pv= new PhaseView();
 			CardExchangeView cev = new CardExchangeView();
