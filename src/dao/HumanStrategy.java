@@ -191,6 +191,12 @@ public class HumanStrategy implements Strategy {
 		}
 		return 0;
 	}
+	/**
+	 * This is the function for reinforcement phase
+	 * @param map	Map Object
+	 * @param listPlayer	List of Players
+	 * @param P			Current Player
+	 */
 	public void reinforcement(Map map, ArrayList<Player> listPlayer,Player P) {
 		P.setEndOfActions(0);
 		P.setView("PhaseViewCardExchangeView");
@@ -350,6 +356,13 @@ public class HumanStrategy implements Strategy {
 		P.setEndOfActions(1);
 		P.setActions("Reinforcement finished");
 	}
+	/**
+	 * This is the function for fortification phase
+	 * @param map	Map Object
+	 * @param listPlayer	List of Players
+	 * @param command	command used for testing
+	 * @param P			Current Player
+	 */
 	public void fortification(Map map, ArrayList<Player> listPlayer, String command,Player P) {
 		P.setEndOfActions(0);
 		P.setView("PhaseView");
@@ -482,6 +495,13 @@ public class HumanStrategy implements Strategy {
 			}
 		} while (flag == 0);
 	}
+	/**
+	 * This is the function for attack phase
+	 * @param map	Map Object
+	 * @param listPlayer	List of Players
+	 * @param P			Current Player
+	 * @return 1 if the game is over otherwise 0.
+	 */
 	public int attack(Map map, ArrayList<Player> listPlayer,Player P) {
 		P.setEndOfActions(0);
 		P.setView("PhaseView");
@@ -651,13 +671,8 @@ public class HumanStrategy implements Strategy {
 							map.setCountryOwner(toCountry, P.getName());
 							P.getAssigned_countries().add(toCountry);
 							defender.getAssigned_countries().remove(toCountry);
-							/*toCountry.setNoOfArmies(1);
-							fromCountry.setNoOfArmies(fromCountry.getNoOfArmies() - 1);*/
 							System.out.println("You have conquered country: " + toCountry.getName());
 							P.setActions(P.getName() + " has conquered country: " + toCountry.getName());
-							
-							// System.out.println(fromCountry.getNoOfArmies());
-							//Class cls=defender.getClass();
 							System.out.println(
 									"Move armies from " + fromCountry.getName() + " to " + toCountry.getName());
 							System.out.println("Number of dices used by the attacker in the last attack:"+attackerDice);
@@ -680,7 +695,6 @@ public class HumanStrategy implements Strategy {
 
 							} else {
 								String card = P.randomCard();
-								//P.cards.add(card);
 								P.getCards().add(card);
 								System.out.println("You have received: " + card + " card");
 								P.setActions(P.getName() + " has received: " + card + " card");
