@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BenevolentStrategy implements Strategy  {
-	
+	/**
+	 * This country object stores the weakest country.
+	 */
 	public Country weak;
 	/**
 	 * This method calculates the number of reinforcement armies
@@ -29,6 +31,13 @@ public class BenevolentStrategy implements Strategy  {
 
 		return reinforcementArmies;
 	}
+	/**
+	 * This function finds the weakest country of a player which is the country with lowest no. of armies out of all the countries which can be attacked by the other players.
+	 * @param map			Map Object
+	 * @param listPlayer	List of Players
+	 * @param P				Current Player
+	 * @return		1 for success,0 for failure
+	 */
 	public int weakestCountry(Map map, ArrayList<Player> listPlayer,Player P) {
 		int min =999,flag=0;
 		for(int i=0;i<P.getAssigned_countries().size();i++) {
@@ -48,6 +57,12 @@ public class BenevolentStrategy implements Strategy  {
 			return 0;
 		return 0;
 	}
+	/**
+	 * This function finds the weakest country of a player which is the country with lowest no. of armies.
+	 * @param map			Map Object
+	 * @param listPlayer	List of Players
+	 * @param P				Current Player
+	 */
 	public void simpleWeakestCountry(Map map, ArrayList<Player> listPlayer,Player P) {
 		int min =999;
 		for(int i=0;i<P.getAssigned_countries().size();i++) {
@@ -57,15 +72,28 @@ public class BenevolentStrategy implements Strategy  {
 				}
 			}
 	}
+	/**
+	 * This function informs whether an attack is possible on a country or not.
+	 * @param map	Map Object
+	 * @param listPlayer	List of Players
+	 * @param P			Current Player
+	 * @param c			Current country
+	 * @return			1 for success,0 for failure
+	 */
 	public int attackPossible(Map map, ArrayList<Player> listPlayer,Player P,Country c) {
 		for(String s:c.getNeighbors()) {
 			Country neighbor=map.getCountryFromName(s);
-			if(!c.getOwner().equals(neighbor.getOwner()))
+			if(!c.getOwner().equals(neighbor.getOwner())&& neighbor.getNoOfArmies()>1)
 					return 1;
 		}
 		return 0;
 	}
-	
+	/**
+	 * This is the function for reinforcement phase
+	 * @param map	Map Object
+	 * @param listPlayer	List of Players
+	 * @param P			Current Player
+	 */
 	public void reinforcement(Map map, ArrayList<Player> listPlayer,Player P) {
 		P.setEndOfActions(0);
 		P.setView("PhaseView");
@@ -78,23 +106,18 @@ public class BenevolentStrategy implements Strategy  {
 		if(flag==0) {
 			simpleWeakestCountry(map, listPlayer, P);
 		}
-		//Country weak=new Country();
-		/*int min =0;
-		for(int i=0;i<P.getAssigned_countries().size();i++) {
-			if(i==0) {
-				min=P.getAssigned_countries().get(i).getNoOfArmies();
-				weak=P.getAssigned_countries().get(i);
-			}
-			if(P.getAssigned_countries().get(i).getNoOfArmies()<min) {
-				min=P.getAssigned_countries().get(i).getNoOfArmies();
-				weak=P.getAssigned_countries().get(i);
-			}
-		}*/
 		P.setActions("Reinforced " + reinforcementArmies + " armies to "+ weak.getName());
 		weak.setNoOfArmies(weak.getNoOfArmies()+reinforcementArmies);
 		P.setEndOfActions(1); 
 		P.setActions("Reinforcement finished");
 	}
+	/**
+	 * This is the function for attack phase
+	 * @param map	Map Object
+	 * @param listPlayer	List of Players
+	 * @param P			Current Player
+	 * @return 1 if the game is over otherwise 0.
+	 */
 	public int attack(Map map, ArrayList<Player> listPlayer,Player P) {
 		P.setEndOfActions(0);
 		P.setView("PhaseView");
@@ -104,11 +127,17 @@ public class BenevolentStrategy implements Strategy  {
 		P.setActions("Attack finished");
 		return 0;
 	}
+	/**
+	 * This is the function for fortification phase
+	 * @param map	Map Object
+	 * @param listPlayer	List of Players
+	 * @param command	command used for testing
+	 * @param P			Current Player
+	 */
 	public void fortification(Map map, ArrayList<Player> listPlayer, String command,Player P) {
 		P.setEndOfActions(0);
 		P.setView("PhaseView");
 		P.setState("Fortification");
-		//Country weak=new Country();
 		int min =0;
 		int flag=weakestCountry(map, listPlayer, P);
 		if(flag==0) {
