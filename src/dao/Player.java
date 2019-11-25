@@ -11,6 +11,7 @@ import dao.Map;
  */
 public class Player extends pattern.Observable {
 	private Strategy strategy;
+
 	public Strategy getStrategy() {
 		return strategy;
 	}
@@ -99,18 +100,18 @@ public class Player extends pattern.Observable {
 
 	/**
 	 * To get random card
+	 * 
 	 * @return card
 	 */
 	public String randomCard() {
 		Random number = new Random();
-		if(deck.size()>0) {
 		int no = number.nextInt(deck.size());
-		return deck.get(no);}
-		return "JOKER";
+		return deck.get(no);
 	}
 
 	/**
 	 * This method returns the number of unassigned armies
+	 * 
 	 * @return Number of Unassigned Armies
 	 */
 	public int getUnassignedarmies() {
@@ -119,6 +120,7 @@ public class Player extends pattern.Observable {
 
 	/**
 	 * This method sets the number of unassigned armies
+	 * 
 	 * @param unassignedarmies Number of unassigned armies
 	 */
 
@@ -128,6 +130,7 @@ public class Player extends pattern.Observable {
 
 	/**
 	 * This method returns the name of the player.
+	 * 
 	 * @return Player Name
 	 */
 	public String getName() {
@@ -136,6 +139,7 @@ public class Player extends pattern.Observable {
 
 	/**
 	 * This method sets the name of the player.
+	 * 
 	 * @param name Player Name
 	 */
 	public void setName(String name) {
@@ -144,6 +148,7 @@ public class Player extends pattern.Observable {
 
 	/**
 	 * This method returns the number of armies for a player.
+	 * 
 	 * @return Number of armies for a player
 	 */
 	public int getNoOfArmies() {
@@ -152,6 +157,7 @@ public class Player extends pattern.Observable {
 
 	/**
 	 * This method sets the number of armies for a player.
+	 * 
 	 * @param noOfArmies Number of armies of a particular player
 	 */
 	public void setNoOfArmies(int noOfArmies) {
@@ -160,14 +166,16 @@ public class Player extends pattern.Observable {
 
 	/**
 	 * This method returns the list of countries belonging to a player.
+	 * 
 	 * @return List of countries belonging to a player
 	 */
 	public List<Country> getAssigned_countries() {
 		return assigned_countries;
 	}
-	
+
 	/**
 	 * To get the current view
+	 * 
 	 * @return view
 	 */
 	public String getView() {
@@ -176,6 +184,7 @@ public class Player extends pattern.Observable {
 
 	/**
 	 * To set the current view
+	 * 
 	 * @param view
 	 */
 	public void setView(String view) {
@@ -193,6 +202,7 @@ public class Player extends pattern.Observable {
 
 	/**
 	 * To get end of actions
+	 * 
 	 * @return endOfActions
 	 */
 	public int getEndOfActions() {
@@ -201,14 +211,17 @@ public class Player extends pattern.Observable {
 
 	/**
 	 * TO set end of actions
+	 * 
 	 * @param endOfActions
 	 */
 	public void setEndOfActions(int endOfActions) {
 		this.endOfActions = endOfActions;
 
 	}
+
 	/**
 	 * TO get current actions
+	 * 
 	 * @return actions
 	 */
 	public String getActions() {
@@ -217,6 +230,7 @@ public class Player extends pattern.Observable {
 
 	/**
 	 * To store current action
+	 * 
 	 * @param actions
 	 */
 	public void setActions(String actions) {
@@ -227,6 +241,7 @@ public class Player extends pattern.Observable {
 
 	/**
 	 * TO get current state
+	 * 
 	 * @return state
 	 */
 	public String getState() {
@@ -235,13 +250,14 @@ public class Player extends pattern.Observable {
 
 	/**
 	 * To set current state
+	 * 
 	 * @param state
 	 */
 	public void setState(String state) {
 		this.state = state;
 		notify(this);
 	}
-	
+
 	/**
 	 * This method returns the cardExchangeCounter.
 	 * 
@@ -259,9 +275,10 @@ public class Player extends pattern.Observable {
 	public void setCardExchangeCounter(int cardExchangeCounter) {
 		this.cardExchangeCounter = cardExchangeCounter;
 	}
-	
+
 	/**
 	 * This method returns the card list.
+	 * 
 	 * @return
 	 */
 	public ArrayList<String> getCards() {
@@ -270,20 +287,20 @@ public class Player extends pattern.Observable {
 
 	/**
 	 * This method sets the card list.
+	 * 
 	 * @param cards
 	 */
 	public void setCards(ArrayList<String> cards) {
 		this.cards = cards;
 	}
 
-	
 	/**
 	 * This method is used for reinforcement phase and exchange of cards.
 	 * 
-	 * @param listPlayer  List of players
-	 * @param map         Map object which contains the map details like continents
-	 *                    and countries.
-	 *                    
+	 * @param listPlayer List of players
+	 * @param map        Map object which contains the map details like continents
+	 *                   and countries.
+	 * 
 	 */
 	public void executeReinforcement(Map map, ArrayList<Player> listPlayer) {
 		this.strategy.reinforcement(map, listPlayer, this);
@@ -292,29 +309,27 @@ public class Player extends pattern.Observable {
 	/**
 	 * This function is used for fortification phase.
 	 * 
-	 * @param listPlayer  List of players
-	 * @param map         Map object which contains the map details like continents
-	 *                    and countries.
-	 * @param command	For testing
+	 * @param listPlayer List of players
+	 * @param map        Map object which contains the map details like continents
+	 *                   and countries.
+	 * @param command    For testing
 	 */
 	public void executeFortification(Map map, ArrayList<Player> listPlayer, String command) {
-			this.strategy.fortification(map, listPlayer, command, this);
+		this.strategy.fortification(map, listPlayer, command, this);
 
 	}
 
 	/**
 	 * This method is used for attack phase.
-	 * @param map Object of Map
+	 * 
+	 * @param map        Object of Map
 	 * @param listPlayer list of Players
 	 * @return 1 if attack is successful otherwise 0.
 	 * @throws Exception
 	 */
 	public int executeAttack(Map map, ArrayList<Player> listPlayer) throws Exception {
-		int result=this.strategy.attack(map, listPlayer, this);
+		int result = this.strategy.attack(map, listPlayer, this);
 		return result;
 	}
 
-	
-
-	
 }
