@@ -22,6 +22,14 @@ public class RandomStrategy implements Strategy {
 		// calculate reinforcement armies
 		int reinforcementArmies = calculateReinforceArmies(map, P);
 
+		// is it possible to exchange cards
+		if (P.cardExchangePossible()) {
+			// if there are 5 cards, must exchange
+
+			// else, decide randomly
+
+		}
+
 		// loop over playerlist and assign reinforcement armies
 		System.out.println("Reinforcement armies to be assigned :" + reinforcementArmies);
 
@@ -205,12 +213,16 @@ public class RandomStrategy implements Strategy {
 						return 1;
 
 				} else {
-					String card = P.randomCard();
-					// P.cards.add(card);
-					P.getCards().add(card);
-					System.out.println("You have received: " + card + " card");
-					P.setActions(P.getName() + " has received: " + card + " card");
-					Player.deck.remove(card);
+					if (Player.deck.size() > 0) {
+						String card = P.randomCard();
+						P.getCards().add(card);
+						System.out.println("You have received: " + card + " card");
+						P.setActions(P.getName() + " has received: " + card + " card");
+						Player.deck.remove(card);
+					} else {
+						System.out.println("Card deck is empty.");
+						P.setActions("Card deck is empty.");
+					}
 				}
 
 				String command = "attackmove " + defenderDice;

@@ -332,4 +332,26 @@ public class Player extends pattern.Observable {
 		return result;
 	}
 
+	/**
+	 * This method checks if card exchange is possible or not.
+	 *
+	 * @return true if exchange is possible otherwise false;
+	 */
+	public boolean cardExchangePossible() {
+		// TODO Auto-generated method stub
+
+		int infantryNum = Collections.frequency(cards, "infantry");
+		int cavalryNum = Collections.frequency(cards, "cavalry");
+		int artilleryNum = Collections.frequency(cards, "artillery");
+		if (infantryNum >= 3) {
+			return true;
+		} else if (cavalryNum >= 3) {
+			return true;
+		} else if (artilleryNum >= 3) {
+			return true;
+		} else if (infantryNum + cavalryNum + artilleryNum >= 3) {
+			return true;
+		}
+		return false;
+	}
 }
