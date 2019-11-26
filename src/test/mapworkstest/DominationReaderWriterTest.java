@@ -19,7 +19,7 @@ import mapWorks.DominationReaderWriter;
 import mapWorks.MapEditor;
 
 /**
- * This class tests the functions in MapReader.java class
+ * This class tests the functions in DominationReaderWriter.java class
  * 
  * @author divya_000
  *

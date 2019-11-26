@@ -12,8 +12,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import dao.Map;
+import mapWorks.DominationReaderWriter;
 import mapWorks.MapEditor;
-import mapWorks.MapReader;
+
 
 /**
  * TestClass to check the MapEditor class
@@ -32,9 +33,9 @@ public class MapEditorTest {
 	 */
 	static MapEditor mapEditor;
 	/**
-	 * Object of MapReader
+	 * Object of DominationReaderWriter
 	 */
-	static MapReader mapReader;
+	static DominationReaderWriter drw;
 
 	/**
 	 * Method to initialize the objects
@@ -49,7 +50,7 @@ public class MapEditorTest {
 		mapEditor.editNeighbor(
 				("editneighbor -add india pakistan -add pakistan china -add india congo -add congo uganda").split(" "));
 		testMap = mapEditor.getMap();
-		mapReader = new MapReader();
+		drw= new DominationReaderWriter();
 	}
 
 	/**
