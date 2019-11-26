@@ -40,7 +40,7 @@ public class SaveGameBuilder extends GameBuilder {
 		content +=("\r\n[PlayerList]\r\n");
 		
 		for(Player p :map.getListOfPlayers()) {
-			content += p.getName() +" "+p.getNoOfArmies() +" " +p.getStrategy().getClass().getName() +" ";
+			content += p.getName() +" "+p.getNoOfArmies() +" "+p.getUnassignedarmies()+" " +p.getStrategy().getClass().getName() +" ";
 			for(Country c :p.getAssigned_countries()) {
 				content += c.getName() +" ";
 			}

@@ -24,6 +24,9 @@ import pattern.Strategy.CheaterStrategy;
 import pattern.Strategy.HumanStrategy;
 import pattern.Strategy.RandomStrategy;
 import pattern.Strategy.Strategy;
+import pattern.builder.Director;
+import pattern.builder.Game;
+import pattern.builder.LoadGameBuilder;
 import mapWorks.MapEditor;
 
 /**
@@ -55,7 +58,7 @@ public class Main {
 			
 			if(gameMode.equalsIgnoreCase("Single Game")) {
 				System.out.println(
-						"Type \nloadmap <filename> -load an existing map \neditmap <filename> -edit an existing map or create a new map");
+						"Type \n loadgame <filename> \nloadmap <filename> -load an existing map \neditmap <filename> -edit an existing map or create a new map");
 				String[] commands = sc.nextLine().split(" ");
 				if (commands.length == 1 && !commands[0].equals("exit")) {
 					System.out.println("Invalid command .Type exit to end game");
@@ -72,6 +75,15 @@ public class Main {
 					case "editmap":
 						editmap(commands[1]);
 						break;
+						
+					case "loadgame":
+						Map map = new Map();
+						Director d = new Director();
+						d.setGbuilder(new LoadGameBuilder());
+						d.constructGame(commands[1], map, " ", " ");
+						Game game=d.getGame();
+						loadSavedGame(game);
+						
 					case "exit":
 						sc.close();
 						return;
@@ -91,6 +103,13 @@ public class Main {
 				System.out.println("Invalid Command");
 			}
 		}
+	}
+
+	private static void loadSavedGame(Game game) {
+		// TODO Auto-generated method stub
+		
+		
+		
 	}
 
 	private static void tournamentModeInit() throws Exception {

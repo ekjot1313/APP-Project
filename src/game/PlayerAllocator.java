@@ -66,7 +66,7 @@ public class PlayerAllocator {
 		do {
 			try {
 			System.out.println(
-					"Type \ngameplayer -add<PlayerName> or -remove <PlayerName> \npopulatecountries - assign countries to players");
+					"Type \ngameplayer -add<PlayerName> <Strategy> or -remove <PlayerName> \npopulatecountries - assign countries to players");
 			System.out.println("Type showmap");
 			if(command!= null ) {
 				cmd =command;
@@ -217,7 +217,7 @@ public class PlayerAllocator {
 										return 0;
 									if(str[i+1].equalsIgnoreCase("human"))
 										i++;
-									else if(str[i+1].equalsIgnoreCase("aggresive"))
+									else if(str[i+1].equalsIgnoreCase("aggressive"))
 										i++;
 									else if(str[i+1].equalsIgnoreCase("benevolent"))
 										i++;

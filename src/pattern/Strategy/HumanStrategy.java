@@ -219,6 +219,7 @@ public class HumanStrategy implements Strategy {
 		} else
 			forceExchangeCards = 0;
 		// loop over playerlist and assign reinforcement armies
+		P.setUnassignedarmies(reinforcementArmies);
 		System.out.println("Reinforcement armies to be assigned :" + reinforcementArmies);
 		System.out.println("Type reinforce <countryname> <num>  to assign armies ");
 		System.out.println("Type exchangecards <num> <num> <num> -none to exchange cards\n Type showmap\n Type savegame <fileName>");

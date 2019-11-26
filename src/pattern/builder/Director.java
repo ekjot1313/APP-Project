@@ -6,8 +6,8 @@ public class Director {
 	
 	private GameBuilder gbuilder;
 
-	public GameBuilder getGbuilder() {
-		return gbuilder;
+	public Game getGame() {
+		return gbuilder.getGameProduct();
 	}
 
 	public void setGbuilder(GameBuilder gbuilder) {
