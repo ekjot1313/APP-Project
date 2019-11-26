@@ -79,8 +79,13 @@ public class Main {
 						System.out.println("Invalid command . Type exit to end game");
 					}
 				}
-			}else if(gameMode.equalsIgnoreCase("Tournament")) {				
-				tournamentMode();
+			}else if(gameMode.equalsIgnoreCase("Tournament")) {	
+				try {
+				tournamentModeInit();
+				//tournamentMode();
+				}catch(Exception e) {
+					System.out.println("Invalid Command");
+				}
 				
 			}else {
 				System.out.println("Invalid Command");
@@ -88,7 +93,7 @@ public class Main {
 		}
 	}
 
-	private static void tournamentMode() throws Exception {
+	private static void tournamentModeInit() throws Exception {
 		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
 		String[] listOfMapFiles ;
@@ -96,34 +101,40 @@ public class Main {
 		int numberOfGames = 0;
 		int maxTurns = 0;
 		//Initial setup
-		while(true) {
-		
-		System.out.println("Type tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns");
-		String tournamentCommand  = sc.nextLine();
-		
-		String[] tournamentCommandArray = tournamentCommand.split(" ");
-		
-			if(tournamentCommandArray[0].equals("tournament") && tournamentCommandArray.length == 9){
-				if(tournamentCommandArray[1].equals("-M") && tournamentCommandArray[3].equals("-P") && tournamentCommandArray[5].equals("-G") && tournamentCommandArray[7].equals("-D")) {
-					listOfMapFiles = tournamentCommandArray[2].split(",");
-					listOfPlayerStrategies = tournamentCommandArray[4].split(",");
-					try {
-					numberOfGames = Integer.parseInt(tournamentCommandArray[6]);
-					maxTurns = Integer.parseInt(tournamentCommandArray[8]);
-					}catch(Exception e) {
+				while(true) {
+				
+				System.out.println("Type tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns");
+				String tournamentCommand  = sc.nextLine();
+				
+				String[] tournamentCommandArray = tournamentCommand.split(" ");
+				
+					if(tournamentCommandArray[0].equals("tournament") && tournamentCommandArray.length == 9){
+						if(tournamentCommandArray[1].equals("-M") && tournamentCommandArray[3].equals("-P") && tournamentCommandArray[5].equals("-G") && tournamentCommandArray[7].equals("-D")) {
+							listOfMapFiles = tournamentCommandArray[2].split(",");
+							listOfPlayerStrategies = tournamentCommandArray[4].split(",");
+							try {
+							numberOfGames = Integer.parseInt(tournamentCommandArray[6]);
+							maxTurns = Integer.parseInt(tournamentCommandArray[8]);
+							}catch(Exception e) {
+								System.out.println("Invalid command .Type again");
+							}
+							break;
+							
+						}else {
+							System.out.println("Invalid command .Type again");
+						}
+							
+					}else {
 						System.out.println("Invalid command .Type again");
 					}
-					break;
-					
-				}else {
-					System.out.println("Invalid command .Type again");
 				}
-					
-			}else {
-				System.out.println("Invalid command .Type again");
-			}
-		}
+				
+				tournamentMode(listOfMapFiles,listOfPlayerStrategies,numberOfGames,maxTurns);
 		
+	}
+
+	private static String[][] tournamentMode(String[] listOfMapFiles, String[] listOfPlayerStrategies, int numberOfGames, int maxTurns) throws Exception {
+		// TODO Auto-generated method stub
 		
 		//TournamentMode Begins
 		String[][] winnerArray = new String[listOfMapFiles.length][numberOfGames];
@@ -143,6 +154,8 @@ public class Main {
 							ArrayList<String> deck = createDeck(map);
 							Player.deck = deck;								
 							p.setName(playerType);
+							if(getStrategyByName(playerType) == null)
+								throw new Exception();
 							p.setStrategy(getStrategyByName(playerType));
 							map.addPlayer(p);
 							listOfPlayers.add(p);
@@ -217,7 +230,7 @@ public class Main {
 			System.out.println();
 		}
 		
-		
+		return winnerArray;
 		
 	}
 
