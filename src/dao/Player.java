@@ -21,7 +21,16 @@ public class Player extends pattern.Observable {
 	public void setStrategy(Strategy strategy) {
 		this.strategy = strategy;
 	}
+	public int test=0;
+	private String testCommand;
+	public String getTestCommand() {
+		return testCommand;
+	}
 
+	public void setTestCommand(String testCommand) {
+		test=1;
+		this.testCommand = testCommand;
+	}
 	/**
 	 * To store the current view
 	 */

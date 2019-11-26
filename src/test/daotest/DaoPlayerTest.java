@@ -167,13 +167,15 @@ public class DaoPlayerTest {
 	}
 	/**
 	 * Test method for {@link dao.Player#endGame(ArrayList)}.
+	 * @throws Exception 
 	 */
 	@Test
-	public void testEndGame() {
-		int result=A.getStrategy().endGame(listOfPlayers);
-		assertEquals(0,result);
-		listOfPlayers.remove(1);
-		
+	public void testAttackAndEndGame() throws Exception {
+		china.setNoOfArmies(1);
+		india.setNoOfArmies(1000);
+		A.setTestCommand("attack india china -allout");
+		int result=A.executeAttack(testMap,listOfPlayers);
+		assertEquals(1,result);
 		result=A.getStrategy().endGame(listOfPlayers);
 		assertEquals(1,result);
 	}
@@ -182,7 +184,6 @@ public class DaoPlayerTest {
 	 */
 	@Test
 	public void testAttackDeadlock() {
-		
 		int result=A.getStrategy().attackDeadlock(testMap,A);
 		assertEquals(0,result);
 		

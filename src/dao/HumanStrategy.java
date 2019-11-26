@@ -503,6 +503,7 @@ public class HumanStrategy implements Strategy {
 	 * @return 1 if the game is over otherwise 0.
 	 */
 	public int attack(Map map, ArrayList<Player> listPlayer,Player P) {
+	
 		P.setEndOfActions(0);
 		P.setView("PhaseView");
 		P.setState("Attack");
@@ -532,6 +533,9 @@ public class HumanStrategy implements Strategy {
 				return 0;
 			}
 			input = sc3.nextLine();
+			if(P.test==1) {
+				input=P.getTestCommand();
+			}
 			while (validate(input, map,P) == 0) {
 				System.out.println("Invalid command, Kindly type again");
 				input = sc3.nextLine();
@@ -682,6 +686,10 @@ public class HumanStrategy implements Strategy {
 							int valid = 0;
 							do {
 								String command = sc3.nextLine();
+								if(P.test==1) {
+									command="attackmove "+attackerDice;
+									valid=1;
+								}else
 								valid = attackMove(command, fromCountry, toCountry,attackerDice,P);
 							} while (valid == 0);
 							if (defender.getAssigned_countries().size() == 0) {// defender is out of the game
@@ -725,7 +733,9 @@ public class HumanStrategy implements Strategy {
 					}
 				}
 			}
-
+			if(P.test==1) {
+				input="attack -noattack";
+			}
 		} while (!input.equals("attack -noattack") && attackDeadlock == 0);
 		if (attackDeadlock == 1) {
 
