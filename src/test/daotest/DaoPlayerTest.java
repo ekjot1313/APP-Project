@@ -73,16 +73,16 @@ public class DaoPlayerTest {
 		testMap.getListOfCountries().add(pakistan);
 		testMap.getListOfCountries().add(china);
 		Continent asia=new Continent();
+		asia.setName("asia");
 		testMap.getListOfContinent().add(asia);
-		
+		A.setStrategy(new HumanStrategy());
 		A.setName("A");
 		A.setNoOfArmies(40);
 		A.getAssigned_countries().add(india);
 		A.getAssigned_countries().add(pakistan);
-		A.setStrategy(new HumanStrategy());
+		B.setStrategy(new HumanStrategy());
 		B.setName("B");
 		B.setNoOfArmies(40);
-		B.setStrategy(new HumanStrategy());
 		B.getAssigned_countries().add(china);
 		listOfPlayers=new ArrayList<Player>();
 		listOfPlayers.add(A);
@@ -132,6 +132,8 @@ public class DaoPlayerTest {
 		command="attack china india 4";
 		result=B.getStrategy().validate(command, testMap,B);
 		assertEquals(0, result);
+		A.getAssigned_countries().clear();
+		B.getAssigned_countries().clear();
 	}
 	
 	/**
@@ -164,6 +166,8 @@ public class DaoPlayerTest {
 		assertEquals(1, result);
 		assertEquals(19, india.getNoOfArmies());
 		assertEquals(1, china.getNoOfArmies());
+		A.getAssigned_countries().clear();
+		B.getAssigned_countries().clear();
 	}
 	/**
 	 * Test method for {@link dao.Player#endGame(ArrayList)}.
@@ -171,22 +175,28 @@ public class DaoPlayerTest {
 	 */
 	@Test
 	public void testAttackAndEndGame() throws Exception {
+		
 		china.setNoOfArmies(1);
 		india.setNoOfArmies(1000);
+		B.setNoOfArmies(1);
+		System.out.println(A.getAssigned_countries().size());
+		System.out.println(B.getAssigned_countries().size());
 		A.setTestCommand("attack india china -allout");
 		int result=A.executeAttack(testMap,listOfPlayers);
 		assertEquals(1,result);
 		result=A.getStrategy().endGame(listOfPlayers);
 		assertEquals(1,result);
+		A.getAssigned_countries().clear();
+		B.getAssigned_countries().clear();
 	}
 	/**
 	 * Test method for {@link dao.Player#attackDeadlock(Map)}.
 	 */
 	@Test
 	public void testAttackDeadlock() {
+		
 		int result=A.getStrategy().attackDeadlock(testMap,A);
 		assertEquals(0,result);
-		
 		india.setNoOfArmies(1);
 		result=A.getStrategy().attackDeadlock(testMap,A);
 		assertEquals(1,result);
@@ -195,13 +205,14 @@ public class DaoPlayerTest {
 		B.setNoOfArmies(1);
 		result=B.getStrategy().attackDeadlock(testMap,B);
 		assertEquals(1,result);
+		A.getAssigned_countries().clear();
+		B.getAssigned_countries().clear();
 	}
 	/**
 	 * Test method for {@link dao.Player#fortification(Map, ArrayList, String)}.
 	 */
 	@Test
 	public void testFortification() {
-		
 		System.out.println("\nFor Player A-> fortify pakistan china 10");
 		A.executeFortification(testMap, listOfPlayers, "fortify pakistan china 10");
 		assertEquals(20,pakistan.getNoOfArmies());
@@ -239,6 +250,8 @@ public class DaoPlayerTest {
 		A.executeFortification(testMap, listOfPlayers, "fortify pakistan india 10 5");
 		assertEquals(30,india.getNoOfArmies());
 		assertEquals(1,pakistan.getNoOfArmies());
+		A.getAssigned_countries().clear();
+		B.getAssigned_countries().clear();
 		
 	}
 	/**
@@ -257,6 +270,8 @@ public class DaoPlayerTest {
 		result = A.getStrategy().calculateReinforceArmies(testMap,A);
 		//System.out.println(result);
 		assertEquals(13, result);
+		A.getAssigned_countries().clear();
+		B.getAssigned_countries().clear();
 	}
 	
 }

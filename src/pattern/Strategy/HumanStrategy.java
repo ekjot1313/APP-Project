@@ -538,10 +538,10 @@ public class HumanStrategy implements Strategy {
 				P.setActions("You cannot attack now because of the attack deadlock." + "\n Attack Finished.");
 				return 0;
 			}
-			input = sc3.nextLine();
 			if(P.test==1) {
 				input=P.getTestCommand();
-			}
+			}else
+				input = sc3.nextLine();
 			while (validate(input, map,P) == 0) {
 				System.out.println("Invalid command, Kindly type again");
 				input = sc3.nextLine();
@@ -691,11 +691,12 @@ public class HumanStrategy implements Strategy {
 							System.out.println("Type attackmove <number> to move");
 							int valid = 0;
 							do {
-								String command = sc3.nextLine();
-								if(P.test==1) {
+								String command; 
+								if(P.test==1) 
 									command="attackmove "+attackerDice;
-									valid=1;
-								}else
+								else
+									command= sc3.nextLine();
+								
 								valid = attackMove(command, fromCountry, toCountry,attackerDice,P);
 							} while (valid == 0);
 							if (defender.getAssigned_countries().size() == 0) {// defender is out of the game
@@ -708,6 +709,7 @@ public class HumanStrategy implements Strategy {
 									return 1;
 
 							} else {
+								if(P.test!=1) {
 								String card = P.randomCard();
 								if(!card.equals("None")) {
 								P.getCards().add(card);
@@ -716,6 +718,7 @@ public class HumanStrategy implements Strategy {
 								Player.deck.remove(card);
 								}else {
 									System.out.println("No more cards available");
+								}
 								}
 									
 							}
