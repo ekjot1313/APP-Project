@@ -15,6 +15,7 @@ public class BenevolentStrategy implements Strategy  {
 	 * @param P			  Player
 	 * @return Number of reinforcement armies
 	 */
+	@Override
 	public int calculateReinforceArmies(Map map,Player P) {
 		// calculating on the basis of no of countries the player own
 		int noOfArmies = P.getAssigned_countries().size() / 3;
@@ -166,5 +167,27 @@ public class BenevolentStrategy implements Strategy  {
 		P.setEndOfActions(1); 
 		P.setActions("Fortification finished");
 	}
+	@Override
+	public int validate(String command, Map testMap, Player P) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int attackMove(String command, Country fromCountry, Country toCountry, int attackerDice, Player P) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int endGame(ArrayList<Player> listOfPlayers) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int attackDeadlock(Map testMap, Player P) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
 
 }

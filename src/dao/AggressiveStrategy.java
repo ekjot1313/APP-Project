@@ -443,4 +443,20 @@ public class AggressiveStrategy implements Strategy {
 			return 1;
 		return 0;
 	}
+	@Override
+	public int validate(String command, Map testMap, Player P) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int attackMove(String command, Country fromCountry, Country toCountry, int attackerDice, Player P) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int attackDeadlock(Map testMap, Player P) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

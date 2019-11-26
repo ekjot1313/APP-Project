@@ -548,6 +548,18 @@ public class RandomStrategy implements Strategy {
 		return 0;
 	}
 
+	@Override
+	public int validate(String command, Map testMap, Player P) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int attackMove(String command, Country fromCountry, Country toCountry, int attackerDice, Player P) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	// red in coverage
 	// /**
 	// * This is the method to check the attack command.
