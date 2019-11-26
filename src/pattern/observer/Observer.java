@@ -1,4 +1,4 @@
-package pattern;
+package pattern.observer;
 /**
  * This is interface which is implemented by observer class
  * @author divya_000

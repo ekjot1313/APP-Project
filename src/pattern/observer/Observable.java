@@ -1,4 +1,4 @@
-package pattern;
+package pattern.observer;
 
 import java.util.ArrayList;
 
