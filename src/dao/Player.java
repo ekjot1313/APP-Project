@@ -69,7 +69,7 @@ public class Player extends Observable {
 	 * This holds the count of no of times the player has exchanged cards to get
 	 * armies.
 	 */
-	private static int cardExchangeCounter;
+	public static int cardExchangeCounter;
 
 	/**
 	 * ArrayList of cards

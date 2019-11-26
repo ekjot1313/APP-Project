@@ -39,13 +39,13 @@ public abstract class GameBuilder {
 	 * @param filename
 	 * @param map
 	 */
-	abstract void buildPlayer(String filename ,Map map);
+	abstract void buildPlayer(String filename ,String player);
 	/**
 	 * To build Phase
 	 * @param filename
 	 * @param map
 	 */
-	abstract void buildPhase(String filename ,Map map);
+	abstract void buildPhase(String filename ,String phase);
 	
 
 

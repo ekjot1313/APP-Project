@@ -14,10 +14,10 @@ public class Director {
 		this.gbuilder = gbuilder;
 	}
 	
-	public void constructGame(String fileName, Map map) {
+	public void constructGame(String fileName, Map map,String player ,String phase) {
 		gbuilder.createNewGame();
 		gbuilder.buildMap(fileName, map);
-		gbuilder.buildPhase(fileName, map);
-		gbuilder.buildPlayer(fileName, map);
+		gbuilder.buildPhase(fileName, phase);
+		gbuilder.buildPlayer(fileName, player);
 	}
 }
