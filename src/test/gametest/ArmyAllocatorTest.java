@@ -97,7 +97,7 @@ public class ArmyAllocatorTest {
 		pa.allocate(testMap,"populatecountries");
 		pa.populateCountries(testMap);
 		ArmyAllocator aa = new ArmyAllocator();
-		int total =aa.calculateTotalArmies(listOfPlayers,testMap,1);
+		int total =aa.calculateTotalArmies(listOfPlayers,testMap);
 		assertEquals(40, total);
 	}
 	

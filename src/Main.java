@@ -12,7 +12,7 @@ import mapWorks.MapReader;
 import view.CardExchangeView;
 import view.PWDView;
 import view.PhaseView;
-import dao.AggresiveStrategy;
+import dao.AggressiveStrategy;
 import dao.BenevolentStrategy;
 import dao.CheaterStrategy;
 import dao.HumanStrategy;
@@ -222,7 +222,7 @@ public class Main {
 	private static Strategy getStrategyByName(String playerType) {
 		// TODO Auto-generated method stub
 		if(playerType.equalsIgnoreCase("Aggressive"))
-			return new AggresiveStrategy();
+			return new AggressiveStrategy();
 		if(playerType.equalsIgnoreCase("Random"))
 			return new RandomStrategy();
 		if(playerType.equalsIgnoreCase("Cheater"))

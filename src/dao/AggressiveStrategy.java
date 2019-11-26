@@ -11,11 +11,11 @@ import java.util.Scanner;
  * @author Piyush
  *
  */
-public class AggresiveStrategy implements Strategy {
+public class AggressiveStrategy implements Strategy {
 	/**
 	 * Constructor to initialize country object.
 	 */
-	public AggresiveStrategy(){
+	public AggressiveStrategy(){
 		strong=new Country();
 	}
 	/**
