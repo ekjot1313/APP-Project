@@ -183,6 +183,7 @@ public class DaoPlayerTest {
 		System.out.println(B.getAssigned_countries().size());
 		A.setTestCommand("attack india china -allout");
 		int result=A.executeAttack(testMap,listOfPlayers);
+		
 		assertEquals(1,result);
 		result=A.getStrategy().endGame(listOfPlayers);
 		assertEquals(1,result);
