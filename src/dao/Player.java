@@ -57,7 +57,7 @@ public class Player extends pattern.Observable {
 	 * This holds the count of no of times the player has exchanged cards to get
 	 * armies.
 	 */
-	private int cardExchangeCounter;
+	private static int cardExchangeCounter;
 
 	/**
 	 * ArrayList of cards
