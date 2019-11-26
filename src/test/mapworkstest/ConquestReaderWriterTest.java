@@ -35,7 +35,7 @@ public class ConquestReaderWriterTest {
 		 */
 		static MapEditor mapEditor;
 		/**
-		 * Object of DominationReaderWriter
+		 * Object of ConquestReaderWriter
 		 */
 		static ConquestReaderWriter crw;
 		/**
@@ -92,7 +92,7 @@ public class ConquestReaderWriterTest {
 		}
 
 		/**
-		 * Method to test {@link mapWorks.MapReader#parseMapFile(File)}
+		 * Method to test {@link mapWorks.ConquestReaderWriter#parseMapFile(Map, File))}
 		 */
 		@Test
 		public void testParseMap() {
@@ -107,7 +107,7 @@ public class ConquestReaderWriterTest {
 		}
 
 		/**
-		 * Method to test {@link mapWorks.MapReader#loadContinents()}
+		 * Method to test {@link mapWorks.ConquestReaderWriter#loadContinents(Map)}
 		 */
 		@Test
 		public void testLoadContinents() {
@@ -148,7 +148,7 @@ public class ConquestReaderWriterTest {
 		}
 
 		/**
-		 * Method to test {@link mapWorks.MapReader#loadCountries()}
+		 * Method to test {@link mapWorks.ConquestReaderWriter#loadTerritories(Map)}
 		 */
 		@Test
 		public void testLoadTerritories() {
@@ -183,7 +183,7 @@ public class ConquestReaderWriterTest {
 
 		
 		/**
-		 * Method to test {@link mapWorks.MapSaver#MapSaver()}
+		 * Method to test {@link mapWorks.ConquestReaderWriter#saveMap(Map, String)}
 		 */
 		@Test
 		public void testMapSaver() {

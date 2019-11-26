@@ -78,7 +78,7 @@ public class ConquestReaderWriter {
 	 * This method loads the bridges to the continents
 	 * 
 	 */
-	private void loadBridges(Map map) {
+	public void loadBridges(Map map) {
 		// TODO Auto-generated method stub
 		for(Country c: map.getListOfCountries()) {
 			for(String neighborCountry :c.getNeighbors() ) {
@@ -96,7 +96,7 @@ public class ConquestReaderWriter {
 	 * @throws NumberFormatException for Buffered Reader
 	 * @throws IOException           for Buffered Reader
 	 */
-	private void loadTerritories(Map map) throws NumberFormatException, IOException {
+	public void loadTerritories(Map map) throws NumberFormatException, IOException {
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
 			
 			if (currentLine.length() == 0) {
@@ -124,7 +124,7 @@ public class ConquestReaderWriter {
 	 * @throws NumberFormatException for Buffered Reader
 	 * @throws IOException           for Buffered Reader
 	 */
-	private void loadContinents(Map map) throws NumberFormatException, IOException {
+	public void loadContinents(Map map) throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
 
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {

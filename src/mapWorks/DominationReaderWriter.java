@@ -79,7 +79,7 @@ public class DominationReaderWriter {
 	 * @throws NumberFormatException for Buffered Reader
 	 * @throws IOException           for Buffered Reader
 	 */
-	private void loadBorders(Map map) throws NumberFormatException, IOException {
+	public void loadBorders(Map map) throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
 
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
@@ -117,7 +117,7 @@ public class DominationReaderWriter {
 	 * @throws NumberFormatException for Buffered Reader
 	 * @throws IOException           for Buffered Reader
 	 */
-	private void loadCountries(Map map) throws NumberFormatException, IOException {
+	public void loadCountries(Map map) throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
 
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
@@ -142,7 +142,7 @@ public class DominationReaderWriter {
 	 * @throws NumberFormatException for Buffered Reader
 	 * @throws IOException           for Buffered Reader
 	 */
-	private void loadContinents(Map map) throws NumberFormatException, IOException {
+	public void loadContinents(Map map) throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
 
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
