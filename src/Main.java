@@ -97,6 +97,7 @@ public class Main {
 		int maxTurns = 0;
 		//Initial setup
 		while(true) {
+		
 		System.out.println("Type tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns");
 		String tournamentCommand  = sc.nextLine();
 		
@@ -139,6 +140,8 @@ public class Main {
 						for(String playerType : listOfPlayerStrategies) {
 							Player p =  new Player();
 							p.deck = new ArrayList<String>();
+							ArrayList<String> deck = createDeck(map);
+							Player.deck = deck;								
 							p.setName(playerType);
 							p.setStrategy(getStrategyByName(playerType));
 							map.addPlayer(p);
