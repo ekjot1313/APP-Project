@@ -143,9 +143,9 @@ public class AggressiveStrategy implements Strategy {
 								map.setNoOfArmies(P, P.getNoOfArmies() + P.getCardExchangeCounter());
 								System.out.println("Reinforcement armies added " + P.getCardExchangeCounter());
 								System.out.println("Remaining armies to be placed : " + reinforcementArmies);
-								P.deck.add(card1);
-								P.deck.add(card2);
-								P.deck.add(card3);
+								Player.deck.add(card1);
+								Player.deck.add(card2);
+								Player.deck.add(card3);
 								flag=1;
 								break;
 							}

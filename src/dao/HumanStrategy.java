@@ -698,7 +698,7 @@ public class HumanStrategy implements Strategy {
 								P.getCards().add(card);
 								System.out.println("You have received: " + card + " card");
 								P.setActions(P.getName() + " has received: " + card + " card");
-								P.deck.remove(card);
+								Player.deck.remove(card);
 							}
 							
 							Continent cont = map.getContinentFromName(toCountry.getContinentName());

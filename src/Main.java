@@ -156,19 +156,19 @@ public class Main {
 					boolean isDraw = true;
 					for(int k =0;k<maxTurns;k++) {
 						PhaseView pv= new PhaseView();
-						//CardExchangeView cev = new CardExchangeView();
+						CardExchangeView cev = new CardExchangeView();
 						int gameOver = 0;
 						for (int i = 0; i < pa.listOfPlayers.size(); i++) {
 							
 							//System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " reinforcement phase begins");
 							pa.listOfPlayers.get(i).attach(pv);
 							
-							//pa.listOfPlayers.get(i).attach(cev);
+							pa.listOfPlayers.get(i).attach(cev);
 							pa.listOfPlayers.get(i).executeReinforcement(map, (ArrayList<Player>) pa.listOfPlayers);
 							Thread.sleep(2500);
 							Player current= pa.listOfPlayers.get(i);
-							//pa.listOfPlayers.get(i).detach(cev);
-							//cev.close();
+							pa.listOfPlayers.get(i).detach(cev);
+							cev.close();
 							//System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " Attack phase begins");
 							gameOver = pa.listOfPlayers.get(i).executeAttack(map, (ArrayList<Player>) pa.listOfPlayers);
 							Thread.sleep(2500);
