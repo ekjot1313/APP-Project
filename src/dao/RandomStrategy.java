@@ -255,15 +255,14 @@ public class RandomStrategy implements Strategy {
 						return 1;
 
 				} else {
-					if (Player.deck.size() > 0) {
-						String card = P.randomCard();
-						P.getCards().add(card);
-						System.out.println("You have received: " + card + " card");
-						P.setActions(P.getName() + " has received: " + card + " card");
-						Player.deck.remove(card);
-					} else {
-						System.out.println("Card deck is empty.");
-						P.setActions("Card deck is empty.");
+					String card = P.randomCard();
+					if(!card.equals("None")) {
+					P.getCards().add(card);
+					System.out.println("You have received: " + card + " card");
+					P.setActions(P.getName() + " has received: " + card + " card");
+					Player.deck.remove(card);
+					}else {
+						System.out.println("No more cards available");
 					}
 				}
 

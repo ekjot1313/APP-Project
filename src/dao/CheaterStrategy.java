@@ -107,11 +107,14 @@ public class CheaterStrategy implements Strategy {
 
 			} else {
 				String card = P.randomCard();
-				// P.cards.add(card);
+				if(!card.equals("None")) {
 				P.getCards().add(card);
 				System.out.println("You have received: " + card + " card");
 				P.setActions(P.getName() + " has received: " + card + " card");
 				Player.deck.remove(card);
+				}else {
+					System.out.println("No more cards available");
+				}
 			}
 
 			Continent cont = map.getContinentFromName(toCountry.getContinentName());
