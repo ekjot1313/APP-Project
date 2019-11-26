@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package test.pattern.Strategy;
 
 import static org.junit.Assert.*;
@@ -9,112 +7,182 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+import java.util.ArrayList;
+import org.junit.Before;
+import org.junit.Test;
+import dao.Continent;
+import dao.Country;
+import dao.Map;
+import dao.Player;
+import pattern.Strategy.HumanStrategy;
+
 /**
- * @author ekjot
+ * Class to test the Player Class 
+ * @author Piyush
  *
  */
 public class BenevolentStrategyTest {
-
 	/**
-	 * @throws java.lang.Exception
+	 * Object of Map 
 	 */
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
+	Map testMap;
 	/**
-	 * @throws java.lang.Exception
+	 * Object of Country india 
 	 */
-	@Before
-	public void setUp() throws Exception {
-	}
-
+	Country india;
 	/**
-	 * Test method for {@link pattern.Strategy.BenevolentStrategy#calculateReinforceArmies(dao.Map, dao.Player)}.
+	 * Object of Country pakistan
 	 */
-	@Test
-	public void testCalculateReinforceArmies() {
-		fail("Not yet implemented");
-	}
-
+	Country pakistan;
 	/**
-	 * Test method for {@link pattern.Strategy.BenevolentStrategy#weakestCountry(dao.Map, java.util.ArrayList, dao.Player)}.
+	 * Object of Country china
 	 */
-	@Test
-	public void testWeakestCountry() {
-		fail("Not yet implemented");
-	}
-
+	Country china;
 	/**
-	 * Test method for {@link pattern.Strategy.BenevolentStrategy#simpleWeakestCountry(dao.Map, java.util.ArrayList, dao.Player)}.
+	 * Object of Player A
 	 */
-	@Test
-	public void testSimpleWeakestCountry() {
-		fail("Not yet implemented");
-	}
-
+	Player A;
 	/**
-	 * Test method for {@link pattern.Strategy.BenevolentStrategy#attackPossible(dao.Map, java.util.ArrayList, dao.Player, dao.Country)}.
+	 * Object of Player B
 	 */
-	@Test
-	public void testAttackPossible() {
-		fail("Not yet implemented");
-	}
-
+	Player B;
 	/**
-	 * Test method for {@link pattern.Strategy.BenevolentStrategy#reinforcement(dao.Map, java.util.ArrayList, dao.Player)}.
+	 * ArrayList to store the list of players
 	 */
-	@Test
-	public void testReinforcement() {
-		fail("Not yet implemented");
-	}
-
+	ArrayList<Player> listOfPlayers;
+	
 	/**
-	 * Test method for {@link pattern.Strategy.BenevolentStrategy#attack(dao.Map, java.util.ArrayList, dao.Player)}.
+	 * Set up method to initialize the objects
+	 */
+	@Before 
+	public void before() {
+		Map testMap=new Map();
+		Country india =new Country();
+		Country pakistan =new Country();
+		Country china =new Country();
+		Player A = new Player();
+		Player B = new Player();
+		india.setName("india");
+		india.setContinentName("asia");
+		india.setNoOfArmies(20);
+		india.setOwner("A");
+		india.getNeighbors().add("pakistan");
+		india.getNeighbors().add("china");
+		
+		pakistan.setName("pakistan");
+		pakistan.setContinentName("asia");
+		pakistan.setNoOfArmies(20);
+		pakistan.setOwner("A");
+		pakistan.getNeighbors().add("india");
+		//pakistan.getNeighbors().add(china);
+		china.setName("china");
+		china.setContinentName("asia");
+		china.setNoOfArmies(40);
+		china.setOwner("B");
+		china.getNeighbors().add("india");
+		testMap.getListOfCountries().add(india);
+		testMap.getListOfCountries().add(pakistan);
+		testMap.getListOfCountries().add(china);
+		Continent asia=new Continent();
+		asia.setName("asia");
+		testMap.getListOfContinent().add(asia);
+		A.setStrategy(new HumanStrategy());
+		A.setName("A");
+		A.setNoOfArmies(40);
+		A.getAssigned_countries().add(india);
+		A.getAssigned_countries().add(pakistan);
+		B.setStrategy(new HumanStrategy());
+		B.setName("B");
+		B.setNoOfArmies(40);
+		B.getAssigned_countries().add(china);
+		listOfPlayers=new ArrayList<Player>();
+		listOfPlayers.add(A);
+		listOfPlayers.add(B);
+	}
+	/**
+	 * Test method for 
 	 */
 	@Test
 	public void testAttack() {
-		fail("Not yet implemented");
+		try {
+			A.executeAttack(testMap, listOfPlayers);
+			assertEquals(20,india.getNoOfArmies());
+			assertEquals(20,pakistan.getNoOfArmies());
+			assertEquals(40,china.getNoOfArmies());
+			assertEquals(40,A.getNoOfArmies());
+			assertEquals(40,B.getNoOfArmies());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
-
 	/**
-	 * Test method for {@link pattern.Strategy.BenevolentStrategy#fortification(dao.Map, java.util.ArrayList, java.lang.String, dao.Player)}.
+	 * Test method for 
+	 */
+	@Test
+	public void testReinforcement() {
+		try {
+			india.setNoOfArmies(18);
+			pakistan.setNoOfArmies(22);
+			A.executeReinforcement(testMap, listOfPlayers);
+			assertEquals(31, india.getNoOfArmies()); 
+			assertEquals(22, pakistan.getNoOfArmies());
+			assertEquals(53, A.getNoOfArmies());
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	/**
+	 * Test method for {@link dao.Player#fortification(Map, ArrayList, String)}.
 	 */
 	@Test
 	public void testFortification() {
-		fail("Not yet implemented");
+		System.out.println("\nFor Player A-> fortify pakistan china 10");
+		A.executeFortification(testMap, listOfPlayers, "fortify pakistan china 10");
+		assertEquals(20,pakistan.getNoOfArmies());
+		assertEquals(40,china.getNoOfArmies());
+		
+		System.out.println("\nFor Player A-> fortify -none");
+		A.executeFortification(testMap, listOfPlayers, "fortify -none");
+		assertEquals(20,pakistan.getNoOfArmies());
+		assertEquals(20,india.getNoOfArmies());
+		
+		System.out.println("\nFor Player A-> fortify china india 5");
+		A.executeFortification(testMap, listOfPlayers, "fortify china india 5");
+		assertEquals(20,pakistan.getNoOfArmies());
+		assertEquals(20,india.getNoOfArmies());
+		assertEquals(40,china.getNoOfArmies());
+		
+		System.out.println("\nFor Player A-> fortify pakistan india 30");
+		A.executeFortification(testMap, listOfPlayers, "fortify pakistan india 30");
+		assertEquals(20,india.getNoOfArmies());
+		assertEquals(20,pakistan.getNoOfArmies());
+	
+		System.out.println("\nFor Player A-> fortify pakistan india 10");
+		A.executeFortification(testMap, listOfPlayers, "fortify pakistan india 10");
+		assertEquals(30,india.getNoOfArmies());
+		assertEquals(10,pakistan.getNoOfArmies());
+		
+		System.out.println("\nFor Player A-> fortify pakistan india 10");
+		pakistan.setNoOfArmies(1);
+		A.executeFortification(testMap, listOfPlayers, "fortify pakistan india 10");
+		assertEquals(30,india.getNoOfArmies());
+		assertEquals(1,pakistan.getNoOfArmies());
+		
+		System.out.println("\nFor Player A-> fortify pakistan india 10 5");
+		pakistan.setNoOfArmies(1);
+		A.executeFortification(testMap, listOfPlayers, "fortify pakistan india 10 5");
+		assertEquals(30,india.getNoOfArmies());
+		assertEquals(1,pakistan.getNoOfArmies());
+		A.getAssigned_countries().clear();
+		B.getAssigned_countries().clear();
+		
 	}
-
-	/**
-	 * Test method for {@link pattern.Strategy.BenevolentStrategy#validate(java.lang.String, dao.Map, dao.Player)}.
-	 */
-	@Test
-	public void testValidate() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link pattern.Strategy.BenevolentStrategy#attackMove(java.lang.String, dao.Country, dao.Country, int, dao.Player)}.
-	 */
-	@Test
-	public void testAttackMove() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link pattern.Strategy.BenevolentStrategy#endGame(java.util.ArrayList)}.
-	 */
-	@Test
-	public void testEndGame() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link pattern.Strategy.BenevolentStrategy#attackDeadlock(dao.Map, dao.Player)}.
-	 */
-	@Test
-	public void testAttackDeadlock() {
-		fail("Not yet implemented");
-	}
-
+	
+	
 }
