@@ -52,7 +52,7 @@ public class Player extends Observable {
 	/**
 	 * deck of cards
 	 */
-	public static ArrayList<String> deck;
+	public static ArrayList<String> deck=new ArrayList<String>();
 	/**
 	 * TO store current actions
 	 */
