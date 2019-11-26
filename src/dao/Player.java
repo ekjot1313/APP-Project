@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+import pattern.Strategy.Strategy;
+
 /**
  * This class represents the Player details
  * 

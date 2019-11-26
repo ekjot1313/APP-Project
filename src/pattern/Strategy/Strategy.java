@@ -1,6 +1,10 @@
-package dao;
+package pattern.Strategy;
 
 import java.util.ArrayList;
+
+import dao.Country;
+import dao.Map;
+import dao.Player;
 
 public interface Strategy {
 	

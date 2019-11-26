@@ -2,16 +2,16 @@ package game;
 
 import java.util.*;
 
-import dao.RandomStrategy;
-import dao.AggressiveStrategy;
-import dao.BenevolentStrategy;
-import dao.CheaterStrategy;
 import dao.Continent;
 import dao.Country;
-import dao.HumanStrategy;
 import dao.Map;
 import dao.Player;
 //import mapWorks.MapReader;
+import pattern.Strategy.AggressiveStrategy;
+import pattern.Strategy.BenevolentStrategy;
+import pattern.Strategy.CheaterStrategy;
+import pattern.Strategy.HumanStrategy;
+import pattern.Strategy.RandomStrategy;
 
 /**
  * This class is used to add or remove players and also to assign countries to

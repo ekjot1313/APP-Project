@@ -1,4 +1,4 @@
-package dao;
+package pattern.Strategy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,6 +6,12 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+
+import dao.Continent;
+import dao.Country;
+import dao.Dice;
+import dao.Map;
+import dao.Player;
 /**
  * This class is for Aggresive Strategy, implements the Strategy interface.
  * @author Piyush

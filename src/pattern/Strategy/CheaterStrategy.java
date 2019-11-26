@@ -1,7 +1,12 @@
-package dao;
+package pattern.Strategy;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+
+import dao.Continent;
+import dao.Country;
+import dao.Map;
+import dao.Player;
 
 public class CheaterStrategy implements Strategy {
 

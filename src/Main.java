@@ -11,19 +11,19 @@ import java.util.Scanner;
 import view.CardExchangeView;
 import view.PWDView;
 import view.PhaseView;
-import dao.AggressiveStrategy;
-import dao.BenevolentStrategy;
-import dao.CheaterStrategy;
-import dao.HumanStrategy;
 import dao.Map;
 import dao.Player;
-import dao.RandomStrategy;
-import dao.Strategy;
 import game.ArmyAllocator;
 import game.PlayerAllocator;
 import mapWorks.ConquestReaderWriter;
 import mapWorks.DominationReaderWriter;
 import mapWorks.MapReaderWriterAdapter;
+import pattern.Strategy.AggressiveStrategy;
+import pattern.Strategy.BenevolentStrategy;
+import pattern.Strategy.CheaterStrategy;
+import pattern.Strategy.HumanStrategy;
+import pattern.Strategy.RandomStrategy;
+import pattern.Strategy.Strategy;
 import mapWorks.MapEditor;
 
 /**

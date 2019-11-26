@@ -6,9 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 import dao.Continent;
 import dao.Country;
-import dao.HumanStrategy;
 import dao.Map;
 import dao.Player;
+import pattern.Strategy.HumanStrategy;
 
 /**
  * Class to test the Player Class 
