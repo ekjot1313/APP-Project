@@ -19,7 +19,7 @@ public class RandomStrategy implements Strategy {
 		// TODO Auto-generated method stub
 
 		P.setEndOfActions(0);
-		P.setView("PhaseView");
+		P.setView("PhaseViewCardExchangeView");
 		P.setState("Reinforcement");
 
 		// calculate reinforcement armies
@@ -57,7 +57,7 @@ public class RandomStrategy implements Strategy {
 		// TODO Auto-generated method stub
 		int armies = 0;
 		ArrayList<String> cards = P.getCards();
-		String card1="", card2="", card3="";
+		String card1 = "", card2 = "", card3 = "";
 
 		ArrayList<String> infantryCards = (ArrayList<String>) cards.stream().filter(card -> card.contains("infantry"))
 				.collect(Collectors.toList());
@@ -86,7 +86,7 @@ public class RandomStrategy implements Strategy {
 		cards.remove(card1);
 		cards.remove(card2);
 		cards.remove(card3);
-		
+
 		P.setView("CardExchangeView");
 		P.setActions("Player has exchanged " + card1 + ", " + card2 + ", " + card3);
 
@@ -256,12 +256,12 @@ public class RandomStrategy implements Strategy {
 
 				} else {
 					String card = P.randomCard();
-					if(!card.equals("None")) {
-					P.getCards().add(card);
-					System.out.println("You have received: " + card + " card");
-					P.setActions(P.getName() + " has received: " + card + " card");
-					Player.deck.remove(card);
-					}else {
+					if (!card.equals("None")) {
+						P.getCards().add(card);
+						System.out.println("You have received: " + card + " card");
+						P.setActions(P.getName() + " has received: " + card + " card");
+						Player.deck.remove(card);
+					} else {
 						System.out.println("No more cards available");
 					}
 				}
