@@ -10,7 +10,7 @@ import dao.Country;
 import dao.Map;
 import dao.Player;
 
-public class SaveGame extends GameBuilder {
+public class SaveGameBuilder extends GameBuilder {
 	
 	@Override
 	void buildMap(String fileName, Map map) {
@@ -47,12 +47,12 @@ public class SaveGame extends GameBuilder {
 			for(String cards : p.getCards()) {
 				content += cards +" ";
 			}
-			
+			content += "\n";
 		}
 		
 		content +=("\r\n[CardDetails]\r\n");
 		for(String card :Player.deck) {
-			content += card +" ";
+			content += card +",";
 		}
 		content +=Player.cardExchangeCounter;
 		
@@ -76,10 +76,10 @@ public class SaveGame extends GameBuilder {
 		BufferedWriter bwFile;
 		
 		try {
-			bwFile = new BufferedWriter(new FileWriter(mapPath));
+			bwFile = new BufferedWriter(new FileWriter(mapPath,true));
 			
 			String content ="";
-			content +=("\r\n[CurrentPhase]\r\n");
+			content +=("\r\n[CurrentPlayer]\r\n");
 			content += player;
 			bwFile.write(content);
 			bwFile.close();
@@ -100,7 +100,7 @@ public class SaveGame extends GameBuilder {
 		BufferedWriter bwFile;
 		
 		try {
-			bwFile = new BufferedWriter(new FileWriter(mapPath));
+			bwFile = new BufferedWriter(new FileWriter(mapPath,true));
 			
 			String content ="";
 			content +=("\r\n[CurrentPhase]\r\n");

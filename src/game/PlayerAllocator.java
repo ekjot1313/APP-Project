@@ -12,6 +12,8 @@ import pattern.Strategy.BenevolentStrategy;
 import pattern.Strategy.CheaterStrategy;
 import pattern.Strategy.HumanStrategy;
 import pattern.Strategy.RandomStrategy;
+import pattern.builder.Director;
+import pattern.builder.SaveGameBuilder;
 
 /**
  * This class is used to add or remove players and also to assign countries to
@@ -79,11 +81,12 @@ public class PlayerAllocator {
 				System.out.println("Type showmap");
 				cmd = in.nextLine();
 			}
+			String str[] = cmd.split(" ");
 			if (cmd.equals("showmap")) {
 			//	MapReader mr = new MapReader();
 				map.displayAll();
-			} else if (validate(cmd) == 1) {
-				String str[] = cmd.split(" ");
+			} 
+			else if (validate(cmd) == 1) {
 				int checkDuplicate = 0;
 				for (int i = 1; i < str.length; i++) {
 					try {
@@ -102,7 +105,7 @@ public class PlayerAllocator {
 						p.setName(str[i + 1]);
 						if(str[i+2].equalsIgnoreCase("human"))
 							p.setStrategy(new HumanStrategy());
-						else if(str[i+2].equalsIgnoreCase("aggresive"))
+						else if(str[i+2].equalsIgnoreCase("aggressive"))
 							p.setStrategy(new AggressiveStrategy());
 						else if(str[i+2].equalsIgnoreCase("benevolent"))
 							p.setStrategy(new BenevolentStrategy());
@@ -187,35 +190,6 @@ public class PlayerAllocator {
 	 * @param command Command given by the user
 	 * @return 1 if valid else 0
 	 */
-	/*public int validate(String command) {
-		String str[] = command.split(" ");
-		int count;
-		if ((str.length % 2) != 0) {
-			if (str[0].equals("populatecountries"))
-				return 1;
-			if (str[0].contentEquals("gameplayer") && str.length == 1)
-				return 0;
-			if (str[0].equals("gameplayer") && (str[1].equals("-add") || str[1].equals("-remove"))) {
-				for (int i = 1; i < str.length; i++) {
-					count = 0;
-					if (str[i].equals("-add") || str[i].equals("-remove")) {
-						if (str[i + 1].contains("-"))
-							return 0;
-						else {
-							i++;
-							count++;
-						}
-						if (count != 1)
-							return 0;
-					}
-				}
-				return 1;
-			}
-		}
-		return 0;
-
-	}
-	*/
 	public int validate(String command) {
 		String str[] = command.split(" ");
 		int count;

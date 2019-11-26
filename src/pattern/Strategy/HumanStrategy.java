@@ -15,6 +15,8 @@ import dao.Country;
 import dao.Dice;
 import dao.Map;
 import dao.Player;
+import pattern.builder.Director;
+import pattern.builder.SaveGameBuilder;
 
 public class HumanStrategy implements Strategy {
 	/**
@@ -219,7 +221,7 @@ public class HumanStrategy implements Strategy {
 		// loop over playerlist and assign reinforcement armies
 		System.out.println("Reinforcement armies to be assigned :" + reinforcementArmies);
 		System.out.println("Type reinforce <countryname> <num>  to assign armies ");
-		System.out.println("Type exchangecards <num> <num> <num> -none to exchange cards\n Type showmap");
+		System.out.println("Type exchangecards <num> <num> <num> -none to exchange cards\n Type showmap\n Type savegame <fileName>");
 		map.setNoOfArmies(P, P.getNoOfArmies() + reinforcementArmies);
 		while (reinforcementArmies != 0 || forceExchangeCards == 1) {
 
@@ -234,7 +236,13 @@ public class HumanStrategy implements Strategy {
 			if (input.equals("showmap")) {
 
 				map.displayAll();
-			} else if (inputArray.length == 3 && inputArray[0].equals("reinforce")) {
+			} 
+			else if(inputArray[0].equals("savegame")){
+				Director d= new Director();
+				d.setGbuilder(new SaveGameBuilder());
+				d.constructGame(inputArray[1], map, P.getName(), P.getState());
+			}
+			else if (inputArray.length == 3 && inputArray[0].equals("reinforce")) {
 				int armiesTobeplaced =0;
 				try {
 				armiesTobeplaced = Integer.parseInt(inputArray[2]);
@@ -379,7 +387,7 @@ public class HumanStrategy implements Strategy {
 		do {
 
 			System.out.println(
-					"Type fortify <from country name> <to country name> <number of armies> or fortify -none (choose to not do a move)\n Type showmap");
+					"Type fortify <from country name> <to country name> <number of armies> or fortify -none (choose to not do a move)\n Type showmap\n Type savegame <fileName>");
 			if (command != null)
 				in = command;
 			else
@@ -387,7 +395,13 @@ public class HumanStrategy implements Strategy {
 			String input[] = in.split(" ");
 			if (in.equals("showmap")) {
 				map.displayAll();
-			} else if (input.length == 4 && input[0].equals("fortify")) {
+			}
+			else if(input[0].equals("savegame")){
+				Director d= new Director();
+				d.setGbuilder(new SaveGameBuilder());
+				d.constructGame(input[1], map, P.getName(), P.getState());
+			}
+			else if (input.length == 4 && input[0].equals("fortify")) {
 				HashMap<Integer, List<Integer>> mapOfAssignedCountries = new HashMap<Integer, List<Integer>>();
 				for (int i = 0; i < P.getAssigned_countries().size(); i++) {
 					List<Integer> templist = new ArrayList<Integer>();
@@ -526,7 +540,7 @@ public class HumanStrategy implements Strategy {
 		}
 		System.out.println("Type attack <countrynamefrom> <countynameto> <numdice> for a single attack");
 		System.out.println("attack <countrynamefrom> <countynameto> -allout for an attack until no attack is possible\nattack –noattack to end attack phase");
-		System.out.println("Type showmap");
+		System.out.println("Type showmap\n Type savegame <fileName>");
 		String input;
 		do {
 			attackDeadlock = 0;
@@ -546,11 +560,16 @@ public class HumanStrategy implements Strategy {
 				System.out.println("Invalid command, Kindly type again");
 				input = sc3.nextLine();
 			}
+			String s[] = input.split(" ");
 			if (input.equals("showmap")) {
 				map.displayAll();
-			} else {
-
-				String s[] = input.split(" ");
+			} else if(s[0].equals("savegame")){
+				Director d= new Director();
+				d.setGbuilder(new SaveGameBuilder());
+				d.constructGame(s[1], map, P.getName(), P.getState());
+			}
+			else {
+				
 				if (!input.equals("attack -noattack")) {
 					Country fromCountry = map.getCountryFromName(s[1]);
 					System.out.println("Valid command");

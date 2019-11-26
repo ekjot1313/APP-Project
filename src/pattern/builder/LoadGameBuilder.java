@@ -13,7 +13,7 @@ import dao.Map;
 import dao.Player;
 import pattern.Strategy.HumanStrategy;
 
-public class LoadGame extends GameBuilder{
+public class LoadGameBuilder extends GameBuilder{
 	/**
 	 * BufferedReader to process map file
 	 */
@@ -67,7 +67,7 @@ public class LoadGame extends GameBuilder{
 			if (currentLine.length() == 0) {
 				continue;
 			}
-			String[] cardDetails = currentLine.split(" ");
+			String[] cardDetails = currentLine.split(",");
 			ArrayList<String> deck = new ArrayList<String>();
 			for(int i=0;i<cardDetails.length - 1;i++) {
 				deck.add(cardDetails[i]);
