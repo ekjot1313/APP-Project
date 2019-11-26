@@ -78,6 +78,7 @@ public class CardExchangeView implements Observer {
 				txtrActions.append(i + 1 + " : " + ((Player) obj).getCards().get(i) + "\n");
 			}
 			txtrActions.append(((Player) obj).getActions());
+			txtrActions.append("\n");
 		}
 	}
 

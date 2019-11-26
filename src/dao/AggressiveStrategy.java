@@ -111,16 +111,100 @@ public class AggressiveStrategy implements Strategy {
 	 */
 	public void reinforcement(Map map, ArrayList<Player> listPlayer,Player P) {
 		P.setEndOfActions(0);
-		P.setView("PhaseView");
+		P.setView("PhaseViewCardExchangeView");
 		P.setState("Reinforcement");
 		Scanner sc = new Scanner(System.in);
 		// calculate reinforcement armies
 		int reinforcementArmies=calculateReinforceArmies(map,P);
+		//int cardSize=P.getCards().size();
+		int flag=0;
+	while(P.getCards().size()>=3) {
+			flag=0;
+			int cardSize=P.getCards().size();
+			for(int i=0;i<cardSize-2;i++) {
+				String c1[]=P.getCards().get(i).split(" ");
+				for(int j=i+1;j<cardSize;j++) {
+					String c2[]=P.getCards().get(j).split(" ");
+					if(c1[1].equalsIgnoreCase(c2[1])) {
+						for(int k=j+1;k<cardSize;k++) {
+							String c3[]=P.getCards().get(k).split(" ");
+							if(c1[1].equalsIgnoreCase(c3[1])) {
+						
+								String card1=P.getCards().get(i);
+								String card2=P.getCards().get(j);
+								String card3=P.getCards().get(k);
+								P.getCards().remove(card1);
+								P.getCards().remove(card2);
+								P.getCards().remove(card3);
+								P.setView("CardExchangeView");
+								P.setActions("Player has exchanged " + card1 + ", " + card2 + ", " + card3);
+								P.setCardExchangeCounter(P.getCardExchangeCounter() + 5);
+								reinforcementArmies += P.getCardExchangeCounter();
+								map.setNoOfArmies(P, P.getNoOfArmies() + P.getCardExchangeCounter());
+								System.out.println("Reinforcement armies added " + P.getCardExchangeCounter());
+								System.out.println("Remaining armies to be placed : " + reinforcementArmies);
+								P.deck.add(card1);
+								P.deck.add(card2);
+								P.deck.add(card3);
+								flag=1;
+								break;
+							}
+						}
+					}
+					if(flag==1)
+						break;
+				}
+				if(flag==1)
+					break;
+			}
+			if(flag==0) {
+				for(int i=0;i<cardSize-2;i++) {
+					String c1[]=P.getCards().get(i).split(" ");
+					for(int j=i+1;j<cardSize-1;j++) {
+						String c2[]=P.getCards().get(j).split(" ");
+						if(!c1[1].equalsIgnoreCase(c2[1])) {
+							for(int k=j+1;k<cardSize;k++) {
+								String c3[]=P.getCards().get(k).split(" ");
+								if(!c1[1].equalsIgnoreCase(c3[1]) && !c2[1].equalsIgnoreCase(c3[1])) {
+							String card1=P.getCards().get(i);
+							String card2=P.getCards().get(j);
+							String card3=P.getCards().get(k);
+							P.getCards().remove(card1);
+							P.getCards().remove(card2);
+							P.getCards().remove(card3);
+							P.setView("CardExchangeView");
+							P.setActions("Player has exchanged " + card1 + ", " + card2 + ", " + card3);
+							P.setCardExchangeCounter(P.getCardExchangeCounter() + 5);
+							reinforcementArmies += P.getCardExchangeCounter();
+							map.setNoOfArmies(P, P.getNoOfArmies() + P.getCardExchangeCounter());
+							System.out.println("Reinforcement armies added " + P.getCardExchangeCounter());
+							System.out.println("Remaining armies to be placed : " + reinforcementArmies);
+							P.deck.add(card1);
+							P.deck.add(card2);
+							P.deck.add(card3);
+							flag=1;
+							break;
+								}
+							}
+						}
+						if(flag==1)
+						break;
+					}
+					if(flag==1)
+					break;
+				}
+				if(flag==0)
+					break;
+			}
+		}
+		
+		
 		map.setNoOfArmies(P, (P.getNoOfArmies() + reinforcementArmies));
-		int flag=strongestCountry(map,listPlayer,P);
+		flag=strongestCountry(map,listPlayer,P);
 		if(flag==0) {
 			simpleStrongestCountry(map,listPlayer,P);
 		}
+		P.setView("PhaseView");
 		P.setActions("Reinforced " + reinforcementArmies + " armies to "+ strong.getName());
 		strong.setNoOfArmies(strong.getNoOfArmies()+reinforcementArmies);
 		P.setEndOfActions(1); 
