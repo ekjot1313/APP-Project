@@ -197,8 +197,6 @@ public class AggressiveStrategy implements Strategy {
 					break;
 			}
 		}
-		
-		
 		map.setNoOfArmies(P, (P.getNoOfArmies() + reinforcementArmies));
 		flag=strongestCountry(map,listPlayer,P);
 		if(flag==0) {
