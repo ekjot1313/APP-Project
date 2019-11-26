@@ -1,9 +1,10 @@
 package test.mapworkstest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-
+import java.io.IOException;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -14,9 +15,8 @@ import org.junit.Test;
 import dao.Continent;
 import dao.Country;
 import dao.Map;
+import mapWorks.DominationReaderWriter;
 import mapWorks.MapEditor;
-import mapWorks.MapReader;
-import mapWorks.MapSaver;
 
 /**
  * This class tests the functions in MapReader.java class
@@ -24,7 +24,7 @@ import mapWorks.MapSaver;
  * @author divya_000
  *
  */
-public class MapReaderTest {
+public class DominationReaderWriterTest {
 
 	/**
 	 * Object of Map
@@ -35,13 +35,9 @@ public class MapReaderTest {
 	 */
 	static MapEditor mapEditor;
 	/**
-	 * Object of MapReader
+	 * Object of DominationReaderWriter
 	 */
-	static MapReader mapReader;
-	/**
-	 * Object of MapSaver
-	 */
-	static MapSaver mapSaver;
+	static DominationReaderWriter drw;
 	/**
 	 * List of objects of Countries
 	 */
@@ -73,7 +69,7 @@ public class MapReaderTest {
 				("editneighbor -add india pakistan -add pakistan china -add india congo -add congo uganda").split(" "));
 		testMap = mapEditor.getMap();
 
-		mapSaver = new MapSaver();
+		drw = new DominationReaderWriter();
 
 		Country country1 = new Country();
 		country1.setName("india");
@@ -109,12 +105,13 @@ public class MapReaderTest {
 	 */
 	@Test
 	public void testParseMap() {
-		mapReader = new MapReader();
+		drw = new DominationReaderWriter();
+		testMap = new Map();
 		String filename = "ameroki.map";
 		String currentPath = System.getProperty("user.dir");
 		currentPath += "\\Maps\\" + filename;
 		File newFile = new File(currentPath);
-		int test = mapReader.parseMapFile(newFile);
+		int test = drw.parseMapFile(testMap,newFile);
 		assertEquals(1, test);
 	}
 
@@ -124,7 +121,8 @@ public class MapReaderTest {
 	@Test
 	public void testLoadContinent() {
 
-		mapReader = new MapReader();
+		drw = new DominationReaderWriter();
+		testMap = new Map();
 		Continent continent1 = new Continent();
 		continent1.setName("asia");
 		continent1.setContinentValue(11);
@@ -143,7 +141,7 @@ public class MapReaderTest {
 			String currentPath = System.getProperty("user.dir");
 			currentPath += "\\Maps\\" + filename;
 			File newFile = new File(currentPath);
-			mapReader.parseMapFile(newFile);
+			drw.parseMapFile(testMap,newFile);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -151,8 +149,8 @@ public class MapReaderTest {
 		String name = " ";
 		int contVal = 0;
 
-		name = mapReader.getMap().getListOfContinent().get(0).getName();
-		contVal = mapReader.getMap().getListOfContinent().get(0).getContinentValue();
+		name = testMap.getListOfContinent().get(0).getName();
+		contVal = testMap.getListOfContinent().get(0).getContinentValue();
 
 		assertEquals(testname, name);
 		assertEquals(testcontVal, contVal);
@@ -163,7 +161,8 @@ public class MapReaderTest {
 	 */
 	@Test
 	public void testLoadCountries() {
-		mapReader = new MapReader();
+		drw = new DominationReaderWriter();
+		testMap = new Map();
 
 		String[] testNameofCountry = new String[testlistofCountries.size()];
 		for (int i = 0; i < testlistofCountries.size(); i++) {
@@ -175,14 +174,14 @@ public class MapReaderTest {
 			String currentPath = System.getProperty("user.dir");
 			currentPath += "\\Maps\\" + filename;
 			File newFile = new File(currentPath);
-			mapReader.parseMapFile(newFile);
+			drw.parseMapFile(testMap,newFile);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 
-		String[] nameOfCountry = new String[mapReader.getMap().getListOfCountries().size()];
-		for (int i = 0; i < mapReader.getMap().getListOfCountries().size(); i++) {
-			nameOfCountry[i] = mapReader.getMap().getListOfCountries().get(i).getName();
+		String[] nameOfCountry = new String[testMap.getListOfCountries().size()];
+		for (int i = 0; i < testMap.getListOfCountries().size(); i++) {
+			nameOfCountry[i] = testMap.getListOfCountries().get(i).getName();
 		}
 
 		for (int i = 0; i < testNameofCountry.length; i++) {
@@ -197,14 +196,15 @@ public class MapReaderTest {
 	@Test
 	public void testLoadBorders() {
 
-		mapReader = new MapReader();
+		drw = new DominationReaderWriter();
+		testMap = new Map();
 
 		try {
 			String filename = "abcd.map";
 			String currentPath = System.getProperty("user.dir");
 			currentPath += "\\Maps\\" + filename;
 			File newFile = new File(currentPath);
-			mapReader.parseMapFile(newFile);
+			drw.parseMapFile(testMap,newFile);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -213,16 +213,16 @@ public class MapReaderTest {
 		List<String> country2Neighbors = new ArrayList<String>();
 		List<String> country3Neighbors = new ArrayList<String>();
 
-		for (int i = 0; i < mapReader.getMap().getListOfCountries().get(0).getNeighbors().size(); i++) {
-			country1Neighbors.add(mapReader.getMap().getListOfCountries().get(0).getNeighbors().get(i));
+		for (int i = 0; i < testMap.getListOfCountries().get(0).getNeighbors().size(); i++) {
+			country1Neighbors.add(testMap.getListOfCountries().get(0).getNeighbors().get(i));
 		}
 
-		for (int i = 0; i < mapReader.getMap().getListOfCountries().get(1).getNeighbors().size(); i++) {
-			country2Neighbors.add(mapReader.getMap().getListOfCountries().get(1).getNeighbors().get(i));
+		for (int i = 0; i < testMap.getListOfCountries().get(1).getNeighbors().size(); i++) {
+			country2Neighbors.add(testMap.getListOfCountries().get(1).getNeighbors().get(i));
 		}
 
-		for (int i = 0; i < mapReader.getMap().getListOfCountries().get(2).getNeighbors().size(); i++) {
-			country3Neighbors.add(mapReader.getMap().getListOfCountries().get(2).getNeighbors().get(i));
+		for (int i = 0; i < testMap.getListOfCountries().get(2).getNeighbors().size(); i++) {
+			country3Neighbors.add(testMap.getListOfCountries().get(2).getNeighbors().get(i));
 		}
 
 		for (int i = 0; i < testListofNeighbors1.size(); i++)
@@ -234,5 +234,22 @@ public class MapReaderTest {
 		for (int i = 0; i < testListofNeighbors3.size(); i++)
 			assertEquals(testListofNeighbors3.get(i), country3Neighbors.get(i));
 
+	}
+	
+	/**
+	 * Method to test {@link mapWorks.MapSaver#MapSaver()}
+	 */
+	@Test
+	public void testMapSaver() {
+		try {
+			drw.saveMap(testMap, "testMap1");
+			String currentPath = System.getProperty("user.dir");
+			currentPath += "\\Maps\\" + "testMap1.map";
+			File newFile = new File(currentPath);
+			assertTrue(newFile.exists());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

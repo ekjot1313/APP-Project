@@ -107,6 +107,7 @@ public class Player extends pattern.Observable {
 	 */
 	public String randomCard() {
 		Random number = new Random();
+		System.out.println(deck.size());
 		int no = number.nextInt(deck.size());
 		return deck.get(no);
 	}

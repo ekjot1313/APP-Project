@@ -6,7 +6,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 
 @RunWith(Suite.class)
-@SuiteClasses({MapReaderTest.class, MapSaverTest.class, MapEditorTest.class})
+@SuiteClasses({DominationReaderWriterTest.class, MapEditorTest.class})
 public class MapWorksTestSuite {
 
 }

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-import mapWorks.MapReader;
 import view.CardExchangeView;
 import view.PWDView;
 import view.PhaseView;
@@ -287,7 +286,6 @@ public class Main {
 	 */
 	private static int  loadmap(String filename) throws Exception {
 		// TODO Auto-generated method stub
-		MapReader mr = new MapReader();
 		String currentPath = System.getProperty("user.dir");
 		currentPath += "\\Maps\\";
 		System.out.println(currentPath);

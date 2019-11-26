@@ -11,7 +11,7 @@ import dao.Country;
 import dao.HumanStrategy;
 import dao.Map;
 import dao.Player;
-import mapWorks.MapReader;
+//import mapWorks.MapReader;
 
 /**
  * This class is used to add or remove players and also to assign countries to
@@ -80,7 +80,7 @@ public class PlayerAllocator {
 				cmd = in.nextLine();
 			}
 			if (cmd.equals("showmap")) {
-				MapReader mr = new MapReader();
+			//	MapReader mr = new MapReader();
 				map.displayAll();
 			} else if (validate(cmd) == 1) {
 				String str[] = cmd.split(" ");
