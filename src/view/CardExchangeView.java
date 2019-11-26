@@ -12,8 +12,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import dao.Player;
-import pattern.Observable;
-import pattern.Observer;
+import pattern.observer.Observable;
+import pattern.observer.Observer;
 
 /**
  * Class to implement the Card Exchange View.

@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import mapWorks.MapEditor;
+import pattern.observer.Observable;
 
 /**
  * This class defines Map
@@ -14,7 +15,7 @@ import mapWorks.MapEditor;
  * @author Ekjot
  *
  */
-public class Map extends pattern.Observable {
+public class Map extends Observable {
 	/**
 	 * To store a message
 	 */

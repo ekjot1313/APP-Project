@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import pattern.Strategy.Strategy;
+import pattern.observer.Observable;
 
 /**
  * This class represents the Player details
@@ -13,7 +14,7 @@ import pattern.Strategy.Strategy;
  * @author Piyush
  *
  */
-public class Player extends pattern.Observable {
+public class Player extends Observable {
 	private Strategy strategy;
 
 	public Strategy getStrategy() {

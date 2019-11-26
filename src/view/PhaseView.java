@@ -4,8 +4,8 @@ import java.awt.EventQueue;
 import java.awt.Insets;
 import java.awt.Toolkit;
 
-import pattern.Observable;
-import pattern.Observer;
+import pattern.observer.Observable;
+import pattern.observer.Observer;
 
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
