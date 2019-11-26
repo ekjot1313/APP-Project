@@ -17,8 +17,8 @@ import dao.Continent;
 import dao.Country;
 import dao.Map;
 import dao.Player;
-import pattern.Observable;
-import pattern.Observer;
+import pattern.observer.Observable;
+import pattern.observer.Observer;
 import java.text.DecimalFormat;
 
 /**
