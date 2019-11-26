@@ -191,4 +191,30 @@ public class CheaterStrategy implements Strategy {
 		return 0;
 	}
 
+	@Override
+	public int validate(String command, Map testMap, Player P) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int attackMove(String command, Country fromCountry, Country toCountry, int attackerDice, Player P) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int attackDeadlock(Map testMap, Player P) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int calculateReinforceArmies(Map testMap, Player P) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
 }

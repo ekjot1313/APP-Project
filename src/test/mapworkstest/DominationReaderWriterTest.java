@@ -101,7 +101,7 @@ public class DominationReaderWriterTest {
 	}
 
 	/**
-	 * Method to test {@link mapWorks.MapReader#parseMapFile(File)}
+	 * Method to test {@link mapWorks.DominationReaderWriter#parseMapFile(Map, File)}
 	 */
 	@Test
 	public void testParseMap() {
@@ -116,7 +116,7 @@ public class DominationReaderWriterTest {
 	}
 
 	/**
-	 * Method to test {@link mapWorks.MapReader#loadContinents()}
+	 * Method to test {@link mapWorks.DominationReaderWriter#loadContinents(Map)}
 	 */
 	@Test
 	public void testLoadContinent() {
@@ -157,7 +157,7 @@ public class DominationReaderWriterTest {
 	}
 
 	/**
-	 * Method to test {@link mapWorks.MapReader#loadCountries()}
+	 * Method to test {@link mapWorks.DominationReaderWriter#loadCountries(Map)}
 	 */
 	@Test
 	public void testLoadCountries() {
@@ -191,7 +191,7 @@ public class DominationReaderWriterTest {
 	}
 
 	/**
-	 * Method to test {@link mapWorks.MapReader#loadBorders()}
+	 * Method to test {@link mapWorks.DominationReaderWriter#loadBorders(Map)}
 	 */
 	@Test
 	public void testLoadBorders() {
@@ -237,7 +237,7 @@ public class DominationReaderWriterTest {
 	}
 	
 	/**
-	 * Method to test {@link mapWorks.MapSaver#MapSaver()}
+	 * Method to test {@link mapWorks.DominationReaderWriter#saveMap(Map, String)}
 	 */
 	@Test
 	public void testMapSaver() {
