@@ -5,12 +5,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class RandomStrategy implements Strategy {
 
 	Random random = new Random();
 	private Scanner sc;
 
+	// gameplayer -add a random -add b random -add c random -add d random -add e
+	// random
 	@Override
 	public void reinforcement(Map map, ArrayList<Player> listPlayer, Player P) {
 		// TODO Auto-generated method stub
@@ -21,14 +24,6 @@ public class RandomStrategy implements Strategy {
 
 		// calculate reinforcement armies
 		int reinforcementArmies = calculateReinforceArmies(map, P);
-
-		// is it possible to exchange cards
-		if (P.cardExchangePossible()) {
-			// if there are 5 cards, must exchange
-
-			// else, decide randomly
-
-		}
 
 		// loop over playerlist and assign reinforcement armies
 		System.out.println("Reinforcement armies to be assigned :" + reinforcementArmies);
@@ -55,6 +50,53 @@ public class RandomStrategy implements Strategy {
 		}
 		P.setEndOfActions(1);
 		P.setActions("Reinforcement finished");
+
+	}
+
+	private int exchangeCards(Player P) {
+		// TODO Auto-generated method stub
+		int armies = 0;
+		ArrayList<String> cards = P.getCards();
+		String card1="", card2="", card3="";
+
+		ArrayList<String> infantryCards = (ArrayList<String>) cards.stream().filter(card -> card.contains("infantry"))
+				.collect(Collectors.toList());
+		ArrayList<String> cavalryCards = (ArrayList<String>) cards.stream().filter(card -> card.contains("cavalry"))
+				.collect(Collectors.toList());
+		ArrayList<String> artilleryCards = (ArrayList<String>) cards.stream().filter(card -> card.contains("artillery"))
+				.collect(Collectors.toList());
+
+		if (infantryCards.size() >= 3) {
+			card1 = infantryCards.get(0);
+			card2 = infantryCards.get(1);
+			card3 = infantryCards.get(2);
+		} else if (cavalryCards.size() >= 3) {
+			card1 = cavalryCards.get(0);
+			card2 = cavalryCards.get(1);
+			card3 = cavalryCards.get(2);
+		} else if (artilleryCards.size() >= 3) {
+			card1 = artilleryCards.get(0);
+			card2 = artilleryCards.get(1);
+			card3 = artilleryCards.get(2);
+		} else if (infantryCards.size() >= 1 && cavalryCards.size() >= 1 && artilleryCards.size() >= 1) {
+			card1 = infantryCards.get(0);
+			card2 = cavalryCards.get(0);
+			card3 = artilleryCards.get(0);
+		}
+		cards.remove(card1);
+		cards.remove(card2);
+		cards.remove(card3);
+		
+		P.setView("CardExchangeView");
+		P.setActions("Player has exchanged " + card1 + ", " + card2 + ", " + card3);
+
+		P.setCardExchangeCounter(P.getCardExchangeCounter() + 5);
+		armies += P.getCardExchangeCounter();
+
+		Player.deck.add(card1);
+		Player.deck.add(card2);
+		Player.deck.add(card3);
+		return armies;
 
 	}
 
@@ -428,6 +470,24 @@ public class RandomStrategy implements Strategy {
 			if (continent.getOwner().equals(P.getName())) {
 				reinforcementArmies += continent.getContinentValue();
 
+			}
+		}
+
+		// adding armies in exchange of cards
+		if (P.getCards().size() >= 3) {
+			// is it possible to exchange cards
+			if (P.cardExchangePossible()) {
+				// if there are 5 cards, must exchange
+				if (P.getCards().size() >= 5) {
+					reinforcementArmies += exchangeCards(P);
+				}
+				// else, decide randomly
+				else {
+					// exchange
+					if (random.nextInt(2) == 0) {
+						reinforcementArmies += exchangeCards(P);
+					}
+				}
 			}
 		}
 
