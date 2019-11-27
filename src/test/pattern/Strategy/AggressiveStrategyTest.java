@@ -136,8 +136,8 @@ public class AggressiveStrategyTest {
 			india.setNoOfArmies(22);
 			pakistan.setNoOfArmies(18);
 			A.executeReinforcement(testMap, listOfPlayers);
-			assertEquals(35, india.getNoOfArmies()); 
-			assertEquals(18, pakistan.getNoOfArmies());
+			assertEquals(22, india.getNoOfArmies()); 
+			assertEquals(31, pakistan.getNoOfArmies());
 			assertEquals(53, A.getNoOfArmies());
 			
 		} catch (Exception e) {
