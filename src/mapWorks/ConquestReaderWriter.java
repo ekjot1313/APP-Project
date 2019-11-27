@@ -104,13 +104,22 @@ public class ConquestReaderWriter {
 			}
 			String[] countryDetails = currentLine.split(",");
 			Country c = new Country();
-			c.setName(countryDetails[0]);
-			c.setContinentName(countryDetails[3]);
-			Continent continent = map.getContinentFromName(countryDetails[3]);
+			String coname = countryDetails[0];
+			if(coname.contains(" "))
+				coname = coname.replaceAll(" ", "_");
+			c.setName(coname);
+			String cname = countryDetails[3];
+			if(cname.contains(" "))
+				cname = cname.replaceAll(" ", "_");
+			c.setContinentName(cname);
+			Continent continent = map.getContinentFromName(cname);
 			continent.getCountries().add(c.getName());
 			List<String> neighbours =  new ArrayList<String>();
 			for (int i = 4; i < countryDetails.length; i++) {
-				neighbours.add(countryDetails[i]);
+				String neighbour = countryDetails[i];
+				if(neighbour.contains(" "))
+					neighbour = neighbour.replaceAll(" ", "_");
+				neighbours.add(neighbour);
 			}
 			c.setNeighbors(neighbours);
 			map.addCountry(c);
@@ -133,7 +142,10 @@ public class ConquestReaderWriter {
 			}
 			String[] continentDetails = currentLine.split("=");
 			Continent continent = new Continent();
-			continent.setName(continentDetails[0]);
+			String cname = continentDetails[0];
+			if(cname.contains(" "))
+				cname = cname.replaceAll(" ", "_");
+			continent.setName(cname);
 			continent.setContinentValue(Integer.parseInt(continentDetails[1]));
 			map.addContinent(continent);
 			
