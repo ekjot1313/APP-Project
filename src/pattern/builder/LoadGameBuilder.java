@@ -35,7 +35,6 @@ public class LoadGameBuilder extends GameBuilder{
 		currentPath += "\\SavedGame\\" + filename + ".txt";
 		File newFile = new File(currentPath);
 		try {
-
 			bufferReaderForFile = new BufferedReader(new FileReader(newFile));
 			
 			while ((currentLine = bufferReaderForFile.readLine()) != null) {

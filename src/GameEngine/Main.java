@@ -59,7 +59,7 @@ public class Main {
 			
 			if(gameMode.equalsIgnoreCase("Single Game")) {
 				System.out.println(
-						"Type \n loadgame <filename> \nloadmap <filename> -load an existing map \neditmap <filename> -edit an existing map or create a new map");
+						"Type \nloadgame <filename> \nloadmap <filename> -load an existing map \neditmap <filename> -edit an existing map or create a new map");
 				String[] commands = sc.nextLine().split(" ");
 				if (commands.length == 1 && !commands[0].equals("exit")) {
 					System.out.println("Invalid command .Type exit to end game");
@@ -78,16 +78,27 @@ public class Main {
 						break;
 						
 					case "loadgame":
-						map = new Map();
-						pwdView = new PWDView(true);
-						map.attach(pwdView);
-						Director d = new Director();
-						d.setGbuilder(new LoadGameBuilder());
-						d.constructGame(commands[1], map, " ", " ");
-						Game game=d.getGame();
-						map = game.getMap();
-						loadSavedGame(game);
 						
+						String currentPath = System.getProperty("user.dir");
+						currentPath += "\\SavedGame\\";					
+						currentPath += commands[1] + ".txt";
+						File newFile = new File(currentPath);
+						if (newFile.exists()) {
+							map = new Map();
+							pwdView = new PWDView(true);
+							map.attach(pwdView);
+							Director d = new Director();
+							d.setGbuilder(new LoadGameBuilder());
+							d.constructGame(commands[1], map, " ", " ");
+							
+							Game game=d.getGame();
+							map = game.getMap();
+							loadSavedGame(game);
+						}
+						else {
+							System.out.println("Invalid filename");
+							continue;
+						}
 					case "exit":
 						sc.close();
 						return;
