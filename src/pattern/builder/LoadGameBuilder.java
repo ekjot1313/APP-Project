@@ -37,8 +37,12 @@ public class LoadGameBuilder extends GameBuilder{
 		try {
 
 			bufferReaderForFile = new BufferedReader(new FileReader(newFile));
-			map = new Map();
+			
 			while ((currentLine = bufferReaderForFile.readLine()) != null) {
+				if(currentLine.contains("[PlayerList]")) {
+					loadPlayers(map);
+				}
+				
 				if (currentLine.contains("[Continents]")) {
 					loadContinents(map);
 				}
@@ -46,11 +50,7 @@ public class LoadGameBuilder extends GameBuilder{
 				if (currentLine.contains("[Territories]")) {
 					loadTerritories(map);
 				}
-				
-				if(currentLine.contains("[PlayerList]")) {
-					loadPlayers(map);
-				}
-				
+	
 				if(currentLine.contains("[CardDetails]")) {
 					loadCardDetails(map);
 				}
@@ -130,24 +130,7 @@ public class LoadGameBuilder extends GameBuilder{
 					cardList.add(cardsString[i]);
 					System.out.println("Cards: "+cardsString[i]);
 				}
-				/*for(int i=0;i<playerDetails.length;i++) {
-					if(playerDetails[i].equals("CARDS")) {
-						index = i;
-					}
-				}*/
 				
-				
-				/*for(int m=index;m<playerDetails.length;m++) {
-					cardsString += playerDetails[m];
-				}
-				System.out.println("CardsString: "+cardsString);*/
-				//String [] cards = cardsString.split(",");
-				//System.out.println("length: "+(playerDetails.length-2));
-				/*for(int k=0;k<cards.length;k++) {
-					cardList.add(cards[k]);
-					System.out.println("Cards: "+cards[k]);
-				}
-					*/
 				
 				p.setCards(cardList);
 				
@@ -185,6 +168,8 @@ public class LoadGameBuilder extends GameBuilder{
 			c.setContinentName(countryDetails[1]);
 			c.setNoOfArmies(Integer.parseInt(countryDetails[2]));
 			c.setOwner(countryDetails[3]);
+			
+			
 			Continent continent = map.getContinentFromName(countryDetails[1]);
 			continent.getCountries().add(c.getName());
 			List<String> neighbours =  new ArrayList<String>();
@@ -208,7 +193,8 @@ public class LoadGameBuilder extends GameBuilder{
 			Continent continent = new Continent();
 			continent.setName(continentDetails[0]);
 			continent.setContinentValue(Integer.parseInt(continentDetails[1]));
-			continent.setOwner(continentDetails[2]);
+			if(continentDetails[2].equals("FREE") && continentDetails[3].equals("CONTINENTS"))
+			continent.setOwner("FREE CONTINENTS");
 			map.addContinent(continent);
 			
 

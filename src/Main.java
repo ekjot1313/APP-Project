@@ -77,11 +77,14 @@ public class Main {
 						break;
 						
 					case "loadgame":
-						Map map = new Map();
+						map = new Map();
+						pwdView = new PWDView(true);
+						map.attach(pwdView);
 						Director d = new Director();
 						d.setGbuilder(new LoadGameBuilder());
 						d.constructGame(commands[1], map, " ", " ");
 						Game game=d.getGame();
+						map = game.getMap();
 						loadSavedGame(game);
 						
 					case "exit":
@@ -108,9 +111,7 @@ public class Main {
 	private static void loadSavedGame(Game game) throws Exception {
 		// TODO Auto-generated method stub
 		
-		pwdView = new PWDView(true);
-		map = game.getMap();
-		map.attach(pwdView);
+		
 		PhaseView pv= new PhaseView();
 		CardExchangeView cev = new CardExchangeView();
 		String currentPlayer= game.getCurrentPlayer();
