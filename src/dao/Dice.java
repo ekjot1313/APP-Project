@@ -53,6 +53,10 @@ public class Dice {
 		setDefenderDice(defenderDice);
 	}
 
+	public Dice() {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * This method returns a random number between 1 and 6
 	 * 
