@@ -123,10 +123,14 @@ public class HumanStrategy implements Strategy {
 		int neighborFound = 0;
 		if (command.equals("showmap"))
 			return 1;
+		
 		if (s.length == 2) {
 			if (command.equals("attack -noattack")) {
 				P.setEndOfActions(1);
 				P.setActions("Attack finished");
+				return 1;
+			}
+			else if(command.contains("savegame")) {
 				return 1;
 			}
 		}
