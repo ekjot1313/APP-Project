@@ -42,17 +42,18 @@ public class Map extends Observable {
 	private List<Player> listOfPlayers;
 
 	/**
-	 * flag to print or not
+	 * Flag to print or not
 	 */
 	public boolean printFlag = true;
-	
+
 	/**
 	 * Type of map
 	 */
 	public String type;
-	
+
 	/**
 	 * This method returns the list of players
+	 * 
 	 * @return Player List
 	 */
 	public List<Player> getListOfPlayers() {
@@ -61,6 +62,7 @@ public class Map extends Observable {
 
 	/**
 	 * This method sets the player list
+	 * 
 	 * @param listOfPlayers The list of players to be set
 	 */
 	public void setListOfPlayers(List<Player> listOfPlayers) {
@@ -315,8 +317,7 @@ public class Map extends Observable {
 
 	/**
 	 * This method displays the map
-	 * 
-	 * 
+	 *  
 	 */
 	public void displayAll() {
 
@@ -456,7 +457,7 @@ public class Map extends Observable {
 	 * This method sets owner to given country and notify PWDView about the change.
 	 * 
 	 * @param country Object of the country whose owner is to be set
-	 * @param owner Name of the player to be set as owner
+	 * @param owner   Name of the player to be set as owner
 	 */
 	public void setCountryOwner(Country country, String owner) {
 		country.setOwner(owner);
@@ -486,7 +487,8 @@ public class Map extends Observable {
 
 	/**
 	 * Adds the country to list of countries
-	 * @param country object of country class 
+	 * 
+	 * @param country object of country class
 	 */
 	public void addCountry(Country country) {
 		getListOfCountries().add(country);
@@ -495,6 +497,7 @@ public class Map extends Observable {
 
 	/**
 	 * This method sets the owner of the continent
+	 * 
 	 * @param cont Object of the continent whose owner is to set
 	 * @param name Name of the player to be set as owner
 	 */
@@ -505,6 +508,7 @@ public class Map extends Observable {
 
 	/**
 	 * This method removes the player from list of players
+	 * 
 	 * @param player Player to be removed from player list
 	 */
 	public void removePlayer(Player player) {
@@ -514,6 +518,7 @@ public class Map extends Observable {
 
 	/**
 	 * This method sets the number of armies for a player
+	 * 
 	 * @param p Player Object
 	 * @param i Number of armies to be assigned
 	 */
@@ -538,6 +543,7 @@ public class Map extends Observable {
 
 	/**
 	 * This method is used to print the message
+	 * 
 	 * @param msg Message to be printed
 	 */
 	public void print(String msg) {
@@ -547,6 +553,7 @@ public class Map extends Observable {
 
 	/**
 	 * This method is used to prints the message on next line
+	 * 
 	 * @param msg Message to be printed
 	 */
 	public void println(String msg) {

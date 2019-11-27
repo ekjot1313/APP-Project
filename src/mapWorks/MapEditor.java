@@ -124,7 +124,7 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method is used to read editcontinent command, store sub-commands to
+	 * This method is used to read 'editcontinent' command, store sub-commands to
 	 * queue, and execute all sub-commands
 	 * 
 	 * @param command Command given by the user
@@ -200,10 +200,10 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method is used to read editcountry command, store sub-commands to queue,
+	 * This method is used to read 'editcountry' command, store sub-commands to queue,
 	 * and execute all sub-commands
 	 * 
-	 * @param command Command given be the user
+	 * @param command Command given by the user
 	 */
 	public void editCountry(String[] command) {
 
@@ -275,10 +275,10 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method is used to read editneighbor command, store sub-commands to
+	 * This method is used to read 'editneighbor' command, store sub-commands to
 	 * queue, and execute all sub-commands
 	 * 
-	 * @param command Command given the user
+	 * @param command Command given by the user
 	 */
 	public void editNeighbor(String[] command) {
 
@@ -354,8 +354,8 @@ public class MapEditor {
 	 * 
 	 * @param continentName  Continent to be added
 	 * @param continentValue Continent Value
-	 * @param queue          queue
-	 * @return queue
+	 * @param queue          Queue
+	 * @return Queue
 	 */
 	public ArrayList<ArrayList<String>> addContinentToQueue(String continentName, String continentValue,
 			ArrayList<ArrayList<String>> queue) {
@@ -376,7 +376,7 @@ public class MapEditor {
 	 * This method adds sub-command, of removing continent, to queue.
 	 * 
 	 * @param continentName Continent to be removed
-	 * @param queue         queue
+	 * @param queue         Queue
 	 */
 	public ArrayList<ArrayList<String>> removeContinentToQueue(String continentName,
 			ArrayList<ArrayList<String>> queue) {
@@ -398,8 +398,8 @@ public class MapEditor {
 	 * 
 	 * @param countryName   Country to be added
 	 * @param continentName Continent in which the country is to be added
-	 * @param queue         queue
-	 * @return queue
+	 * @param queue         Queue
+	 * @return Queue
 	 */
 	public ArrayList<ArrayList<String>> addCountryToQueue(String countryName, String continentName,
 			ArrayList<ArrayList<String>> queue) {
@@ -420,8 +420,8 @@ public class MapEditor {
 	 * This method adds sub-command, of removing country, to queue.
 	 * 
 	 * @param countryName Country to be removed
-	 * @param queue       queue
-	 * @return queue
+	 * @param queue       Queue
+	 * @return Queue
 	 */
 	public ArrayList<ArrayList<String>> removeCountryToQueue(String countryName, ArrayList<ArrayList<String>> queue) {
 
@@ -442,8 +442,8 @@ public class MapEditor {
 	 * 
 	 * @param countryName         Country Name
 	 * @param neighborCountryName Neighboring country to be added
-	 * @param queue               queue
-	 * @return queue
+	 * @param queue               Queue
+	 * @return Queue
 	 */
 	public ArrayList<ArrayList<String>> addNeighborToQueue(String countryName, String neighborCountryName,
 			ArrayList<ArrayList<String>> queue) {
@@ -465,8 +465,8 @@ public class MapEditor {
 	 * 
 	 * @param countryName         Country Name
 	 * @param neighborCountryName Neighboring country to be removed
-	 * @param queue               queue
-	 * @return queue
+	 * @param queue               Queue
+	 * @return Queue
 	 */
 	public ArrayList<ArrayList<String>> removeNeighborToQueue(String countryName, String neighborCountryName,
 			ArrayList<ArrayList<String>> queue) {
@@ -748,7 +748,6 @@ public class MapEditor {
 	 */
 	public boolean removeBridge(String continent1Name, String continent2Name, String country1Name,
 			String country2Name) {
-		// TODO Auto-generated method stub
 		// check all bridge in first continent
 
 		Continent continent1, continent2;
@@ -808,7 +807,7 @@ public class MapEditor {
 	/**
 	 * This method is used to print some string if print flag is set to true
 	 * 
-	 * @param string String to print
+	 * @param string String to be printed
 	 */
 	private void print(String string) {
 		// TODO Auto-generated method stub

@@ -3,7 +3,6 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 
 import pattern.Strategy.Strategy;
 import pattern.observer.Observable;
@@ -17,23 +16,46 @@ import pattern.observer.Observable;
 public class Player extends Observable {
 	private Strategy strategy;
 
+	/**
+	 * This method returns the strategy
+	 *
+	 * @return Strategy
+	 */
 	public Strategy getStrategy() {
 		return strategy;
 	}
 
+	/**
+	 * This method sets the strategy
+	 * 
+	 * @param strategy Strategy to be set
+	 */
 	public void setStrategy(Strategy strategy) {
 		this.strategy = strategy;
 	}
-	public int test=0;
+
+	public int test = 0;
 	private String testCommand;
+
+	/**
+	 * This method returns the test command
+	 * 
+	 * @return Test Command
+	 */
 	public String getTestCommand() {
 		return testCommand;
 	}
 
+	/**
+	 * This method is used to set the test command
+	 * 
+	 * @param testCommand Test Command to be set
+	 */
 	public void setTestCommand(String testCommand) {
-		test=1;
+		test = 1;
 		this.testCommand = testCommand;
 	}
+
 	/**
 	 * To store the current view
 	 */
@@ -45,16 +67,16 @@ public class Player extends Observable {
 	private int endOfActions;
 
 	/**
-	 * To store current state- Reinforcement ,attack, fortify
+	 * To store current state - Reinforcement ,Attack, Fortify
 	 */
 	private String state;
 
 	/**
-	 * deck of cards
+	 * Deck of cards
 	 */
-	public static ArrayList<String> deck=new ArrayList<String>();
+	public static ArrayList<String> deck = new ArrayList<String>();
 	/**
-	 * TO store current actions
+	 * To store current actions
 	 */
 	private String actions;
 
@@ -62,9 +84,7 @@ public class Player extends Observable {
 	 * The name of the player
 	 */
 	private String name;
-	/**
-	 * List of cards for a player
-	 */
+
 	/**
 	 * This holds the count of no of times the player has exchanged cards to get
 	 * armies.
@@ -77,7 +97,7 @@ public class Player extends Observable {
 	private ArrayList<String> cards;
 
 	/**
-	 * Number of armies assigned ot the player
+	 * Number of armies assigned to the player
 	 */
 	private int noOfArmies = 0;
 	/**
@@ -85,24 +105,9 @@ public class Player extends Observable {
 	 */
 	private int unassignedarmies = 0;
 	/**
-	 * list of assigned countries
+	 * List of assigned countries
 	 */
 	private List<Country> assigned_countries;
-
-	/**
-	 * Object of scanner class
-	 */
-	private Scanner sc;
-
-	/**
-	 * Object of scanner class
-	 */
-	private Scanner sc2;
-
-	/**
-	 * Object of scanner class
-	 */
-	private Scanner sc3;
 
 	/**
 	 * Constructor initializes the list of assigned countries
@@ -113,15 +118,14 @@ public class Player extends Observable {
 	}
 
 	/**
-	 * To get random card
+	 * This method is used to get a random card
 	 * 
-	 * @return card
+	 * @return Random Card
 	 */
 	public String randomCard() {
-		if(deck.size() == 0)
+		if (deck.size() == 0)
 			return "None";
 		Random number = new Random();
-		//System.out.println(deck.size());
 		int no = number.nextInt(deck.size());
 		return deck.get(no);
 	}
@@ -191,18 +195,18 @@ public class Player extends Observable {
 	}
 
 	/**
-	 * To get the current view
+	 * This method returns the current view
 	 * 
-	 * @return view
+	 * @return Current View
 	 */
 	public String getView() {
 		return view;
 	}
 
 	/**
-	 * To set the current view
+	 * This method sets the current view
 	 * 
-	 * @param view
+	 * @param view View to be set
 	 */
 	public void setView(String view) {
 		this.view = view;
@@ -218,7 +222,7 @@ public class Player extends Observable {
 	}
 
 	/**
-	 * To get end of actions
+	 * This method is used to get the end of actions
 	 * 
 	 * @return endOfActions
 	 */
@@ -227,9 +231,9 @@ public class Player extends Observable {
 	}
 
 	/**
-	 * TO set end of actions
+	 * This method is used to set the end of actions
 	 * 
-	 * @param endOfActions
+	 * @param endOfActions End of Actions
 	 */
 	public void setEndOfActions(int endOfActions) {
 		this.endOfActions = endOfActions;
@@ -237,18 +241,18 @@ public class Player extends Observable {
 	}
 
 	/**
-	 * TO get current actions
+	 * This method is used to get the current actions
 	 * 
-	 * @return actions
+	 * @return Actions
 	 */
 	public String getActions() {
 		return actions;
 	}
 
 	/**
-	 * To store current action
+	 * This method is used to store the current actions
 	 * 
-	 * @param actions
+	 * @param actions Actions to be stored
 	 */
 	public void setActions(String actions) {
 		this.actions = actions;
@@ -257,18 +261,18 @@ public class Player extends Observable {
 	}
 
 	/**
-	 * TO get current state
+	 * This method to used to get the current state
 	 * 
-	 * @return state
+	 * @return Current State
 	 */
 	public String getState() {
 		return state;
 	}
 
 	/**
-	 * To set current state
+	 * This method is used to set the current state
 	 * 
-	 * @param state
+	 * @param state State to be set
 	 */
 	public void setState(String state) {
 		this.state = state;
@@ -278,7 +282,7 @@ public class Player extends Observable {
 	/**
 	 * This method returns the cardExchangeCounter.
 	 * 
-	 * @return
+	 * @return Card Exchange Counter
 	 */
 	public int getCardExchangeCounter() {
 		return cardExchangeCounter;
@@ -287,7 +291,7 @@ public class Player extends Observable {
 	/**
 	 * This method sets the cardExchangeCounter.
 	 * 
-	 * @param cardExchangeCounter
+	 * @param cardExchangeCounter Counter to be set
 	 */
 	public void setCardExchangeCounter(int cardExchangeCounter) {
 		this.cardExchangeCounter = cardExchangeCounter;
@@ -296,7 +300,7 @@ public class Player extends Observable {
 	/**
 	 * This method returns the card list.
 	 * 
-	 * @return
+	 * @return List of Cards
 	 */
 	public ArrayList<String> getCards() {
 		return cards;
@@ -305,7 +309,7 @@ public class Player extends Observable {
 	/**
 	 * This method sets the card list.
 	 * 
-	 * @param cards
+	 * @param cards Card list to be set
 	 */
 	public void setCards(ArrayList<String> cards) {
 		this.cards = cards;
@@ -324,7 +328,7 @@ public class Player extends Observable {
 	}
 
 	/**
-	 * This function is used for fortification phase.
+	 * This method is used for fortification phase.
 	 * 
 	 * @param listPlayer List of players
 	 * @param map        Map object which contains the map details like continents
@@ -355,7 +359,6 @@ public class Player extends Observable {
 	 * @return true if exchange is possible otherwise false;
 	 */
 	public boolean cardExchangePossible() {
-		// TODO Auto-generated method stub
 
 		int infantryNum = (int) cards.stream().filter(card -> card.contains("infantry")).count();
 		int cavalryNum = (int) cards.stream().filter(card -> card.contains("cavalry")).count();

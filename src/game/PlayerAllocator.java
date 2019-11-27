@@ -1,6 +1,9 @@
 package game;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 import dao.Continent;
 import dao.Country;
@@ -12,8 +15,6 @@ import pattern.Strategy.BenevolentStrategy;
 import pattern.Strategy.CheaterStrategy;
 import pattern.Strategy.HumanStrategy;
 import pattern.Strategy.RandomStrategy;
-import pattern.builder.Director;
-import pattern.builder.SaveGameBuilder;
 
 /**
  * This class is used to add or remove players and also to assign countries to
@@ -29,9 +30,10 @@ public class PlayerAllocator {
 	public List<Player> listOfPlayers;
 
 	/**
-	 * Gets the player name form list of players
-	 * @param name name of player to retrieve
-	 * @return listOfPlayers 
+	 * This method returns player from the list of players
+	 * 
+	 * @param name Name of the player to retrieve
+	 * @return Player Object
 	 */
 	public Player getPlayerFromName(String name) {
 		for (int i = 0; i < listOfPlayers.size(); i++) {
@@ -52,108 +54,104 @@ public class PlayerAllocator {
 	/**
 	 * This method adds or removes the player
 	 * 
-	 * @param map Map Object
-	 * @param command given command 
+	 * @param map     Map Object
+	 * @param command Given Command
 	 */
-	public void allocate(Map map,String command) {
+	public void allocate(Map map, String command) {
 
 		this.listOfPlayers = map.getListOfPlayers();
 
 		Scanner in = new Scanner(System.in);
-		String cmd="";
-		int testing =0;
+		String cmd = "";
+		int testing = 0;
 
 		do {
 			try {
-			System.out.println(
-					"Type \ngameplayer -add<PlayerName> <Strategy> or -remove <PlayerName> \npopulatecountries - assign countries to players");
-			System.out.println("Type showmap");
-			if(command!= null ) {
-				cmd =command;
-				testing =1;
-			}
-			else
-				cmd = in.nextLine();
-			while (cmd.equals("populatecountries") && listOfPlayers.size() == 0) {
-				System.out.println("Player list is empty, add players first.");
 				System.out.println(
 						"Type \ngameplayer -add<PlayerName> <Strategy> or -remove <PlayerName> \npopulatecountries - assign countries to players");
 				System.out.println("Type showmap");
-				cmd = in.nextLine();
-			}
-			String str[] = cmd.split(" ");
-			if (cmd.equals("showmap")) {
-			//	MapReader mr = new MapReader();
-				map.displayAll();
-			} 
-			else if (validate(cmd) == 1) {
-				int checkDuplicate = 0;
-				for (int i = 1; i < str.length; i++) {
-					try {
-					if (str[i].equals("-add")) {
-						checkDuplicate = 0;
-						for (int h = 0; h < listOfPlayers.size(); h++) {
-							if (str[i + 1].equals(listOfPlayers.get(h).getName())) {
-								throw new AllocatorException("This player is already added, kindly add a new player.");
-							}
-						}
-						if (listOfPlayers.size() == map.getListOfCountries().size()) {
-							throw new AllocatorException("Sorry! Cannot add more players than no of countries");
-						}
-				
-						Player p = new Player();
-						p.setName(str[i + 1]);
-						if(str[i+2].equalsIgnoreCase("human"))
-							p.setStrategy(new HumanStrategy());
-						else if(str[i+2].equalsIgnoreCase("aggressive"))
-							p.setStrategy(new AggressiveStrategy());
-						else if(str[i+2].equalsIgnoreCase("benevolent"))
-							p.setStrategy(new BenevolentStrategy());
-						else if(str[i+2].equalsIgnoreCase("random"))
-							p.setStrategy(new RandomStrategy());
-						else if(str[i+2].equalsIgnoreCase("cheater"))
-							p.setStrategy(new CheaterStrategy());
-						// listOfPlayers.add(p);
-						map.addPlayer(p);
-						
-						System.out.println("Player " + p.getName() + " has been added successfully.");
-						i=i+2;
-					
-					}
-					if (str[i].equals("-remove")) {
-						int j;
-						int flag = 0;
-						for (j = 0; j < listOfPlayers.size(); j++) {
-							if (listOfPlayers.get(j).getName().contentEquals(str[i + 1])) {
-								System.out.println(
-										"Player " + listOfPlayers.get(j).getName() + " has been removed successfully.");
-								// listOfPlayers.remove(j);
-								map.removePlayer(listOfPlayers.get(j));
-								flag = 1;
-								break;
-							}
-						}
-						if (flag == 0) {
-							throw new AllocatorException("Player Not found");
-						}
-						i++;
+				if (command != null) {
+					cmd = command;
+					testing = 1;
+				} else
+					cmd = in.nextLine();
+				while (cmd.equals("populatecountries") && listOfPlayers.size() == 0) {
+					System.out.println("Player list is empty, add players first.");
+					System.out.println(
+							"Type \ngameplayer -add<PlayerName> <Strategy> or -remove <PlayerName> \npopulatecountries - assign countries to players");
+					System.out.println("Type showmap");
+					cmd = in.nextLine();
+				}
+				String str[] = cmd.split(" ");
+				if (cmd.equals("showmap")) {
+					map.displayAll();
+				} else if (validate(cmd) == 1) {
+					int checkDuplicate = 0;
+					for (int i = 1; i < str.length; i++) {
+						try {
+							if (str[i].equals("-add")) {
+								checkDuplicate = 0;
+								for (int h = 0; h < listOfPlayers.size(); h++) {
+									if (str[i + 1].equals(listOfPlayers.get(h).getName())) {
+										throw new AllocatorException(
+												"This player is already added, kindly add a new player.");
+									}
+								}
+								if (listOfPlayers.size() == map.getListOfCountries().size()) {
+									throw new AllocatorException("Sorry! Cannot add more players than no of countries");
+								}
 
+								Player p = new Player();
+								p.setName(str[i + 1]);
+								if (str[i + 2].equalsIgnoreCase("human"))
+									p.setStrategy(new HumanStrategy());
+								else if (str[i + 2].equalsIgnoreCase("aggressive"))
+									p.setStrategy(new AggressiveStrategy());
+								else if (str[i + 2].equalsIgnoreCase("benevolent"))
+									p.setStrategy(new BenevolentStrategy());
+								else if (str[i + 2].equalsIgnoreCase("random"))
+									p.setStrategy(new RandomStrategy());
+								else if (str[i + 2].equalsIgnoreCase("cheater"))
+									p.setStrategy(new CheaterStrategy());
+								map.addPlayer(p);
+
+								System.out.println("Player " + p.getName() + " has been added successfully.");
+								i = i + 2;
+
+							}
+							if (str[i].equals("-remove")) {
+								int j;
+								int flag = 0;
+								for (j = 0; j < listOfPlayers.size(); j++) {
+									if (listOfPlayers.get(j).getName().contentEquals(str[i + 1])) {
+										System.out.println("Player " + listOfPlayers.get(j).getName()
+												+ " has been removed successfully.");
+										map.removePlayer(listOfPlayers.get(j));
+										flag = 1;
+										break;
+									}
+								}
+								if (flag == 0) {
+									throw new AllocatorException("Player Not found");
+								}
+								i++;
+
+							}
+						} catch (Exception e) {
+							System.out.println(e.getMessage());
+						}
 					}
-					}catch(Exception e) {
-						System.out.println(e.getMessage());
-					}
+
+				} else
+					throw new AllocatorException("Invalid command,Type again");
+				if (cmd.equals("populatecountries") && listOfPlayers.size() == 1) {
+					throw new AllocatorException("Single player cannot play the game, please add more players");
+				}
+				if (testing == 1) {
+					break;
 				}
 
-			} else
-				throw new AllocatorException("Invalid command,Type again");
-			if (cmd.equals("populatecountries") && listOfPlayers.size() == 1) {
-				throw new AllocatorException("Single player cannot play the game, please add more players");
-			}
-			if(testing ==1) {
-				break;
-			}
-			
-			}catch (Exception e) {
+			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
 		} while (!cmd.equals("populatecountries") || listOfPlayers.size() <= 1);
@@ -193,47 +191,46 @@ public class PlayerAllocator {
 	public int validate(String command) {
 		String str[] = command.split(" ");
 		int count;
-			if (str[0].equals("populatecountries"))
-				return 1;
-			if (str[0].contentEquals("gameplayer") && str.length == 1)
-				return 0;
-			if (str[0].equals("gameplayer") && (str[1].equals("-add") || str[1].equals("-remove"))) {
-				for (int i = 1; i < str.length; i++) {
-					count = 0;
-					if (str[i].equals("-add") || str[i].equals("-remove")) {
-						if(str[i].equals("-add")) {
-							if(i+1 == str.length)
+		if (str[0].equals("populatecountries"))
+			return 1;
+		if (str[0].contentEquals("gameplayer") && str.length == 1)
+			return 0;
+		if (str[0].equals("gameplayer") && (str[1].equals("-add") || str[1].equals("-remove"))) {
+			for (int i = 1; i < str.length; i++) {
+				count = 0;
+				if (str[i].equals("-add") || str[i].equals("-remove")) {
+					if (str[i].equals("-add")) {
+						if (i + 1 == str.length)
+							return 0;
+						if (str[i + 1].contains("-"))
+							return 0;
+						else {
+							i++;
+							if (i + 1 == str.length)
 								return 0;
 							if (str[i + 1].contains("-"))
 								return 0;
 							else {
-								i++;
-								if(i+1 == str.length)
+								if (i + 1 == str.length)
 									return 0;
-								if (str[i + 1].contains("-"))
+								if (str[i + 1].equalsIgnoreCase("human"))
+									i++;
+								else if (str[i + 1].equalsIgnoreCase("aggressive"))
+									i++;
+								else if (str[i + 1].equalsIgnoreCase("benevolent"))
+									i++;
+								else if (str[i + 1].equalsIgnoreCase("random"))
+									i++;
+								else if (str[i + 1].equalsIgnoreCase("cheater"))
+									i++;
+								else
 									return 0;
-								else {
-									if(i+1 == str.length)
-										return 0;
-									if(str[i+1].equalsIgnoreCase("human"))
-										i++;
-									else if(str[i+1].equalsIgnoreCase("aggressive"))
-										i++;
-									else if(str[i+1].equalsIgnoreCase("benevolent"))
-										i++;
-									else if(str[i+1].equalsIgnoreCase("random"))
-										i++;
-									else if(str[i+1].equalsIgnoreCase("cheater"))
-										i++;
-									else 
-										return 0;
-									
-								}
+
 							}
 						}
-						else if(str[i].equals("-remove")) {
-							if(i+1 == str.length)
-								return 0;
+					} else if (str[i].equals("-remove")) {
+						if (i + 1 == str.length)
+							return 0;
 						if (str[i + 1].contains("-"))
 							return 0;
 						else {
@@ -242,14 +239,13 @@ public class PlayerAllocator {
 						}
 						if (count != 1)
 							return 0;
-						}
 					}
-					else
-						return 0;
-				}
-				return 1;
+				} else
+					return 0;
 			}
-			return 0;
+			return 1;
+		}
+		return 0;
 	}
 
 	/**
@@ -294,7 +290,7 @@ public class PlayerAllocator {
 			Country c = map.getCountryFromName(countryList.get(index));
 			countryList.remove(index);
 			listOfPlayers.get(m).getAssigned_countries().add(c);
-			map.setCountryOwner(c,listOfPlayers.get(m).getName());
+			map.setCountryOwner(c, listOfPlayers.get(m).getName());
 		}
 
 		for (Continent c : map.getListOfContinent()) {

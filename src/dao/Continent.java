@@ -23,17 +23,19 @@ public class Continent {
 	 * To store the name of the owner of the continent.
 	 */
 	private String owner;
-	
+
 	/**
 	 * This method returns the owner of the continent
+	 * 
 	 * @return Continent Owner
 	 */
 	public String getOwner() {
 		return owner;
 	}
-	
+
 	/**
 	 * This method sets the owner of the continent
+	 * 
 	 * @param owner Continent owner to be set
 	 */
 	public void setOwner(String owner) {
@@ -41,7 +43,7 @@ public class Continent {
 	}
 
 	/**
-	 * TO store list of countries in the continent
+	 * To store list of countries in the continent
 	 */
 	private List<String> countries;
 	/**

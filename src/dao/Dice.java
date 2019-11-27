@@ -22,6 +22,7 @@ public class Dice {
 
 	/**
 	 * This method returns the number of dice used by the attacker
+	 * 
 	 * @return Number of attacker dice
 	 */
 	public int getAttackerDice() {
@@ -30,6 +31,7 @@ public class Dice {
 
 	/**
 	 * This method returns the number of dice used by the defender
+	 * 
 	 * @return Number of defender dice
 	 */
 	public int getDefenderDice() {
@@ -53,10 +55,6 @@ public class Dice {
 		setDefenderDice(defenderDice);
 	}
 
-	public Dice() {
-		// TODO Auto-generated constructor stub
-	}
-
 	/**
 	 * This method returns a random number between 1 and 6
 	 * 
@@ -68,8 +66,8 @@ public class Dice {
 	}
 
 	/**
-	 * This method returns a 2D array of size 2*3 with 3 rolledNumbers for both attacker and defender. 
-	 * 3rd rolledNumber for defender will always be 0.
+	 * This method returns a 2D array of size 2*3 with 3 rolledNumbers for both
+	 * attacker and defender. 3rd rolledNumber for defender will always be 0.
 	 * 
 	 * @return result 2D array of rolled numbers
 	 */
@@ -112,8 +110,8 @@ public class Dice {
 	}
 
 	/**
-	 * This method prints the given 2D array of size 2*3 onto console. 
-	 * This will omit 3rd element in 2nd row (as it is always 0).
+	 * This method prints the given 2D array of size 2*3 onto console. This will
+	 * omit 3rd element in 2nd row (as it is always 0).
 	 * 
 	 * @param result 2D array of size 2*3
 	 * @return array to be displayed in the form string
@@ -135,12 +133,13 @@ public class Dice {
 			System.out.print(result[1][i] + " ");
 		}
 		System.out.println();
-		//System.out.println(str);
+		// System.out.println(str);
 		return str;
 	}
 
 	/**
 	 * This method sets the number of dice used by the attacker
+	 * 
 	 * @param attackerDice Number of attacker dice to be set
 	 * @return true if successfully set, else false
 	 */
@@ -157,6 +156,7 @@ public class Dice {
 
 	/**
 	 * This method sets the number of dice used by the defender
+	 * 
 	 * @param defenderDice Number of defender dice to be used
 	 * @return true if successfully set, else false
 	 */

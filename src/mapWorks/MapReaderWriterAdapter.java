@@ -14,13 +14,11 @@ public class MapReaderWriterAdapter extends DominationReaderWriter {
 
 	@Override
 	public int parseMapFile(Map map,File file) {
-		// TODO Auto-generated method stub
 		return crw.parseMapFile(map,file);
 	}
 
 	@Override
 	public void saveMap(Map map, String fileName) throws IOException {
-		// TODO Auto-generated method stub
 		crw.saveMap(map, fileName);
 	}
 	

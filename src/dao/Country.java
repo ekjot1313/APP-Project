@@ -1,6 +1,7 @@
 package dao;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class contains details of the country
@@ -35,7 +36,7 @@ public class Country {
 	 */
 	public Country() {
 		this.neighbors = new ArrayList<String>();
-		this.owner="FREE COUNTRIES";
+		this.owner = "FREE COUNTRIES";
 	}
 
 	/**

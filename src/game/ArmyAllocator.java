@@ -1,12 +1,12 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 import dao.Country;
 import dao.Map;
 import dao.Player;
-import java.util.Random;
 
 /**
  * This class allows the players to allocate armies to their countries
@@ -30,14 +30,10 @@ public class ArmyAllocator {
 	 * @return Number of assigned armies
 	 */
 	public int calculateTotalArmies(ArrayList<Player> listOfPLayers, Map map) {
-		// 2 -40 armies ,3 -35 armies , 4- 30 armies ,5 -25 armies ...
 		int maxArmiesForEachPlayer = 40;
-		// Maximum number of players can be 9 only
-		// Logic for more than 9 players - TBD*
 		int assignedArmies = maxArmiesForEachPlayer - 5 * (listOfPLayers.size() - 2);
 		if (assignedArmies <= 0) {
 			for (Player p : listOfPLayers) {
-				// p.setNoOfArmies(5);
 				map.setNoOfArmies(p, 5);
 				p.setUnassignedarmies(5);
 			}
@@ -45,11 +41,10 @@ public class ArmyAllocator {
 		} else {
 			for (Player p : listOfPLayers) {
 				map.setNoOfArmies(p, assignedArmies);
-				// p.setNoOfArmies(assignedArmies);
 				p.setUnassignedarmies(assignedArmies);
 			}
 		}
-		
+
 		return assignedArmies;
 	}
 
@@ -68,88 +63,85 @@ public class ArmyAllocator {
 		if (test == 1) {
 			placeAll(listOfPLayers, map);
 		} else {
-			
+
 			for (int i = 0; i < assignedArmies; i++) {
 				try {
-				for (Player p : listOfPLayers) {
-					if(!p.getStrategy().getClass().getName().equals("pattern.Strategy.HumanStrategy")) {
-						isPlaceAll = true;
-						break;
-					}
-					Boolean armyNotAllocated = true;
-					while (armyNotAllocated) {
-						System.out.println("Player " + p.getName()
-						+ " to place armies :\n Type placearmy <countryname> or placeall to randomly allocate armies.\n Type showmap");
+					for (Player p : listOfPLayers) {
+						if (!p.getStrategy().getClass().getName().equals("pattern.Strategy.HumanStrategy")) {
+							isPlaceAll = true;
+							break;
+						}
+						Boolean armyNotAllocated = true;
+						while (armyNotAllocated) {
+							System.out.println("Player " + p.getName()
+									+ " to place armies :\n Type placearmy <countryname> or placeall to randomly allocate armies.\n Type showmap");
 
-						String input = sc1.nextLine();
-						String[] commands = input.split(" ");
-						if (input.equals("showmap")) {
-							map.displayAll();
-						} else if (commands.length == 2 && commands[0].equals("placearmy")) {
-							// check if country is valid and assigned to the current player
-							if (map.getCountryFromName(commands[1]) == null) {
-								throw new AllocatorException("Invalid country");
-							} else {
-								Country tempCountry = map.getCountryFromName(commands[1]);
-								if (tempCountry.getOwner() != p.getName())
-									throw new AllocatorException("Country is not assigned to current player");
-								else {
-									// main logic
-									if (tempCountry.getNoOfArmies() == 0) {
-										tempCountry.setNoOfArmies(tempCountry.getNoOfArmies() + 1);
-										p.setUnassignedarmies(p.getUnassignedarmies() - 1);
-										armyNotAllocated = false;
-									} else {
-										// check if there is any other country assigned to the current player with 0
-										// armies
-										boolean isValid = true;
-										for (Country c : p.getAssigned_countries()) {
-											if (c.getNoOfArmies() == 0 && c.getName() != tempCountry.getName()) {
-												isValid = false;
-												break;
-											}
-
-										}
-										if (!isValid)
-											throw new AllocatorException("Cannot place army to this country");
-										else {
+							String input = sc1.nextLine();
+							String[] commands = input.split(" ");
+							if (input.equals("showmap")) {
+								map.displayAll();
+							} else if (commands.length == 2 && commands[0].equals("placearmy")) {
+								// check if country is valid and assigned to the current player
+								if (map.getCountryFromName(commands[1]) == null) {
+									throw new AllocatorException("Invalid country");
+								} else {
+									Country tempCountry = map.getCountryFromName(commands[1]);
+									if (tempCountry.getOwner() != p.getName())
+										throw new AllocatorException("Country is not assigned to current player");
+									else {
+										// main logic
+										if (tempCountry.getNoOfArmies() == 0) {
 											tempCountry.setNoOfArmies(tempCountry.getNoOfArmies() + 1);
 											p.setUnassignedarmies(p.getUnassignedarmies() - 1);
 											armyNotAllocated = false;
+										} else {
+											// check if there is any other country assigned to the current player with 0
+											// armies
+											boolean isValid = true;
+											for (Country c : p.getAssigned_countries()) {
+												if (c.getNoOfArmies() == 0 && c.getName() != tempCountry.getName()) {
+													isValid = false;
+													break;
+												}
+
+											}
+											if (!isValid)
+												throw new AllocatorException("Cannot place army to this country");
+											else {
+												tempCountry.setNoOfArmies(tempCountry.getNoOfArmies() + 1);
+												p.setUnassignedarmies(p.getUnassignedarmies() - 1);
+												armyNotAllocated = false;
+											}
 										}
+
 									}
-
 								}
+								if (armyNotAllocated == false)
+									System.out.println("Army placed successfully");
+
+							} else if (commands.length == 1 && commands[0].equals("placearmy")) {
+								throw new AllocatorException("Invalid command.");
+							} else if (commands[0].equals("placeall")) {
+								isPlaceAll = true;
+								break;
+							} else {
+								throw new AllocatorException("Invalid command");
 							}
-							if (armyNotAllocated == false)
-								System.out.println("Army placed successfully");
 
-						} else if (commands.length == 1 && commands[0].equals("placearmy")) {
-							throw new AllocatorException("Invalid command.");
-						} else if (commands[0].equals("placeall")) {
-							isPlaceAll = true;
-							break;
-						} else {
-							throw new AllocatorException("Invalid command");
 						}
-
+						if (isPlaceAll)
+							break;
 					}
 					if (isPlaceAll)
 						break;
-				}
-				if (isPlaceAll)
-					break;
-			
 
-			
-		}
-		catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		}
-		// logic for placeall
-		if (isPlaceAll)
-			placeAll(listOfPLayers, map);
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			// logic for placeall
+			if (isPlaceAll)
+				placeAll(listOfPLayers, map);
 		}
 	}
 
@@ -166,7 +158,7 @@ public class ArmyAllocator {
 			for (int i = 0; i < p.getAssigned_countries().size() && p.getUnassignedarmies() > 0; i++) {
 				if (p.getAssigned_countries().get(i).getNoOfArmies() == 0) {
 					p.getAssigned_countries().get(i)
-					.setNoOfArmies(p.getAssigned_countries().get(i).getNoOfArmies() + 1);
+							.setNoOfArmies(p.getAssigned_countries().get(i).getNoOfArmies() + 1);
 					p.setUnassignedarmies(p.getUnassignedarmies() - 1);
 				}
 			}

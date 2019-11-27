@@ -76,6 +76,7 @@ public class DominationReaderWriter {
 	/**
 	 * This method loads borders to the map object
 	 * 
+	 * @param map Map Object
 	 * @throws NumberFormatException for Buffered Reader
 	 * @throws IOException           for Buffered Reader
 	 */
@@ -114,6 +115,7 @@ public class DominationReaderWriter {
 	/**
 	 * This method loads countries to the map object
 	 * 
+	 * @param map Map Object
 	 * @throws NumberFormatException for Buffered Reader
 	 * @throws IOException           for Buffered Reader
 	 */
@@ -139,11 +141,11 @@ public class DominationReaderWriter {
 	/**
 	 * This method loads the continents to the map object
 	 * 
+	 * @param map Map Object
 	 * @throws NumberFormatException for Buffered Reader
 	 * @throws IOException           for Buffered Reader
 	 */
 	public void loadContinents(Map map) throws NumberFormatException, IOException {
-		// TODO Auto-generated method stub
 
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
 			if (currentLine.length() == 0) {
