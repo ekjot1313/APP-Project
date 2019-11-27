@@ -1,6 +1,7 @@
 package pattern.builder;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,7 +12,11 @@ import dao.Continent;
 import dao.Country;
 import dao.Map;
 import dao.Player;
+import pattern.Strategy.AggressiveStrategy;
+import pattern.Strategy.BenevolentStrategy;
+import pattern.Strategy.CheaterStrategy;
 import pattern.Strategy.HumanStrategy;
+import pattern.Strategy.RandomStrategy;
 
 public class LoadGameBuilder extends GameBuilder{
 	/**
@@ -26,9 +31,12 @@ public class LoadGameBuilder extends GameBuilder{
 	@Override
 	void buildMap(String filename, Map map) {
 		// TODO Auto-generated method stub
+		String currentPath = System.getProperty("user.dir");
+		currentPath += "\\SavedGame\\" + filename + ".txt";
+		File newFile = new File(currentPath);
 		try {
 
-			bufferReaderForFile = new BufferedReader(new FileReader(filename));
+			bufferReaderForFile = new BufferedReader(new FileReader(newFile));
 			map = new Map();
 			while ((currentLine = bufferReaderForFile.readLine()) != null) {
 				if (currentLine.contains("[Continents]")) {
@@ -92,19 +100,21 @@ public class LoadGameBuilder extends GameBuilder{
 				Player p = new Player();
 				p.setName(playerDetails[0]);
 				p.setNoOfArmies(Integer.parseInt(playerDetails[1]));
-				if(playerDetails[2].equals("pattern.Strategy.HumanStrategy"))
+				p.setUnassignedarmies(Integer.parseInt(playerDetails[2]));
+				
+				if(playerDetails[3].equals("pattern.Strategy.HumanStrategy"))
 					p.setStrategy(new HumanStrategy());
-				else if(playerDetails[2].equals("pattern.Strategy.AggressiveStrategy"))
-					p.setStrategy(new HumanStrategy());
-				else if(playerDetails[2].equals("pattern.Strategy.BenevolentStrategy"))
-					p.setStrategy(new HumanStrategy());
-				else if(playerDetails[2].equals("pattern.Strategy.CheaterStrategy"))
-					p.setStrategy(new HumanStrategy());
-				else if(playerDetails[2].equals("pattern.Strategy.RandomStrategy"))
-					p.setStrategy(new HumanStrategy());
+				else if(playerDetails[3].equals("pattern.Strategy.AggressiveStrategy"))
+					p.setStrategy(new AggressiveStrategy());
+				else if(playerDetails[3].equals("pattern.Strategy.BenevolentStrategy"))
+					p.setStrategy(new BenevolentStrategy());
+				else if(playerDetails[3].equals("pattern.Strategy.CheaterStrategy"))
+					p.setStrategy(new CheaterStrategy());
+				else if(playerDetails[3].equals("pattern.Strategy.RandomStrategy"))
+					p.setStrategy(new RandomStrategy());
 				ArrayList<Country> countries = new ArrayList<Country>();
-				int j= 3;
-				for(j=3;j<playerDetails.length;j++) {
+				int j= 4;
+				for(j=4;j<playerDetails.length;j++) {
 					if(map.getCountryFromName(playerDetails[j]) != null) {
 						Country c= map.getCountryFromName(playerDetails[j]);
 					countries.add(c);
@@ -114,7 +124,8 @@ public class LoadGameBuilder extends GameBuilder{
 				}
 				p.setAssigned_countries(countries);
 				ArrayList<String> cardList = new ArrayList<String>();
-				for(int k=j;k<playerDetails.length;k++) {
+				String[] cards = playerDetails[playerDetails.length-1].split(",");
+				for(int k=0;k<cards.length;k++) {
 					cardList.add(playerDetails[k]);
 				}
 				p.setCards(cardList);
@@ -188,9 +199,12 @@ public class LoadGameBuilder extends GameBuilder{
 	void buildPlayer(String filename, String player) {
 		// TODO Auto-generated method stub	
 		String currPlayer ="";
+		String currentPath = System.getProperty("user.dir");
+		currentPath += "\\SavedGame\\" + filename + ".txt";
+		File newFile = new File(currentPath);
 		try {
 
-			bufferReaderForFile = new BufferedReader(new FileReader(filename));
+			bufferReaderForFile = new BufferedReader(new FileReader(newFile));
 			while ((currentLine = bufferReaderForFile.readLine()) != null) {
 				if (currentLine.contains("[CurrentPlayer]")) {
 					currPlayer = bufferReaderForFile.readLine();
@@ -209,9 +223,12 @@ public class LoadGameBuilder extends GameBuilder{
 	void buildPhase(String filename, String phase) {
 		// TODO Auto-generated method stub
 		String currPhase ="";
+		String currentPath = System.getProperty("user.dir");
+		currentPath += "\\SavedGame\\" + filename + ".txt";
+		File newFile = new File(currentPath);
 		try {
 
-			bufferReaderForFile = new BufferedReader(new FileReader(filename));
+			bufferReaderForFile = new BufferedReader(new FileReader(newFile));
 			while ((currentLine = bufferReaderForFile.readLine()) != null) {
 				if (currentLine.contains("[CurrentPhase]")) {
 					currPhase = bufferReaderForFile.readLine();

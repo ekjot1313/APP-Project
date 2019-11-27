@@ -45,4 +45,15 @@ public class Game {
 	public void setCurrentPhase(String currentPhase) {
 		this.currentPhase = currentPhase;
 	}
+	public Map getMap() {
+		return map;
+	}
+	public String getCurrentPlayer() {
+		return currentPlayer;
+	}
+	public String getCurrentPhase() {
+		return currentPhase;
+	}
+	
+	
 }

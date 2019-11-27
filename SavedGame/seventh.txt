@@ -1,0 +1,64 @@
+**
+[Continents]
+azio 5 FREE CONTINENTS
+ameroki 10 FREE CONTINENTS
+utropa 10 FREE CONTINENTS
+amerpoll 5 FREE CONTINENTS
+afrori 5 FREE CONTINENTS
+ulstrailia 5 a
+
+[Territories]
+siberia azio 2 b egypt great_britain worrick 
+worrick azio 1 a siberia india czeck yazteck 
+yazteck azio 4 b worrick kongrolo middle_east czeck 
+kongrolo azio 1 a yazteck czeck china middle_east 
+china azio 4 b kongrolo middle_east heal sluci kancheria 
+middle_east azio 2 b yazteck china kancheria kongrolo 
+sluci azio 3 c china kancheria afganistan 
+afganistan azio 6 c kancheria sluci 
+kancheria azio 2 b china afganistan sluci middle_east india 
+india azio 1 a japan worrick kancheria 
+japan azio 3 a south_afrori india 
+new_guinia ulstrailia 4 a jacuncail western_ulstrailia 
+western_ulstrailia ulstrailia 1 a jacuncail eastern_ulstarilia new_guinia 
+eastern_ulstarilia ulstrailia 2 a jacuncail western_ulstrailia 
+jacuncail ulstrailia 1 a south_afrori new_guinia western_ulstrailia eastern_ulstarilia 
+tungu afrori 1 c north_afrori south_afrori east_afrori 
+south_afrori afrori 3 a tungu jacuncail japan 
+north_afrori afrori 1 a egypt east_afrori tungu 
+east_afrori afrori 3 c north_afrori maganar tungu 
+egypt afrori 1 a heaurt siberia north_afrori 
+maganar afrori 2 c east_afrori ihesia 
+pero amerpoll 1 a vagnagale heaurt 
+heaurt amerpoll 2 c pero vagnagale egypt 
+vagnagale amerpoll 3 c argentina pero heaurt 
+argentina amerpoll 1 b northern_utropa vagnagale 
+ireland utropa 2 c ihesia senadlavin 
+ihesia utropa 1 c ireland western_utropa maganar senadlavin 
+western_utropa utropa 1 a ihesia senadlavin souther_utropa great_britain northern_utropa 
+souther_utropa utropa 2 c western_utropa great_britain northern_utropa 
+northern_utropa utropa 2 b western_utropa argentina souther_utropa 
+senadlavin utropa 1 a western_utropa western_united_states great_britain ireland ihesia 
+great_britain utropa 4 b western_utropa siberia western_united_states souther_utropa senadlavin 
+teramar ameroki 3 c western_united_states alberta 
+western_united_states ameroki 1 a albania czeck teramar alberta central_ameroki senadlavin great_britain 
+czeck ameroki 1 a worrick kongrolo albania western_united_states yazteck 
+alberta ameroki 2 b western_united_states central_ameroki vinenlant teramar duiestie 
+central_ameroki ameroki 1 a Quebeck albania western_united_states alberta duiestie 
+albania ameroki 1 a Quebeck czeck western_united_states central_ameroki 
+duiestie ameroki 3 c Quebeck central_ameroki vinenlant alberta 
+Quebeck ameroki 1 b heal duiestie central_ameroki albania 
+vinenlant ameroki 3 b alberta duiestie 
+heal azio 2 c china Quebeck 
+
+[PlayerList]
+a 26 0 pattern.Strategy.AggressiveStrategy czeck egypt western_ulstrailia central_ameroki western_utropa albania japan new_guinia kongrolo eastern_ulstarilia worrick pero india north_afrori western_united_states senadlavin jacuncail south_afrori heal infantry worrick infantry heaurt infantry new_guinia artillery 
+b 30 3 pattern.Strategy.HumanStrategy Quebeck vinenlant china northern_utropa kancheria great_britain alberta middle_east argentina siberia yazteck 
+c 33 0 pattern.Strategy.BenevolentStrategy ihesia tungu heaurt vagnagale east_afrori maganar teramar sluci souther_utropa ireland afganistan duiestie heal 
+
+[CardDetails]
+siberia artillery,yazteck artillery,kongrolo cavalry,china artillery,middle_east cavalry,sluci cavalry,afganistan artillery,kancheria cavalry,india infantry,japan cavalry,western_ulstrailia infantry,eastern_ulstarilia artillery,jacuncail artillery,tungu artillery,south_afrori infantry,north_afrori infantry,east_afrori artillery,egypt infantry,maganar infantry,pero cavalry,vagnagale artillery,argentina infantry,ireland artillery,ihesia artillery,western_utropa cavalry,souther_utropa infantry,northern_utropa infantry,senadlavin artillery,great_britain infantry,teramar artillery,western_united_states artillery,czeck infantry,alberta cavalry,central_ameroki artillery,albania cavalry,duiestie artillery,Quebeck cavalry,vinenlant infantry,0
+[CurrentPhase]
+Reinforcement
+[CurrentPlayer]
+b

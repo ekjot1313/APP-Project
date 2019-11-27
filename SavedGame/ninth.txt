@@ -1,0 +1,64 @@
+**
+[Continents]
+azio 5 FREE CONTINENTS
+ameroki 10 FREE
+utropa 10 FREE
+amerpoll 5 FREE
+afrori 5 FREE
+ulstrailia 5 FREE
+
+[Territories]
+siberia azio 1 a egypt great_britain worrick 
+worrick azio 1 a siberia india czeck yazteck 
+yazteck azio 1 a worrick kongrolo middle_east czeck 
+kongrolo azio 1 c yazteck czeck china middle_east 
+china azio 1 c kongrolo middle_east heal sluci kancheria 
+middle_east azio 3 a yazteck china kancheria kongrolo 
+sluci azio 1 a china kancheria afganistan 
+afganistan azio 2 c kancheria sluci 
+kancheria azio 1 a china afganistan sluci middle_east india 
+india azio 4 b japan worrick kancheria 
+japan azio 3 b south_afrori india 
+new_guinia ulstrailia 1 c jacuncail western_ulstrailia 
+western_ulstrailia ulstrailia 1 a jacuncail eastern_ulstarilia new_guinia 
+eastern_ulstarilia ulstrailia 10 a jacuncail western_ulstrailia 
+jacuncail ulstrailia 1 a south_afrori new_guinia western_ulstrailia eastern_ulstarilia 
+tungu afrori 1 a north_afrori south_afrori east_afrori 
+south_afrori afrori 5 b tungu jacuncail japan 
+north_afrori afrori 3 a egypt east_afrori tungu 
+east_afrori afrori 2 a north_afrori maganar tungu 
+egypt afrori 1 a heaurt siberia north_afrori 
+maganar afrori 1 a east_afrori ihesia 
+pero amerpoll 1 a vagnagale heaurt 
+heaurt amerpoll 1 c pero vagnagale egypt 
+vagnagale amerpoll 1 a argentina pero heaurt 
+argentina amerpoll 3 b northern_utropa vagnagale 
+ireland utropa 6 c ihesia senadlavin 
+ihesia utropa 3 c ireland western_utropa maganar senadlavin 
+western_utropa utropa 1 b ihesia senadlavin souther_utropa great_britain northern_utropa 
+souther_utropa utropa 3 c western_utropa great_britain northern_utropa 
+northern_utropa utropa 5 c western_utropa argentina souther_utropa 
+senadlavin utropa 1 a western_utropa western_united_states great_britain ireland ihesia 
+great_britain utropa 1 b western_utropa siberia western_united_states souther_utropa senadlavin 
+teramar ameroki 1 b western_united_states alberta 
+western_united_states ameroki 3 c albania czeck teramar alberta central_ameroki senadlavin great_britain 
+czeck ameroki 3 b worrick kongrolo albania western_united_states yazteck 
+alberta ameroki 2 c western_united_states central_ameroki vinenlant teramar duiestie 
+central_ameroki ameroki 3 c Quebeck albania western_united_states alberta duiestie 
+albania ameroki 5 b Quebeck czeck western_united_states central_ameroki 
+duiestie ameroki 3 b Quebeck central_ameroki vinenlant alberta 
+Quebeck ameroki 4 b heal duiestie central_ameroki albania 
+vinenlant ameroki 1 a alberta duiestie 
+heal azio 2 c china Quebeck 
+
+[PlayerList]
+a 31 0 pattern.Strategy.AggressiveStrategy egypt vinenlant kancheria vagnagale senadlavin east_afrori north_afrori middle_east western_ulstrailia maganar jacuncail sluci tungu eastern_ulstarilia pero great_britain siberia worrick yazteck a,middle_east infantry,teramar infantry,kancheria infantry,
+b 41 3 pattern.Strategy.HumanStrategy teramar albania south_afrori argentina czeck western_utropa japan india Quebeck great_britain duiestie b,
+c 33 0 pattern.Strategy.BenevolentStrategy heaurt ihesia central_ameroki northern_utropa ireland kongrolo afganistan new_guinia western_united_states china souther_utropa alberta heal c,
+
+[CardDetails]
+siberia artillery,worrick infantry,yazteck infantry,kongrolo infantry,china artillery,sluci infantry,afganistan cavalry,india artillery,japan cavalry,new_guinia cavalry,western_ulstrailia infantry,eastern_ulstarilia cavalry,jacuncail cavalry,tungu cavalry,south_afrori cavalry,north_afrori artillery,east_afrori cavalry,egypt artillery,maganar infantry,pero infantry,vagnagale infantry,argentina infantry,ireland infantry,ihesia cavalry,western_utropa artillery,souther_utropa cavalry,northern_utropa cavalry,senadlavin infantry,western_united_states cavalry,czeck artillery,alberta infantry,central_ameroki infantry,albania artillery,duiestie infantry,Quebeck artillery,vinenlant artillery,heal artillery,0
+[CurrentPhase]
+Reinforcement
+[CurrentPlayer]
+b

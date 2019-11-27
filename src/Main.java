@@ -105,10 +105,71 @@ public class Main {
 		}
 	}
 
-	private static void loadSavedGame(Game game) {
+	private static void loadSavedGame(Game game) throws Exception {
 		// TODO Auto-generated method stub
 		
+	map = game.getMap();
+	String currentPlayer= game.getCurrentPlayer();
+	String currentPhase = game.getCurrentPhase();
+	
+	/*System.out.println(currentPlayer+" "+currentPhase);
+	for(int i=0;i<map.getListOfContinent().size();i++) {
+		System.out.println(map.getListOfContinent().get(i).getName());
+		System.out.println(map.getListOfContinent().get(i).getOwner());
+	}*/
+	Player p =new Player();
+	for(int j=0;j<map.getListOfPlayers().size();j++) {
+		if(map.getListOfPlayers().get(j).getName().equals(currentPlayer)){
+			System.out.println(map.getListOfPlayers().get(j).getStrategy());
+		}
+	}
+	
 		
+		boolean isRemaining= true;
+		int playerIndex = 0;
+		
+		for(int j=0;j<map.getListOfPlayers().size();j++) {
+			if(map.getListOfPlayers().get(j).getName().equals(currentPlayer)){
+				p= map.getListOfPlayers().get(j);
+			}
+		}
+		if(currentPhase.equalsIgnoreCase("reinforcement")) {
+			p.executeReinforcement(map, (ArrayList<Player>)(map.getListOfPlayers()));
+			p.executeAttack(map, (ArrayList<Player>)(map.getListOfPlayers()));
+			p.executeFortification(map, (ArrayList<Player>)(map.getListOfPlayers()), null);
+		}else if(currentPhase.equalsIgnoreCase("attack")) {
+			p.executeAttack(map, (ArrayList<Player>)(map.getListOfPlayers()));
+			p.executeFortification(map, (ArrayList<Player>)(map.getListOfPlayers()), null);
+		}else if(currentPhase.equalsIgnoreCase("fortification")) {
+			p.executeFortification(map, (ArrayList<Player>)(map.getListOfPlayers()), null);
+		}
+		
+		while(true) {
+			
+			if(isRemaining) {
+				/**for(int j=0;j<map.getListOfPlayers().size();j++) {
+					if(map.getListOfPlayers().get(j).getName().equals(currentPlayer)){
+						p= map.getListOfPlayers().get(j);
+						playerIndex = j+1;
+					}
+				}*/
+				playerIndex = map.getListOfPlayers().indexOf(p);
+				playerIndex ++;
+			}
+			else {
+				playerIndex = 0;
+			}
+			System.out.println(playerIndex);
+			
+			for(int i =playerIndex; i<map.getListOfPlayers().size();i++) {
+				p = map.getListOfPlayers().get(i);
+				p.executeReinforcement(map, (ArrayList<Player>)(map.getListOfPlayers()));
+				p.executeAttack(map, (ArrayList<Player>)(map.getListOfPlayers()));
+				p.executeFortification(map, (ArrayList<Player>)(map.getListOfPlayers()), null);
+			}
+			
+			isRemaining = false;
+		}
 		
 	}
 

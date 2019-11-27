@@ -44,8 +44,9 @@ public class SaveGameBuilder extends GameBuilder {
 			for(Country c :p.getAssigned_countries()) {
 				content += c.getName() +" ";
 			}
+			
 			for(String cards : p.getCards()) {
-				content += cards +" ";
+				content += cards +",";
 			}
 			content += "\n";
 		}
