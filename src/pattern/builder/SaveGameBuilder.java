@@ -45,6 +45,7 @@ public class SaveGameBuilder extends GameBuilder {
 				content += c.getName() +" ";
 			}
 			
+			content += "CARDS,";
 			for(String cards : p.getCards()) {
 				content += cards +",";
 			}

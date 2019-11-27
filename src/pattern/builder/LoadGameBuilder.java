@@ -124,10 +124,31 @@ public class LoadGameBuilder extends GameBuilder{
 				}
 				p.setAssigned_countries(countries);
 				ArrayList<String> cardList = new ArrayList<String>();
-				String[] cards = playerDetails[playerDetails.length-1].split(",");
-				for(int k=0;k<cards.length;k++) {
-					cardList.add(playerDetails[k]);
+				int index=0;
+				String [] cardsString=currentLine.split(",");
+				for(int i=1; i<cardsString.length;i++) {
+					cardList.add(cardsString[i]);
+					System.out.println("Cards: "+cardsString[i]);
 				}
+				/*for(int i=0;i<playerDetails.length;i++) {
+					if(playerDetails[i].equals("CARDS")) {
+						index = i;
+					}
+				}*/
+				
+				
+				/*for(int m=index;m<playerDetails.length;m++) {
+					cardsString += playerDetails[m];
+				}
+				System.out.println("CardsString: "+cardsString);*/
+				//String [] cards = cardsString.split(",");
+				//System.out.println("length: "+(playerDetails.length-2));
+				/*for(int k=0;k<cards.length;k++) {
+					cardList.add(cards[k]);
+					System.out.println("Cards: "+cards[k]);
+				}
+					*/
+				
 				p.setCards(cardList);
 				
 				playerlist.add(p);

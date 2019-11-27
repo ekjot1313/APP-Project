@@ -108,24 +108,23 @@ public class Main {
 	private static void loadSavedGame(Game game) throws Exception {
 		// TODO Auto-generated method stub
 		
-	map = game.getMap();
-	pwdView = new PWDView(true);
-	map.attach(pwdView);
-	PhaseView pv= new PhaseView();
-	CardExchangeView cev = new CardExchangeView();
-	String currentPlayer= game.getCurrentPlayer();
-	String currentPhase = game.getCurrentPhase();
-	
-	System.out.println("Current Player: "+currentPlayer+" Current Phase: "+currentPhase);
-	
-	Player p =new Player();
-	for(int j=0;j<map.getListOfPlayers().size();j++) {
-		if(map.getListOfPlayers().get(j).getName().equals(currentPlayer)){
-			//System.out.println(map.getListOfPlayers().get(j).getStrategy());
-		}
-	}
-	
+		pwdView = new PWDView(true);
+		map = game.getMap();
+		map.attach(pwdView);
+		PhaseView pv= new PhaseView();
+		CardExchangeView cev = new CardExchangeView();
+		String currentPlayer= game.getCurrentPlayer();
+		String currentPhase = game.getCurrentPhase();
 		
+		System.out.println("Current Player: "+currentPlayer+" Current Phase: "+currentPhase);
+		
+		Player p =new Player();
+		for(int j=0;j<map.getListOfPlayers().size();j++) {
+			if(map.getListOfPlayers().get(j).getName().equals(currentPlayer)){
+				//System.out.println(map.getListOfPlayers().get(j).getStrategy());
+			}
+		}
+	
 		boolean isRemaining= true;
 		int playerIndex = 0;
 		int gameOver=0;
