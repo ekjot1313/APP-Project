@@ -1,4 +1,4 @@
-package test.main;
+package test.GameEngine;
 
 import static org.junit.Assert.assertArrayEquals;
 
