@@ -180,8 +180,8 @@ public class DominationReaderWriter {
 	 */
 public void saveMap(Map map, String fileName) throws IOException {
 		
-		String message1;
-		String message2;
+		String message1 = " ";
+		String message2= " ";
 		String mapName;
 		message1 = map.getMessage1();
 		message2 = map.getMessage2();
