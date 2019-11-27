@@ -103,7 +103,7 @@ public class AggressiveStrategy implements Strategy {
 	public int attackPossible(Map map, ArrayList<Player> listPlayer,Player P,Country c) {
 		for(String s:c.getNeighbors()) {
 			Country neighbor=map.getCountryFromName(s);
-			if(!c.getOwner().equals(neighbor.getOwner()) && neighbor.getNoOfArmies()>1) {
+			if(!c.getOwner().equals(neighbor.getOwner())) {
 					return 1;
 			}
 		}
