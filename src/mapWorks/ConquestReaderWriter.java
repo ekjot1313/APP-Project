@@ -160,7 +160,7 @@ public class ConquestReaderWriter {
 		String currentPath = System.getProperty("user.dir") + "\\Maps\\";
 		String mapPath = currentPath + fileName + ".map";
 		BufferedWriter bwFile = new BufferedWriter(new FileWriter(mapPath));
-		String content = "; map";
+		String content = "[map]";
 		content += (message1 + "\r\n");
 		content += ("\r\nname " + mapName + " Map\r\n");
 		content += ("\r\n" + message2 + "\r\n");

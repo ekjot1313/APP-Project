@@ -1,17 +1,15 @@
-[Map]
-author=Dustwhirl
-warn=yes
-image=Aden.bmp
-wrap=no
-scroll=none
+; mapnull
+
+name null Map
+
+null
 
 [Continents]
 Berga=4
 Craterland=5
 
 [Territories]
-Barron,629,173,Berga,Banyan,Cyan
-Banyan,603,242,Berga,Barron
-
-Cyan,177,73,Craterland,Coron,Barron
-Coron,263,123,Craterland,Cyan
+Barron,0,0,Berga,Banyan,Cyan,
+Banyan,0,0,Berga,Barron,
+Cyan,0,0,Craterland,Coron,Barron,
+Coron,0,0,Craterland,Cyan,

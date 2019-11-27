@@ -418,7 +418,7 @@ public class Main {
 			System.out.println("Map file does not exist .New File created .");
 			editMapCommands();
 			try {
-				map = mpe.mapEditorInit(null , drw);
+				map = mpe.mapEditorInit(map , drw);
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
