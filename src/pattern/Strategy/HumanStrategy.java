@@ -225,8 +225,11 @@ public class HumanStrategy implements Strategy {
 		System.out.println("Type exchangecards <num> <num> <num> -none to exchange cards\n Type showmap\n Type savegame <fileName>");
 		map.setNoOfArmies(P, P.getNoOfArmies() + reinforcementArmies);
 		while (reinforcementArmies != 0 || forceExchangeCards == 1) {
-
-			String input = sc.nextLine();
+			String input;
+			if(P.test==1)
+				input=P.getTestCommand();
+			else
+				input = sc.nextLine();
 			String[] inputArray = input.split(" ");
 
 			if (P.getCards().size() >= 5) {
