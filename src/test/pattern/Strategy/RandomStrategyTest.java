@@ -100,8 +100,8 @@ public class RandomStrategyTest {
 		B.setNoOfArmies(40);
 		B.setStrategy(new RandomStrategy());
 		B.getAssigned_countries().add(china);
-		listOfPlayers =(ArrayList<Player>) testMap.getListOfPlayers(); 
-		
+		listOfPlayers = (ArrayList<Player>) testMap.getListOfPlayers();
+
 		testMap.getListOfPlayers().add(A);
 		testMap.getListOfPlayers().add(B);
 
@@ -153,8 +153,8 @@ public class RandomStrategyTest {
 			reinforcedArmies += country.getNoOfArmies();
 		}
 		reinforcedArmies -= initialArmies;
-		System.out.println(Math.abs((reinforcedArmies - expected))+"..........................");
-		assertTrue(Math.abs((reinforcedArmies - expected))%5==0);
+		System.out.println(Math.abs((reinforcedArmies - expected)) + "..........................");
+		assertTrue(Math.abs((reinforcedArmies - expected)) % 5 == 0);
 
 		// test with 3 different card types
 
@@ -178,14 +178,15 @@ public class RandomStrategyTest {
 			reinforcedArmies += country.getNoOfArmies();
 		}
 		reinforcedArmies -= initialArmies;
-		assertTrue(Math.abs((reinforcedArmies - expected))%5==0);
+		assertTrue(Math.abs((reinforcedArmies - expected)) % 5 == 0);
 
 	}
 
 	/**
 	 * Test method for
 	 * {@link pattern.Strategy.RandomStrategy#attack(dao.Map, java.util.ArrayList, dao.Player)}.
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 	@Test
 	public void testAttack() throws Exception {
@@ -229,8 +230,7 @@ public class RandomStrategyTest {
 		A.getCards().add("Test4 infantry");
 		A.getCards().add("Test5 cavalry");
 		armies = A.getStrategy().calculateReinforceArmies(testMap, A);
-		System.out.println(armies+"......................");
-		assertTrue(armies == 10||armies == 18||armies == 20||armies == 28);
+		assertTrue(armies == 10 || armies == 18 || armies == 20 || armies == 28);
 	}
 
 	/**
