@@ -228,11 +228,20 @@ public class Main {
 				
 					if(tournamentCommandArray[0].equals("tournament") && tournamentCommandArray.length == 9){
 						if(tournamentCommandArray[1].equals("-M") && tournamentCommandArray[3].equals("-P") && tournamentCommandArray[5].equals("-G") && tournamentCommandArray[7].equals("-D")) {
-							listOfMapFiles = tournamentCommandArray[2].split(",");
-							listOfPlayerStrategies = tournamentCommandArray[4].split(",");
 							try {
+							listOfMapFiles = tournamentCommandArray[2].split(",");
+							if(!(listOfMapFiles.length >=1 && listOfMapFiles.length <=5 ))
+								throw new Exception();
+							listOfPlayerStrategies = tournamentCommandArray[4].split(",");
+							if(!(listOfPlayerStrategies.length >=2 && listOfPlayerStrategies.length <=4 ))
+								throw new Exception();
 							numberOfGames = Integer.parseInt(tournamentCommandArray[6]);
+							if(!(numberOfGames >=1 && numberOfGames <=5 ))
+								throw new Exception();
 							maxTurns = Integer.parseInt(tournamentCommandArray[8]);
+							if(!(maxTurns >=10 && maxTurns <=50 ))
+								throw new Exception();
+							tournamentMode(listOfMapFiles,listOfPlayerStrategies,numberOfGames,maxTurns);
 							}catch(Exception e) {
 								System.out.println("Invalid command .Type again");
 							}
@@ -247,7 +256,7 @@ public class Main {
 					}
 				}
 				
-				tournamentMode(listOfMapFiles,listOfPlayerStrategies,numberOfGames,maxTurns);
+				
 		
 	}
 
