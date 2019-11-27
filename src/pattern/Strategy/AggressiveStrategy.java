@@ -146,7 +146,7 @@ public class AggressiveStrategy implements Strategy {
 								P.setActions("Player has exchanged " + card1 + ", " + card2 + ", " + card3);
 								P.setCardExchangeCounter(P.getCardExchangeCounter() + 5);
 								reinforcementArmies += P.getCardExchangeCounter();
-								map.setNoOfArmies(P, P.getNoOfArmies() + P.getCardExchangeCounter());
+								//map.setNoOfArmies(P, P.getNoOfArmies() + P.getCardExchangeCounter());
 								System.out.println("Reinforcement armies added " + P.getCardExchangeCounter());
 								System.out.println("Remaining armies to be placed : " + reinforcementArmies);
 								Player.deck.add(card1);
@@ -182,7 +182,7 @@ public class AggressiveStrategy implements Strategy {
 							P.setActions("Player has exchanged " + card1 + ", " + card2 + ", " + card3);
 							P.setCardExchangeCounter(P.getCardExchangeCounter() + 5);
 							reinforcementArmies += P.getCardExchangeCounter();
-							map.setNoOfArmies(P, P.getNoOfArmies() + P.getCardExchangeCounter());
+							//map.setNoOfArmies(P, P.getNoOfArmies() + P.getCardExchangeCounter());
 							System.out.println("Reinforcement armies added " + P.getCardExchangeCounter());
 							System.out.println("Remaining armies to be placed : " + reinforcementArmies);
 							P.deck.add(card1);
@@ -225,6 +225,10 @@ public class AggressiveStrategy implements Strategy {
 		P.setEndOfActions(0);
 		P.setView("PhaseView");
 		P.setState("Attack");
+		int flag1=strongestCountry(map,listPlayer,P);
+		if(flag1==0) {
+			simpleStrongestCountry(map,listPlayer,P);
+		}
 		if(strong.getNoOfArmies()==1) {
 			System.out.println("Sorry!You cannot attack with 1 army in your strongest country");
 			P.setEndOfActions(1); 

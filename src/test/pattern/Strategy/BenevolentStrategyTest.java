@@ -15,7 +15,9 @@ import dao.Continent;
 import dao.Country;
 import dao.Map;
 import dao.Player;
+import pattern.Strategy.BenevolentStrategy;
 import pattern.Strategy.HumanStrategy;
+import pattern.Strategy.Strategy;
 
 /**
  * Class to test the Player Class 
@@ -57,12 +59,12 @@ public class BenevolentStrategyTest {
 	 */
 	@Before 
 	public void before() {
-		Map testMap=new Map();
-		Country india =new Country();
-		Country pakistan =new Country();
-		Country china =new Country();
-		Player A = new Player();
-		Player B = new Player();
+		testMap=new Map();
+		india =new Country();
+		pakistan =new Country();
+		china =new Country();
+		A = new Player();
+		B = new Player();
 		india.setName("india");
 		india.setContinentName("asia");
 		india.setNoOfArmies(20);
@@ -87,12 +89,12 @@ public class BenevolentStrategyTest {
 		Continent asia=new Continent();
 		asia.setName("asia");
 		testMap.getListOfContinent().add(asia);
-		A.setStrategy(new HumanStrategy());
+		A.setStrategy(new BenevolentStrategy());
 		A.setName("A");
 		A.setNoOfArmies(40);
 		A.getAssigned_countries().add(india);
 		A.getAssigned_countries().add(pakistan);
-		B.setStrategy(new HumanStrategy());
+		B.setStrategy(new BenevolentStrategy());
 		B.setName("B");
 		B.setNoOfArmies(40);
 		B.getAssigned_countries().add(china);
@@ -127,9 +129,16 @@ public class BenevolentStrategyTest {
 			india.setNoOfArmies(18);
 			pakistan.setNoOfArmies(22);
 			A.executeReinforcement(testMap, listOfPlayers);
-			assertEquals(31, india.getNoOfArmies()); 
+			assertEquals(21, india.getNoOfArmies()); 
 			assertEquals(22, pakistan.getNoOfArmies());
-			assertEquals(53, A.getNoOfArmies());
+			assertEquals(43, A.getNoOfArmies());
+			A.setNoOfArmies(40);
+			india.setNoOfArmies(22);
+			pakistan.setNoOfArmies(18);
+			A.executeReinforcement(testMap, listOfPlayers);
+			assertEquals(25, india.getNoOfArmies()); 
+			assertEquals(18, pakistan.getNoOfArmies());
+			assertEquals(43, A.getNoOfArmies());
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -142,47 +151,16 @@ public class BenevolentStrategyTest {
 	 */
 	@Test
 	public void testFortification() {
-		System.out.println("\nFor Player A-> fortify pakistan china 10");
-		A.executeFortification(testMap, listOfPlayers, "fortify pakistan china 10");
-		assertEquals(20,pakistan.getNoOfArmies());
-		assertEquals(40,china.getNoOfArmies());
-		
-		System.out.println("\nFor Player A-> fortify -none");
-		A.executeFortification(testMap, listOfPlayers, "fortify -none");
-		assertEquals(20,pakistan.getNoOfArmies());
-		assertEquals(20,india.getNoOfArmies());
-		
-		System.out.println("\nFor Player A-> fortify china india 5");
-		A.executeFortification(testMap, listOfPlayers, "fortify china india 5");
-		assertEquals(20,pakistan.getNoOfArmies());
-		assertEquals(20,india.getNoOfArmies());
-		assertEquals(40,china.getNoOfArmies());
-		
-		System.out.println("\nFor Player A-> fortify pakistan india 30");
-		A.executeFortification(testMap, listOfPlayers, "fortify pakistan india 30");
-		assertEquals(20,india.getNoOfArmies());
-		assertEquals(20,pakistan.getNoOfArmies());
-	
-		System.out.println("\nFor Player A-> fortify pakistan india 10");
-		A.executeFortification(testMap, listOfPlayers, "fortify pakistan india 10");
-		assertEquals(30,india.getNoOfArmies());
-		assertEquals(10,pakistan.getNoOfArmies());
-		
-		System.out.println("\nFor Player A-> fortify pakistan india 10");
-		pakistan.setNoOfArmies(1);
-		A.executeFortification(testMap, listOfPlayers, "fortify pakistan india 10");
-		assertEquals(30,india.getNoOfArmies());
-		assertEquals(1,pakistan.getNoOfArmies());
-		
-		System.out.println("\nFor Player A-> fortify pakistan india 10 5");
-		pakistan.setNoOfArmies(1);
-		A.executeFortification(testMap, listOfPlayers, "fortify pakistan india 10 5");
-		assertEquals(30,india.getNoOfArmies());
-		assertEquals(1,pakistan.getNoOfArmies());
-		A.getAssigned_countries().clear();
-		B.getAssigned_countries().clear();
-		
+		try{
+ 		india.setNoOfArmies(22);
+		pakistan.setNoOfArmies(10);
+		A.executeFortification(testMap, listOfPlayers,null);
+		assertEquals(31, india.getNoOfArmies()); 
+		assertEquals(1, pakistan.getNoOfArmies());
+		} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		}
 	}
-	
 	
 }

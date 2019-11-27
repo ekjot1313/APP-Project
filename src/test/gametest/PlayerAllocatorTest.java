@@ -93,7 +93,7 @@ public class PlayerAllocatorTest {
 	@Test
 	public void testAllocate() {
 		PlayerAllocator pa = new PlayerAllocator();
-		pa.allocate(testMap,"gameplayer -add C");
+		pa.allocate(testMap,"gameplayer -add C human");
 		int playeradded =0;
 		for(Player p :testMap.getListOfPlayers()) {
 		if(p.getName().equals("C"))

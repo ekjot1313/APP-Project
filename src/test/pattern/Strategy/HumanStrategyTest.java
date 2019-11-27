@@ -281,5 +281,25 @@ public class HumanStrategyTest {
 		A.getAssigned_countries().clear();
 		B.getAssigned_countries().clear();
 	}
+	/**
+	 * Method to check calculation of number of reinforcement armies for a player
+	 */
+	@Test
+	public void testReinforcement() {
+		india.setNoOfArmies(18);
+		pakistan.setNoOfArmies(22);
+		A.test=1;
+		A.setTestCommand("reinforce india 3");
+		A.executeReinforcement(testMap, listOfPlayers);
+		assertEquals(21, india.getNoOfArmies()); 
+		assertEquals(22, pakistan.getNoOfArmies());
+		assertEquals(43, A.getNoOfArmies());
+		
+		A.setTestCommand("reinforce pakistan 3");
+		A.executeReinforcement(testMap, listOfPlayers);
+		assertEquals(21, india.getNoOfArmies()); 
+		assertEquals(25, pakistan.getNoOfArmies());
+		assertEquals(46, A.getNoOfArmies());
+			}
 	
 }
