@@ -531,6 +531,7 @@ public class HumanStrategy implements Strategy {
 	 * @return 1 if the game is over otherwise 0.
 	 */
 	public int attack(Map map, ArrayList<Player> listPlayer,Player P) {
+		P.setUnassignedarmies(0);
 	
 		P.setEndOfActions(0);
 		P.setView("PhaseView");
