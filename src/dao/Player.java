@@ -121,7 +121,7 @@ public class Player extends Observable {
 		if(deck.size() == 0)
 			return "None";
 		Random number = new Random();
-		System.out.println(deck.size());
+		//System.out.println(deck.size());
 		int no = number.nextInt(deck.size());
 		return deck.get(no);
 	}
