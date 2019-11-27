@@ -113,8 +113,10 @@ public class BenevolentStrategy implements Strategy  {
 			simpleWeakestCountry(map, listPlayer, P);
 		}
 		P.setActions("Reinforced " + reinforcementArmies + " armies to "+ weak.getName());
+		System.out.println("Reinforced " + reinforcementArmies + " armies to "+ weak.getName());
 		weak.setNoOfArmies(weak.getNoOfArmies()+reinforcementArmies);
 		P.setEndOfActions(1); 
+		System.out.println("Reinforcement finished");
 		P.setActions("Reinforcement finished");
 	}
 	/**

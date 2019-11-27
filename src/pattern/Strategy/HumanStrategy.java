@@ -279,6 +279,8 @@ public class HumanStrategy implements Strategy {
 						P.setView("PhaseView");
 						P.setActions("Reinforced " + armiesTobeplaced + " armies to "
 								+ map.getCountryFromName(inputArray[1]).getName());
+						System.out.println("Reinforced " + armiesTobeplaced + " armies to "
+								+ map.getCountryFromName(inputArray[1]).getName());
 						if (forceExchangeCards == 1 && reinforcementArmies == 0)
 							System.out.println(
 									"You have more than 5 exchange cards ,please exchange cards to proceed to attack phase");

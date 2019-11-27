@@ -52,10 +52,12 @@ public class RandomStrategy implements Strategy {
 			P.setView("PhaseView");
 			P.setActions(
 					"Reinforced " + armiesTobeplaced + " armies to " + map.getCountryFromName(inputArray[1]).getName());
+			System.out.println("Reinforced " + armiesTobeplaced + " armies to " + map.getCountryFromName(inputArray[1]).getName());
 
 		}
 		P.setEndOfActions(1);
 		P.setActions("Reinforcement finished");
+		System.out.println("Reinforcement finished");
 
 	}
 
