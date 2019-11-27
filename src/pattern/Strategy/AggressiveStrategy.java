@@ -236,10 +236,12 @@ public class AggressiveStrategy implements Strategy {
 			return 0;
 		}else {
 			while(true) {
+				int indicate=0;
 		for(int i=0;i<strong.getNeighbors().size();i++) {
 			Country neighbor=map.getCountryFromName(strong.getNeighbors().get(i));
 			if(!strong.getOwner().equals(neighbor.getOwner())) {
 				//attack
+				indicate=1;
 				Country toCountry=neighbor;
 				Country fromCountry=strong;
 				int attackerDice = 0;
@@ -345,6 +347,12 @@ public class AggressiveStrategy implements Strategy {
 				P.setActions("Attack finished");
 				return 0;
 			}
+		}
+		if(indicate==0) {
+			System.out.println("Cannot attack");
+			P.setEndOfActions(1); 
+			P.setActions("Attack finished");
+			return 0;
 		}
 		}
 		}
