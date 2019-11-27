@@ -175,7 +175,7 @@ public class Main {
 			for(int i =playerIndex; i<map.getListOfPlayers().size();i++) {
 				
 				p = map.getListOfPlayers().get(i);
-				
+				System.out.println("________________________________________________________________________");
 				System.out.println("Player " + p.getName() + " Reinforcement phase begins");
 				p.attach(pv);
 				
@@ -184,6 +184,7 @@ public class Main {
 				Thread.sleep(1500);
 				p.detach(cev);
 				cev.close();
+				System.out.println("________________________________________________________________________");
 				System.out.println("Player " + p.getName() + " Attack phase begins");
 				Player current= p;
 				gameOver = p.executeAttack(map, (ArrayList<Player>) map.getListOfPlayers());
@@ -192,6 +193,7 @@ public class Main {
 					break;
 				int index=map.getListOfPlayers().indexOf(current);
 				i=index;
+				System.out.println("________________________________________________________________________");
 				System.out.println("Player " + p.getName() + " Fortification phase begins");
 				p.executeFortification(map, (ArrayList<Player>)map.getListOfPlayers() ,null);
 				Thread.sleep(1500);
@@ -498,6 +500,7 @@ public class Main {
 			CardExchangeView cev = new CardExchangeView();
 			
 			for (int i = 0; i < pa.listOfPlayers.size(); i++) {
+				System.out.println("________________________________________________________________________");
 				System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " reinforcement phase begins");
 				pa.listOfPlayers.get(i).attach(pv);
 				
@@ -506,6 +509,7 @@ public class Main {
 				Thread.sleep(1500);
 				pa.listOfPlayers.get(i).detach(cev);
 				cev.close();
+				System.out.println("________________________________________________________________________");
 				System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " Attack phase begins");
 				Player current= pa.listOfPlayers.get(i);
 				gameOver = pa.listOfPlayers.get(i).executeAttack(map, (ArrayList<Player>) pa.listOfPlayers);
@@ -514,6 +518,7 @@ public class Main {
 					break;
 				int index=pa.listOfPlayers.indexOf(current);
 				i=index;
+				System.out.println("________________________________________________________________________");
 				System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " Fortification phase begins");
 				pa.listOfPlayers.get(i).executeFortification(map, (ArrayList<Player>) pa.listOfPlayers,null);
 				Thread.sleep(1500);
