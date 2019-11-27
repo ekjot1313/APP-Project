@@ -1,5 +1,5 @@
 /**
- * @author ekjot
+ *
  */
 package test.pattern.Strategy;
 
@@ -67,6 +67,7 @@ public class RandomStrategyTest {
 		china = new Country();
 		A = new Player();
 		B = new Player();
+		
 
 		india.setName("india");
 		india.setContinentName("asia");

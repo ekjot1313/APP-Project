@@ -48,7 +48,6 @@ public class CheaterStrategy implements Strategy {
 		}
 		P.setEndOfActions(1);
 		P.setActions("Reinforcement finished");
-		
 
 	}
 
@@ -112,12 +111,12 @@ public class CheaterStrategy implements Strategy {
 
 			} else {
 				String card = P.randomCard();
-				if(!card.equals("None")) {
-				P.getCards().add(card);
-				System.out.println("You have received: " + card + " card");
-				P.setActions(P.getName() + " has received: " + card + " card");
-				Player.deck.remove(card);
-				}else {
+				if (!card.equals("None")) {
+					P.getCards().add(card);
+					System.out.println("You have received: " + card + " card");
+					P.setActions(P.getName() + " has received: " + card + " card");
+					Player.deck.remove(card);
+				} else {
 					System.out.println("No more cards available");
 				}
 			}
@@ -141,12 +140,10 @@ public class CheaterStrategy implements Strategy {
 		}
 		P.setEndOfActions(1);
 		P.setActions("Attack finished");
-		
+
 		return 0;
 
 	}
-
-
 
 	@Override
 	public void fortification(Map map, ArrayList<Player> listPlayer, String command, Player P) {
@@ -174,14 +171,14 @@ public class CheaterStrategy implements Strategy {
 			int newArmy = country.getNoOfArmies();
 			map.setNoOfArmies(P, P.getNoOfArmies() + newArmy);
 			country.setNoOfArmies(2 * newArmy);
-			
+
 			P.setActions("Fortified " + country.getName() + " with " + newArmy + " armies");
 		}
 
 		System.out.println("Fortification successful");
 		P.setEndOfActions(1);
 		P.setActions("Fortification finished");
-		
+
 	}
 
 	/**
@@ -219,7 +216,5 @@ public class CheaterStrategy implements Strategy {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-
 
 }
