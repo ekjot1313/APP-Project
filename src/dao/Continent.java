@@ -20,20 +20,21 @@ public class Continent {
 	 */
 	private int continentValue;
 	/**
-	 * To store the name of the owner of the conitnent.
+	 * To store the name of the owner of the continent.
 	 */
 	private String owner;
+	
 	/**
-	 * This method gives the owner
-	 * @return
+	 * This method returns the owner of the continent
+	 * @return Continent Owner
 	 */
 	public String getOwner() {
 		return owner;
 	}
 	
 	/**
-	 *  This method sets the owner
-	 * @param owner
+	 * This method sets the owner of the continent
+	 * @param owner Continent owner to be set
 	 */
 	public void setOwner(String owner) {
 		this.owner = owner;

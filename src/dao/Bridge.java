@@ -12,11 +12,11 @@ public class Bridge {
 	 */
 	private String neigContinent;
 	/**
-	 * To store from country
+	 * To store 'From Country'
 	 */
 	private String country1;
 	/**
-	 * To store To country
+	 * To store 'To Country'
 	 */
 	private String country2;
 

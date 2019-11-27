@@ -6,7 +6,7 @@ import java.util.Random;
 /**
  * This class represents a dice used in attack phase.
  * 
- * @author ekjot
+ * @author Ekjot
  *
  */
 public class Dice {
@@ -14,22 +14,23 @@ public class Dice {
 	/**
 	 * Random object to get random number.
 	 */
-	static 
-	Random number = new Random();
+	static Random number = new Random();
 	/**
 	 * To store the attackerDice
 	 */
 	private int attackerDice = 0;
 
 	/**
-	 * @return the attackerDice
+	 * This method returns the number of dice used by the attacker
+	 * @return Number of attacker dice
 	 */
 	public int getAttackerDice() {
 		return attackerDice;
 	}
 
 	/**
-	 * @return the defenderDice
+	 * This method returns the number of dice used by the defender
+	 * @return Number of defender dice
 	 */
 	public int getDefenderDice() {
 		return defenderDice;
@@ -43,8 +44,8 @@ public class Dice {
 	/**
 	 * Constructor sets attackerDice and defenderDice
 	 * 
-	 * @param attackerDice
-	 * @param defenderDice
+	 * @param attackerDice Number of attacker dice
+	 * @param defenderDice Number of defender dice
 	 *
 	 */
 	public Dice(int attackerDice, int defenderDice) {
@@ -52,14 +53,10 @@ public class Dice {
 		setDefenderDice(defenderDice);
 	}
 
-	public Dice() {
-		// TODO Auto-generated constructor stub
-	}
-
 	/**
 	 * This method returns a random number between 1 and 6
 	 * 
-	 * @return rolledNumber Rolled number from dice.
+	 * @return rolledNumber Rolled number from dice
 	 */
 	public int roll() {
 		int rolledNumber = number.nextInt(6) + 1;
@@ -67,8 +64,8 @@ public class Dice {
 	}
 
 	/**
-	 * This method returns a 2D array of 2*3, of 3 rolledNumbers for both attacker
-	 * and defender. 3rd rolledNumber for defender will always be 0.
+	 * This method returns a 2D array of size 2*3 with 3 rolledNumbers for both attacker and defender. 
+	 * 3rd rolledNumber for defender will always be 0.
 	 * 
 	 * @return result 2D array of rolled numbers
 	 */
@@ -90,10 +87,10 @@ public class Dice {
 	}
 
 	/**
-	 * This method sort the given 2D array of dimension 2*3 in descending order.
+	 * This method sorts the given 2D array of dimension 2*3 in descending order
 	 * 
-	 * @param arr Unsorted 2D array of 2*3.
-	 * @return result Sorted 2D array of 2*3.
+	 * @param arr Unsorted 2D array of size 2*3
+	 * @return result Sorted 2D array of size 2*3
 	 */
 	public int[][] sort(int[][] arr) {
 
@@ -111,11 +108,11 @@ public class Dice {
 	}
 
 	/**
-	 * This method prints the given 2D array of 2*3 onto console This will omit 3rd
-	 * element in 2nd row(as it is always 0).
+	 * This method prints the given 2D array of size 2*3 onto console. 
+	 * This will omit 3rd element in 2nd row (as it is always 0).
 	 * 
-	 * @param result
-	 * @return
+	 * @param result 2D array of size 2*3
+	 * @return array to be displayed in the form string
 	 */
 	public String print(int[][] result) {
 		String str = "";
@@ -139,8 +136,9 @@ public class Dice {
 	}
 
 	/**
-	 * @param attackerDice the attackerDice to set
-	 * 
+	 * This method sets the number of dice used by the attacker
+	 * @param attackerDice Number of attacker dice to be set
+	 * @return true if successfully set, else false
 	 */
 	public boolean setAttackerDice(int attackerDice) {
 
@@ -154,8 +152,9 @@ public class Dice {
 	}
 
 	/**
-	 * @param defenderDice the defenderDice to set
-	 * 
+	 * This method sets the number of dice used by the defender
+	 * @param defenderDice Number of defender dice to be used
+	 * @return true if successfully set, else false
 	 */
 	public boolean setDefenderDice(int defenderDice) {
 		if (defenderDice <= 2 && defenderDice > 0)

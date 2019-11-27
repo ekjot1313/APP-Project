@@ -41,7 +41,7 @@ public class Map extends Observable {
 	 */
 	private List<Player> listOfPlayers;
 
-	/*
+	/**
 	 * flag to print or not
 	 */
 	public boolean printFlag = true;
@@ -50,15 +50,18 @@ public class Map extends Observable {
 	 * Type of map
 	 */
 	public String type;
+	
 	/**
-	 * @return the listOfPlayers
+	 * This method returns the list of players
+	 * @return Player List
 	 */
 	public List<Player> getListOfPlayers() {
 		return listOfPlayers;
 	}
 
 	/**
-	 * @param listOfPlayers the listOfPlayers to set
+	 * This method sets the player list
+	 * @param listOfPlayers The list of players to be set
 	 */
 	public void setListOfPlayers(List<Player> listOfPlayers) {
 		this.listOfPlayers = listOfPlayers;
@@ -234,7 +237,6 @@ public class Map extends Observable {
 	 * 
 	 */
 	public void display() {
-		// TODO Auto-generated method stub
 
 		// display
 		if (this.getListOfContinent().size() > 0) {
@@ -317,7 +319,6 @@ public class Map extends Observable {
 	 * 
 	 */
 	public void displayAll() {
-		// TODO Auto-generated method stub
 
 		// display
 		if (this.getListOfContinent().size() > 0) {
@@ -452,37 +453,33 @@ public class Map extends Observable {
 	}
 
 	/**
-	 * This method set owner to given country and notify PWDView about the change.
+	 * This method sets owner to given country and notify PWDView about the change.
 	 * 
-	 * @param country
-	 * @param owner
+	 * @param country Object of the country whose owner is to be set
+	 * @param owner Name of the player to be set as owner
 	 */
 	public void setCountryOwner(Country country, String owner) {
-		// TODO Auto-generated method stub
-
 		country.setOwner(owner);
 		notify(this);
 
 	}
 
 	/**
-	 * This method add new player to listOfPlayers
+	 * This method add new player to the list of players
 	 * 
-	 * @param player
+	 * @param player Player to be added to the player list
 	 */
 	public void addPlayer(Player player) {
-		// TODO Auto-generated method stub
 		this.listOfPlayers.add(player);
 		notify(this);
 	}
 
 	/**
-	 * This method add one continent into listOfContinent
+	 * This method add one continent into the list of continents
 	 * 
-	 * @param continent
+	 * @param continent Continent to be added to the continent list
 	 */
 	public void addContinent(Continent continent) {
-		// TODO Auto-generated method stub
 		getListOfContinent().add(continent);
 		notify(this);
 	}
@@ -492,51 +489,46 @@ public class Map extends Observable {
 	 * @param country object of country class 
 	 */
 	public void addCountry(Country country) {
-		// TODO Auto-generated method stub
 		getListOfCountries().add(country);
 		notify(this);
 	}
 
 	/**
-	 * Set the owner of the continent
-	 * @param cont name of continent
-	 * @param name name of player
+	 * This method sets the owner of the continent
+	 * @param cont Object of the continent whose owner is to set
+	 * @param name Name of the player to be set as owner
 	 */
 	public void setContinentOwner(Continent cont, String name) {
-		// TODO Auto-generated method stub
 		cont.setOwner(name);
 		notify(this);
 	}
 
 	/**
-	 * Removes the player from list of players
-	 * @param player
+	 * This method removes the player from list of players
+	 * @param player Player to be removed from player list
 	 */
 	public void removePlayer(Player player) {
-		// TODO Auto-generated method stub
 		this.listOfPlayers.remove(player);
 		notify(this);
 	}
 
 	/**
-	 * Sets the number of armies for a player
-	 * @param p player 
-	 * @param i number of armies to be assigned
+	 * This method sets the number of armies for a player
+	 * @param p Player Object
+	 * @param i Number of armies to be assigned
 	 */
 	public void setNoOfArmies(Player p, int i) {
-		// TODO Auto-generated method stub
 		p.setNoOfArmies(i);
 		notify(this);
 	}
 
 	/**
-	 * This method checks if map is completely valid or not.
+	 * This method checks if the map is completely valid or not
 	 * 
-	 * @param map
-	 * @return true: if map is valid. false: if map is invalid
+	 * @param map Map Object
+	 * @return true if map is valid, else false
 	 */
 	public boolean isValid(Map map) {
-		// TODO Auto-generated method stub
 		int notConnected = validateMap();
 		int notConnectedSubGraph = validateContinent(map);
 		if (notConnected == 0 && notConnectedSubGraph == 0)
@@ -545,8 +537,8 @@ public class Map extends Observable {
 	}
 
 	/**
-	 * Prints the message
-	 * @param msg
+	 * This method is used to print the message
+	 * @param msg Message to be printed
 	 */
 	public void print(String msg) {
 		if (printFlag)
@@ -554,8 +546,8 @@ public class Map extends Observable {
 	}
 
 	/**
-	 * Prints the message on next line
-	 * @param msg
+	 * This method is used to prints the message on next line
+	 * @param msg Message to be printed
 	 */
 	public void println(String msg) {
 		if (printFlag)
