@@ -12,6 +12,12 @@ import java.util.Random;
 public class Dice {
 
 	/**
+	 * default constructor
+	 */
+	public Dice() {
+	}
+
+	/**
 	 * Random object to get random number.
 	 */
 	static Random number = new Random();
