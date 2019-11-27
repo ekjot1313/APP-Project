@@ -99,7 +99,8 @@ public class LoadGameBuilder extends GameBuilder{
 				
 				Player p = new Player();
 				p.setName(playerDetails[0]);
-				p.setNoOfArmies(Integer.parseInt(playerDetails[1]));
+				//p.setNoOfArmies(Integer.parseInt(playerDetails[1]));
+				
 				p.setUnassignedarmies(Integer.parseInt(playerDetails[2]));
 				
 				if(playerDetails[3].equals("pattern.Strategy.HumanStrategy"))
@@ -134,9 +135,11 @@ public class LoadGameBuilder extends GameBuilder{
 				
 				p.setCards(cardList);
 				
-				playerlist.add(p);
+				//playerlist.add(p);
+				map.addPlayer(p);
+				map.setNoOfArmies(p, Integer.parseInt(playerDetails[1]));
 			}
-		map.setListOfPlayers(playerlist);
+		//map.setListOfPlayers(playerlist);
 			
 		
 		
