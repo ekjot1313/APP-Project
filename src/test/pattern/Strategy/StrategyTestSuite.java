@@ -6,7 +6,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ AggressiveStrategyTest.class, BenevolentStrategyTest.class, CheaterStrategyTest.class,
-		HumanStrategyTest.class })//, RandomStrategyTest.class })
+		HumanStrategyTest.class , RandomStrategyTest.class })
 public class StrategyTestSuite {
 
 }
