@@ -210,8 +210,10 @@ public class AggressiveStrategy implements Strategy {
 		}
 		P.setView("PhaseView");
 		P.setActions("Reinforced " + reinforcementArmies + " armies to "+ strong.getName());
+		System.out.println("Reinforced " + reinforcementArmies + " armies to "+ strong.getName());
 		strong.setNoOfArmies(strong.getNoOfArmies()+reinforcementArmies);
 		P.setEndOfActions(1); 
+		System.out.println("Reinforcement finished");
 		P.setActions("Reinforcement finished");
 	}
 	/**

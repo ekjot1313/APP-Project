@@ -40,6 +40,7 @@ public class CheaterStrategy implements Strategy {
 				System.out.println("Remaining armies to be placed : " + reinforcementArmies);
 				P.setView("PhaseView");
 				P.setActions("Reinforced " + armiesTobeplaced + " armies to " + country.getName());
+				System.out.println("Reinforced " + armiesTobeplaced + " armies to " + country.getName());
 
 			} else
 				System.out
@@ -48,6 +49,7 @@ public class CheaterStrategy implements Strategy {
 		}
 		P.setEndOfActions(1);
 		P.setActions("Reinforcement finished");
+		System.out.println("Reinforcement finished");
 
 	}
 
