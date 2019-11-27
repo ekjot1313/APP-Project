@@ -39,10 +39,6 @@ public class LoadGameBuilder extends GameBuilder{
 			bufferReaderForFile = new BufferedReader(new FileReader(newFile));
 			
 			while ((currentLine = bufferReaderForFile.readLine()) != null) {
-				if(currentLine.contains("[PlayerList]")) {
-					loadPlayers(map);
-				}
-				
 				if (currentLine.contains("[Continents]")) {
 					loadContinents(map);
 				}
@@ -50,7 +46,11 @@ public class LoadGameBuilder extends GameBuilder{
 				if (currentLine.contains("[Territories]")) {
 					loadTerritories(map);
 				}
-	
+				
+				if(currentLine.contains("[PlayerList]")) {
+					loadPlayers(map);
+				}
+				
 				if(currentLine.contains("[CardDetails]")) {
 					loadCardDetails(map);
 				}
@@ -128,7 +128,7 @@ public class LoadGameBuilder extends GameBuilder{
 				String [] cardsString=currentLine.split(",");
 				for(int i=1; i<cardsString.length;i++) {
 					cardList.add(cardsString[i]);
-					System.out.println("Cards: "+cardsString[i]);
+					//System.out.println("Cards: "+cardsString[i]);
 				}
 				
 				
@@ -168,8 +168,6 @@ public class LoadGameBuilder extends GameBuilder{
 			c.setContinentName(countryDetails[1]);
 			c.setNoOfArmies(Integer.parseInt(countryDetails[2]));
 			c.setOwner(countryDetails[3]);
-			
-			
 			Continent continent = map.getContinentFromName(countryDetails[1]);
 			continent.getCountries().add(c.getName());
 			List<String> neighbours =  new ArrayList<String>();
@@ -194,7 +192,9 @@ public class LoadGameBuilder extends GameBuilder{
 			continent.setName(continentDetails[0]);
 			continent.setContinentValue(Integer.parseInt(continentDetails[1]));
 			if(continentDetails[2].equals("FREE") && continentDetails[3].equals("CONTINENTS"))
-			continent.setOwner("FREE CONTINENTS");
+				continent.setOwner("FREE CONTINENTS");
+			else
+			continent.setOwner(continentDetails[2]);
 			map.addContinent(continent);
 			
 

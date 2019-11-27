@@ -1,9 +1,4 @@
 **
-[PlayerList]
-a 13 0 pattern.Strategy.AggressiveStrategy vinenlant kancheria japan north_afrori south_afrori duiestie tungu CARDS,pero infantry,heaurt infantry,kongrolo infantry,
-b 107 0 pattern.Strategy.CheaterStrategy new_guinia senadlavin argentina western_united_states souther_utropa worrick heaurt yazteck pero maganar western_ulstrailia ihesia albania egypt great_britain western_utropa northern_utropa east_afrori central_ameroki india alberta eastern_ulstarilia Quebeck jacuncail middle_east vagnagale czeck kongrolo teramar ireland siberia CARDS,egypt infantry,senadlavin cavalry,china cavalry,heal cavalry,east_afrori cavalry,vinenlant artillery,kancheria cavalry,northern_utropa infantry,albania cavalry,middle_east cavalry,alberta cavalry,sluci infantry,vagnagale artillery,eastern_ulstarilia infantry,tungu infantry,yazteck infantry,great_britain cavalry,teramar cavalry,
-c 12 3 pattern.Strategy.HumanStrategy china afganistan sluci heal CARDS,
-
 [Continents]
 azio 5 FREE CONTINENTS
 ameroki 10 FREE CONTINENTS
@@ -55,6 +50,11 @@ duiestie ameroki 6 a Quebeck central_ameroki vinenlant alberta
 Quebeck ameroki 2 b heal duiestie central_ameroki albania 
 vinenlant ameroki 1 a alberta duiestie 
 heal azio 2 c china Quebeck 
+
+[PlayerList]
+a 13 0 pattern.Strategy.AggressiveStrategy vinenlant kancheria japan north_afrori south_afrori duiestie tungu CARDS,pero infantry,heaurt infantry,kongrolo infantry,
+b 107 0 pattern.Strategy.CheaterStrategy new_guinia senadlavin argentina western_united_states souther_utropa worrick heaurt yazteck pero maganar western_ulstrailia ihesia albania egypt great_britain western_utropa northern_utropa east_afrori central_ameroki india alberta eastern_ulstarilia Quebeck jacuncail middle_east vagnagale czeck kongrolo teramar ireland siberia CARDS,egypt infantry,senadlavin cavalry,china cavalry,heal cavalry,east_afrori cavalry,vinenlant artillery,kancheria cavalry,northern_utropa infantry,albania cavalry,middle_east cavalry,alberta cavalry,sluci infantry,vagnagale artillery,eastern_ulstarilia infantry,tungu infantry,yazteck infantry,great_britain cavalry,teramar cavalry,
+c 12 3 pattern.Strategy.HumanStrategy china afganistan sluci heal CARDS,
 
 [CardDetails]
 siberia infantry,worrick infantry,afganistan cavalry,india infantry,japan artillery,new_guinia infantry,western_ulstrailia infantry,jacuncail cavalry,south_afrori artillery,north_afrori cavalry,maganar artillery,argentina infantry,ireland infantry,ihesia infantry,western_utropa infantry,souther_utropa artillery,western_united_states infantry,czeck infantry,central_ameroki artillery,duiestie cavalry,Quebeck infantry,0
