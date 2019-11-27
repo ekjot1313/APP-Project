@@ -109,50 +109,61 @@ public class Main {
 		// TODO Auto-generated method stub
 		
 	map = game.getMap();
+	pwdView = new PWDView(true);
+	map.attach(pwdView);
+	PhaseView pv= new PhaseView();
+	CardExchangeView cev = new CardExchangeView();
 	String currentPlayer= game.getCurrentPlayer();
 	String currentPhase = game.getCurrentPhase();
 	
-	/*System.out.println(currentPlayer+" "+currentPhase);
-	for(int i=0;i<map.getListOfContinent().size();i++) {
-		System.out.println(map.getListOfContinent().get(i).getName());
-		System.out.println(map.getListOfContinent().get(i).getOwner());
-	}*/
+	System.out.println("Current Player: "+currentPlayer+" Current Phase: "+currentPhase);
+	
 	Player p =new Player();
 	for(int j=0;j<map.getListOfPlayers().size();j++) {
 		if(map.getListOfPlayers().get(j).getName().equals(currentPlayer)){
-			System.out.println(map.getListOfPlayers().get(j).getStrategy());
+			//System.out.println(map.getListOfPlayers().get(j).getStrategy());
 		}
 	}
 	
 		
 		boolean isRemaining= true;
 		int playerIndex = 0;
+		int gameOver=0;
 		
 		for(int j=0;j<map.getListOfPlayers().size();j++) {
 			if(map.getListOfPlayers().get(j).getName().equals(currentPlayer)){
 				p= map.getListOfPlayers().get(j);
 			}
 		}
+
 		if(currentPhase.equalsIgnoreCase("reinforcement")) {
+			p.attach(pv);
+			p.attach(cev);
 			p.executeReinforcement(map, (ArrayList<Player>)(map.getListOfPlayers()));
+			Thread.sleep(1500);
+			p.detach(cev);
+			cev.close();
 			p.executeAttack(map, (ArrayList<Player>)(map.getListOfPlayers()));
+			Thread.sleep(1500);
 			p.executeFortification(map, (ArrayList<Player>)(map.getListOfPlayers()), null);
+			Thread.sleep(1500);
+			p.detach(pv);
 		}else if(currentPhase.equalsIgnoreCase("attack")) {
+			p.attach(pv);
 			p.executeAttack(map, (ArrayList<Player>)(map.getListOfPlayers()));
+			Thread.sleep(1500);
 			p.executeFortification(map, (ArrayList<Player>)(map.getListOfPlayers()), null);
+			Thread.sleep(1500);
+			p.detach(pv);
 		}else if(currentPhase.equalsIgnoreCase("fortification")) {
 			p.executeFortification(map, (ArrayList<Player>)(map.getListOfPlayers()), null);
+			Thread.sleep(1500);
+			p.detach(pv);
 		}
 		
 		while(true) {
 			
 			if(isRemaining) {
-				/**for(int j=0;j<map.getListOfPlayers().size();j++) {
-					if(map.getListOfPlayers().get(j).getName().equals(currentPlayer)){
-						p= map.getListOfPlayers().get(j);
-						playerIndex = j+1;
-					}
-				}*/
 				playerIndex = map.getListOfPlayers().indexOf(p);
 				playerIndex ++;
 			}
@@ -162,17 +173,44 @@ public class Main {
 			System.out.println(playerIndex);
 			
 			for(int i =playerIndex; i<map.getListOfPlayers().size();i++) {
+				
 				p = map.getListOfPlayers().get(i);
-				p.executeReinforcement(map, (ArrayList<Player>)(map.getListOfPlayers()));
-				p.executeAttack(map, (ArrayList<Player>)(map.getListOfPlayers()));
-				p.executeFortification(map, (ArrayList<Player>)(map.getListOfPlayers()), null);
+				
+				System.out.println("Player " + p.getName() + " Reinforcement phase begins");
+				p.attach(pv);
+				
+				p.attach(cev);
+				p.executeReinforcement(map, (ArrayList<Player>) map.getListOfPlayers());
+				Thread.sleep(1500);
+				p.detach(cev);
+				cev.close();
+				System.out.println("Player " + p.getName() + " Attack phase begins");
+				Player current= p;
+				gameOver = p.executeAttack(map, (ArrayList<Player>) map.getListOfPlayers());
+				Thread.sleep(1500);
+				if (gameOver == 1)
+					break;
+				int index=map.getListOfPlayers().indexOf(current);
+				i=index;
+				System.out.println("Player " + p.getName() + " Fortification phase begins");
+				p.executeFortification(map, (ArrayList<Player>)map.getListOfPlayers() ,null);
+				Thread.sleep(1500);
+				p.detach(pv);
+				
 			}
-			
 			isRemaining = false;
+			if (gameOver == 1)
+				break;
 		}
+		System.out.println("Game Over");
+		System.out.println("Winner is Player: " + map.getListOfPlayers().get(0).getName());
 		
-	}
+		//detach and close PWDView
+		map.detach(pwdView);
+		pwdView.close();
 
+	}
+			
 	private static void tournamentModeInit() throws Exception {
 		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
