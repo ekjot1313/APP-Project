@@ -120,7 +120,9 @@ public class Country {
 	 * @param noOfArmies Number of armies in the country
 	 */
 	public void setNoOfArmies(int noOfArmies) {
-		this.noOfArmies = noOfArmies;
+		if (noOfArmies >= 0) {
+			this.noOfArmies = noOfArmies;
+		}
 	}
 
 	/**
