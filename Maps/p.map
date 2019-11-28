@@ -1,0 +1,17 @@
+[Map]null
+
+name null Map
+
+null
+
+[continents]
+asia 10 00000
+africa 10 00000
+
+[countries]
+1 india 1
+2 congo 2
+
+[borders]
+1 2
+2 1

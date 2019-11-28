@@ -1,0 +1,63 @@
+**
+[Continents]
+azio 5 FREE CONTINENTS
+ameroki 10 FREE CONTINENTS
+utropa 10 FREE CONTINENTS
+amerpoll 5 FREE CONTINENTS
+afrori 5 FREE CONTINENTS
+ulstrailia 5 FREE CONTINENTS
+
+[Territories]
+siberia azio 2 a egypt great_britain worrick 
+worrick azio 2 a siberia india czeck yazteck 
+yazteck azio 1 b worrick kongrolo middle_east czeck 
+kongrolo azio 3 b yazteck czeck china middle_east 
+china azio 4 a kongrolo middle_east heal sluci kancheria 
+middle_east azio 2 b yazteck china kancheria kongrolo 
+sluci azio 4 b china kancheria afganistan 
+afganistan azio 1 a kancheria sluci 
+kancheria azio 2 b china afganistan sluci middle_east india 
+india azio 3 a japan worrick kancheria 
+japan azio 1 a south_afrori india 
+new_guinia ulstrailia 2 b jacuncail western_ulstrailia 
+western_ulstrailia ulstrailia 1 a jacuncail eastern_ulstarilia new_guinia 
+eastern_ulstarilia ulstrailia 1 a jacuncail western_ulstrailia 
+jacuncail ulstrailia 2 a south_afrori new_guinia western_ulstrailia eastern_ulstarilia 
+tungu afrori 3 a north_afrori south_afrori east_afrori 
+south_afrori afrori 1 b tungu jacuncail japan 
+north_afrori afrori 2 a egypt east_afrori tungu 
+east_afrori afrori 1 b north_afrori maganar tungu 
+egypt afrori 1 a heaurt siberia north_afrori 
+maganar afrori 2 b east_afrori ihesia 
+pero amerpoll 2 a vagnagale heaurt 
+heaurt amerpoll 3 b pero vagnagale egypt 
+vagnagale amerpoll 2 b argentina pero heaurt 
+argentina amerpoll 3 b northern_utropa vagnagale 
+ireland utropa 2 a ihesia senadlavin 
+ihesia utropa 3 b ireland western_utropa maganar senadlavin 
+western_utropa utropa 2 b ihesia senadlavin souther_utropa great_britain northern_utropa 
+souther_utropa utropa 1 b western_utropa great_britain northern_utropa 
+northern_utropa utropa 1 b western_utropa argentina souther_utropa 
+senadlavin utropa 1 a western_utropa western_united_states great_britain ireland ihesia 
+great_britain utropa 1 b western_utropa siberia western_united_states souther_utropa senadlavin 
+teramar ameroki 1 a western_united_states alberta 
+western_united_states ameroki 1 a albania czeck teramar alberta central_ameroki senadlavin great_britain 
+czeck ameroki 2 a worrick kongrolo albania western_united_states yazteck 
+alberta ameroki 4 a western_united_states central_ameroki vinenlant teramar duiestie 
+central_ameroki ameroki 3 a Quebeck albania western_united_states alberta duiestie 
+albania ameroki 1 b Quebeck czeck western_united_states central_ameroki 
+duiestie ameroki 2 b Quebeck central_ameroki vinenlant alberta 
+Quebeck ameroki 1 a heal duiestie central_ameroki albania 
+vinenlant ameroki 1 b alberta duiestie 
+heal azio 2 b china Quebeck 
+
+[PlayerList]
+a 47 0 pattern.Strategy.HumanStrategy central_ameroki western_ulstrailia tungu japan jacuncail egypt china ireland teramar india senadlavin czeck pero siberia afganistan eastern_ulstarilia western_united_states north_afrori alberta Quebeck worrick 
+b 40 0 pattern.Strategy.HumanStrategy maganar sluci kancheria northern_utropa east_afrori argentina heaurt kongrolo western_utropa duiestie ihesia yazteck great_britain south_afrori vinenlant souther_utropa albania middle_east vagnagale new_guinia heal 
+
+[CardDetails]
+siberia infantry,worrick cavalry,yazteck infantry,kongrolo cavalry,china cavalry,middle_east artillery,sluci infantry,afganistan artillery,kancheria artillery,india cavalry,japan infantry,new_guinia artillery,western_ulstrailia artillery,eastern_ulstarilia infantry,jacuncail cavalry,tungu artillery,south_afrori artillery,north_afrori cavalry,east_afrori artillery,egypt cavalry,maganar cavalry,pero cavalry,heaurt artillery,vagnagale infantry,argentina artillery,ireland infantry,ihesia cavalry,western_utropa infantry,souther_utropa cavalry,northern_utropa artillery,senadlavin artillery,great_britain infantry,teramar artillery,western_united_states artillery,czeck artillery,alberta infantry,central_ameroki infantry,albania artillery,duiestie infantry,Quebeck cavalry,vinenlant infantry,heal cavalry,0
+[CurrentPhase]
+Reinforcement
+[CurrentPlayer]
+a

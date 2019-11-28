@@ -1,4 +1,4 @@
-package test.mapworkstest;
+package test.pattern.Adapter;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -14,8 +14,8 @@ import org.junit.Test;
 import dao.Continent;
 import dao.Country;
 import dao.Map;
-import mapWorks.ConquestReaderWriter;
-import mapWorks.DominationReaderWriter;
+import pattern.Adapter.ConquestReaderWriter;
+import pattern.Adapter.DominationReaderWriter;
 import mapWorks.MapEditor;
 
 /**
