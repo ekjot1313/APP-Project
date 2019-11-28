@@ -28,7 +28,7 @@ south_afrori afrori 4 b tungu jacuncail japan
 north_afrori afrori 2 b egypt east_afrori tungu 
 east_afrori afrori 3 c north_afrori maganar tungu 
 egypt afrori 6 b heaurt siberia north_afrori 
-maganar afrori 1 c east_afrori ihesia 
+maganar afrori 4 c east_afrori ihesia 
 pero amerpoll 3 c vagnagale heaurt 
 heaurt amerpoll 2 b pero vagnagale egypt 
 vagnagale amerpoll 1 a argentina pero heaurt 
@@ -54,11 +54,11 @@ heal azio 2 b china Quebeck
 [PlayerList]
 a 13 0 pattern.Strategy.AggressiveStrategy eastern_ulstarilia argentina western_utropa vagnagale jacuncail new_guinia northern_utropa souther_utropa great_britain western_ulstrailia CARDS,heal artillery,egypt infantry,teramar infantry,new_guinia artillery,western_utropa artillery,japan artillery,
 b 85 0 pattern.Strategy.CheaterStrategy Quebeck central_ameroki egypt ireland middle_east kancheria albania czeck china india alberta japan sluci heaurt south_afrori afganistan duiestie north_afrori yazteck vinenlant worrick ihesia western_united_states heal senadlavin kongrolo teramar siberia CARDS,western_ulstrailia artillery,czeck artillery,duiestie infantry,heaurt artillery,argentina cavalry,yazteck infantry,worrick cavalry,great_britain artillery,souther_utropa cavalry,maganar infantry,northern_utropa cavalry,middle_east infantry,siberia cavalry,sluci infantry,kancheria infantry,east_afrori artillery,
-c 13 3 pattern.Strategy.HumanStrategy maganar east_afrori pero tungu CARDS,
+c 13 0 pattern.Strategy.HumanStrategy maganar east_afrori pero tungu CARDS,
 
 [CardDetails]
 kongrolo artillery,china infantry,afganistan infantry,india artillery,eastern_ulstarilia infantry,jacuncail artillery,tungu cavalry,south_afrori infantry,north_afrori artillery,pero infantry,vagnagale artillery,ireland infantry,ihesia cavalry,senadlavin cavalry,western_united_states artillery,alberta artillery,central_ameroki artillery,albania infantry,Quebeck cavalry,vinenlant infantry,0
 [CurrentPhase]
-Reinforcement
+Attack
 [CurrentPlayer]
 c

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +18,12 @@ import dao.Continent;
 import dao.Country;
 import dao.Map;
 import dao.Player;
-import pattern.observer.Observable;
-import pattern.observer.Observer;
-import java.text.DecimalFormat;
+import pattern.Strategy.AggressiveStrategy;
+import pattern.Strategy.BenevolentStrategy;
+import pattern.Strategy.CheaterStrategy;
+import pattern.Strategy.HumanStrategy;
+import pattern.Strategy.RandomStrategy;
+import pattern.Strategy.Strategy;
 
 /**
  * Class to implement the Player World Domination View.
@@ -38,12 +42,12 @@ public class PWDView implements Observer {
 	private static JScrollPane scrollPane1;
 	private static JScrollPane scrollPane2;
 	private static JScrollPane scrollPane3;
-	private static boolean visible=true;
-	
-	
-	
+	private static boolean visible = true;
+
 	/**
-	 * This method updates the player world domination view after receiving the notification
+	 * This method updates the player world domination view after receiving the
+	 * notification
+	 * 
 	 * @param obj Object of observable class
 	 */
 	public void update(Observable obj) {
@@ -59,24 +63,25 @@ public class PWDView implements Observer {
 
 	/**
 	 * Method to calculate total number of armies owned by each player
+	 * 
 	 * @param map Map object
 	 * @return Player name along with number of armies owned
 	 */
 	public String calcTotalArmies(Map map) {
 		// TODO Auto-generated method stub
 		String armyOwn = "";
-		for(Player player:map.getListOfPlayers()) {
-			armyOwn+=player.getName()+": "+player.getNoOfArmies()+"\n";
+		for (Player player : map.getListOfPlayers()) {
+			armyOwn += player.getName() + ": " + player.getNoOfArmies() + "\n";
 		}
-		
+
 		playerArmiesTA.setText(armyOwn);
 		return armyOwn;
-		
-		
+
 	}
 
 	/**
 	 * Method to calculate continents owned by every player
+	 * 
 	 * @param map Map object
 	 * @return Player name along with continent owned
 	 */
@@ -112,9 +117,9 @@ public class PWDView implements Observer {
 
 		for (int i = 0; i < continentsOwned.size(); i++) {
 
-			contOwn+=players.get(i)+": \n";
+			contOwn += players.get(i) + ": \n";
 			for (String cont : continentsOwned.get(i)) {
-				contOwn += "   "+cont + ",\n";
+				contOwn += "   " + cont + ",\n";
 			}
 
 			contOwn += "\n";
@@ -126,6 +131,7 @@ public class PWDView implements Observer {
 
 	/**
 	 * Method to calculate the percentage of map controlled by each player.
+	 * 
 	 * @param map Map Object
 	 * @return PLayer name along with percentage of map controlled
 	 */
@@ -145,15 +151,40 @@ public class PWDView implements Observer {
 
 		for (Country country : map.getListOfCountries()) {
 			String owner = country.getOwner();
-			
+
 			int ind = players.indexOf(owner);
-			if(ind != -1)
-			num[ind]++;
+			if (ind != -1)
+				num[ind]++;
 		}
 
 		for (int i = 0; i < num.length; i++) {
+			try {
+				String str="";
+					Strategy strategy = map.getPlayerFromName(players.get(i)).getStrategy();
 
-			mapOwn += players.get(i) + ": " + df2.format(num[i] * 100 / totalCountryNum) + "%\n";
+				if (strategy instanceof HumanStrategy) {
+					str="Hum";
+
+
+				} else if (strategy instanceof AggressiveStrategy) {
+					str="Agg";
+
+				} else if (strategy instanceof CheaterStrategy) {
+					str="Che";
+
+				} else if (strategy instanceof RandomStrategy) {
+					str="Ran";
+
+				} else if (strategy instanceof BenevolentStrategy) {
+					str="Ben";
+
+				}
+				mapOwn += players.get(i) + "<" + str + ">" + ": " + df2.format(num[i] * 100 / totalCountryNum)
+				+ "%\n";
+			} catch (NullPointerException e) {
+
+			}
+
 		}
 
 		countryPercentageTA.setText(mapOwn);
@@ -163,10 +194,11 @@ public class PWDView implements Observer {
 
 	/**
 	 * Constructor to create the application.
+	 * 
 	 * @param visible1 value of visible
 	 */
 	public PWDView(Boolean visible1) {
-		visible=visible1;
+		visible = visible1;
 		initialize();
 
 	}
@@ -176,12 +208,9 @@ public class PWDView implements Observer {
 	 */
 	private static void initialize() {
 		if (frame == null) {
-			
-			
+
 			frame = new JFrame("Player World Domination View");
-			
-			
-			
+
 			frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 			frame.setAlwaysOnTop(true);
 			frame.setFocusableWindowState(false);
@@ -191,7 +220,6 @@ public class PWDView implements Observer {
 			countryPercentageTA.setEditable(false);
 			countryPercentageTA.setForeground(Color.white);
 			countryPercentageTA.setBackground(Color.BLACK);
-			
 
 			continentOwnerTA = new JTextArea();
 			continentOwnerTA.setEditable(false);
@@ -205,22 +233,22 @@ public class PWDView implements Observer {
 
 			scrollPane1 = new JScrollPane();
 			scrollPane1.setViewportView(countryPercentageTA);
-			
-			TitledBorder border=(TitledBorder) BorderFactory.createTitledBorder("Map Percentage");
+
+			TitledBorder border = (TitledBorder) BorderFactory.createTitledBorder("Map Percentage");
 			border.setTitleColor(Color.white);
 			scrollPane1.setBorder(border);
 			scrollPane1.setBackground(Color.BLACK);
 
 			scrollPane2 = new JScrollPane();
 			scrollPane2.setViewportView(continentOwnerTA);
-			border=(TitledBorder) BorderFactory.createTitledBorder("Continents Information");
+			border = (TitledBorder) BorderFactory.createTitledBorder("Continents Information");
 			border.setTitleColor(Color.white);
 			scrollPane2.setBorder(border);
 			scrollPane2.setBackground(Color.BLACK);
 
 			scrollPane3 = new JScrollPane();
 			scrollPane3.setViewportView(playerArmiesTA);
-			border=(TitledBorder) BorderFactory.createTitledBorder("Armies Owned");
+			border = (TitledBorder) BorderFactory.createTitledBorder("Armies Owned");
 			border.setTitleColor(Color.white);
 			scrollPane3.setBorder(border);
 			scrollPane3.setBackground(Color.BLACK);
@@ -230,12 +258,12 @@ public class PWDView implements Observer {
 			frame.getContentPane().add(scrollPane1);
 			frame.getContentPane().add(scrollPane2);
 			frame.getContentPane().add(scrollPane3);
-			
+
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-			frame.setBounds((screenSize.width*2)/3, 0, (screenSize.width)/3, (screenSize.height)/3);
+			frame.setBounds((screenSize.width * 2) / 3, 0, (screenSize.width) / 3, (screenSize.height) / 3);
 			frame.setBackground(Color.BLACK);
 			setVisible(visible);
-			
+
 		}
 	}
 
@@ -249,6 +277,7 @@ public class PWDView implements Observer {
 
 	/**
 	 * Method to check if the frame is visible
+	 * 
 	 * @return value of visible
 	 */
 	public static boolean isVisible() {
@@ -257,10 +286,11 @@ public class PWDView implements Observer {
 
 	/**
 	 * Method to make the frame visible
+	 * 
 	 * @param visible1 value of visible
 	 */
 	public static void setVisible(boolean visible1) {
-		visible=visible1;
+		visible = visible1;
 		frame.setVisible(visible1);
 	}
 
