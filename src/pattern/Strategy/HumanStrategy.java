@@ -236,6 +236,8 @@ public class HumanStrategy implements Strategy {
 		} else
 			forceExchangeCards = 0;
 		// loop over playerlist and assign reinforcement armies
+		if(P.getUnassignedarmies() != reinforcementArmies && P.getUnassignedarmies() != 0)
+			reinforcementArmies = (P.getUnassignedarmies());
 		P.setUnassignedarmies(reinforcementArmies);
 		System.out.println("Reinforcement armies to be assigned :" + reinforcementArmies);
 		System.out.println("Type reinforce <countryname> <num>  to assign armies ");
@@ -259,13 +261,11 @@ public class HumanStrategy implements Strategy {
 
 				map.displayAll();
 			} else if (inputArray[0].equals("savegame")) {
-				if (reinforcementArmies > 0 && reinfor != reinforcementArmies)
-					System.out.println("Please reinforce all armies before saving");
-				else {
+				
 					Director d = new Director();
 					d.setGbuilder(new SaveGameBuilder());
 					d.constructGame(inputArray[1], map, P.getName(), P.getState());
-				}
+				
 			} else if (inputArray.length == 3 && inputArray[0].equals("reinforce")) {
 				int armiesTobeplaced = 0;
 				try {
@@ -290,6 +290,7 @@ public class HumanStrategy implements Strategy {
 						map.getCountryFromName(inputArray[1]).setNoOfArmies(
 								map.getCountryFromName(inputArray[1]).getNoOfArmies() + armiesTobeplaced);
 						reinforcementArmies -= armiesTobeplaced;
+						P.setUnassignedarmies(reinforcementArmies);
 						System.out.println("Reinforcement armies placed successfully");
 						System.out.println("Remaining armies to be placed : " + reinforcementArmies);
 						P.setView("PhaseView");
