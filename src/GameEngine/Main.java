@@ -182,7 +182,7 @@ public class Main {
 			} else {
 				playerIndex = 0;
 			}
-			System.out.println(playerIndex);
+			//System.out.println(playerIndex);
 
 			for (int i = playerIndex; i < map.getListOfPlayers().size(); i++) {
 
