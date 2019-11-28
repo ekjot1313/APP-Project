@@ -153,7 +153,7 @@ public class RandomStrategyTest {
 			reinforcedArmies += country.getNoOfArmies();
 		}
 		reinforcedArmies -= initialArmies;
-		System.out.println(Math.abs((reinforcedArmies - expected)) + "..........................");
+
 		assertTrue(Math.abs((reinforcedArmies - expected)) % 5 == 0);
 
 		// test with 3 different card types
