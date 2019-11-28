@@ -104,7 +104,7 @@ public class AggressiveStrategyTest {
 		listOfPlayers.add(B);
 	}
 	/**
-	 * Test method for 
+	 * Test method for reinforcement
 	 */
 	@Test
 	public void testReinforcement() {
@@ -147,7 +147,7 @@ public class AggressiveStrategyTest {
 		
 	}
 	/**
-	 * Test method for 
+	 * Test method for attack
 	 */
 	@Test
 	public void testAttack() {
@@ -173,7 +173,7 @@ public class AggressiveStrategyTest {
 	}
 	
 	/**
-	 * Test method for {@link dao.Player#fortification(Map, ArrayList, String)}.
+	 * Test method for fortification
 	 */
 	@Test
 	public void testFortification() {

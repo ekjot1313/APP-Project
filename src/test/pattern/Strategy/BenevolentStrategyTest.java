@@ -103,7 +103,7 @@ public class BenevolentStrategyTest {
 		listOfPlayers.add(B);
 	}
 	/**
-	 * Test method for 
+	 * Test method for Attack
 	 */
 	@Test
 	public void testAttack() {
@@ -121,7 +121,7 @@ public class BenevolentStrategyTest {
 		
 	}
 	/**
-	 * Test method for 
+	 * Test method for Reinforcement
 	 */
 	@Test
 	public void testReinforcement() {
@@ -147,7 +147,7 @@ public class BenevolentStrategyTest {
 		
 	}
 	/**
-	 * Test method for {@link dao.Player#fortification(Map, ArrayList, String)}.
+	 * Test method for fortification
 	 */
 	@Test
 	public void testFortification() {
