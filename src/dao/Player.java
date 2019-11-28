@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import pattern.Strategy.Strategy;
 import pattern.observer.Observable;
+import pattern.strategy.Strategy;
 
 /**
  * This class represents the Player details

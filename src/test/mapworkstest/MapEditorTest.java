@@ -12,8 +12,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import dao.Map;
-import pattern.Adapter.DominationReaderWriter;
-import mapWorks.MapEditor;
+import mapworks.MapEditor;
+import pattern.adapter.DominationReaderWriter;
 
 
 /**
@@ -54,7 +54,7 @@ public class MapEditorTest {
 	}
 
 	/**
-	 * Method to test {@link mapWorks.MapEditor#editContinent(String[])}
+	 * Method to test {@link mapworks.MapEditor#editContinent(String[])}
 	 */
 	@Test
 	public void testEditContinent() {
@@ -68,7 +68,7 @@ public class MapEditorTest {
 	}
 
 	/**
-	 * Method to test {@link mapWorks.MapEditor#editCountry(String[])}
+	 * Method to test {@link mapworks.MapEditor#editCountry(String[])}
 	 */
 	@Test
 	public void testEditCountry() {
@@ -87,7 +87,7 @@ public class MapEditorTest {
 
 	/**
 	 * Method to test Method to test
-	 * {@link mapWorks.MapEditor#editNeighbor(String[])}
+	 * {@link mapworks.MapEditor#editNeighbor(String[])}
 	 */
 	@Test
 	public void testEditNeighbor() {
@@ -104,7 +104,7 @@ public class MapEditorTest {
 
 	/**
 	 * Method to test
-	 * {@link mapWorks.MapEditor#addContinentToQueue(String, String, ArrayList)}
+	 * {@link mapworks.MapEditor#addContinentToQueue(String, String, ArrayList)}
 	 */
 	@Test
 	public void testAddContinentToQueue() {
@@ -128,7 +128,7 @@ public class MapEditorTest {
 
 	/**
 	 * Method to test
-	 * {@link mapWorks.MapEditor#removeContinentToQueue(String, ArrayList)}
+	 * {@link mapworks.MapEditor#removeContinentToQueue(String, ArrayList)}
 	 */
 	@Test
 	public void testremoveContinentToQueue() {
@@ -150,7 +150,7 @@ public class MapEditorTest {
 
 	/**
 	 * Method to test
-	 * {@link mapWorks.MapEditor#addCountryToQueue(String, String, ArrayList)}
+	 * {@link mapworks.MapEditor#addCountryToQueue(String, String, ArrayList)}
 	 */
 	@Test
 	public void testAddCountryToQueue() {
@@ -174,7 +174,7 @@ public class MapEditorTest {
 
 	/**
 	 * Method to test
-	 * {@link mapWorks.MapEditor#removeCountryToQueue(String, ArrayList)}
+	 * {@link mapworks.MapEditor#removeCountryToQueue(String, ArrayList)}
 	 */
 	@Test
 	public void testremoveCountryToQueue() {
@@ -196,7 +196,7 @@ public class MapEditorTest {
 
 	/**
 	 * Method to test
-	 * {@link mapWorks.MapEditor#addNeighborToQueue(String, String, ArrayList)}
+	 * {@link mapworks.MapEditor#addNeighborToQueue(String, String, ArrayList)}
 	 */
 	@Test
 	public void testAddNeighborToQueue() {
@@ -220,7 +220,7 @@ public class MapEditorTest {
 
 	/**
 	 * Method to test
-	 * {@link mapWorks.MapEditor#removeNeighborToQueue(String, String, ArrayList)}
+	 * {@link mapworks.MapEditor#removeNeighborToQueue(String, String, ArrayList)}
 	 */
 	@Test
 	public void testRemoveNeighborToQueue() {
@@ -244,7 +244,7 @@ public class MapEditorTest {
 
 	/**
 	 * Method to test
-	 * {@link mapWorks.MapEditor#removeBridge(String, String, String, String)}
+	 * {@link mapworks.MapEditor#removeBridge(String, String, String, String)}
 	 */
 	@Test
 	public void testRemoveBridges() {

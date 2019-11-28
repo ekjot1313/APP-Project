@@ -10,7 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import dao.Map;
-import mapWorks.MapEditor;
+import mapworks.MapEditor;
 import pattern.builder.Director;
 import pattern.builder.SaveGameBuilder;
 

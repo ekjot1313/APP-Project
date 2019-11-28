@@ -9,11 +9,11 @@ import dao.Continent;
 import dao.Country;
 import dao.Map;
 import dao.Player;
-import pattern.Strategy.AggressiveStrategy;
-import pattern.Strategy.BenevolentStrategy;
-import pattern.Strategy.CheaterStrategy;
-import pattern.Strategy.HumanStrategy;
-import pattern.Strategy.RandomStrategy;
+import pattern.strategy.AggressiveStrategy;
+import pattern.strategy.BenevolentStrategy;
+import pattern.strategy.CheaterStrategy;
+import pattern.strategy.HumanStrategy;
+import pattern.strategy.RandomStrategy;
 
 /**
  * This class is used to add or remove players and also to assign countries to

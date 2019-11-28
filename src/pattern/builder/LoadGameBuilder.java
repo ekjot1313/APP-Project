@@ -12,11 +12,11 @@ import dao.Continent;
 import dao.Country;
 import dao.Map;
 import dao.Player;
-import pattern.Strategy.AggressiveStrategy;
-import pattern.Strategy.BenevolentStrategy;
-import pattern.Strategy.CheaterStrategy;
-import pattern.Strategy.HumanStrategy;
-import pattern.Strategy.RandomStrategy;
+import pattern.strategy.AggressiveStrategy;
+import pattern.strategy.BenevolentStrategy;
+import pattern.strategy.CheaterStrategy;
+import pattern.strategy.HumanStrategy;
+import pattern.strategy.RandomStrategy;
 
 /**
  * This class is used to load the game
@@ -117,15 +117,15 @@ public class LoadGameBuilder extends GameBuilder {
 
 			p.setUnassignedarmies(Integer.parseInt(playerDetails[2]));
 
-			if (playerDetails[3].equals("pattern.Strategy.HumanStrategy"))
+			if (playerDetails[3].equals("pattern.strategy.HumanStrategy"))
 				p.setStrategy(new HumanStrategy());
-			else if (playerDetails[3].equals("pattern.Strategy.AggressiveStrategy"))
+			else if (playerDetails[3].equals("pattern.strategy.AggressiveStrategy"))
 				p.setStrategy(new AggressiveStrategy());
-			else if (playerDetails[3].equals("pattern.Strategy.BenevolentStrategy"))
+			else if (playerDetails[3].equals("pattern.strategy.BenevolentStrategy"))
 				p.setStrategy(new BenevolentStrategy());
-			else if (playerDetails[3].equals("pattern.Strategy.CheaterStrategy"))
+			else if (playerDetails[3].equals("pattern.strategy.CheaterStrategy"))
 				p.setStrategy(new CheaterStrategy());
-			else if (playerDetails[3].equals("pattern.Strategy.RandomStrategy"))
+			else if (playerDetails[3].equals("pattern.strategy.RandomStrategy"))
 				p.setStrategy(new RandomStrategy());
 			ArrayList<Country> countries = new ArrayList<Country>();
 			int j = 4;

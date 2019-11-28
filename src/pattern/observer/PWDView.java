@@ -18,12 +18,12 @@ import dao.Continent;
 import dao.Country;
 import dao.Map;
 import dao.Player;
-import pattern.Strategy.AggressiveStrategy;
-import pattern.Strategy.BenevolentStrategy;
-import pattern.Strategy.CheaterStrategy;
-import pattern.Strategy.HumanStrategy;
-import pattern.Strategy.RandomStrategy;
-import pattern.Strategy.Strategy;
+import pattern.strategy.AggressiveStrategy;
+import pattern.strategy.BenevolentStrategy;
+import pattern.strategy.CheaterStrategy;
+import pattern.strategy.HumanStrategy;
+import pattern.strategy.RandomStrategy;
+import pattern.strategy.Strategy;
 
 /**
  * Class to implement the Player World Domination View.

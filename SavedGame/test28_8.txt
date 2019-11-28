@@ -1,0 +1,64 @@
+**
+[Continents]
+azio 5 FREE CONTINENTS
+ameroki 10 FREE CONTINENTS
+utropa 10 FREE CONTINENTS
+amerpoll 5 FREE CONTINENTS
+afrori 5 FREE CONTINENTS
+ulstrailia 5 FREE CONTINENTS
+
+[Territories]
+siberia azio 2 b egypt great_britain worrick 
+worrick azio 1 a siberia india czeck yazteck 
+yazteck azio 3 b worrick kongrolo middle_east czeck 
+kongrolo azio 1 a yazteck czeck china middle_east 
+china azio 1 a kongrolo middle_east heal sluci kancheria 
+middle_east azio 3 c yazteck china kancheria kongrolo 
+sluci azio 2 c china kancheria afganistan 
+afganistan azio 1 b kancheria sluci 
+kancheria azio 3 b china afganistan sluci middle_east india 
+india azio 1 a japan worrick kancheria 
+japan azio 4 a south_afrori india 
+new_guinia ulstrailia 1 c jacuncail western_ulstrailia 
+western_ulstrailia ulstrailia 1 a jacuncail eastern_ulstarilia new_guinia 
+eastern_ulstarilia ulstrailia 1 c jacuncail western_ulstrailia 
+jacuncail ulstrailia 4 c south_afrori new_guinia western_ulstrailia eastern_ulstarilia 
+tungu afrori 3 c north_afrori south_afrori east_afrori 
+south_afrori afrori 1 a tungu jacuncail japan 
+north_afrori afrori 3 b egypt east_afrori tungu 
+east_afrori afrori 1 a north_afrori maganar tungu 
+egypt afrori 1 a heaurt siberia north_afrori 
+maganar afrori 2 b east_afrori ihesia 
+pero amerpoll 7 b vagnagale heaurt 
+heaurt amerpoll 3 b pero vagnagale egypt 
+vagnagale amerpoll 5 c argentina pero heaurt 
+argentina amerpoll 2 c northern_utropa vagnagale 
+ireland utropa 1 a ihesia senadlavin 
+ihesia utropa 1 a ireland western_utropa maganar senadlavin 
+western_utropa utropa 1 b ihesia senadlavin souther_utropa great_britain northern_utropa 
+souther_utropa utropa 1 a western_utropa great_britain northern_utropa 
+northern_utropa utropa 4 c western_utropa argentina souther_utropa 
+senadlavin utropa 1 a western_utropa western_united_states great_britain ireland ihesia 
+great_britain utropa 3 c western_utropa siberia western_united_states souther_utropa senadlavin 
+teramar ameroki 2 c western_united_states alberta 
+western_united_states ameroki 1 a albania czeck teramar alberta central_ameroki senadlavin great_britain 
+czeck ameroki 1 a worrick kongrolo albania western_united_states yazteck 
+alberta ameroki 2 b western_united_states central_ameroki vinenlant teramar duiestie 
+central_ameroki ameroki 2 c Quebeck albania western_united_states alberta duiestie 
+albania ameroki 2 b Quebeck czeck western_united_states central_ameroki 
+duiestie ameroki 1 a Quebeck central_ameroki vinenlant alberta 
+Quebeck ameroki 1 a heal duiestie central_ameroki albania 
+vinenlant ameroki 4 b alberta duiestie 
+heal azio 2 c china Quebeck 
+
+[PlayerList]
+a 20 0 pattern.Strategy.AggressiveStrategy ireland china japan egypt Quebeck souther_utropa south_afrori india east_afrori western_ulstrailia western_united_states senadlavin duiestie worrick ihesia kongrolo czeck CARDS,souther_utropa artillery,sluci cavalry,heaurt artillery,
+b 35 3 pattern.Strategy.HumanStrategy yazteck maganar afganistan heaurt pero alberta vinenlant north_afrori western_utropa albania kancheria siberia CARDS,
+c 34 0 pattern.Strategy.BenevolentStrategy vagnagale jacuncail northern_utropa sluci argentina great_britain eastern_ulstarilia new_guinia middle_east teramar central_ameroki tungu heal CARDS,
+
+[CardDetails]
+siberia infantry,worrick artillery,yazteck cavalry,kongrolo cavalry,china cavalry,middle_east artillery,afganistan artillery,kancheria infantry,india cavalry,japan infantry,new_guinia infantry,western_ulstrailia infantry,eastern_ulstarilia artillery,jacuncail infantry,tungu cavalry,south_afrori artillery,north_afrori infantry,east_afrori artillery,egypt cavalry,maganar infantry,pero artillery,vagnagale artillery,argentina infantry,ireland artillery,ihesia infantry,western_utropa cavalry,northern_utropa cavalry,senadlavin infantry,great_britain cavalry,teramar artillery,western_united_states artillery,czeck infantry,alberta infantry,central_ameroki cavalry,albania artillery,duiestie infantry,Quebeck infantry,vinenlant infantry,heal cavalry,0
+[CurrentPhase]
+Reinforcement
+[CurrentPlayer]
+b

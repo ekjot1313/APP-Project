@@ -15,7 +15,7 @@ import dao.Map;
 import dao.Player;
 
 import game.PlayerAllocator;
-import mapWorks.MapEditor;
+import mapworks.MapEditor;
 
 /**
  * Test class to check the Map class

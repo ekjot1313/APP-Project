@@ -69,7 +69,7 @@ public class ArmyAllocator {
 			for (int i = 0; i < assignedArmies; i++) {
 				try {
 					for (Player p : listOfPLayers) {
-						if (!p.getStrategy().getClass().getName().equals("pattern.Strategy.HumanStrategy")) {
+						if (!p.getStrategy().getClass().getName().equals("pattern.strategy.HumanStrategy")) {
 							isPlaceAll = true;
 							break;
 						}
