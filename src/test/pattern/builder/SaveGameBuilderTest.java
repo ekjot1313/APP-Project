@@ -25,6 +25,9 @@ public class SaveGameBuilderTest {
 	 */
 	static MapEditor mapEditor;
 	
+	/**
+	 * This method is used for initialization and set up before running tests
+	 */
 	@BeforeClass
 	public static void BeforeClass() {
 		map = new Map();
@@ -48,6 +51,9 @@ public class SaveGameBuilderTest {
 		flag= false;
 	}
 
+	/**
+	 * Test method for BuildMap(filename, map)
+	 */
 	@Test
 	public void testbuildMap() {
 		
@@ -79,6 +85,9 @@ public class SaveGameBuilderTest {
 			}
 	}
 	
+	/**
+	 * Test method for BuildPLayer(filename, player)
+	 */
 	@Test
 	public void testBuildPlayer() {
 		
@@ -99,6 +108,9 @@ public class SaveGameBuilderTest {
 			}
 	}
 	
+	/**
+	 * Test method for BuildPhase(filename, phase)
+	 */
 	@Test
 	public void testBuildPhase() {
 		
