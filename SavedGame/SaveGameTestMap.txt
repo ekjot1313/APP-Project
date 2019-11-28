@@ -1,0 +1,20 @@
+**
+[Continents]
+asia 10 FREE CONTINENTS
+africa 14 FREE CONTINENTS
+
+[Territories]
+india asia 0 FREE COUNTRIES pakistan congo 
+pakistan asia 0 FREE COUNTRIES india china 
+china asia 0 FREE COUNTRIES pakistan 
+congo africa 0 FREE COUNTRIES india uganda 
+uganda africa 0 FREE COUNTRIES congo 
+
+[PlayerList]
+
+[CardDetails]
+0
+[CurrentPhase]
+Attack
+[CurrentPlayer]
+testPlayer
