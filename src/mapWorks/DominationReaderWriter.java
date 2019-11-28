@@ -12,11 +12,12 @@ import dao.Continent;
 import dao.Country;
 import dao.Map;
 
+/**
+ * This class is used for reading and writing map files in Domination format
+ *
+ */
 public class DominationReaderWriter {
-	/**
-	 * Map to store the current map object
-	 */
-	//public Map map;
+
 	/**
 	 * BufferedReader to process map file
 	 */
@@ -25,16 +26,15 @@ public class DominationReaderWriter {
 	 * CurrentLine to store the current line of parsing
 	 */
 	private String currentLine;
-	
 
 	/**
 	 * This method parses the map file
 	 * 
+	 * @param map  Map Object
 	 * @param file Map file to be parsed
 	 * @return 1 if successful else 0
 	 */
-	public int parseMapFile(Map map,File file) {
-		
+	public int parseMapFile(Map map, File file) {
 
 		try {
 
@@ -81,8 +81,6 @@ public class DominationReaderWriter {
 	 * @throws IOException           for Buffered Reader
 	 */
 	public void loadBorders(Map map) throws NumberFormatException, IOException {
-		// TODO Auto-generated method stub
-
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
 			if (currentLine.length() == 0) {
 				continue;
@@ -120,8 +118,6 @@ public class DominationReaderWriter {
 	 * @throws IOException           for Buffered Reader
 	 */
 	public void loadCountries(Map map) throws NumberFormatException, IOException {
-		// TODO Auto-generated method stub
-
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
 			if (currentLine.length() == 0) {
 				continue;
@@ -131,7 +127,7 @@ public class DominationReaderWriter {
 			country.setName(countryDetails[1]);
 			country.setContinentName(map.getListOfContinent().get((Integer.parseInt(countryDetails[2])) - 1).getName());
 			map.addCountry(country);
-			
+
 			map.getListOfContinent().get((Integer.parseInt(countryDetails[2])) - 1).getCountries()
 					.add(countryDetails[1]);
 		}
@@ -156,23 +152,11 @@ public class DominationReaderWriter {
 			continent.setName(continentDetails[0]);
 			continent.setContinentValue(Integer.parseInt(continentDetails[1]));
 			map.addContinent(continent);
-			
 
 		}
 
 	}
-	/**
-	 * This method returns the currently loaded map
-	 * 
-	 * @return Map Object
-	 */
-	/*public Map getMap() {
-		return this.map;
-	}*/
 
-
-
-	
 	/**
 	 * This method saves the map to .map file
 	 * 
@@ -180,10 +164,10 @@ public class DominationReaderWriter {
 	 * @param fileName Name of the file
 	 * @throws IOException for Buffered Reader
 	 */
-public void saveMap(Map map, String fileName) throws IOException {
-		
+	public void saveMap(Map map, String fileName) throws IOException {
+
 		String message1 = " ";
-		String message2= " ";
+		String message2 = " ";
 		String mapName;
 		message1 = map.getMessage1();
 		message2 = map.getMessage2();

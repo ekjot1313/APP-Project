@@ -1,15 +1,15 @@
 package mapWorks;
 
-import dao.Bridge;
-import dao.Continent;
-import dao.Country;
-import dao.Map;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import dao.Bridge;
+import dao.Continent;
+import dao.Country;
+import dao.Map;
 
 /**
  * This class is used to edit the map. This will be called when user will enter
@@ -21,15 +21,15 @@ import java.util.Arrays;
  */
 public class MapEditor {
 	/**
-	 * flag to store true if flow is good
+	 * Flag to store true if flow is good
 	 */
 	public boolean good;
 	/**
-	 * flag to allow print or not
+	 * Flag to allow print or not
 	 */
 	public boolean print;
 	/**
-	 * to store map object
+	 * To store map object
 	 */
 	public Map map;
 
@@ -49,7 +49,7 @@ public class MapEditor {
 	 * @return Map object
 	 * @throws IOException BufferedReader used for user input
 	 */
-	public Map mapEditorInit(Map map ,DominationReaderWriter drw) throws IOException {
+	public Map mapEditorInit(Map map, DominationReaderWriter drw) throws IOException {
 		BufferedReader brConsole = new BufferedReader(new InputStreamReader(System.in));
 
 		// if passed map is null then create new map otherwise copy map
@@ -90,7 +90,6 @@ public class MapEditor {
 
 					// validate and save map; if map is invalid, prompt user to edit map
 					if (this.map.validateMap() == 0 && this.map.validateContinent(this.map) == 0) {
-						//(new MapSaver()).saveMap(this.map, command[1]);
 						drw.saveMap(map, command[1]);
 
 						// map successfully edited and saved
@@ -200,8 +199,8 @@ public class MapEditor {
 	}
 
 	/**
-	 * This method is used to read 'editcountry' command, store sub-commands to queue,
-	 * and execute all sub-commands
+	 * This method is used to read 'editcountry' command, store sub-commands to
+	 * queue, and execute all sub-commands
 	 * 
 	 * @param command Command given by the user
 	 */
@@ -377,6 +376,7 @@ public class MapEditor {
 	 * 
 	 * @param continentName Continent to be removed
 	 * @param queue         Queue
+	 * @return Queue
 	 */
 	public ArrayList<ArrayList<String>> removeContinentToQueue(String continentName,
 			ArrayList<ArrayList<String>> queue) {
@@ -515,8 +515,6 @@ public class MapEditor {
 					}
 					if (map.getContinentFromName(s.get(1)) != null) {
 						print("Continent: " + s.get(1) + ", Already Exists.");
-						// return; Commented after build 2, because now corrupt sub-command will not
-						// affect whole command
 						continue; // jump to next sub-command
 					}
 					// creating new continent object and adding properties
@@ -539,8 +537,6 @@ public class MapEditor {
 
 					if (continent == null) {
 						print("Continent: " + s.get(1) + ", Not Found.");
-						// return; Commented after build 2, because now corrupt sub-command will not
-						// affect whole command
 						continue; // jump to next sub-command
 					}
 
@@ -668,8 +664,6 @@ public class MapEditor {
 					if (link) {
 						print("Given Countries: " + count.getName() + " and " + neig.getName()
 								+ ", Are Already Neighbors.");
-						// good = false; Commented during refactoring in build 3; not required
-						// return;
 						continue; // jump to next sub-command
 					}
 
@@ -692,8 +686,6 @@ public class MapEditor {
 					if (!link) {
 						print("Given Countries: " + count.getName() + " and " + neig.getName()
 								+ ", Are Not Neighbors.");
-						// good = false; Commented during refactoring in build 3; not required
-						// return;
 						continue; // jump to next sub-command
 					}
 
@@ -781,7 +773,6 @@ public class MapEditor {
 	 * @param map Map object to be validated
 	 */
 	private void validateMap(Map map) {
-		// TODO Auto-generated method stub
 		int notConnected = map.validateMap();
 		int notConnectedSubGraph = map.validateContinent(map);
 		if (notConnected == 0 && notConnectedSubGraph == 0) {
@@ -798,10 +789,7 @@ public class MapEditor {
 	 * @param map Map Object
 	 */
 	public void showMap(Map map) {
-		// TODO Auto-generated method stub
-
 		map.display();
-
 	}
 
 	/**
@@ -810,7 +798,6 @@ public class MapEditor {
 	 * @param string String to be printed
 	 */
 	private void print(String string) {
-		// TODO Auto-generated method stub
 		if (print) {
 			System.out.println(string);
 		}
