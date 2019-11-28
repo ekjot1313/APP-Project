@@ -13,13 +13,22 @@ import dao.Dice;
 import dao.Map;
 import dao.Player;
 
+/**
+ * This class is for Random Strategy, implements the Strategy interface
+ *
+ */
 public class RandomStrategy implements Strategy {
 
 	Random random = new Random();
 	private Scanner sc;
 
-	// gameplayer -add a random -add b random -add c random -add d random -add e
-	// random
+	/**
+	 * This is the method for reinforcement phase
+	 * 
+	 * @param map        Map Object
+	 * @param listPlayer List of Players
+	 * @param P          Current Player
+	 */
 	@Override
 	public void reinforcement(Map map, ArrayList<Player> listPlayer, Player P) {
 		// TODO Auto-generated method stub
@@ -52,7 +61,8 @@ public class RandomStrategy implements Strategy {
 			P.setView("PhaseView");
 			P.setActions(
 					"Reinforced " + armiesTobeplaced + " armies to " + map.getCountryFromName(inputArray[1]).getName());
-			System.out.println("Reinforced " + armiesTobeplaced + " armies to " + map.getCountryFromName(inputArray[1]).getName());
+			System.out.println(
+					"Reinforced " + armiesTobeplaced + " armies to " + map.getCountryFromName(inputArray[1]).getName());
 
 		}
 		P.setEndOfActions(1);
@@ -61,8 +71,13 @@ public class RandomStrategy implements Strategy {
 
 	}
 
+	/**
+	 * This method is used for card exchange
+	 * 
+	 * @param P Player Object
+	 * @return Number of armies
+	 */
 	private int exchangeCards(Player P) {
-		// TODO Auto-generated method stub
 		int armies = 0;
 		ArrayList<String> cards = P.getCards();
 		String card1 = "", card2 = "", card3 = "";
@@ -105,11 +120,16 @@ public class RandomStrategy implements Strategy {
 		Player.deck.add(card2);
 		Player.deck.add(card3);
 		return armies;
-
 	}
 
+	/**
+	 * This method generates a random reinforcement command
+	 * 
+	 * @param p                      Player Object
+	 * @param maxReinforcementArmies Maximum number of reinforcement armies possible
+	 * @return Random reinforcement command
+	 */
 	private String getRandomReinforceCommand(Player p, int maxReinforcementArmies) {
-		// TODO Auto-generated method stub
 		String input = "reinforce ";
 
 		int numOfCountriesOwned = p.getAssigned_countries().size();
@@ -122,10 +142,16 @@ public class RandomStrategy implements Strategy {
 		return input;
 	}
 
+	/**
+	 * This is the method for attack phase
+	 * 
+	 * @param map        Map Object
+	 * @param listPlayer List of Players
+	 * @param P          Current Player
+	 * @return 1 if the game is over otherwise 0.
+	 */
 	@Override
 	public int attack(Map map, ArrayList<Player> listPlayer, Player P) {
-		// TODO Auto-generated method stub
-
 		P.setEndOfActions(0);
 		P.setView("PhaseView");
 		P.setState("Attack");
@@ -155,11 +181,6 @@ public class RandomStrategy implements Strategy {
 			}
 		}
 		ArrayList<String> allNeighbors = new ArrayList<String>(allNeighborsSet);
-		// red in coverage
-		// // no neighbor found
-		// if (allNeighbors.size() == 0) {
-		// return 0;
-		// }
 
 		// selecting one neighbor country to attack on
 		int index = random.nextInt(allNeighbors.size());
@@ -182,20 +203,6 @@ public class RandomStrategy implements Strategy {
 			}
 
 			input = getRandomAttackCommand(P, map, toCountry);
-
-			// red in coverage
-			// while (validate(input, map, P) == 0) {
-			// System.out.println("Invalid attack. Trying again.");
-			// input = getRandomAttackCommand(P, map, toCountry);
-			// numOfAttack--;
-			// if (numOfAttack == 0 || input.contains("error")) {
-			// System.out.println("No further attack possible.");
-			// P.setActions("No further attack possible.");
-			// P.setEndOfActions(1);
-			// P.setActions("Attack finished");
-			// return 0;
-			// }
-			// }
 
 			String s[] = input.split(" ");
 
@@ -303,8 +310,15 @@ public class RandomStrategy implements Strategy {
 
 	}
 
+	/**
+	 * This method returns the number of dice used by defender
+	 * 
+	 * @param toCountry Country which is to be defended
+	 * @param map       Map Object
+	 * @param P         Player Object
+	 * @return Number of defender dice
+	 */
 	private int getDefenderDice(Country toCountry, Map map, Player P) {
-		// TODO Auto-generated method stub
 		int defenderDice = 1;
 		int validCommand = 0;
 		String owner = toCountry.getOwner();
@@ -356,8 +370,15 @@ public class RandomStrategy implements Strategy {
 		return defenderDice;
 	}
 
+	/**
+	 * This method generates a random attack command
+	 * 
+	 * @param P         Player Object
+	 * @param map       Map Object
+	 * @param toCountry Country to be attacked
+	 * @return Random attack command
+	 */
 	private String getRandomAttackCommand(Player P, Map map, Country toCountry) {
-		// TODO Auto-generated method stub
 		String input = "attack ";
 
 		// getting player's countries that are neighbor to selected country and have
@@ -400,6 +421,14 @@ public class RandomStrategy implements Strategy {
 		return input;
 	}
 
+	/**
+	 * This is the method for fortification phase
+	 * 
+	 * @param map        Map Object
+	 * @param listPlayer List of Players
+	 * @param command    Command used for testing
+	 * @param P          Current Player
+	 */
 	@Override
 	public void fortification(Map map, ArrayList<Player> listPlayer, String command, Player P) {
 		// TODO Auto-generated method stub
@@ -502,11 +531,11 @@ public class RandomStrategy implements Strategy {
 	}
 
 	/**
-	 * Function to move the armies after conquering country
+	 * This method is used to move the armies after conquering country
 	 * 
-	 * @param command     entered command
-	 * @param fromCountry name of country from which armies are moved
-	 * @param toCountry   name of country to which armies should be moved
+	 * @param command     Command Given
+	 * @param fromCountry Name of country from which armies are moved
+	 * @param toCountry   Name of country to which armies should be moved
 	 * @return 1 if armies are successfully moved otherwise 0.
 	 */
 	public int attackMove(String command, Country fromCountry, Country toCountry, Player P) {
@@ -545,9 +574,9 @@ public class RandomStrategy implements Strategy {
 	}
 
 	/**
-	 * Function to check the end of game
+	 * This method is used to check the end of game
 	 * 
-	 * @param listPlayer list of players
+	 * @param listPlayer List of Players
 	 * @return 1 if end of game otherwise 0.
 	 */
 	public int endGame(ArrayList<Player> listPlayer) {
@@ -558,102 +587,11 @@ public class RandomStrategy implements Strategy {
 
 	@Override
 	public int validate(String command, Map testMap, Player P) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int attackMove(String command, Country fromCountry, Country toCountry, int attackerDice, Player P) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	// red in coverage
-	// /**
-	// * This is the method to check the attack command.
-	// *
-	// * @return 1 if the command is valid otherwise 0.
-	// */
-	// public int validate(String command, Map map, Player P) {
-	// String s[] = command.split(" ");
-	// int countryFound = 0;
-	// int neighborFound = 0;
-	//
-	// if (s.length < 4) {
-	//
-	// P.setEndOfActions(1);
-	// P.setActions("Attack finished");
-	// return 1;
-	//
-	// }
-	// if (s.length == 4) {
-	//
-	// for (Country c : P.getAssigned_countries()) {
-	// if (c.getName().equals(s[1])) {
-	// countryFound = 1;
-	// if (c.getNoOfArmies() > 1) {
-	// for (int i = 0; i < c.getNeighbors().size(); i++) {
-	// if (c.getNeighbors().get(i).equals(s[2])) {
-	// neighborFound = 1;
-	// Country c2 = map.getCountryFromName(s[2]);
-	// if (!P.getName().equals(c2.getOwner())) {
-	//
-	// int numdice = Integer.parseInt(s[3]);
-	//
-	// int noOfArmies = c.getNoOfArmies();
-	// // red in coverage
-	//// if (numdice > 3) {
-	//// System.out.println("Number of dices cannot be more than 3");
-	//// return 0;
-	//// }
-	//// if (numdice >= noOfArmies) {
-	//// System.out.println(
-	//// "Number of dices should be less than the no of armies in that country.");
-	//// return 0;
-	//// }
-	//// if (numdice == 0) {
-	//// System.out.println("Number of dices cannot be 0");
-	//// return 0;
-	//// }
-	//// if (numdice < 0) {
-	//// System.out.println("Incorrect number of dices");
-	//// return 0;
-	//// }
-	// return 1;
-	//
-	// } else {
-	//
-	// System.out.println(command);
-	// System.out.println("Sorry!You cannot attack your own country.");
-	// return 0;
-	// }
-	//
-	// }
-	// }
-	// }
-	// //red in coverage
-	//// else {
-	//// System.out.println("You only have 1 army left in the FromCountry. Hence you
-	// cannot attack");
-	//// return 0;
-	//// }
-	//// if (neighborFound == 0) {
-	//// System.out.println("Sorry!To country is not an adjacent country of From
-	// country.");
-	//// return 0;
-	//// }
-	//
-	// }
-	//
-	// }
-	// //red in coverage
-	//// if (countryFound == 0) {
-	//// System.out.println("Sorry!From country is not assigned to you.");
-	//// return 0;
-	//// }
-	//
-	// }
-	// return 0;
-	// }
-
 }
