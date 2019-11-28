@@ -17,7 +17,9 @@ import dao.Player;
  *
  */
 public class ArmyAllocator {
-
+	/**
+	 * Scanner obj
+	 */
 	private Scanner sc1;
 
 	/**

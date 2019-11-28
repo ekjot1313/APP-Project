@@ -216,6 +216,7 @@ public class HumanStrategy implements Strategy {
 		Scanner sc = new Scanner(System.in);
 		// calculate reinforcement armies
 		int reinforcementArmies=calculateReinforceArmies(map,P);
+		int reinfor = reinforcementArmies;
 		int forceExchangeCards = 0;
 
 		if (P.getCards().size() >= 5) {
@@ -246,9 +247,13 @@ public class HumanStrategy implements Strategy {
 				map.displayAll();
 			} 
 			else if(inputArray[0].equals("savegame")){
+				if(reinforcementArmies > 0 && reinfor != reinforcementArmies )
+					System.out.println("Please reinforce all armies before saving");
+				else {
 				Director d= new Director();
 				d.setGbuilder(new SaveGameBuilder());
 				d.constructGame(inputArray[1], map, P.getName(), P.getState());
+				}
 			}
 			else if (inputArray.length == 3 && inputArray[0].equals("reinforce")) {
 				int armiesTobeplaced =0;
