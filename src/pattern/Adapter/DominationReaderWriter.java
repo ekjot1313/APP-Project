@@ -1,4 +1,4 @@
-package mapWorks;
+package pattern.Adapter;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -6,8 +6,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import dao.Bridge;
 import dao.Continent;
@@ -15,10 +13,10 @@ import dao.Country;
 import dao.Map;
 
 /**
- * This class is used for reading and writing map files in Conquest format
+ * This class is used for reading and writing map files in Domination format
  *
  */
-public class ConquestReaderWriter {
+public class DominationReaderWriter {
 
 	/**
 	 * BufferedReader to process map file
@@ -32,10 +30,10 @@ public class ConquestReaderWriter {
 	/**
 	 * This method parses the map file
 	 * 
+	 * @param map  Map Object
 	 * @param file Map file to be parsed
 	 * @return 1 if successful else 0
 	 */
-
 	public int parseMapFile(Map map, File file) {
 
 		try {
@@ -43,18 +41,18 @@ public class ConquestReaderWriter {
 			bufferReaderForFile = new BufferedReader(new FileReader(file));
 
 			while ((currentLine = bufferReaderForFile.readLine()) != null) {
-				if (currentLine.contains("[Continents]")) {
+				if (currentLine.contains("[continents]")) {
 					loadContinents(map);
 				}
 
-				if (currentLine.contains("[Territories]")) {
-					loadTerritories(map);
+				if (currentLine.contains("[countries]")) {
+					loadCountries(map);
+				}
+				if (currentLine.contains("[borders]")) {
+					loadBorders(map);
 				}
 
 			}
-
-			loadBridges(map);
-
 			// validate map call
 			int notConnected = map.validateMap();
 			int notConnectedSubGraph = map.validateContinent(map);
@@ -69,64 +67,69 @@ public class ConquestReaderWriter {
 		} catch (Exception e) {
 			if (e.toString().contains("FileNotFoundException"))
 				System.out.println("Invalid filename");
-			e.printStackTrace();
+			System.out.println(e);
 			return 0;
 		}
 		return 1;
 	}
 
 	/**
-	 * This method loads the bridges to the continents
-	 * 
-	 * @param map Map Object
-	 */
-	public void loadBridges(Map map) {
-		for (Country c : map.getListOfCountries()) {
-			for (String neighborCountry : c.getNeighbors()) {
-				if (!map.getCountryFromName(neighborCountry).getContinentName().equals(c.getContinentName())) {
-					Bridge bridge = new Bridge(map.getCountryFromName(neighborCountry).getContinentName(), c.getName(),
-							neighborCountry);
-					map.getContinentFromName(c.getContinentName()).getBridges().add(bridge);
-				}
-			}
-		}
-	}
-
-	/**
-	 * This method loads the territories to the map object
+	 * This method loads borders to the map object
 	 * 
 	 * @param map Map Object
 	 * @throws NumberFormatException for Buffered Reader
 	 * @throws IOException           for Buffered Reader
 	 */
-	public void loadTerritories(Map map) throws NumberFormatException, IOException {
+	public void loadBorders(Map map) throws NumberFormatException, IOException {
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
-
 			if (currentLine.length() == 0) {
 				continue;
 			}
-			String[] countryDetails = currentLine.split(",");
-			Country c = new Country();
-			String coname = countryDetails[0];
-			if (coname.contains(" "))
-				coname = coname.replaceAll(" ", "_");
-			c.setName(coname);
-			String cname = countryDetails[3];
-			if (cname.contains(" "))
-				cname = cname.replaceAll(" ", "_");
-			c.setContinentName(cname);
-			Continent continent = map.getContinentFromName(cname);
-			continent.getCountries().add(c.getName());
-			List<String> neighbours = new ArrayList<String>();
-			for (int i = 4; i < countryDetails.length; i++) {
-				String neighbour = countryDetails[i];
-				if (neighbour.contains(" "))
-					neighbour = neighbour.replaceAll(" ", "_");
-				neighbours.add(neighbour);
-			}
-			c.setNeighbors(neighbours);
-			map.addCountry(c);
+			String[] neighbourDetails = currentLine.split(" ");
+			for (int i = 0; i < neighbourDetails.length - 1; i++) {
+				map.getListOfCountries().get(Integer.parseInt(neighbourDetails[0]) - 1).getNeighbors()
+						.add(map.getListOfCountries().get(Integer.parseInt(neighbourDetails[i + 1]) - 1).getName());
 
+				if (!map.getListOfCountries().get(Integer.parseInt(neighbourDetails[0]) - 1).getContinentName().equals(
+						map.getListOfCountries().get(Integer.parseInt(neighbourDetails[i + 1]) - 1).getContinentName()))
+
+				{
+					map.getContinentFromName(
+							map.getListOfCountries().get(Integer.parseInt(neighbourDetails[0]) - 1).getContinentName())
+							.getBridges()
+							.add(new Bridge(
+									map.getListOfCountries().get(Integer.parseInt(neighbourDetails[i + 1]) - 1)
+											.getContinentName(),
+									map.getListOfCountries().get(Integer.parseInt(neighbourDetails[0]) - 1).getName(),
+									map.getListOfCountries().get(Integer.parseInt(neighbourDetails[i + 1]) - 1)
+											.getName()));
+				}
+			}
+
+		}
+
+	}
+
+	/**
+	 * This method loads countries to the map object
+	 * 
+	 * @param map Map Object
+	 * @throws NumberFormatException for Buffered Reader
+	 * @throws IOException           for Buffered Reader
+	 */
+	public void loadCountries(Map map) throws NumberFormatException, IOException {
+		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
+			if (currentLine.length() == 0) {
+				continue;
+			}
+			String[] countryDetails = currentLine.split(" ");
+			Country country = new Country();
+			country.setName(countryDetails[1]);
+			country.setContinentName(map.getListOfContinent().get((Integer.parseInt(countryDetails[2])) - 1).getName());
+			map.addCountry(country);
+
+			map.getListOfContinent().get((Integer.parseInt(countryDetails[2])) - 1).getCountries()
+					.add(countryDetails[1]);
 		}
 
 	}
@@ -139,16 +142,14 @@ public class ConquestReaderWriter {
 	 * @throws IOException           for Buffered Reader
 	 */
 	public void loadContinents(Map map) throws NumberFormatException, IOException {
+
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
 			if (currentLine.length() == 0) {
 				continue;
 			}
-			String[] continentDetails = currentLine.split("=");
+			String[] continentDetails = currentLine.split(" ");
 			Continent continent = new Continent();
-			String cname = continentDetails[0];
-			if (cname.contains(" "))
-				cname = cname.replaceAll(" ", "_");
-			continent.setName(cname);
+			continent.setName(continentDetails[0]);
 			continent.setContinentValue(Integer.parseInt(continentDetails[1]));
 			map.addContinent(continent);
 
@@ -165,8 +166,8 @@ public class ConquestReaderWriter {
 	 */
 	public void saveMap(Map map, String fileName) throws IOException {
 
-		String message1;
-		String message2;
+		String message1 = " ";
+		String message2 = " ";
 		String mapName;
 		message1 = map.getMessage1();
 		message2 = map.getMessage2();
@@ -174,26 +175,32 @@ public class ConquestReaderWriter {
 		String currentPath = System.getProperty("user.dir") + "\\Maps\\";
 		String mapPath = currentPath + fileName + ".map";
 		BufferedWriter bwFile = new BufferedWriter(new FileWriter(mapPath));
-		String content = "[map]";
+		String content = ";Map";
 		content += (message1 + "\r\n");
 		content += ("\r\nname " + mapName + " Map\r\n");
 		content += ("\r\n" + message2 + "\r\n");
-		content += ("\r\n[Continents]\r\n");
+		content += ("\r\n[continents]\r\n");
 		for (Continent continent : map.getListOfContinent()) {
-			content += (continent.getName() + "=" + continent.getContinentValue() + "\n");
+			content += (continent.getName() + " " + continent.getContinentValue() + " 00000\r\n");
 		}
-		content += ("\r\n[Territories]\r\n");
+		content += ("\r\n[countries]\r\n");
 		String borders = "";
 		for (Country country : map.getListOfCountries()) {
-			content += (country.getName() + ",0,0," + country.getContinentName() + ",");
-			for (String neighbor : country.getNeighbors()) {
-				content += (neighbor + ",");
+			int countryIndex = map.getListOfCountries().indexOf(country) + 1;
+			int continentIndex = map.getListOfContinent().indexOf(map.getContinentFromName(country.getContinentName()))
+					+ 1;
+
+			content += (countryIndex + " " + country.getName() + " " + continentIndex + "\r\n");
+			borders += (countryIndex + "");
+			for (String neighborName : country.getNeighbors()) {
+				int neighborIndex = map.getListOfCountries().indexOf(map.getCountryFromName(neighborName)) + 1;
+				borders += (" " + neighborIndex);
 			}
-			content += "\n";
+			borders += ("\r\n");
 		}
+		content += ("\r\n[borders]\r\n" + borders);
 		bwFile.write(content);
 		bwFile.close();
 		System.out.println("Map file saved as: " + fileName + ".map");
 	}
-
 }

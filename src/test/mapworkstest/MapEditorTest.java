@@ -12,7 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import dao.Map;
-import mapWorks.DominationReaderWriter;
+import pattern.Adapter.DominationReaderWriter;
 import mapWorks.MapEditor;
 
 

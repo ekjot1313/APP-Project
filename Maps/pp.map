@@ -1,0 +1,16 @@
+;Mapnull
+
+name null Map
+
+null
+
+[continents]
+asia 10 00000
+
+[countries]
+1 india 1
+2 pak 1
+
+[borders]
+1 2
+2 1

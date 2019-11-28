@@ -10,6 +10,7 @@ import dao.Bridge;
 import dao.Continent;
 import dao.Country;
 import dao.Map;
+import pattern.Adapter.DominationReaderWriter;
 
 /**
  * This class is used to edit the map. This will be called when user will enter

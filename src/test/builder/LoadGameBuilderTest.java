@@ -12,7 +12,7 @@ import org.junit.Test;
 import dao.Continent;
 import dao.Country;
 import dao.Map;
-import mapWorks.DominationReaderWriter;
+import pattern.Adapter.DominationReaderWriter;
 import mapWorks.MapEditor;
 import pattern.builder.Director;
 import pattern.builder.Game;
