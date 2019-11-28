@@ -135,8 +135,8 @@ public class LoadGameBuilder extends GameBuilder{
 				p.setCards(cardList);
 				
 				//playerlist.add(p);
-				map.addPlayer(p);
 				map.setNoOfArmies(p, Integer.parseInt(playerDetails[1])-Integer.parseInt(playerDetails[2]));
+				map.addPlayer(p);
 			}
 		//map.setListOfPlayers(playerlist);
 			

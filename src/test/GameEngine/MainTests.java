@@ -1,6 +1,7 @@
 package test.GameEngine;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -32,15 +33,56 @@ public class MainTests {
 	@Test
 	public void testTournamentMode() throws Exception {
 		
-		String [] testListOfMapFiles = {"TestConquest"};
+		//invalid commands
+		
+		//M=1to5 different
+		//M=0
+		String [] testListOfMapFiles1 = {""};
 		String [] testListOfStrategies = {"Benevolent", "Cheater", "Random"};
 		int testNumberOfGames = 2;
 		int testMaxTurns = 10;
 
-		String [][] output = {{"Cheater", "Cheater"}};
-		String [][] testOutput = m.tournamentMode(testListOfMapFiles, testListOfStrategies, testNumberOfGames, testMaxTurns);
 		
-		assertArrayEquals(output, testOutput);
+		String [][] testOutput = Main.tournamentMode(testListOfMapFiles1, testListOfStrategies, testNumberOfGames, testMaxTurns);
+		
+		assertNull(testOutput);
+		
+		//M=6
+		String [] testListOfMapFiles2 = {"a","b","c","d","e","f"};
+		testOutput = Main.tournamentMode(testListOfMapFiles2, testListOfStrategies, testNumberOfGames, testMaxTurns);
+		
+		assertNull(testOutput);
+		
+		//same M
+		String [] testListOfMapFiles3 = {"a","b","c","d","a"};
+		testOutput = Main.tournamentMode(testListOfMapFiles3, testListOfStrategies, testNumberOfGames, testMaxTurns);
+		
+		assertNull(testOutput);
+		
+		//null M
+		String [] testListOfMapFiles4 = {"a","b","c","d",""};
+		testOutput = Main.tournamentMode(testListOfMapFiles4, testListOfStrategies, testNumberOfGames, testMaxTurns);
+		
+		assertNull(testOutput);
+		
+		
+		
+		
+		
+		//valid command
+		String [] testListOfMapFilesValid = {"TestConquest"};
+		String [] testListOfStrategiesValid = {"Benevolent", "Cheater", "Random"};
+		int testNumberOfGamesValid = 2;
+		int testMaxTurnsValid = 10;
+
+		String [][] outputValid = {{"Cheater", "Cheater"}};
+		String [][] testOutputValid = Main.tournamentMode(testListOfMapFilesValid, testListOfStrategiesValid, testNumberOfGamesValid, testMaxTurnsValid);
+		
+		assertArrayEquals(outputValid, testOutputValid);
+		
+		
+		
+		
 	}
 	
 }

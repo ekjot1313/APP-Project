@@ -32,7 +32,10 @@ public class Bridge {
 		this.country1 = country1;
 		this.country2 = country2;
 	}
-
+	/**
+	 * Copy Constructor 
+	 * @param b bridge
+	 */
 	public Bridge(Bridge b) {
 		this.neigContinent = b.neigContinent;
 		this.country1 = b.country1;

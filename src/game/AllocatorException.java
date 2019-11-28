@@ -6,7 +6,10 @@ package game;
  *
  */
 public class AllocatorException extends Exception {
-
+	/**
+	 * Constructor
+	 * @param message to set message
+	 */
 	public AllocatorException(String message) {
 		super(message);
 	}
