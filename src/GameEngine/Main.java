@@ -13,9 +13,9 @@ import dao.Map;
 import dao.Player;
 import game.ArmyAllocator;
 import game.PlayerAllocator;
+import mapWorks.MapEditor;
 import pattern.Adapter.ConquestReaderWriter;
 import pattern.Adapter.DominationReaderWriter;
-import mapWorks.MapEditor;
 import pattern.Adapter.MapReaderWriterAdapter;
 import pattern.Strategy.AggressiveStrategy;
 import pattern.Strategy.BenevolentStrategy;
@@ -34,7 +34,6 @@ import pattern.observer.PhaseView;
  * 
  * @author Mitalee Naik
  * @since 1.0.0
- *
  */
 public class Main {
 	/**
@@ -45,8 +44,10 @@ public class Main {
 	static Map map;
 
 	/**
+	 * The execution of game begins from this method
+	 * 
 	 * @param args
-	 * @throws Exception The execution of game begins from this function
+	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
 		System.out.println("Welcome to RISK GAME!");
@@ -106,7 +107,6 @@ public class Main {
 			} else if (gameMode.equalsIgnoreCase("Tournament")) {
 				try {
 					tournamentModeInit();
-					// tournamentMode();
 				} catch (Exception e) {
 					System.out.println("Invalid Command");
 				}
@@ -118,14 +118,13 @@ public class Main {
 	}
 
 	/**
-	 * Method for loadinga a saved game after user selects the loadgame option
+	 * This method is used for loading a saved game after user selects the
+	 * 'loadgame' option
 	 * 
-	 * @param game
+	 * @param game Game Object
 	 * @throws Exception
 	 */
 	private static void loadSavedGame(Game game) throws Exception {
-		// TODO Auto-generated method stub
-
 		PhaseView pv = new PhaseView();
 		CardExchangeView cev = new CardExchangeView();
 		String currentPlayer = game.getCurrentPlayer();
@@ -226,8 +225,12 @@ public class Main {
 
 	}
 
+	/**
+	 * This method is used for tournament initial setup
+	 * 
+	 * @throws Exception
+	 */
 	private static void tournamentModeInit() throws Exception {
-		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
 		String[] listOfMapFiles;
 		String[] listOfPlayerStrategies;
@@ -275,9 +278,18 @@ public class Main {
 
 	}
 
+	/**
+	 * This method is used to play the game in tournament mode
+	 * 
+	 * @param listOfMapFiles         List of Maps
+	 * @param listOfPlayerStrategies List of Player Strategies
+	 * @param numberOfGames          Number of Games
+	 * @param maxTurns               Maximum number of turns
+	 * @return Winner Array
+	 * @throws Exception
+	 */
 	public static String[][] tournamentMode(String[] listOfMapFiles, String[] listOfPlayerStrategies, int numberOfGames,
 			int maxTurns) throws Exception {
-		// TODO Auto-generated method stub
 
 		// if command is invalid
 		if (isInvalidTournamentCommand(listOfMapFiles, listOfPlayerStrategies, numberOfGames, maxTurns)) {
@@ -391,10 +403,10 @@ public class Main {
 	/**
 	 * This method checks if given tournament command is invalid or not
 	 * 
-	 * @param listOfMapFiles
-	 * @param listOfPlayerStrategies
-	 * @param numberOfGames
-	 * @param maxTurns
+	 * @param listOfMapFiles         List of Maps
+	 * @param listOfPlayerStrategies List of Player Strategies
+	 * @param numberOfGames          Number of Games
+	 * @param maxTurns               Maximum number of turns
 	 * @return true if command is invalid
 	 * @throws Exception
 	 */
@@ -486,6 +498,12 @@ public class Main {
 		return false;
 	}
 
+	/**
+	 * This method returns Strategy Object according to the passed string
+	 * 
+	 * @param playerType Type of player
+	 * @return Strategy Object
+	 */
 	private static Strategy getStrategyByName(String playerType) {
 		// TODO Auto-generated method stub
 		if (playerType.equalsIgnoreCase("Aggressive"))
@@ -657,10 +675,10 @@ public class Main {
 	}
 
 	/**
-	 * To create a deck of cards based on countries
+	 * This method is used to create a deck of cards based on countries
 	 * 
-	 * @param map
-	 * @return cardlist
+	 * @param map Map Object
+	 * @return Card List
 	 */
 	private static ArrayList<String> createDeck(Map map) {
 		// TODO Auto-generated method stub
@@ -709,7 +727,7 @@ public class Main {
 	}
 
 	/**
-	 * This method contains the commands provided after editmap option is selected
+	 * This method contains the commands provided after 'editmap' option is selected
 	 */
 	private static void editMapCommands() {
 
