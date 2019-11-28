@@ -4,8 +4,8 @@ import dao.Map;
 
 /**
  * Abstract Class Game Builder
+ * 
  * @author Mitalee
- *
  */
 public abstract class GameBuilder {
 	/**
@@ -14,39 +14,43 @@ public abstract class GameBuilder {
 	protected Game gameProduct;
 
 	/**
-	 * To return game 
-	 * @return
+	 * This method returns the Game Object
+	 * 
+	 * @return Game Object
 	 */
 	public Game getGameProduct() {
 		return gameProduct;
 	}
 	
 	/**
-	 * Creates an instance of game
+	 * This method creates an instance of game
 	 */
 	public void createNewGame() {
 		gameProduct = new Game();
 	}
 	
 	/**
-	 * To build complex map object
-	 * @param filename
-	 * @param map
+	 * Abstract method to build complex map object
+	 * 
+	 * @param filename Name of the file
+	 * @param map Map Object
 	 */
 	abstract void buildMap(String filename ,Map map) ;
+	
 	/**
-	 * To build player
-	 * @param filename
-	 * @param map
+	 * Abstract method to build player object
+	 * 
+	 * @param filename Name of the file
+	 * @param player Player Object
 	 */
 	abstract void buildPlayer(String filename ,String player);
+	
 	/**
-	 * To build Phase
-	 * @param filename
-	 * @param map
+	 * Abstract method to build Phase
+	 * 
+	 * @param filename Name of the file
+	 * @param phase Phase
 	 */
 	abstract void buildPhase(String filename ,String phase);
 	
-
-
 }

@@ -4,8 +4,8 @@ import dao.Map;
 
 /**
  * This is the product class of builder pattern
+ * 
  * @author divya_000
- *
  */
 public class Game {
 
@@ -25,32 +25,57 @@ public class Game {
 	private String currentPhase;
 	
 	/**
-	 * Method to set the map object
+	 * This method is used to set the map object
+	 * 
 	 * @param map object of Map
 	 */
 	public void setMap(Map map) {
 		this.map = map;
 	}
+	
 	/**
-	 * Method to set the current player
-	 * @param currentPlayer
+	 * 
+	 * This method is used to set the current player
+	 * 
+	 * @param currentPlayer Current Player
 	 */
 	public void setCurrentPlayer(String currentPlayer) {
 		this.currentPlayer = currentPlayer;
 	}
+	
 	/**
-	 * Method to set the current phase
-	 * @param currentPhase
+	 * 
+	 * This method is used to set the current phase
+	 * 
+	 * @param currentPhase Current Phase
 	 */
 	public void setCurrentPhase(String currentPhase) {
 		this.currentPhase = currentPhase;
 	}
+	
+	/**
+	 * This method returns the map object
+	 * 
+	 * @return Map Object
+	 */
 	public Map getMap() {
 		return map;
 	}
+
+	/**
+	 * This method returns the current player
+	 * 
+	 * @return Current Player
+	 */
 	public String getCurrentPlayer() {
 		return currentPlayer;
 	}
+	
+	/**
+	 * This method returns the current phase
+	 * 
+	 * @return Current Phase
+	 */
 	public String getCurrentPhase() {
 		return currentPhase;
 	}
