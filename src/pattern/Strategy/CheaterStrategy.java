@@ -8,12 +8,21 @@ import dao.Country;
 import dao.Map;
 import dao.Player;
 
+/**
+ * This class is for Cheater Strategy, implements the Strategy interface.
+ *
+ */
 public class CheaterStrategy implements Strategy {
 
+	/**
+	 * This is the method for reinforcement phase
+	 * 
+	 * @param map        Map Object
+	 * @param listPlayer List of Players
+	 * @param P          Current Player
+	 */
 	@Override
 	public void reinforcement(Map map, ArrayList<Player> listPlayer, Player P) {
-		// TODO Auto-generated method stub
-
 		P.setEndOfActions(0);
 		P.setView("PhaseView");
 		P.setState("Reinforcement");
@@ -53,10 +62,16 @@ public class CheaterStrategy implements Strategy {
 
 	}
 
+	/**
+	 * This is the method for attack phase
+	 * 
+	 * @param map        Map Object
+	 * @param listPlayer List of Players
+	 * @param P          Current Player
+	 * @return 1 if the game is over otherwise 0.
+	 */
 	@Override
 	public int attack(Map map, ArrayList<Player> listPlayer, Player P) {
-		// TODO Auto-generated method stub
-
 		P.setEndOfActions(0);
 		P.setView("PhaseView");
 		P.setState("Attack");
@@ -147,10 +162,16 @@ public class CheaterStrategy implements Strategy {
 
 	}
 
+	/**
+	 * This is the method for fortification phase
+	 * 
+	 * @param map        Map Object
+	 * @param listPlayer List of Players
+	 * @param command    Command used for testing
+	 * @param P          Current Player
+	 */
 	@Override
 	public void fortification(Map map, ArrayList<Player> listPlayer, String command, Player P) {
-		// TODO Auto-generated method stub
-
 		P.setEndOfActions(0);
 		P.setView("PhaseView");
 		P.setState("Fortification");
@@ -184,7 +205,7 @@ public class CheaterStrategy implements Strategy {
 	}
 
 	/**
-	 * Function to check the end of game
+	 * This method is used to check the end of game
 	 * 
 	 * @param listPlayer list of players
 	 * @return 1 if end of game otherwise 0.
@@ -197,25 +218,21 @@ public class CheaterStrategy implements Strategy {
 
 	@Override
 	public int validate(String command, Map testMap, Player P) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int attackMove(String command, Country fromCountry, Country toCountry, int attackerDice, Player P) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int attackDeadlock(Map testMap, Player P) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int calculateReinforceArmies(Map testMap, Player P) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

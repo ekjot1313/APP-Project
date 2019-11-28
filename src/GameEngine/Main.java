@@ -279,34 +279,9 @@ public class Main {
 			int maxTurns) throws Exception {
 		// TODO Auto-generated method stub
 
-		// lists cannot be null
-		if (listOfMapFiles == null||listOfPlayerStrategies== null) {
-			System.out.println("M and P cannot be null.");
+		// if command is invalid
+		if (isInvalidTournamentCommand(listOfMapFiles, listOfPlayerStrategies, numberOfGames, maxTurns)) {
 			return null;
-		}
-
-		// listOfMapFiles must be from 1 to 5
-		if (listOfMapFiles.length < 1 || listOfMapFiles.length > 5) {
-			System.out.println("M should be in range 1-5");
-			return null;
-		}
-		// listOfMapFiles must have all different values and cannot be null
-		for (String map : listOfMapFiles) {
-
-			boolean repeated = false;
-			for (String otherMap : listOfMapFiles) {
-				if (otherMap.isEmpty()) {
-					System.out.println("M cannot have Empty value.");
-					return null;
-				}
-				if (map.equals(otherMap)) {
-					if (repeated) {
-						System.out.println("M cannot have repeated values.");
-						return null;
-					}
-					repeated = true;
-				}
-			}
 		}
 
 		// if command is valid
@@ -354,14 +329,14 @@ public class Main {
 
 							pa.listOfPlayers.get(i).attach(cev);
 							pa.listOfPlayers.get(i).executeReinforcement(map, (ArrayList<Player>) pa.listOfPlayers);
-							Thread.sleep(2500);
+							Thread.sleep(0);
 							Player current = pa.listOfPlayers.get(i);
 							pa.listOfPlayers.get(i).detach(cev);
 							cev.close();
 							System.out.println("_______________________________________________________");
 							System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " Attack phase begins");
 							gameOver = pa.listOfPlayers.get(i).executeAttack(map, (ArrayList<Player>) pa.listOfPlayers);
-							Thread.sleep(2500);
+							Thread.sleep(0);
 							if (gameOver == 1)
 								break;
 							int index = pa.listOfPlayers.indexOf(current);
@@ -371,7 +346,7 @@ public class Main {
 									"Player " + pa.listOfPlayers.get(i).getName() + " Fortification phase begins");
 							pa.listOfPlayers.get(i).executeFortification(map, (ArrayList<Player>) pa.listOfPlayers,
 									null);
-							Thread.sleep(1500);
+							Thread.sleep(0);
 							pa.listOfPlayers.get(i).detach(pv);
 
 						}
@@ -411,6 +386,104 @@ public class Main {
 
 		return winnerArray;
 
+	}
+
+	/**
+	 * This method checks if given tournament command is invalid or not
+	 * 
+	 * @param listOfMapFiles
+	 * @param listOfPlayerStrategies
+	 * @param numberOfGames
+	 * @param maxTurns
+	 * @return true if command is invalid
+	 * @throws Exception
+	 */
+	private static boolean isInvalidTournamentCommand(String[] listOfMapFiles, String[] listOfPlayerStrategies,
+			int numberOfGames, int maxTurns) throws Exception {
+		// TODO Auto-generated method stub
+
+		// lists cannot be null
+		if (listOfMapFiles == null || listOfPlayerStrategies == null) {
+			System.out.println("M and P cannot be null.");
+			return true;
+		}
+
+		// listOfMapFiles must be from 1 to 5
+		if (listOfMapFiles.length < 1 || listOfMapFiles.length > 5) {
+			System.out.println("M should be in range 1-5");
+			return true;
+		}
+
+		// listOfPlayerStrategies must be from 2 to 4
+		if (listOfPlayerStrategies.length < 2 || listOfPlayerStrategies.length > 4) {
+			System.out.println("P should be in range 1-5");
+			return true;
+		}
+
+		// numberOfGames must be from 1 to 5
+		if (numberOfGames < 1 || numberOfGames > 5) {
+			System.out.println("G should be in range 1-5");
+			return true;
+		}
+		// maxTurns must be from 10 to 50
+		if (maxTurns < 10 || maxTurns > 50) {
+			System.out.println("D should be in range 10-50");
+			return true;
+		}
+
+		// listOfMapFiles must have all different values and cannot be null
+		for (String map : listOfMapFiles) {
+
+			boolean repeated = false;
+			for (String otherMap : listOfMapFiles) {
+				if (otherMap.isEmpty()) {
+					System.out.println("M cannot have Empty value.");
+					return true;
+				}
+				if (map.equals(otherMap)) {
+					if (repeated) {
+						System.out.println("M cannot have repeated values.");
+						return true;
+					}
+					repeated = true;
+				}
+			}
+		}
+
+		// listOfPlayerStrategies must have all different values and cannot be null and
+		// must be computer
+		for (String strategy : listOfPlayerStrategies) {
+			boolean repeated = false;
+			for (String otherStrategy : listOfPlayerStrategies) {
+				if (otherStrategy.isEmpty()) {
+					System.out.println("P cannot have Empty value.");
+					return true;
+				}
+				if (!(otherStrategy.equalsIgnoreCase("aggressive") || strategy.equalsIgnoreCase("benevolent")
+						|| strategy.equalsIgnoreCase("cheater") || strategy.equalsIgnoreCase("random"))) {
+					System.out.println("P must be Aggressive, Benevolent, Cheater or Random.");
+					return true;
+				}
+				if (strategy.equals(otherStrategy)) {
+					if (repeated) {
+						System.out.println("P cannot have repeated values.");
+						return true;
+					}
+					repeated = true;
+				}
+			}
+		}
+
+		// listOfMapFiles cannot have invalid file
+		for (String filename : listOfMapFiles) {
+			if (loadmap(filename) == 0) {
+				System.out.println("Error while loading: " + filename);
+				return true;
+			}
+		}
+
+		// if command is valid
+		return false;
 	}
 
 	private static Strategy getStrategyByName(String playerType) {
