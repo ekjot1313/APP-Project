@@ -46,8 +46,8 @@ public class Main {
 	/**
 	 * The execution of game begins from this method
 	 * 
-	 * @param args
-	 * @throws Exception
+	 * @param args arguments
+	 * @throws Exception exceptions
 	 */
 	public static void main(String[] args) throws Exception {
 		System.out.println("Welcome to RISK GAME!");
@@ -122,7 +122,7 @@ public class Main {
 	 * 'loadgame' option
 	 * 
 	 * @param game Game Object
-	 * @throws Exception
+	 * @throws Exception exceptions
 	 */
 	private static void loadSavedGame(Game game) throws Exception {
 		PhaseView pv = new PhaseView();
@@ -221,7 +221,7 @@ public class Main {
 	/**
 	 * This method is used for tournament initial setup
 	 * 
-	 * @throws Exception
+	 * @throws Exception exceptions
 	 */
 	private static void tournamentModeInit() throws Exception {
 		Scanner sc = new Scanner(System.in);
@@ -278,8 +278,8 @@ public class Main {
 	 * @param listOfPlayerStrategies List of Player Strategies
 	 * @param numberOfGames          Number of Games
 	 * @param maxTurns               Maximum number of turns
-	 * @return Winner Array
-	 * @throws Exception
+	 * @return Winner Array			 the winner array
+	 * @throws Exception			 exception
 	 */
 	public static String[][] tournamentMode(String[] listOfMapFiles, String[] listOfPlayerStrategies, int numberOfGames,
 			int maxTurns) throws Exception {
@@ -401,7 +401,7 @@ public class Main {
 	 * @param numberOfGames          Number of Games
 	 * @param maxTurns               Maximum number of turns
 	 * @return true if command is invalid
-	 * @throws Exception
+	 * @throws Exception			 exceptions
 	 */
 	private static boolean isInvalidTournamentCommand(String[] listOfMapFiles, String[] listOfPlayerStrategies,
 			int numberOfGames, int maxTurns) throws Exception {
@@ -514,6 +514,7 @@ public class Main {
 	 * This method is called when user gives 'editmap' command
 	 * 
 	 * @param filename Map file to be edited
+	 * @throws Exception exception
 	 */
 	private static void editmap(String filename) throws Exception {
 		MapEditor mpe = new MapEditor();
@@ -561,7 +562,8 @@ public class Main {
 	 * This method is called when user gives 'loadmap' command
 	 * 
 	 * @param filename Map file to be loaded
-	 * @throws Exception
+	 * @throws Exception exception
+	 * @return 1 if loaded else 0
 	 */
 	private static int loadmap(String filename) throws Exception {
 		// TODO Auto-generated method stub
@@ -609,7 +611,7 @@ public class Main {
 	 * This method is called to add or remove a player, assign countries to players
 	 * and allow them to place armies The game phases (reinforcement, attack and
 	 * fortification) start from this function
-	 * @throws Exception
+	 * @throws Exception exception
 	 */
 	private static void gameplayer() throws Exception {
 		// Create Deck of cards

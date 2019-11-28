@@ -33,7 +33,7 @@ public class ViewPWDViewTests {
 
 	/**
 	 * Method to setup parameters before running tests
-	 * @throws java.lang.Exception
+	 * @throws java.lang.Exception exception
 	 */
 	@Before
 	public void setUp() throws Exception {

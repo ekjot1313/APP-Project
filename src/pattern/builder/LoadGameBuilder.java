@@ -79,7 +79,7 @@ public class LoadGameBuilder extends GameBuilder {
 	 * This method is used to load card details
 	 * 
 	 * @param map Map Object
-	 * @throws IOException
+	 * @throws IOException ioexception
 	 */
 	private void loadCardDetails(Map map) throws IOException {
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
@@ -101,7 +101,7 @@ public class LoadGameBuilder extends GameBuilder {
 	 * This method is used to load players
 	 * 
 	 * @param map Map Object
-	 * @throws IOException
+	 * @throws IOException ioexception
 	 */
 	private void loadPlayers(Map map) throws IOException {
 		ArrayList<Player> playerlist = new ArrayList<Player>();
@@ -173,7 +173,7 @@ public class LoadGameBuilder extends GameBuilder {
 	 * This method is used to load territories
 	 * 
 	 * @param map Map Object
-	 * @throws IOException
+	 * @throws IOException ioexception
 	 */
 	private void loadTerritories(Map map) throws IOException {
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {
@@ -204,8 +204,8 @@ public class LoadGameBuilder extends GameBuilder {
 	 * This method is used to load continents
 	 * 
 	 * @param map Map Object
-	 * @throws NumberFormatException
-	 * @throws IOException
+	 * @throws NumberFormatException numberformatexception
+	 * @throws IOException ioexception
 	 */
 	private void loadContinents(Map map) throws NumberFormatException, IOException {
 		while ((currentLine = bufferReaderForFile.readLine()) != null && !currentLine.contains("[")) {

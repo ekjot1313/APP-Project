@@ -56,6 +56,7 @@ public class ArmyAllocator {
 	 * @param assignedArmies Number of armies assigned
 	 * @param listOfPLayers  List of all players
 	 * @param map            Map Object
+	 * @param test			for testing
 	 */
 	public void placeArmy(int assignedArmies, ArrayList<Player> listOfPLayers, Map map, int test) {
 

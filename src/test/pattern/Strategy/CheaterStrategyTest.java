@@ -56,14 +56,14 @@ public class CheaterStrategyTest {
 	ArrayList<Player> listOfPlayers;
 
 	/**
-	 * @throws java.lang.Exception
+	 * @throws java.lang.Exception exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
 
 	/**
-	 * @throws java.lang.Exception
+	 * @throws java.lang.Exception exception
 	 */
 	@Before
 	public void setUp() throws Exception {
@@ -142,7 +142,7 @@ public class CheaterStrategyTest {
 	 * Test method for
 	 * {@link pattern.Strategy.CheaterStrategy#attack(dao.Map, java.util.ArrayList, dao.Player)}.
 	 * 
-	 * @throws Exception
+	 * @throws Exception exception
 	 */
 	@Test
 	public void testAttack() throws Exception {
@@ -217,7 +217,7 @@ public class CheaterStrategyTest {
 	/**
 	 * Test method for
 	 * {@link pattern.Strategy.CheaterStrategy#endGame(java.util.ArrayList)}.
-	 * @throws Exception 
+	 * @throws Exception exception
 	 */
 	@Test
 	public void testEndGame() throws Exception {

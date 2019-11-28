@@ -27,7 +27,7 @@ public class DaoMapTest {
 	/**
 	 * This method is used for initialization and set up before running tests
 	 * 
-	 * @throws java.lang.Exception
+	 * @throws java.lang.Exception exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -62,7 +62,7 @@ public class DaoMapTest {
 	/**
 	 * Set up method for initializing the objects 
 	 * 
-	 * @throws java.lang.Exception
+	 * @throws java.lang.Exception exception
 	 */
 	@Before
 	public void setUp() throws Exception {

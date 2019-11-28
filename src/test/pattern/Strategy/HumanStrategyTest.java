@@ -178,7 +178,7 @@ public class HumanStrategyTest {
 	}
 	/**
 	 * Test method for {@link pattern.Strategy.HumanStrategy#endGame(ArrayList)}.
-	 * @throws Exception 
+	 * @throws Exception exception
 	 */
 	@Test
 	public void testAttackAndEndGame() throws Exception {

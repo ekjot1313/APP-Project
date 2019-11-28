@@ -30,7 +30,7 @@ public class MainTests {
 	 * Method to test String[][] tournamentMode(String[] listOfMapFiles, String[]
 	 * listOfPlayerStrategies, int numberOfGames, int maxTurns)
 	 * 
-	 * @throws Exception
+	 * @throws Exception exceptions
 	 */
 	@Test
 	public void testTournamentMode() throws Exception {

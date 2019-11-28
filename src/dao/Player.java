@@ -347,7 +347,7 @@ public class Player extends Observable {
 	 * @param map        Object of Map
 	 * @param listPlayer list of Players
 	 * @return 1 if attack is successful otherwise 0.
-	 * @throws Exception
+	 * @throws Exception	exception
 	 */
 	public int executeAttack(Map map, ArrayList<Player> listPlayer) throws Exception {
 		int result = this.strategy.attack(map, listPlayer, this);

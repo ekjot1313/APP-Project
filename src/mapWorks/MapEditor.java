@@ -47,6 +47,7 @@ public class MapEditor {
 	 * This method initializes map editor
 	 * 
 	 * @param map Map Object
+	 * @param drw DominationReaderWriter obj
 	 * @return Map object
 	 * @throws IOException BufferedReader used for user input
 	 */

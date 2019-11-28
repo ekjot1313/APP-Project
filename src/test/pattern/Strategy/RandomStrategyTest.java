@@ -54,7 +54,7 @@ public class RandomStrategyTest {
 	ArrayList<Player> listOfPlayers;
 
 	/**
-	 * @throws java.lang.Exception
+	 * @throws java.lang.Exception exceptions
 	 */
 	@Before
 	public void setUp() throws Exception {
@@ -185,7 +185,7 @@ public class RandomStrategyTest {
 	 * Test method for
 	 * {@link pattern.Strategy.RandomStrategy#attack(dao.Map, java.util.ArrayList, dao.Player)}.
 	 * 
-	 * @throws Exception
+	 * @throws Exception exception
 	 */
 	@Test
 	public void testAttack() throws Exception {
@@ -259,7 +259,7 @@ public class RandomStrategyTest {
 	 * Test method for
 	 * {@link pattern.Strategy.RandomStrategy#endGame(java.util.ArrayList)}.
 	 * 
-	 * @throws Exception
+	 * @throws Exception exceptions
 	 */
 	@Test
 	public void testEndGame() throws Exception {
