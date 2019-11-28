@@ -1,4 +1,4 @@
-package test.builder;
+package test.pattern.builder;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -9,7 +9,7 @@ import test.daotest.DaoTestSuite;
 import test.gametest.GameTestSuite;
 import test.mapworkstest.MapWorksTestSuite;
 import test.pattern.Strategy.StrategyTestSuite;
-import test.viewtest.ViewTestSuite;
+import test.pattern.observer.ViewTestSuite;
 
 @RunWith(Suite.class)
 @SuiteClasses({LoadGameBuilderTest.class, SaveGameBuilderTest.class})

@@ -1,4 +1,4 @@
-package test.viewtest;
+package test.pattern.observer;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

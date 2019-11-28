@@ -9,7 +9,6 @@ import pattern.observer.Observable;
 
 /**
  * This class represents the Player details
- * 
  * @author Piyush
  *
  */
@@ -182,7 +181,9 @@ public class Player extends Observable {
 	 * @param noOfArmies Number of armies of a particular player
 	 */
 	public void setNoOfArmies(int noOfArmies) {
-		this.noOfArmies = noOfArmies;
+		if (noOfArmies >= 0) {
+			this.noOfArmies = noOfArmies;
+		}
 	}
 
 	/**

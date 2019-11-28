@@ -1,7 +1,7 @@
 /**
  * 
  */
-package test.viewtest;
+package test.pattern.observer;
 
 import static org.junit.Assert.*;
 
