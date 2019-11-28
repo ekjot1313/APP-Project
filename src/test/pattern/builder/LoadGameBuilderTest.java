@@ -9,6 +9,8 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.Pattern;
+
 import dao.Continent;
 import dao.Country;
 import dao.Map;
@@ -18,6 +20,10 @@ import pattern.builder.Director;
 import pattern.builder.Game;
 import pattern.builder.LoadGameBuilder;
 
+/**
+ * This class test methods in LoadGameBuilder class
+ *
+ */
 public class LoadGameBuilderTest {
 
 	static Map map, testMap;
@@ -46,6 +52,9 @@ public class LoadGameBuilderTest {
 	 */
 	static List<String> testListofNeighbors3;
 
+	/**
+	 * This method is used for initialization and set up before running tests
+	 */
 	@BeforeClass
 	public static void BeforeClass(){
 		map =new Map();
@@ -88,6 +97,9 @@ public class LoadGameBuilderTest {
 		country3.setNeighbors(testListofNeighbors3);
 	}
 
+	/**
+	 * Method to test {@link pattern.builder.LoadGameBuilder#BuildMap(filename, map)}
+	 */
 	@Test
 	public void testBuildMap() {
 		
@@ -163,6 +175,9 @@ public class LoadGameBuilderTest {
 			assertEquals(testListofNeighbors3.get(i), country3Neighbors.get(i));
 	}
 	
+	/**
+	 * Method to test {@link pattern.builder.LoadGameBuilder#BuildPlayer(filename, player)}
+	 */
 	@Test
 	public void testBuildPlayer() {
 		
@@ -183,6 +198,9 @@ public class LoadGameBuilderTest {
 		
 	}
 	
+	/**
+	 * Method to test {@link pattern.builder.LoadGameBuilder#BuildPhase(filename, phase)}
+	 */
 	@Test
 	public void testBuildPhase() {
 		

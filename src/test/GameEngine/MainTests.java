@@ -9,7 +9,7 @@ import org.junit.Test;
 import GameEngine.Main;
 
 /**
- * This class tests the functions in Main.java class
+ * This class tests the functions in Main class
  * 
  * @author divya_000
  *

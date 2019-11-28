@@ -25,6 +25,8 @@ import mapWorks.MapEditor;
 public class DaoMapTest {
 
 	/**
+	 * This method is used for initialization and set up before running tests
+	 * 
 	 * @throws java.lang.Exception
 	 */
 	@BeforeClass
@@ -59,6 +61,7 @@ public class DaoMapTest {
 	
 	/**
 	 * Set up method for initializing the objects 
+	 * 
 	 * @throws java.lang.Exception
 	 */
 	@Before
