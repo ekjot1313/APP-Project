@@ -8,5 +8,5 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({ AggressiveStrategyTest.class, BenevolentStrategyTest.class, CheaterStrategyTest.class,
 		HumanStrategyTest.class , RandomStrategyTest.class })
 public class StrategyTestSuite {
-
 }
+
