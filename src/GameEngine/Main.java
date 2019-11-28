@@ -471,8 +471,8 @@ public class Main {
 					System.out.println("P cannot have Empty value.");
 					return true;
 				}
-				if (!(otherStrategy.equalsIgnoreCase("aggressive") || strategy.equalsIgnoreCase("benevolent")
-						|| strategy.equalsIgnoreCase("cheater") || strategy.equalsIgnoreCase("random"))) {
+				if (!(otherStrategy.equalsIgnoreCase("aggressive") || otherStrategy.equalsIgnoreCase("benevolent")
+						|| otherStrategy.equalsIgnoreCase("cheater") || otherStrategy.equalsIgnoreCase("random"))) {
 					System.out.println("P must be Aggressive, Benevolent, Cheater or Random.");
 					return true;
 				}

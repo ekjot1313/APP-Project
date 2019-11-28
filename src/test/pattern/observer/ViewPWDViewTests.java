@@ -104,8 +104,7 @@ public class ViewPWDViewTests {
 	 */
 	@Test
 	public final void testCalcPercentMap() {
-		
-		assertEquals("FREE COUNTRIES: 33.33%\nA: 33.33%\nB: 33.33%\n",view.calcPercentMap(map));
+		assertEquals("A<>: 33.33%\nB<>: 33.33%\n",view.calcPercentMap(map));
 	}
 
 }
