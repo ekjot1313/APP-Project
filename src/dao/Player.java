@@ -9,7 +9,6 @@ import pattern.observer.Observable;
 
 /**
  * This class represents the Player details
- * 
  * @author Piyush
  *
  */
