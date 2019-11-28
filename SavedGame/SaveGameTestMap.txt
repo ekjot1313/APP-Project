@@ -13,7 +13,7 @@ uganda africa 0 FREE COUNTRIES congo
 [PlayerList]
 
 [CardDetails]
-0
+siberia infantry,worrick infantry,afganistan cavalry,india infantry,japan artillery,new_guinia infantry,western_ulstrailia infantry,jacuncail cavalry,south_afrori artillery,north_afrori cavalry,maganar artillery,argentina infantry,ireland infantry,ihesia infantry,western_utropa infantry,souther_utropa artillery,western_united_states infantry,czeck infantry,central_ameroki artillery,duiestie cavalry,Quebeck infantry,0
 [CurrentPhase]
 Attack
 [CurrentPlayer]
