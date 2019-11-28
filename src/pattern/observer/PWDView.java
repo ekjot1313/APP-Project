@@ -1,4 +1,4 @@
-package view;
+package pattern.observer;
 
 import java.awt.Color;
 import java.awt.Dimension;

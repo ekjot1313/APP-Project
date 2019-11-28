@@ -13,10 +13,10 @@ import dao.Map;
 import dao.Player;
 import game.ArmyAllocator;
 import game.PlayerAllocator;
-import mapWorks.ConquestReaderWriter;
-import mapWorks.DominationReaderWriter;
+import pattern.Adapter.ConquestReaderWriter;
+import pattern.Adapter.DominationReaderWriter;
 import mapWorks.MapEditor;
-import mapWorks.MapReaderWriterAdapter;
+import pattern.Adapter.MapReaderWriterAdapter;
 import pattern.Strategy.AggressiveStrategy;
 import pattern.Strategy.BenevolentStrategy;
 import pattern.Strategy.CheaterStrategy;
@@ -25,9 +25,9 @@ import pattern.Strategy.Strategy;
 import pattern.builder.Director;
 import pattern.builder.Game;
 import pattern.builder.LoadGameBuilder;
-import view.CardExchangeView;
-import view.PWDView;
-import view.PhaseView;
+import pattern.observer.CardExchangeView;
+import pattern.observer.PWDView;
+import pattern.observer.PhaseView;
 
 /**
  * This is the main class

@@ -1,4 +1,4 @@
-package view;
+package pattern.observer;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

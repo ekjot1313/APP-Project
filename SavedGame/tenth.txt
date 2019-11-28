@@ -1,0 +1,28 @@
+**
+[Continents]
+asia 10 FREE CONTINENTS
+africa 14 FREE CONTINENTS
+europe 12 FREE CONTINENTS
+
+[Territories]
+india asia 18 b china 
+china asia 7 a india nepal congo 
+nepal asia 16 a china scotland 
+congo africa 9 c china sAfrica 
+sAfrica africa 12 a congo england 
+scotland europe 9 b england nepal france 
+france europe 12 c scotland italy 
+italy europe 8 b france england 
+england europe 14 c sAfrica scotland italy 
+
+[PlayerList]
+a 38 3 pattern.Strategy.HumanStrategy sAfrica china nepal 
+b 35 0 pattern.Strategy.BenevolentStrategy scotland italy india 
+c 35 0 pattern.Strategy.AggressiveStrategy france congo england 
+
+[CardDetails]
+india artillery,china infantry,nepal infantry,congo artillery,sAfrica cavalry,scotland artillery,france artillery,italy cavalry,england artillery,0
+[CurrentPhase]
+Reinforcement
+[CurrentPlayer]
+a

@@ -12,7 +12,7 @@ import dao.Continent;
 import dao.Country;
 import dao.Map;
 import dao.Player;
-import view.PWDView;
+import pattern.observer.PWDView;
 
 /**
  * Class to test the PWDView class
