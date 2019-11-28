@@ -92,7 +92,7 @@ public class ConquestReaderWriterTest {
 		}
 
 		/**
-		 * Method to test {@link mapWorks.ConquestReaderWriter#parseMapFile(Map, File))}
+		 * Method to test {@link pattern.Adapter.ConquestReaderWriter#parseMapFile(Map, File)}
 		 */
 		@Test
 		public void testParseMap() {
@@ -107,7 +107,7 @@ public class ConquestReaderWriterTest {
 		}
 
 		/**
-		 * Method to test {@link mapWorks.ConquestReaderWriter#loadContinents(Map)}
+		 * Method to test {@link pattern.Adapter.ConquestReaderWriter#loadContinents(Map)}
 		 */
 		@Test
 		public void testLoadContinents() {
@@ -148,7 +148,7 @@ public class ConquestReaderWriterTest {
 		}
 
 		/**
-		 * Method to test {@link mapWorks.ConquestReaderWriter#loadTerritories(Map)}
+		 * Method to test {@link pattern.Adapter.ConquestReaderWriter#loadTerritories(Map)}
 		 */
 		@Test
 		public void testLoadTerritories() {
@@ -183,7 +183,7 @@ public class ConquestReaderWriterTest {
 
 		
 		/**
-		 * Method to test {@link mapWorks.ConquestReaderWriter#saveMap(Map, String)}
+		 * Method to test {@link pattern.Adapter.ConquestReaderWriter#saveMap(Map, String)}
 		 */
 		@Test
 		public void testMapSaver() {

@@ -616,8 +616,6 @@ public class Main {
 	 * This method is called to add or remove a player, assign countries to players
 	 * and allow them to place armies The game phases (reinforcement, attack and
 	 * fortification) start from this function
-	 * 
-	 * @param mr MapReader Object
 	 * @throws Exception
 	 */
 	private static void gameplayer() throws Exception {

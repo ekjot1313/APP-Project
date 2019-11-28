@@ -89,7 +89,7 @@ public class ArmyAllocatorTest {
 	}
 	
 	/**
-	 * Test method for {@link game.ArmyAllocator#calculateTotalArmies(ArrayList, Map, int)}
+	 * Test method for {@link game.ArmyAllocator#calculateTotalArmies(ArrayList, Map)}
 	 */
 	@Test
 	public void testCalculateTotalArmies() {

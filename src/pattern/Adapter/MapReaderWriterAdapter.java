@@ -37,7 +37,7 @@ public class MapReaderWriterAdapter extends DominationReaderWriter {
 	 * This method saves the map file in Conquest format
 	 * 
 	 * @param map      Map Object
-	 * @param filename Name of the file
+	 * @param fileName Name of the file
 	 * @throws IOException for Buffered Reader
 	 */
 	@Override

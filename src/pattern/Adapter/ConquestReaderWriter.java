@@ -31,7 +31,7 @@ public class ConquestReaderWriter {
 
 	/**
 	 * This method parses the map file
-	 * 
+	 * @param map Map object
 	 * @param file Map file to be parsed
 	 * @return 1 if successful else 0
 	 */

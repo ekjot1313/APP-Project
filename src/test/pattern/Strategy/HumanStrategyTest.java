@@ -16,6 +16,7 @@ import dao.Country;
 import dao.Map;
 import dao.Player;
 import pattern.Strategy.HumanStrategy;
+import pattern.Strategy.Strategy;
 
 /**
  * Class to test the Player Class 
@@ -97,7 +98,7 @@ public class HumanStrategyTest {
 	}
 	
 	/**
-	 * Test method for {@link dao.Player#validate(String, Map)}
+	 * Test method for {@link pattern.Strategy.HumanStrategy#validate(String, Map, Player)}
 	 */
 	@Test
 	public void testValidate() {
@@ -144,7 +145,7 @@ public class HumanStrategyTest {
 	}
 	
 	/**
-	 * Test method for {@link dao.Player#attackMove(String, Country, Country)}.
+	 * Test method for {@link pattern.Strategy.HumanStrategy#attackMove(String, Country, Country, int, Player)}.
 	 */
 	@Test
 	public void testAttackMove() {
@@ -177,7 +178,7 @@ public class HumanStrategyTest {
 		B.getAssigned_countries().clear();
 	}
 	/**
-	 * Test method for {@link dao.Player#endGame(ArrayList)}.
+	 * Test method for {@link pattern.Strategy.HumanStrategy#endGame(ArrayList)}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -198,7 +199,7 @@ public class HumanStrategyTest {
 		B.getAssigned_countries().clear();
 	}
 	/**
-	 * Test method for {@link dao.Player#attackDeadlock(Map)}.
+	 * Test method for {@link pattern.Strategy.HumanStrategy#attackDeadlock(Map, Player)}.
 	 */
 	@Test
 	public void testAttackDeadlock() {
@@ -217,7 +218,7 @@ public class HumanStrategyTest {
 		B.getAssigned_countries().clear();
 	}
 	/**
-	 * Test method for {@link dao.Player#fortification(Map, ArrayList, String)}.
+	 * Test method for {@link pattern.Strategy.HumanStrategy#fortification(Map, ArrayList, String, Player)}
 	 */
 	@Test
 	public void testFortification() {

@@ -12,6 +12,8 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.Pattern;
+
 import dao.Continent;
 import dao.Country;
 import dao.Map;
@@ -101,7 +103,7 @@ public class DominationReaderWriterTest {
 	}
 
 	/**
-	 * Method to test {@link mapWorks.DominationReaderWriter#parseMapFile(Map, File)}
+	 * Method to test {@link pattern.Adapter.DominationReaderWriter#parseMapFile(Map, File)}
 	 */
 	@Test
 	public void testParseMap() {
@@ -116,7 +118,7 @@ public class DominationReaderWriterTest {
 	}
 
 	/**
-	 * Method to test {@link mapWorks.DominationReaderWriter#loadContinents(Map)}
+	 * Method to test {@link pattern.Adapter.DominationReaderWriter#loadContinents(Map)}
 	 */
 	@Test
 	public void testLoadContinent() {
@@ -157,7 +159,7 @@ public class DominationReaderWriterTest {
 	}
 
 	/**
-	 * Method to test {@link mapWorks.DominationReaderWriter#loadCountries(Map)}
+	 * Method to test {@link pattern.Adapter.DominationReaderWriter#loadCountries(Map)}
 	 */
 	@Test
 	public void testLoadCountries() {
@@ -191,7 +193,7 @@ public class DominationReaderWriterTest {
 	}
 
 	/**
-	 * Method to test {@link mapWorks.DominationReaderWriter#loadBorders(Map)}
+	 * Method to test {@link pattern.Adapter.DominationReaderWriter#loadBorders(Map)}
 	 */
 	@Test
 	public void testLoadBorders() {
@@ -237,7 +239,7 @@ public class DominationReaderWriterTest {
 	}
 	
 	/**
-	 * Method to test {@link mapWorks.DominationReaderWriter#saveMap(Map, String)}
+	 * Method to test {@link pattern.Adapter.DominationReaderWriter#saveMap(Map, String)}
 	 */
 	@Test
 	public void testMapSaver() {

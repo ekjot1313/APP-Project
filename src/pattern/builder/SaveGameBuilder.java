@@ -18,7 +18,7 @@ public class SaveGameBuilder extends GameBuilder {
 	/**
 	 * This method is used to build complex map object
 	 * 
-	 * @param filename Name of the file
+	 * @param fileName Name of the file
 	 * @param map      Map Object
 	 */
 	@Override
@@ -82,7 +82,7 @@ public class SaveGameBuilder extends GameBuilder {
 	/**
 	 * This method is used to build player object
 	 * 
-	 * @param filename Name of the file
+	 * @param fileName Name of the file
 	 * @param player   Player Object
 	 */
 	@Override
@@ -110,7 +110,7 @@ public class SaveGameBuilder extends GameBuilder {
 	/**
 	 * This method is used to build Phase
 	 * 
-	 * @param filename Name of the file
+	 * @param fileName Name of the file
 	 * @param phase    Phase
 	 */
 	@Override

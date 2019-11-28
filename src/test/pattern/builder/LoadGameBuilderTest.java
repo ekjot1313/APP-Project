@@ -98,7 +98,7 @@ public class LoadGameBuilderTest {
 	}
 
 	/**
-	 * Method to test {@link pattern.builder.LoadGameBuilder#BuildMap(filename, map)}
+	 * Method to test buildMap
 	 */
 	@Test
 	public void testBuildMap() {
@@ -176,7 +176,7 @@ public class LoadGameBuilderTest {
 	}
 	
 	/**
-	 * Method to test {@link pattern.builder.LoadGameBuilder#BuildPlayer(filename, player)}
+	 * Method to test build Player
 	 */
 	@Test
 	public void testBuildPlayer() {
@@ -199,7 +199,7 @@ public class LoadGameBuilderTest {
 	}
 	
 	/**
-	 * Method to test {@link pattern.builder.LoadGameBuilder#BuildPhase(filename, phase)}
+	 * Method to test build phase
 	 */
 	@Test
 	public void testBuildPhase() {
