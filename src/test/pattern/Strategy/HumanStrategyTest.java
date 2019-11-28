@@ -71,7 +71,6 @@ public class HumanStrategyTest {
 		pakistan.setNoOfArmies(20);
 		pakistan.setOwner("A");
 		pakistan.getNeighbors().add("india");
-		//pakistan.getNeighbors().add(china);
 		china.setName("china");
 		china.setContinentName("asia");
 		china.setNoOfArmies(40);
@@ -277,7 +276,6 @@ public class HumanStrategyTest {
 		asia.setOwner("A");
 		testMap.getListOfContinent().add(asia);
 		result = A.getStrategy().calculateReinforceArmies(testMap,A);
-		//System.out.println(result);
 		assertEquals(13, result);
 		A.getAssigned_countries().clear();
 		B.getAssigned_countries().clear();

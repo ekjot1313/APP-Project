@@ -577,7 +577,6 @@ public class MapEditor {
 
 					if (map.getCountryFromName(s.get(1)) != null) {
 						print("Country: " + s.get(1) + ", Already Exists.");
-						// return;
 						continue; // jump to next sub-command
 					} else if ((parentContinent = map.getContinentFromName(s.get(2))) == null) {
 						print("Continent: " + s.get(2) + ", Not Found.");
@@ -606,7 +605,6 @@ public class MapEditor {
 
 					if (country == null) {
 						print("Country: " + s.get(1) + ", Not Found.");
-						// return;
 						continue; // jump to next sub-command
 					}
 
@@ -644,11 +642,9 @@ public class MapEditor {
 				Country count, neig;
 				if ((count = map.getCountryFromName(s.get(1))) == null) {
 					print("Country: " + s.get(1) + ", Not Found.");
-					// return;
 					continue; // jump to next sub-command
 				} else if ((neig = map.getCountryFromName(s.get(2))) == null) {
 					print("Neighbor: " + s.get(2) + ", Not Found.");
-					// return;
 					continue; // jump to next sub-command
 				}
 

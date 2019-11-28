@@ -79,7 +79,6 @@ public class RandomStrategyTest {
 		pakistan.setNoOfArmies(20);
 		pakistan.setOwner("A");
 		pakistan.getNeighbors().add("india");
-		// pakistan.getNeighbors().add(china);
 		china.setName("china");
 		china.setContinentName("asia");
 		china.setNoOfArmies(40);

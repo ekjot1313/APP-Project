@@ -41,9 +41,7 @@ public class CheaterStrategy implements Strategy {
 			if (armiesTobeplaced <= reinforcementArmies && armiesTobeplaced > 0) { // check reinforce command
 				// and country is valid and
 				// assigned to player
-				System.out.println(country.getNoOfArmies() + " to ");
 				country.setNoOfArmies(country.getNoOfArmies() + armiesTobeplaced);
-				System.out.println(country.getNoOfArmies());
 				reinforcementArmies -= armiesTobeplaced;
 				System.out.println("Reinforcement armies placed successfully");
 				System.out.println("Remaining armies to be placed : " + reinforcementArmies);

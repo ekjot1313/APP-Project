@@ -9,7 +9,6 @@ import dao.Continent;
 import dao.Country;
 import dao.Map;
 import dao.Player;
-//import mapWorks.MapReader;
 import pattern.Strategy.AggressiveStrategy;
 import pattern.Strategy.BenevolentStrategy;
 import pattern.Strategy.CheaterStrategy;

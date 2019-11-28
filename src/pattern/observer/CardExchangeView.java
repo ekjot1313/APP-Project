@@ -50,7 +50,6 @@ public class CardExchangeView implements Observer {
 
 				txtrActions.setForeground(Color.white);
 				txtrActions.setBackground(Color.BLACK);
-				// txtrActions.setText("");
 
 				scrollPane = new JScrollPane();
 				scrollPane.setViewportView(txtrActions);

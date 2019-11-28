@@ -133,11 +133,6 @@ public class Main {
 		System.out.println("Current Player: " + currentPlayer + " Current Phase: " + currentPhase);
 
 		Player p = new Player();
-		for (int j = 0; j < map.getListOfPlayers().size(); j++) {
-			if (map.getListOfPlayers().get(j).getName().equals(currentPlayer)) {
-				// System.out.println(map.getListOfPlayers().get(j).getStrategy());
-			}
-		}
 
 		boolean isRemaining = true;
 		int playerIndex = 0;
@@ -182,8 +177,6 @@ public class Main {
 			} else {
 				playerIndex = 0;
 			}
-			//System.out.println(playerIndex);
-
 			for (int i = playerIndex; i < map.getListOfPlayers().size(); i++) {
 
 				p = map.getListOfPlayers().get(i);
@@ -341,14 +334,14 @@ public class Main {
 
 							pa.listOfPlayers.get(i).attach(cev);
 							pa.listOfPlayers.get(i).executeReinforcement(map, (ArrayList<Player>) pa.listOfPlayers);
-							Thread.sleep(0);
+							Thread.sleep(1500);
 							Player current = pa.listOfPlayers.get(i);
 							pa.listOfPlayers.get(i).detach(cev);
 							cev.close();
 							System.out.println("_______________________________________________________");
 							System.out.println("Player " + pa.listOfPlayers.get(i).getName() + " Attack phase begins");
 							gameOver = pa.listOfPlayers.get(i).executeAttack(map, (ArrayList<Player>) pa.listOfPlayers);
-							Thread.sleep(0);
+							Thread.sleep(1500);
 							if (gameOver == 1)
 								break;
 							int index = pa.listOfPlayers.indexOf(current);
@@ -358,7 +351,7 @@ public class Main {
 									"Player " + pa.listOfPlayers.get(i).getName() + " Fortification phase begins");
 							pa.listOfPlayers.get(i).executeFortification(map, (ArrayList<Player>) pa.listOfPlayers,
 									null);
-							Thread.sleep(0);
+							Thread.sleep(1500);
 							pa.listOfPlayers.get(i).detach(pv);
 
 						}
@@ -619,7 +612,6 @@ public class Main {
 	 * @throws Exception
 	 */
 	private static void gameplayer() throws Exception {
-		// Player p =new Player();
 		// Create Deck of cards
 		ArrayList<String> deck = createDeck(map);
 		Player.deck = deck;

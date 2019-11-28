@@ -162,7 +162,6 @@ public class HumanStrategy implements Strategy {
 											try {
 												numdice = Integer.parseInt(s[3]);
 											} catch (Exception e) {
-												// System.out.println("Invalid command.");
 												continue;
 											}
 											int noOfArmies = c.getNoOfArmies();
