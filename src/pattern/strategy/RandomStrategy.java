@@ -485,6 +485,9 @@ public class RandomStrategy implements Strategy {
 			P.setActions("Fortification finished.");
 			break;
 		}
+		if (P.getEndOfActions() == 0) {
+			System.out.println("Fortification not possible.");
+		}
 	}
 
 	/**
@@ -536,7 +539,7 @@ public class RandomStrategy implements Strategy {
 	 * @param command     Command Given
 	 * @param fromCountry Name of country from which armies are moved
 	 * @param toCountry   Name of country to which armies should be moved
-	 * @param P			  the player
+	 * @param P           the player
 	 * @return 1 if armies are successfully moved otherwise 0.
 	 */
 	public int attackMove(String command, Country fromCountry, Country toCountry, Player P) {
